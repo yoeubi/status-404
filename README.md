@@ -21,10 +21,25 @@
 1. classnames
 
 
-## Sass
+## Sass Module 사용법
 
 ```css
+.box {
+    color : red;
+}
+```
 
+```js
+import styles from 'SCSS파일경로명';
+import classNames from 'classnames/bind';
+
+const cx = classNames.bind(styles);
+
+const SampleComponent = () => (
+    <div className={cx('box')}>
+        샘플용
+    </div>
+)
 ```
 
 ## Git Commit log
@@ -49,3 +64,4 @@ More Examples:
 - `refactor`: (refactoring production code, eg. renaming a variable)
 - `test`: (adding missing tests, refactoring tests; no production code change)
 - `chore`: (updating grunt tasks etc; no production code change)
+
