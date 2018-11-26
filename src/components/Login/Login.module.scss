@@ -1,0 +1,13 @@
+.background {
+  background-color: rgba(0, 0, 0, 0.5);
+  .modal {
+    border: 1px solid black;
+    width: 353px;
+    min-height: 500px;
+    transform: translateX(-353px);
+    transition: all 0.5s ease-in-out;
+    &.show {
+      transform: translateX(0);
+    }
+  }
+}
