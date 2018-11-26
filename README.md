@@ -4,6 +4,8 @@
 
 ## 기본 설정
 
+1. `git flow init`을 먼저 합니다.
+
 ### Git branch
 
 - master : 상용화
