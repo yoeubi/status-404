@@ -23,6 +23,7 @@
 
 1. node-sass
 1. classnames
+1. axios
 
 
 ## Sass Module 사용법
