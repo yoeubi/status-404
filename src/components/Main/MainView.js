@@ -140,6 +140,17 @@ class MainView extends Component {
                             })
                         }
                     </ul>
+
+                    <div className={cx('findMatzip')}>
+                        <div className={cx('inner')}>
+                            <span>우리동네 맛집 검색</span> 
+                            <span className="icon">icon</span>
+                        </div>
+                    </div>
+
+                    <ul className={cx('noticeList')}>
+                        
+                    </ul>
                     
                 </div>
                 
