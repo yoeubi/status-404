@@ -4,6 +4,13 @@
 
 ## 기본 설정
 
+### Git branch
+
+- master : 상용화
+- develop : 개발
+- feature : 개인
+
+
 ### Dependency management
 
 - [yarn](https://yarnpkg.com/en/docs/install#windows-stable)
