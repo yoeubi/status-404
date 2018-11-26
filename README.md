@@ -5,6 +5,8 @@
 ## 기본 설정
 
 1. `git flow init`을 먼저 합니다.
+1. `git flow feature start [브런치명]` 으로 브런치 생성
+1. `git flow feature finish [브런치명]` 으로 develop 브런치 병합 및 feature 브런치 삭제 
 
 ### Git branch
 
