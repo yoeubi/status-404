@@ -149,13 +149,61 @@ class MainView extends Component {
                     </div>
 
                     <ul className={cx('noticeList')}>
-                        
+                        <li className={cx('item')}>
+                            <span className={cx('itemTitle')}>
+                            공지
+                            </span>
+                            <span className={cx('itemBody')}>
+                            KT 아현지사 화재로 인한 인근지역 주문불가 안내
+                            </span>
+                        </li>
+                        <li className={cx('item')}>
+                            <span className={cx('itemTitle')}>
+                            이벤트
+                            </span>
+                            <span className={cx('itemBody')}>
+                            [배민] 11월 또래오래 선착순 2천원 할인해드려요!
+                            </span>
+                        </li>
+                        <li className={cx('item')}>
+                            <span className={cx('itemTitle')}>
+                            발표
+                            </span>
+                            <span className={cx('itemBody')}>
+                            [당첨자공지] 세계 축구대회 스웨덴전 기념 오늘은 몇대몇 이벤트 당첨자 공지
+                            </span>
+                        </li>
                     </ul>
+
+                    <div className={cx('bottomBanner')}>
+                        bottomBanner
+                    </div>
                     
                 </div>
                 
                 <div className={cx('footer')}>
-                    footer
+                    <ul className={cx('footerLink')}>
+                        <li className={cx('footerLinkItem')}>
+                         사업자정보확인
+                        </li>
+                        <li className={cx('footerLinkItem')}>
+                         이용약관
+                        </li>
+                        <li className={cx('footerLinkItem')}>
+                         전자금융거래 이용약관
+                        </li>
+                        <li className={cx('footerLinkItem')}>
+                         개인정보 처리방침
+                        </li>
+                    </ul>
+                    <div className={cx('company')}>
+                        <p className={cx('companyTitle')}>Status404</p> 
+                        <p className={cx('companyBody')}>
+                            배달의민족은 통신판매중개자이며 통신판매의 당사자가 아닙니다. <br/>
+                            따라서 배달의 민족은 상품거래정보 및 거래에 대한 책임을 지지 않습니다.
+                        </p>
+                    
+                    </div>
                 </div>
             </div>
         );
