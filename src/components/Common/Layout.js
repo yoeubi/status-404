@@ -14,7 +14,6 @@ class Layout extends Component {
       }
     handleUserModal = () => {
         console.log('실행중');
-
         this.setState({ show: !this.state.show })
     }
 

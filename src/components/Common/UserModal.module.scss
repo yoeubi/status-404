@@ -53,11 +53,12 @@ $modal-font-size : 2rem;
       height: 60px;
       margin-right: 15px;
       border-radius: 50%;
-      background: $main-color;
-      color:#fff;
+      background:#fff;
+      fill: $main-color;
       @include center;
     }
     .user{
+      width:calc(100% - 75px);
       display: flex;
       flex-direction: column;
       justify-content: center;
@@ -70,16 +71,6 @@ $modal-font-size : 2rem;
         font-size:1.4rem;
       }
     }
-    .close{
-      position: absolute;
-      width:45px;
-      height: 100%;
-      @include center;
-      top:0;
-      right:0;
-      background: rgba(0,0,0,0.1);
-
-    }
   }
   .nav {
     display: flex;
@@ -88,12 +79,24 @@ $modal-font-size : 2rem;
       width: 33.333%;
       height: 100px;
       border: 1px solid #f7f7f7;
-      flex-shrink: 1;
+      
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      justify-content: center;
+      font-size:1.2rem;
+      font-weight:600;
+      svg{
+        width:30px;
+        height: 30px;
+        margin-bottom: 5px;
+      }
     }
   }
   .banner {
     height: 80px;
-    border: 1px solid black;
+    background: $main-color;
+    @include center;
   }
   .menu {
     .item {
@@ -101,7 +104,7 @@ $modal-font-size : 2rem;
       border-top: 1px solid $modal-border;
       border-bottom: 1px solid $modal-border;
       background-color: $modal-color;
-      font-size: $modal-font-size;
+      font-size: 1.4rem;
       @include center;
     }
   }
