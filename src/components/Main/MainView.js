@@ -21,87 +21,84 @@ import matzip from '../../img/14_matzip.svg';
 const cx = classNames.bind(styles);
 
 class MainView extends Component {
-    constructor(props){
-        super(props);
-
-        this.state = {
-            isLogin: true,
-            lists: [
-                {
-                    id:0,
-                    name: '한식',
-                    img: hansik
-                },
-                {
-                    id:1,
-                    name: '분식',
-                    img: bunsik
-                },
-                {
-                    id:2,
-                    name: '돈까스·회·일식',
-                    img: ilsik
-                },
-                {
-                    id:3,
-                    name: '치킨',
-                    img: chicken
-                },
-                {
-                    id:4,
-                    name: '피자',
-                    img: pizza
-                },
-                {
-                    id:5,
-                    name: '중국집',
-                    img: chinese
-                },
-                {
-                    id:6,
-                    name: '족발·보쌈',
-                    img: zokbal
-                },
-                {
-                    id:7,
-                    name: '야식',
-                    img: yasik
-                },
-                {
-                    id:8,
-                    name: '찜·탕',
-                    img: zzim
-                },
-                {
-                    id:9,
-                    name: '도시락',
-                    img: dosirak
-                },
-                {
-                    id:10,
-                    name: '카페·디저트',
-                    img: desert
-                },
-                {
-                    id:11,
-                    name: '패스트푸드',
-                    img: fastfood
-                },
-                {
-                    id:12,
-                    name: '프랜차이즈',
-                    img: franchise
-                },
-                {
-                    id:13,
-                    name: '맛집랭킹',
-                    img: matzip
-                },
-            ]
-        }
+    static defaultProps = {
+        isLogin: true,
+        lists: [
+            {
+                id: 0,
+                name: '한식',
+                img: hansik
+            },
+            {
+                id: 1,
+                name: '분식',
+                img: bunsik
+            },
+            {
+                id: 2,
+                name: '돈까스·회·일식',
+                img: ilsik
+            },
+            {
+                id: 3,
+                name: '치킨',
+                img: chicken
+            },
+            {
+                id: 4,
+                name: '피자',
+                img: pizza
+            },
+            {
+                id: 5,
+                name: '중국집',
+                img: chinese
+            },
+            {
+                id: 6,
+                name: '족발·보쌈',
+                img: zokbal
+            },
+            {
+                id: 7,
+                name: '야식',
+                img: yasik
+            },
+            {
+                id: 8,
+                name: '찜·탕',
+                img: zzim
+            },
+            {
+                id: 9,
+                name: '도시락',
+                img: dosirak
+            },
+            {
+                id: 10,
+                name: '카페·디저트',
+                img: desert
+            },
+            {
+                id: 11,
+                name: '패스트푸드',
+                img: fastfood
+            },
+            {
+                id: 12,
+                name: '프랜차이즈',
+                img: franchise
+            },
+            {
+                id: 13,
+                name: '맛집랭킹',
+                img: matzip
+            },
+        ]
     }
+    
     render() {
-        const {isLogin, lists} = this.state;
+        const {isLogin, lists} = this.props;
 
         return (
             <div className={cx('wrap')}>
