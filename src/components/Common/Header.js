@@ -1,7 +1,8 @@
 import React, { Component } from 'react';
 import classNames from 'classnames/bind';
 import styles from './Layout.module.scss';
-import chevronDown from '../../img/chevron-down.svg';
+import {ReactComponent as ChevronDown } from '../../img/chevron-down.svg';
+import {ReactComponent as Hambergur } from '../../img/grabber.svg';
 
 const cx = classNames.bind(styles);
 
@@ -17,7 +18,8 @@ class Header extends Component {
         const {onUserModal} = this.props;
         return (
             <div className={cx('header')}>
-                <button className={cx('hambergur')} onClick={onUserModal}>햄</button>
+                <Hambergur className={cx('hambergur')} onClick={onUserModal} />
+                    
                 <div className={cx('addressInput')}>
                     {
                         isLogin ? (
@@ -27,7 +29,7 @@ class Header extends Component {
                             )
                     }
                     
-                    <img className={cx('icon')} src={chevronDown} alt="down" />
+                    <ChevronDown className={cx('icon')} alt="down" />
                 </div>
             </div>
         );

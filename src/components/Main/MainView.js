@@ -2,20 +2,20 @@ import React, { Component } from 'react';
 import styles from './Main.module.scss';
 import classNames from 'classnames/bind';
 
-import hansik from '../../img/01_hansik.svg';
-import bunsik from '../../img/02_bunsik.svg';
-import ilsik from '../../img/03_ilsik.svg';
-import chicken from '../../img/04_chicken.svg';
-import pizza from '../../img/05_pizza.svg';
-import chinese from '../../img/06_chinese.svg';
-import zokbal from '../../img/07_zokbal.svg';
-import yasik from '../../img/08_yasik.svg';
-import zzim from '../../img/09_zzim.svg';
-import dosirak from '../../img/10_dosirak.svg';
-import desert from '../../img/11_desert.svg';
-import fastfood from '../../img/12_fastfood.svg';
-import franchise from '../../img/13_franchise.svg';
-import matzip from '../../img/14_matzip.svg';
+import { ReactComponent as Hansik} from '../../img/01_hansik.svg';
+import { ReactComponent as Bunsik} from '../../img/02_bunsik.svg';
+import { ReactComponent as Ilsik} from '../../img/03_ilsik.svg';
+import { ReactComponent as Chicken} from '../../img/04_chicken.svg';
+import { ReactComponent as Pizza} from '../../img/05_pizza.svg';
+import { ReactComponent as Chinese} from '../../img/06_chinese.svg';
+import { ReactComponent as Zokbal} from '../../img/07_zokbal.svg';
+import { ReactComponent as Yasik} from '../../img/08_yasik.svg';
+import { ReactComponent as Zzim} from '../../img/09_zzim.svg';
+import { ReactComponent as Dosirak} from '../../img/10_dosirak.svg';
+import { ReactComponent as Desert} from '../../img/11_desert.svg';
+import { ReactComponent as Fastfood} from '../../img/12_fastfood.svg';
+import { ReactComponent as Franchise} from '../../img/13_franchise.svg';
+import { ReactComponent as Matzip} from '../../img/14_matzip.svg';
 
 const cx = classNames.bind(styles);
 
@@ -27,72 +27,72 @@ class MainView extends Component {
             {
                 id: 0,
                 name: '한식',
-                img: hansik
+                img: <Hansik/>
             },
             {
                 id: 1,
                 name: '분식',
-                img: bunsik
+                img: <Bunsik/>
             },
             {
                 id: 2,
                 name: '돈까스·회·일식',
-                img: ilsik
+                img: <Ilsik/>
             },
             {
                 id: 3,
                 name: '치킨',
-                img: chicken
+                img: <Chicken/>
             },
             {
                 id: 4,
                 name: '피자',
-                img: pizza
+                img: <Pizza/>
             },
             {
                 id: 5,
                 name: '중국집',
-                img: chinese
+                img: <Chinese/>
             },
             {
                 id: 6,
                 name: '족발·보쌈',
-                img: zokbal
+                img: <Zokbal/>
             },
             {
                 id: 7,
                 name: '야식',
-                img: yasik
+                img: <Yasik/>
             },
             {
                 id: 8,
                 name: '찜·탕',
-                img: zzim
+                img: <Zzim/>
             },
             {
                 id: 9,
                 name: '도시락',
-                img: dosirak
+                img: <Dosirak/>
             },
             {
                 id: 10,
                 name: '카페·디저트',
-                img: desert
+                img: <Desert/>
             },
             {
                 id: 11,
                 name: '패스트푸드',
-                img: fastfood
+                img: <Fastfood/>
             },
             {
                 id: 12,
                 name: '프랜차이즈',
-                img: franchise
+                img: <Franchise/>
             },
             {
                 id: 13,
                 name: '맛집랭킹',
-                img: matzip
+                img: <Matzip/>
             },
         ]
     }
@@ -116,7 +116,7 @@ class MainView extends Component {
                                         className={cx('item')}
                                         key={c.name}
                                     >
-                                        <img src={c.img} alt={c.name}/>
+                                        {c.img}
                                         {c.name}
                                     </li>
                                 );

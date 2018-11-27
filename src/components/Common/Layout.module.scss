@@ -26,8 +26,8 @@
         }
         .icon{
             display: inline-block;
-            width:20px;
-            height: 20px;
+            width:18px;
+            height: 18px;
             border-radius: 10px;
             background: $main-color;
             text-align: center;
@@ -39,7 +39,9 @@
 
     .hambergur{
         position: fixed;
-        top:15px;
-        left:15px;
+        top:9px;
+        left:5px;
+        width:35px;
+        height: 35px;
     }
 }
