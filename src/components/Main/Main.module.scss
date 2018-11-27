@@ -1,0 +1,160 @@
+@import '../../index.scss';
+.wrap{
+    width:100%;
+}
+
+// header
+.header{
+    position: fixed;
+    top:0;
+    left:0;
+    width:100%;
+    height: 50px;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    border-bottom:1px solid rgba(0,0,0,0.1);
+    font-size:1.3rem;
+    background: #fff;
+
+    .addressInput{
+        font-weight:600;
+        .address{
+
+        }
+        .icon{
+            display: inline-block;
+            width:20px;
+            height: 20px;
+            border-radius: 10px;
+            background: $main-color;
+            text-align: center;
+            fill:#fff;
+            vertical-align: bottom;
+            margin-left: 5px;
+        }
+    }
+}
+
+// body
+.body{
+    margin-top:50px;
+
+    .carousel{
+        width:100%;
+        height: 150px;
+        background: $main-color;
+    }
+    .categories{
+        width:100%;
+        display: flex;
+        flex-wrap:wrap;
+        background:url('../../img/category-bg.png');
+        background-size:40px 40px;
+        .item{
+            font-family: 'Hanna',sans-serif;
+            width:33.333%;
+            height: 140px;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            flex-direction: column;
+            border:1px dotted rgba(0,0,0,0.1);
+            font-size:1.4rem;
+            img{
+                transition: transform;
+                transition-duration: 0.3s;
+                &:hover{
+                    transform: scale(0.9);
+                }
+            }
+        }
+    }
+
+    .findMatzip{
+        width:100%;
+        padding: 15px 18px;
+        background: #f3f3f3;
+        .inner{
+            font-family: 'Hanna',sans-serif;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            width:100%;
+            height: 65px;
+            border:1px solid #f0f0f0;
+            background: #fff;
+            font-size:1.5rem;
+        }
+    }
+
+    .noticeList{
+        .item{
+            width:100%;
+            height: 50px;
+            padding: 15px;
+            font-size:1.3rem;
+            border-bottom:1px solid rgba(0,0,0,0.1);
+            display: flex;
+            justify-content: flex-start;
+            align-items: center;
+            .itemTitle{
+                width:50px;
+                font-weight: 600;
+            }
+            .itemBody{
+                color:#838383;
+                text-overflow:ellipsis;
+                white-space:nowrap;
+                word-wrap:normal;
+                width:calc(100% - 50px);
+                overflow:hidden;
+            }
+        }
+    }
+
+    .bottomBanner{
+        width:100%;
+        height: 90px;
+        background: $main-color;
+        display: flex;
+        justify-content: center;
+        align-items: center;
+        color:#fff;
+    }
+}
+
+
+// footer
+.footer{
+    background: #e9e9e9;
+    color:#8d8d8d;
+    
+    .footerLink{
+        width:100%;
+        height: 50px;
+        display: flex;
+        justify-content: center;
+        align-items: center;
+        border-bottom:1px solid rgba(0,0,0,0.1);
+        .footerLinkItem{
+            padding: 0 15px;
+            text-align: center;
+            border-right:1px solid rgba(0,0,0,0.1);
+            font-size: 0.8rem;
+            &:last-child{
+                border-right: 0;
+            }
+        }
+    }
+
+    .company{
+        width:100%;
+        padding: 20px;
+        .companyTitle{
+            font-size:1.4rem;
+            font-weight:600;
+            margin-bottom: 10px;
+        }
+    }
+}
