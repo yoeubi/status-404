@@ -24,7 +24,12 @@ $modal-font-size : 2rem;
   &.show{
     opacity: 1;
     z-index: 100;
+
+    .modal{
+      transform: translateX(0);
+    }
   }
+  
 }
 .modal {
   width: 353px;
@@ -37,7 +42,7 @@ $modal-font-size : 2rem;
   font-family: 'Noto Sans KR';
   
   &.show {
-    transform: translateX(0);
+    
   }
   .header {
     position: relative;
