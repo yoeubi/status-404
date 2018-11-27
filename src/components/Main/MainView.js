@@ -21,8 +21,11 @@ import matzip from '../../img/14_matzip.svg';
 const cx = classNames.bind(styles);
 
 class MainView extends Component {
+    // MainView :: Main 컴포넌트의 view 를 담당하는 컴포넌트
     static defaultProps = {
+        // 로그인 여부
         isLogin: true,
+        // 카테고리 가데이터
         lists: [
             {
                 id: 0,
@@ -96,7 +99,7 @@ class MainView extends Component {
             },
         ]
     }
-    
+
     render() {
         const {isLogin, lists} = this.props;
 
