@@ -14,14 +14,13 @@ class Layout extends Component {
       }
     handleUserModal = () => {
         console.log('실행중');
-
         this.setState({ show: !this.state.show })
     }
 
     render() {
         const {show} = this.state;
         return (
-            <div className={cx('layout')}>
+            <div className={cx('layout',{'noScroll': show })}>
                 <UserModal onUserModal={this.handleUserModal} showModal={show}/>
                 <Header onUserModal={this.handleUserModal}/>
                 {this.props.children}
