@@ -16,6 +16,7 @@ import { ReactComponent as Desert} from '../../img/11_desert.svg';
 import { ReactComponent as Fastfood} from '../../img/12_fastfood.svg';
 import { ReactComponent as Franchise} from '../../img/13_franchise.svg';
 import { ReactComponent as Matzip} from '../../img/14_matzip.svg';
+import { ReactComponent as SearchIcon} from '../../img/search.svg';
 
 const cx = classNames.bind(styles);
 
@@ -127,7 +128,7 @@ class MainView extends Component {
                     <div className={cx('findMatzip')}>
                         <div className={cx('inner')}>
                             <span>우리동네 맛집 검색</span> 
-                            <span className="icon">icon</span>
+                            <SearchIcon className={cx('icon')}/>
                         </div>
                     </div>
 
