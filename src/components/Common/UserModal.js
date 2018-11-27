@@ -5,28 +5,63 @@ import classNames from 'classnames/bind';
 const cx = classNames.bind(styles);
 
 class UserModal extends Component {
+  static defaultProps = {
+    navList: [
+      {
+        id:0,
+        title: '포인트',
+        img:null
+      },
+      {
+        id:1,
+        title: '쿠폰함',
+        img:null
+      },
+      {
+        id:2,
+        title: '장바구니',
+        img:null
+      },
+      {
+        id:3,
+        title: '바로결제내역',
+        img:null
+      },
+      {
+        id:4,
+        title: '단골매장',
+        img:null
+      },
+      {
+        id:5,
+        title: '리뷰관리',
+        img:null
+      },
+    ]
+  }
   
   render() {
-    const {showModal,onUserModal} = this.props;
-    return <div className={cx("background")}>
+    const {showModal,onUserModal,navList} = this.props;
+    return <div className={cx("background",{ "show": showModal })}>
       <div className={cx("modal", { "show": showModal })}>
         <div className={cx("header")}>
-          <div>유저 이미지</div>
-          <div>
-            <p>고마운 분</p>
-            <p>deceiver22</p>
-            <p>0p</p>
+          <div className={cx("avartar")}>avartar</div>
+          <div className={cx("user")}>
+            <p className={cx("colored")}>고마운 분</p>
+            <p className={cx("username")}>이강산</p>
+            <p className={cx("point","colored")}>0p</p>
           </div>
-          <button onClick={onUserModal}>닫기</button>
+          <button className={cx("close")} onClick={onUserModal}>닫기</button>
         </div>
         <div>
           <ul className={cx("nav")}>
-            <li className={cx("item")}>포인트</li>
-            <li className={cx("item")}>쿠폰함</li>
-            <li className={cx("item")}>장바구니</li>
-            <li className={cx("item")}>바로결제내역</li>
-            <li className={cx("item")}>단골매장</li>
-            <li className={cx("item")}>리뷰관리</li>
+          {
+            navList.map(n=>(
+              <li key={n.id} className={cx("item")}>
+                {n.title}
+              </li>
+            ))
+          }
           </ul>
         </div>
         <div className={cx("banner")} />

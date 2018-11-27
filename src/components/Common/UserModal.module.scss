@@ -13,11 +13,20 @@ $modal-font-size : 2rem;
 
 .background {
   background-color: rgba(0, 0, 0, 0.5);
-}
-.modal {
   position: fixed;
+  width:100%;
   top:0;
   left:0;
+  z-index: -10;
+  opacity: 0;
+  transition: all;
+  transition-duration: 0.3s;
+  &.show{
+    opacity: 1;
+    z-index: 100;
+  }
+}
+.modal {
   width: 353px;
   height: 100vh;
   overflow: auto;
@@ -26,12 +35,51 @@ $modal-font-size : 2rem;
   background-color: #fff;
   color: $modal-font;
   font-family: 'Noto Sans KR';
+  
   &.show {
     transform: translateX(0);
   }
   .header {
+    position: relative;
+    width:100%;
     height: 95px;
-    border: 1px solid black;
+    border-bottom: 1px solid #efefef;
+    display: flex;
+    justify-content: flex-start;
+    align-items: center;
+    padding: 0 13px;
+    .avartar{
+      width:60px;
+      height: 60px;
+      margin-right: 15px;
+      border-radius: 50%;
+      background: $main-color;
+      color:#fff;
+      @include center;
+    }
+    .user{
+      display: flex;
+      flex-direction: column;
+      justify-content: center;
+      font-size:1.3rem;
+      font-weight:600;
+      .colored{
+        color:$main-color;
+      }
+      .username{
+        font-size:1.4rem;
+      }
+    }
+    .close{
+      position: absolute;
+      width:45px;
+      height: 100%;
+      @include center;
+      top:0;
+      right:0;
+      background: rgba(0,0,0,0.1);
+
+    }
   }
   .nav {
     display: flex;

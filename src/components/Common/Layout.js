@@ -21,7 +21,7 @@ class Layout extends Component {
     render() {
         const {show} = this.state;
         return (
-            <div className={cx('layout')}>
+            <div className={cx('layout',{'noScroll': show })}>
                 <UserModal onUserModal={this.handleUserModal} showModal={show}/>
                 <Header onUserModal={this.handleUserModal}/>
                 {this.props.children}

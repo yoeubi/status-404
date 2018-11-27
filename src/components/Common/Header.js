@@ -17,7 +17,7 @@ class Header extends Component {
         const {onUserModal} = this.props;
         return (
             <div className={cx('header')}>
-
+                <button className={cx('hambergur')} onClick={onUserModal}>햄</button>
                 <div className={cx('addressInput')}>
                     {
                         isLogin ? (
@@ -26,7 +26,7 @@ class Header extends Component {
                                 <span className={cx('address')}>배송지 입력하기</span>
                             )
                     }
-                    <button onClick={onUserModal}>모달</button>
+                    
                     <img className={cx('icon')} src={chevronDown} alt="down" />
                 </div>
             </div>
