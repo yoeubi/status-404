@@ -8,6 +8,4 @@ import { Button, Welcome } from "@storybook/react/demo";
 
 import AddressSearch from "./AddressSearch";
 
-storiesOf("AddressSearch", module)
-    .add("default", () => <AddressSearch />);
-    
+storiesOf("AddressSearch", module).add("default", () => <AddressSearch />);

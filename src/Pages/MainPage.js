@@ -9,8 +9,8 @@ class MainPage extends Component {
   render() {
     return (
       <Layout>
-        <Main />
         <AddressSearch />
+        <Main />
       </Layout>
     );
   }
