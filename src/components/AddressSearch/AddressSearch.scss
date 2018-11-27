@@ -1,0 +1,28 @@
+// @import '../../index.scss';
+
+$main-color:  white;
+$main-border: 1px solid black;
+
+.Container {
+    display: flex;
+    position: absolute;
+    top: 10%;
+    left: 40%;
+    width: 300px;
+    height: 500px;
+    background-color: $main-color;
+    border: $main-border;
+}
+
+.header {
+    font-size: 18pt;
+}
+
+.input {
+    background-color: rgb(238, 235, 235);
+}
+
+.AddressSearch {
+    width: 100%;
+    color: black;
+}
