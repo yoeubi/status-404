@@ -107,17 +107,17 @@ class MainView extends Component {
             <div className={cx('wrap')}>
                 
                 <div className={cx('header')}>
-                {
-                    isLogin ? (
-                            <div className={cx('addressInput')}>
-                            <span className={cx('address')}>상계동 666</span>
-                            <img className={cx('icon')} src={chevronDown} alt="down"/>
+                
+                        <div className={cx('addressInput')}>
+                        {
+                            isLogin ? (
+                                <span className={cx('address')}>상계동 666</span>
+                            ): (
+                                <span className={cx('address')}>배송지 입력하기</span>
+                            )
+                        }
+                        <img className={cx('icon')} src={chevronDown} alt="down" />
                         </div>
-                    ):(
-                        <p>로그인 및 회원가입 안내 문구</p>
-                    )
-                }
-                    
                 </div>
 
                 <div className={cx('body')}>
