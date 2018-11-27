@@ -1,0 +1,142 @@
+$main-font-color: #8f8f8f;
+
+@mixin a11y-hidden {
+  position: absolute;
+  width: 1px;
+  height: 1px;
+  overflow: hidden;
+  margin: -1px;
+  clip: rect(0, 0, 0, 0);
+}
+
+.login {
+  width: 100%;
+  //   height: 100vh;
+  padding: 30px;
+  color: $main-font-color;
+  .exit {
+    position: absolute;
+    img {
+      transform: scale(1.3);
+    }
+  }
+  .notification {
+    display: none;
+    position: absolute;
+    top: 10%;
+    left: 0;
+    width: 100%;
+    padding: 0 30px;
+    text-align: center;
+    word-wrap: break-word;
+    font-size: 1.5rem;
+    color: rgb(179, 58, 58);
+    font-weight: 700;
+    &.warning {
+      display: block;
+    }
+  }
+  label {
+    position: absolute;
+    @include a11y-hidden();
+  }
+
+  .login-form {
+    font-size: 1.4rem;
+    width: 100%;
+    margin: 30% auto 0 auto;
+    text-align: center;
+    div {
+      position: relative;
+      .clear {
+        position: absolute;
+        display: none;
+        top: 0;
+        right: 0;
+        padding: 15px 10px;
+        &.show {
+          display: block;
+        }
+        img {
+          transform: scale(1.2);
+          opacity: 0.5;
+        }
+      }
+    }
+    input {
+      width: 100%;
+      height: 45px;
+      margin-bottom: 30px;
+      font-size: 1.4rem;
+      border: none;
+      border-bottom: 1px solid rgba(0, 0, 0, 0.2);
+      &:focus {
+        outline: none;
+        border-bottom: 1px solid #2ac1bc;
+      }
+    }
+    button {
+      width: 100%;
+      height: 45px;
+      margin-bottom: 30px;
+      font-size: 1.4rem;
+      background: #2ac1bc;
+      color: #fff;
+      border: none;
+      &:active,
+      &:hover {
+        background: #1ab1ac;
+      }
+    }
+    .find-user {
+      color: rgba(0, 0, 0, 0.3);
+      text-decoration: underline;
+    }
+  }
+
+  // social-login
+  .social-login {
+    width: 100%;
+    margin: 50% auto 0 auto;
+    text-align: center;
+    button {
+      font-size: 1.4rem;
+      width: 100%;
+      height: 45px;
+      color: $main-font-color;
+      border: 1px solid $main-font-color;
+      background: #fff;
+      display: flex;
+      justify-content: center;
+      align-items: center;
+      &:hover , &:focus {
+        background: #eee;
+      }
+      &.facebook {
+        // background: #4968ad;
+      }
+      &.naver {
+        margin-bottom: 10px;
+        // background: #5eca6b;
+      }
+      .icon {
+        transform: translate(-10px, 2px);
+        img {
+          transform: scale(1.3);
+        }
+      }
+    }
+  }
+
+  .join {
+    width: 100%;
+    font-size: 1.2rem;
+    margin-top: 30px;
+    text-align: center;
+    color: rgba(0, 0, 0, 0.3);
+    a {
+      color: #000;
+      font-weight: bold;
+    }
+  }
+}
