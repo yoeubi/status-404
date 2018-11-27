@@ -1,7 +1,6 @@
 import React, { Component } from 'react';
 import styles from './Main.module.scss';
 import classNames from 'classnames/bind';
-import chevronDown from '../../img/chevron-down.svg';
 
 import hansik from '../../img/01_hansik.svg';
 import bunsik from '../../img/02_bunsik.svg';
@@ -23,8 +22,6 @@ const cx = classNames.bind(styles);
 class MainView extends Component {
     // MainView :: Main 컴포넌트의 view 를 담당하는 컴포넌트
     static defaultProps = {
-        // 로그인 여부
-        isLogin: true,
         // 카테고리 가데이터
         lists: [
             {
@@ -101,24 +98,10 @@ class MainView extends Component {
     }
 
     render() {
-        const {isLogin, lists} = this.props;
+        const { lists} = this.props;
 
         return (
             <div className={cx('wrap')}>
-                
-                <div className={cx('header')}>
-                
-                        <div className={cx('addressInput')}>
-                        {
-                            isLogin ? (
-                                <span className={cx('address')}>상계동 666</span>
-                            ): (
-                                <span className={cx('address')}>배송지 입력하기</span>
-                            )
-                        }
-                        <img className={cx('icon')} src={chevronDown} alt="down" />
-                        </div>
-                </div>
 
                 <div className={cx('body')}>
                     <div className={cx('carousel')}>

@@ -1,4 +1,5 @@
 import React, { Component } from 'react';
+import Layout from '../components/Common/Layout';
 import Main from '../containers/Main';
 
 class MainPage extends Component {
@@ -6,7 +7,9 @@ class MainPage extends Component {
     // 레이아웃 컴포넌트 등과 연결
     render() {
         return (
-            <Main/>
+            <Layout>
+                <Main />
+            </Layout>
         );
     }
 }

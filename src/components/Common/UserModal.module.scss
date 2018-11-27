@@ -15,8 +15,12 @@ $modal-font-size : 2rem;
   background-color: rgba(0, 0, 0, 0.5);
 }
 .modal {
+  position: fixed;
+  top:0;
+  left:0;
   width: 353px;
-  min-height: 500px;
+  height: 100vh;
+  overflow: auto;
   transform: translateX(-353px);
   transition: all 0.5s ease-in-out;
   background-color: #fff;
