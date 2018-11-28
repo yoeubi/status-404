@@ -10,7 +10,7 @@ const cx = classNames.bind(styles);
 class Header extends Component {
     
     render() {
-        const {onUserModal, isLogin} = this.props;
+        const {user, onUserModal, isLogin} = this.props;
         return (
             <div className={cx('header')}>
                 <Hambergur className={cx('hambergur')} onClick={onUserModal} />
@@ -19,7 +19,9 @@ class Header extends Component {
                     {
                         isLogin ? (
                             // 로그인시
-                            <span className={cx('address')}>상계동 666</span>
+                            <span className={cx('address')}>
+                                {user.address2}
+                            </span>
                         ) : (
                             // 미 로그인시 => 로그인 페이지로
                             <span className={cx('address')}>

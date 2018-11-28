@@ -44,7 +44,7 @@ class UserModal extends Component {
   }
   
   render() {
-    const {showModal,onUserModal,navList,isLogin} = this.props;
+    const {user,showModal,onUserModal,navList,isLogin} = this.props;
     // FIXME :: 모달 활성화시 Layout 에스크롤이 생기지 않게 하기 위해 css 트릭을 적용하였으나
     //          활성화시 어떤 위치에서도 최상단으로 이동하는 버그가 있어서 해결해야 함
     return (
@@ -69,8 +69,8 @@ class UserModal extends Component {
             onClick={onUserModal}
             to="/profile"
             className={cx("user")}>
-            <p className={cx("colored")}>고마운 분</p>
-            <p className={cx("username")}>이강산</p>
+            <p className={cx("colored")}>{user.nickname}</p>
+            <p className={cx("username")}>{user.username}</p>
             <p className={cx("point","colored")}>0p</p>
           </Link>
         </div>

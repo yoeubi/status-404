@@ -12,7 +12,9 @@ class UserProvider extends Component {
                 username: '이강산',
                 phone:'000-0000-0000',
                 is_host: true,
-                address: '서울시 노원구 상계동 666',
+                address1: '서울시 노원구 상계동 666',
+                address2: '상계동 666',
+                address3: '000-000',
                 avatar : null
             }
         }
