@@ -1,4 +1,5 @@
 import React, { Component } from "react";
+import { Link } from "react-router-dom";
 import styles from "./Join.scss";
 import classNames from "classnames/bind";
 import { ReactComponent as X } from "../../svg/x.svg";
@@ -96,7 +97,9 @@ class Join extends Component {
       <div className={cx("join")}>
         <header className={cx("header")}>
           <span className={cx("close")}>
+            <Link to="/login">
             <Left />
+            </Link>
           </span>
           <span>회원가입</span>
           <span className={cx("complete", { check })}>완료</span>

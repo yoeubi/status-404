@@ -3,6 +3,7 @@ import {withUser} from '../context/UserContext';
 import MainView from '../components/Main/MainView';
 import Header from '../components/Main/Header';
 import UserModal from '../components/Main/UserModal';
+import AddressSearch from "../components/AddressSearch/AddressSearch";
 import axios from 'axios';
 
 const apiKey = '1173586d003c2973d03c551fc45e438f'; // 강산이꺼니까 막쓰지마샘
@@ -27,7 +28,8 @@ class MainContainer extends Component {
         this.state = {
             // 모달 활성화 여부
             show: false,
-            myposition: null
+            myposition: null,
+            addressSearchShow: false
         }
     }
     async componentDidMount(){
@@ -61,28 +63,40 @@ class MainContainer extends Component {
         }
     }
 
-    handleUserModal = () => {
-        console.log(this.state.show);
-        this.setState({ show: !this.state.show })
-    }
 
-    render() {
-        const {show} = this.state;
-        const {user} = this.props; // <=== UserContext 에 작성된 상태가 props로 전달됩니다.
-        return (
-            <React.Fragment>
-            <UserModal 
-                user={user}
-                onUserModal={this.handleUserModal} showModal={show}
-            />
-            <Header 
-                user={user}
-                onUserModal={this.handleUserModal}
-            />
-            <MainView/>
-            </React.Fragment>
-        );
-    }
+  handleUserModal = () => {
+    console.log(this.state.show);
+    this.setState({ show: !this.state.show });
+  };
+
+  handleAddressSearch = () => {
+    console.log("address");
+    this.setState({ addressSearchShow: !this.state.addressSearchShow });
+  };
+
+  render() {
+    const { show, addressSearchShow } = this.state;
+    const { user } = this.props; // <=== UserContext 에 작성된 상태가 props로 전달됩니다.
+    return (
+      <React.Fragment>
+        <UserModal
+          user={user}
+          onUserModal={this.handleUserModal}
+          showModal={show}
+        />
+        <Header
+          user={user}
+          onUserModal={this.handleUserModal}
+          onAddressSearch={this.handleAddressSearch}
+        />
+        <AddressSearch
+          show={addressSearchShow}
+          onAddressSearch={this.handleAddressSearch}
+        />
+        <MainView />
+      </React.Fragment>
+    );
+  }
 }
 
 export default withUser(MainContainer);
