@@ -13,12 +13,15 @@ class Join extends Component {
     nickname: "",
     email: "",
     password: "",
+    phone : '',
     nickFocus: false,
     emailFocus: false,
     passFocus: false,
+    phoneFocus : false,
     nickValid: false,
     emailValid: false,
-    passValid: false
+    passValid: false,
+    phoneValid: false
   };
   handleChange = e => {
     const { name, value } = e.target;
@@ -33,23 +36,34 @@ class Join extends Component {
     this.setState({
       nickFocus: true,
       emailFocus: false,
-      passFocus: false
+      passFocus: false,
+      phoneFocus: false
     });
   };
   handleEmailFocus = () => {
     this.setState({
       nickFocus: false,
       emailFocus: true,
-      passFocus: false
+      passFocus: false,
+      phoneFocus: false
     });
   };
   handlePassFocus = () => {
     this.setState({
       nickFocus: false,
       emailFocus: false,
-      passFocus: true
+      passFocus: true,
+      phoneFocus: false
     });
   };
+  handlePhoneFocus = () => {
+    this.setState({
+      nickFocus: false,
+      emailFocus: false,
+      passFocus: false,
+      phoneFocus: true
+    });
+  }
   handleRemove = target => {
     this.setState({
       [target]: ""
@@ -71,6 +85,9 @@ class Join extends Component {
       case "password":
         flag = /^[a-zA-Z0-9]{8,20}$/g.test(value);
         return { target: "passValid", flag };
+      case "phone":
+      flag = /^[0-9]{9,}$/g.test(value);
+          return {target :'phoneValid', flag };
       default:
         throw new Error("유효성 검사 실패");
     }
@@ -83,6 +100,8 @@ class Join extends Component {
         return value.slice(0, 40);
       case "password":
         return value.slice(0, 20);
+      case "phone":
+        return value.slice(0, 12);
       default:
         throw new Error("길이 검사 실패");
     }
@@ -92,22 +111,26 @@ class Join extends Component {
       nickname,
       email,
       password,
+      phone,
       nickFocus,
       emailFocus,
       passFocus,
+      phoneFocus,
       nickValid,
       emailValid,
-      passValid
+      passValid,
+      phoneValid
     } = this.state;
     const {
       handleChange,
       handlePassFocus,
       handleNickFocus,
       handleEmailFocus,
+      handlePhoneFocus,
       handleRemove
     } = this;
     const check =
-      nickValid && emailValid && passValid && nickname && email && password;
+      nickValid && emailValid && passValid && phoneValid && nickname && email && password && phone;
     return (
       <div className={cx("join")}>
         <header className={cx("header")}>
@@ -209,6 +232,34 @@ class Join extends Component {
               <X style={{ fill: "rgba(0,0,0,1)" }} />
             </span>
             <span className={cx("check", { show: password && passValid })}>
+              <Check style={{ fill: "#2ac1bc" }} />
+            </span>
+          </div>
+          <div>
+            <label htmlFor="phone" className={cx({ show: phoneFocus })}>
+              전화번호
+            </label>
+            <input
+              type="number"
+              id="phone"
+              name="phone"
+              placeholder="전화번호를 입력해주세요"
+              value={phone}
+              onChange={handleChange}
+              onFocus={handlePhoneFocus}
+            />
+            <p className={cx({ show: phone && !phoneValid })}>
+              11~12자의 숫자만 가능합니다.
+            </p>
+            <span
+              className={cx("clear", {
+                show: phone && phoneFocus
+              })}
+              onClick={() => handleRemove("phone")}
+            >
+              <X style={{ fill: "rgba(0,0,0,1)" }} />
+            </span>
+            <span className={cx("check", { show: phone && phoneValid })}>
               <Check style={{ fill: "#2ac1bc" }} />
             </span>
           </div>
