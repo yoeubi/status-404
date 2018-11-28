@@ -27,18 +27,16 @@ class Layout extends Component {
     }
 
     render() {
-        const {show, isLogin} = this.state;
-        const {user} = this.props;
+        const {show} = this.state;
+        const {user} = this.props; // <=== UserContext 에 작성된 상태가 props로 전달됩니다.
         return (
             <div className={cx('layout',{'noScroll': show })}>
                 <UserModal 
                 user={user}
-                isLogin={isLogin}
                 onUserModal={this.handleUserModal} showModal={show}
                 />
                 <Header 
                 user={user}
-                isLogin={isLogin}
                 onUserModal={this.handleUserModal}
                 />
                 {this.props.children}
