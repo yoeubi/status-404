@@ -13,11 +13,11 @@ class Join extends Component {
     nickname: "",
     email: "",
     password: "",
-    phone : '',
+    phone: "",
     nickFocus: false,
     emailFocus: false,
     passFocus: false,
-    phoneFocus : false,
+    phoneFocus: false,
     nickValid: false,
     emailValid: false,
     passValid: false,
@@ -26,7 +26,7 @@ class Join extends Component {
   handleChange = e => {
     const { name, value } = e.target;
     const result = this.isValid(name, value);
-    const newValue = this.isMax(name, value);
+    let newValue = this.isMax(name, value);
     this.setState({
       [name]: newValue,
       [result.target]: result.flag
@@ -63,7 +63,7 @@ class Join extends Component {
       passFocus: false,
       phoneFocus: true
     });
-  }
+  };
   handleRemove = target => {
     this.setState({
       [target]: ""
@@ -86,8 +86,8 @@ class Join extends Component {
         flag = /^[a-zA-Z0-9]{8,20}$/g.test(value);
         return { target: "passValid", flag };
       case "phone":
-      flag = /^[0-9]{9,}$/g.test(value);
-          return {target :'phoneValid', flag };
+        flag = /^[0-9]{11,12}$/g.test(value);
+        return { target: "phoneValid", flag };
       default:
         throw new Error("유효성 검사 실패");
     }
@@ -101,7 +101,7 @@ class Join extends Component {
       case "password":
         return value.slice(0, 20);
       case "phone":
-        return value.slice(0, 12);
+        return value.slice(0, 11);
       default:
         throw new Error("길이 검사 실패");
     }
@@ -130,7 +130,14 @@ class Join extends Component {
       handleRemove
     } = this;
     const check =
-      nickValid && emailValid && passValid && phoneValid && nickname && email && password && phone;
+      nickValid &&
+      emailValid &&
+      passValid &&
+      phoneValid &&
+      nickname &&
+      email &&
+      password &&
+      phone;
     return (
       <div className={cx("join")}>
         <header className={cx("header")}>
@@ -238,16 +245,17 @@ class Join extends Component {
           </div>
           <div>
             <label htmlFor="phone" className={cx({ show: phoneFocus })}>
-              전화번호
+              휴대번호
             </label>
             <input
-              type="number"
+              type="tell"
               id="phone"
               name="phone"
               placeholder="9~12자로 입력해주세요"
               value={phone}
               onChange={handleChange}
               onFocus={handlePhoneFocus}
+              autoComplete="off"
             />
             <p className={cx({ show: phone && !phoneValid })}>
               9~12자의 숫자만 가능합니다.
