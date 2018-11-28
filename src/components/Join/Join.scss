@@ -27,7 +27,12 @@ $input-height : 45px;
         span {
             @include center();
             &.close {
-                transform: scale(1.5);
+                a {
+                    @include center();
+                    svg {
+                        transform: scale(1.5);
+                    }
+                }
             }
         }
     }

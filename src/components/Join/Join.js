@@ -23,8 +23,9 @@ class Join extends Component {
   handleChange = e => {
     const { name, value } = e.target;
     const result = this.isValid(name, value);
+    const newValue = this.isMax(name,value);
     this.setState({
-        [name] : value,
+      [name]: newValue,
       [result.target]: result.flag
     });
   };
@@ -54,7 +55,7 @@ class Join extends Component {
       [target]: ""
     });
   };
-  isValid(target, value) {
+  isValid = (target, value) => {
     let flag = null;
     switch (target) {
       case "nickname":
@@ -70,6 +71,18 @@ class Join extends Component {
         return { target: "passValid", flag };
       default:
         throw new Error("유효성 검사 실패");
+    }
+  }
+  isMax = (target,value) => {
+    switch (target) {
+        case 'nickname':
+            return value.slice(0,10);
+        case 'email':
+            return value.slice(0,40);
+        case 'password':
+            return value.slice(0,20);
+        default :
+            throw new Error('길이 검사 실패');
     }
   }
   render() {
@@ -89,7 +102,7 @@ class Join extends Component {
       handlePassFocus,
       handleNickFocus,
       handleEmailFocus,
-      handleRemove,
+      handleRemove
     } = this;
     const check =
       nickValid && emailValid && passValid && nickname && email && password;
@@ -98,7 +111,7 @@ class Join extends Component {
         <header className={cx("header")}>
           <span className={cx("close")}>
             <Link to="/login">
-            <Left />
+              <Left />
             </Link>
           </span>
           <span>회원가입</span>
