@@ -59,8 +59,10 @@ class AddressSearch extends Component {
               <li key={r.id} className={cx("listItem")}>
                 <span className={cx("address")}>{r.address}</span>
                 <button className={cx("deleteButton")}>x</button>
-                <div className={cx("box")}>도로명</div>
-                <div className={cx("road")}>{r.road}</div>
+                <div className={cx("textContainer")}>
+                  <div className={cx("box")}>도로명</div>
+                  <div className={cx("road")}>{r.road}</div>
+                </div>
               </li>
             ))}
           </ul>
