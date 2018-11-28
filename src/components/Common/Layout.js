@@ -24,12 +24,13 @@ class Layout extends Component {
     this.setState({ show: !this.state.show });
   };
 
-  handleAddressSearch = () => {
-    this.setState({ showPopup: !this.state.showPopup });
-  };
+  //   handleAddressSearch = () => {
+  //     console.log("handleAddressSearch");
+  //     this.setState({ showPopup: !this.state.showPopup });
+  //   };
 
   render() {
-    const { show, isLogin, showPopup } = this.state;
+    const { show, isLogin } = this.state;
     return (
       <div className={cx("layout", { noScroll: show })}>
         <UserModal
@@ -37,10 +38,10 @@ class Layout extends Component {
           onUserModal={this.handleUserModal}
           showModal={show}
         />
-        <AddressSearch
+        {/* <AddressSearch
           onAddressSearch={this.handleAddressSearch}
           showPopup={showPopup}
-        />
+        /> */}
         <Header isLogin={isLogin} onUserModal={this.handleUserModal} />
         {this.props.children}
       </div>

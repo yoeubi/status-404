@@ -1,11 +1,5 @@
 @import '../../index.scss';
 // header
-.layout{
-    &.noScroll{
-        overflow: hidden;
-        height:100vh;
-    }
-}
 .header{
     position: fixed;
     top:0;
@@ -21,9 +15,6 @@
 
     .addressInput{
         font-weight:600;
-        .address{
-
-        }
         .icon{
             display: inline-block;
             width:18px;

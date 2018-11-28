@@ -4,7 +4,7 @@ $main-color: white;
 $main-border: 1px solid black;
 
 .container {
-  display: block;
+  // display: block;
   position: absolute;
   width: 100%;
   height: 100%;
@@ -13,9 +13,9 @@ $main-border: 1px solid black;
   color: black;
   // background-color: rgb(255, 255, 152);
 
-  &.showPopup {
-    // display: none;
-  }
+  // &.showPopup {
+  //   // display: none;
+  // }
 }
 
 .formContainer {
@@ -92,4 +92,13 @@ $main-border: 1px solid black;
   padding: 15px;
   background-color: white;
   // background-color: yellowgreen;
+}
+
+.listItem {
+  padding: 10px;
+  font-size: 12pt;
+  height: 60px;
+  width: 100%;
+  background-color: white;
+  border-bottom: 1px solid rgba(241, 241, 241, 0.87);
 }

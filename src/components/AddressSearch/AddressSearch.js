@@ -6,19 +6,31 @@ import classNames from "classnames/bind";
 const cx = classNames.bind(styles);
 
 class AddressSearch extends Component {
-  constructor(props) {
-    super(props);
-
-    this.state = {};
-  }
+  static defaultProps = {
+    recentAddressList: [
+      {
+        id: 0,
+        address: "성동구 성수동2가 277-17 제강빌딩",
+        road: "성수이로 118 제강빌딩"
+      },
+      {
+        id: 1,
+        address: "성동구 성수동2가 277-54 서브웨이",
+        road: "아차산로 121 서브웨이"
+      },
+      {
+        id: 2,
+        address: "성동구 성수동2가 300-1 성수역[2호선]",
+        road: "아차산로 113"
+      }
+    ]
+  };
 
   render() {
-    const { showPopup, onAddressSearch } = this.props;
+    const { recentAddressList } = this.props;
+    // const { showPopup, onAddressSearch } = this.props;
     return (
-      <div
-        className={cx("container", { showPopup: showPopup })}
-        onClick={onAddressSearch}
-      >
+      <div className={cx("container")}>
         <div className={cx("formContainer")}>
           <button className={cx("closeButton")}>X</button>
           <h1 className={cx("header")}>
@@ -41,9 +53,17 @@ class AddressSearch extends Component {
         </div>
         <div className={cx("listContainer")}>
           <h2 className={cx("listTitle")}>최근 주소</h2>
+          <ul className={cx("recentAddress")}>
+            {recentAddressList.map(r => (
+              <li key={r.id} className={cx("listItem")}>
+                <span>{r.address}</span>
+                <span>{r.road}</span>
+              </li>
+            ))}
+          </ul>
         </div>
       </div>
-    );
+    ); // <div className={cx("container", { showPopup: showPopup })}>
   }
 }
 
