@@ -116,11 +116,13 @@ $main-border: 1px solid black;
   font-size: 12pt;
   width: 90%;
   height: 30px;
-  background-color: goldenrod;
+  margin-bottom: 10px;
+  // background-color: goldenrod;
 }
 
 .box {
-  // display: block;
+  display: flex;
+  flex-direction: row;
   color: rgb(160, 158, 158);
   font-size: 9pt;
   width: 40px;
@@ -128,23 +130,25 @@ $main-border: 1px solid black;
   text-align: center;
   border: 0.5px solid rgb(145, 145, 145);
   margin-right: 10px;
-  background-color: yellowgreen;
+  padding: 2px;
+  // background-color: yellowgreen;
 }
 
 .road {
-  // width: calc(100% - 20px);
+  width: calc(100% - 80px);
   color: rgb(139, 139, 139);
   font-size: 11pt;
   background-color: sandybrown;
 }
 
 .deleteButton {
+  border: none;
   position: absolute;
-  top: 30px;
+  top: 25px;
   right: 0;
   width: 30px;
   // height: 80px;
   font-size: 15pt;
   color: silver;
-  background-color: green;
+  // background-color: green;
 }
