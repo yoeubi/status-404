@@ -219,6 +219,7 @@ class Join extends Component {
               value={password}
               onChange={handleChange}
               onFocus={handlePassFocus}
+              autoComplete="off"
             />
             <p className={cx({ show: password && !passValid })}>
               8~20자의 영문자, 숫자만 가능합니다.
@@ -243,13 +244,13 @@ class Join extends Component {
               type="number"
               id="phone"
               name="phone"
-              placeholder="전화번호를 입력해주세요"
+              placeholder="9~12자로 입력해주세요"
               value={phone}
               onChange={handleChange}
               onFocus={handlePhoneFocus}
             />
             <p className={cx({ show: phone && !phoneValid })}>
-              11~12자의 숫자만 가능합니다.
+              9~12자의 숫자만 가능합니다.
             </p>
             <span
               className={cx("clear", {
