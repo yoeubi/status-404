@@ -27,12 +27,13 @@ class AddressSearch extends Component {
   };
 
   render() {
-    const { recentAddressList } = this.props;
-    // const { showPopup, onAddressSearch } = this.props;
+    const { recentAddressList, show, onAddressSearch } = this.props;
     return (
-      <div className={cx("container")}>
+      <div className={cx("container", { show: show })}>
         <div className={cx("formContainer")}>
-          <button className={cx("closeButton")}>X</button>
+          <button className={cx("closeButton")} onClick={onAddressSearch}>
+            X
+          </button>
           <h1 className={cx("header")}>
             지번, 도로명, 건물명을
             <p>입력하세요</p>

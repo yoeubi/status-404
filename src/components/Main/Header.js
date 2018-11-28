@@ -10,13 +10,11 @@ const cx = classNames.bind(styles);
 class Header extends Component {
   render() {
     // const { user, onUserModal, onAddressSearch } = this.props;
-    const { user, onUserModal } = this.props;
+    const { user, onUserModal, onAddressSearch } = this.props;
     return (
       <div className={cx("header")}>
         <Hambergur className={cx("hambergur")} onClick={onUserModal} />
-
-        {/* <div className={cx("addressInput")} onClick={onAddressSearch}> */}
-        <div className={cx("addressInput")}>
+        <div className={cx("addressInput")} onClick={onAddressSearch}>
           {user ? (
             // 로그인시
             <span className={cx("address")}>{user.address2}</span>
