@@ -1,6 +1,6 @@
 import React, { Component } from "react";
 import { Link } from "react-router-dom";
-import styles from "./Join.scss";
+import styles from "./Join.module.scss";
 import classNames from "classnames/bind";
 import { ReactComponent as X } from "../../svg/x.svg";
 import { ReactComponent as Left } from "../../svg/chevron-left.svg";
@@ -25,8 +25,8 @@ class Join extends Component {
   };
   handleChange = e => {
     const { name, value } = e.target;
-    const result = this.isValid(name, value);
     let newValue = this.isMax(name, value);
+    const result = this.isValid(name, newValue);
     this.setState({
       [name]: newValue,
       [result.target]: result.flag
@@ -86,7 +86,7 @@ class Join extends Component {
         flag = /^[a-zA-Z0-9]{8,20}$/g.test(value);
         return { target: "passValid", flag };
       case "phone":
-        flag = /^[0-9]{11,12}$/g.test(value);
+        flag = /^[0-9]{11}$/g.test(value);
         return { target: "phoneValid", flag };
       default:
         throw new Error("유효성 검사 실패");
