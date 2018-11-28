@@ -29,7 +29,7 @@
             flex-direction: column;
             border:1px dotted rgba(0,0,0,0.1);
             font-size:1.4rem;
-            img{
+            svg{
                 transition: transform;
                 transition-duration: 0.3s;
                 &:hover{
@@ -53,6 +53,9 @@
             border:1px solid #f0f0f0;
             background: #fff;
             font-size:1.5rem;
+            .icon{
+                margin-left: 5px;
+            }
         }
     }
 

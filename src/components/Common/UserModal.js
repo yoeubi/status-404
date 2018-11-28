@@ -44,7 +44,7 @@ class UserModal extends Component {
   }
   
   render() {
-    const {showModal,onUserModal,navList} = this.props;
+    const {showModal,onUserModal,navList,isLogin} = this.props;
     // FIXME :: 모달 활성화시 Layout 에스크롤이 생기지 않게 하기 위해 css 트릭을 적용하였으나
     //          활성화시 어떤 위치에서도 최상단으로 이동하는 버그가 있어서 해결해야 함
     return (
@@ -56,8 +56,12 @@ class UserModal extends Component {
         // 클릭 이벤트시 background 엘리먼트까지 이벤트가 전달되면
         // onUserModal 이 실행되기 때문에 이벤트를 막아놓았다.
         e.stopPropagation();
-      }} className={cx("modal", { "show": showModal })}>
-        <div className={cx("header")}>
+      }} className={cx("modal")}>
+
+      {
+        isLogin ? (
+          // 로그인시
+          <div className={cx("header")}>
           <Avater className={cx("avartar")}></Avater>
           <Link 
             // click 시 profile 페이지 렌더링과 동시에 모달이 사라지도록
@@ -70,6 +74,21 @@ class UserModal extends Component {
             <p className={cx("point","colored")}>0p</p>
           </Link>
         </div>
+        ):(
+          // 미로그인시
+          <div className={cx("headerNoLogin")}>
+          <div className={cx("headerNoLoginBanner")}>
+            BannerImage
+          </div>
+            <Link 
+            to="/login"
+            className={cx("headerLogin")}>
+              로그인
+            </Link>
+          </div>
+        )
+      }
+        
         <div>
           <ul className={cx("nav")}>
           {

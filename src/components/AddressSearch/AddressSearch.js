@@ -13,8 +13,12 @@ class AddressSearch extends Component {
   }
 
   render() {
+    const { showPopup, onAddressSearch } = this.props;
     return (
-      <div className={cx("container")}>
+      <div
+        className={cx("container", { showPopup: showPopup })}
+        onClick={onAddressSearch}
+      >
         <div className={cx("formContainer")}>
           <button className={cx("closeButton")}>X</button>
           <h1 className={cx("header")}>
