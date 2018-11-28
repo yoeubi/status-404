@@ -23,8 +23,9 @@ class Join extends Component {
   handleChange = e => {
     const { name, value } = e.target;
     const result = this.isValid(name, value);
+    const newValue = this.isMax(name, value);
     this.setState({
-        [name] : value,
+      [name]: newValue,
       [result.target]: result.flag
     });
   };
@@ -54,7 +55,7 @@ class Join extends Component {
       [target]: ""
     });
   };
-  isValid(target, value) {
+  isValid = (target, value) => {
     let flag = null;
     switch (target) {
       case "nickname":
@@ -63,7 +64,9 @@ class Join extends Component {
         );
         return { target: "nickValid", flag };
       case "email":
-        flag = /^[a-zA-Z0-9\-_]+@{1}[a-zA-Z0-9]+.{1}[a-zA-Z]+$/g.test(value);
+        flag = /^[a-zA-Z0-9\-_]+\@{1}[a-zA-Z0-9]+\.?[a-zA-Z]+\.{1}[a-zA-Z]+$/g.test(
+          value
+        );
         return { target: "emailValid", flag };
       case "password":
         flag = /^[a-zA-Z0-9]{8,20}$/g.test(value);
@@ -71,7 +74,19 @@ class Join extends Component {
       default:
         throw new Error("유효성 검사 실패");
     }
-  }
+  };
+  isMax = (target, value) => {
+    switch (target) {
+      case "nickname":
+        return value.slice(0, 10);
+      case "email":
+        return value.slice(0, 40);
+      case "password":
+        return value.slice(0, 20);
+      default:
+        throw new Error("길이 검사 실패");
+    }
+  };
   render() {
     const {
       nickname,
@@ -89,7 +104,7 @@ class Join extends Component {
       handlePassFocus,
       handleNickFocus,
       handleEmailFocus,
-      handleRemove,
+      handleRemove
     } = this;
     const check =
       nickValid && emailValid && passValid && nickname && email && password;
@@ -98,20 +113,23 @@ class Join extends Component {
         <header className={cx("header")}>
           <span className={cx("close")}>
             <Link to="/login">
-            <Left />
+              <Left />
             </Link>
           </span>
           <span>회원가입</span>
-          <span className={cx("complete", { check })}>완료</span>
+          {check ? (
+            <span className={cx("complete", "check")} tabIndex="0">
+              <Link to="/">완료</Link>
+            </span>
+          ) : (
+            <span className={cx("complete")} tabIndex="0">
+              완료
+            </span>
+          )}
         </header>
         <form className={cx("join-form")}>
           <div>
-            <label
-              htmlFor="nickname"
-              className={cx({
-                show: nickFocus
-              })}
-            >
+            <label htmlFor="nickname" className={cx({ show: nickFocus })}>
               닉네임
             </label>
             <input
@@ -127,7 +145,9 @@ class Join extends Component {
               2~10자의 한글 영문자 숫자만 입력가능합니다.
             </p>
             <span
-              className={cx("clear", { show: nickname && nickFocus })}
+              className={cx("clear", {
+                show: nickname && nickFocus
+              })}
               onClick={() => handleRemove("nickname")}
             >
               <X style={{ fill: "rgba(0,0,0,1)" }} />
@@ -137,12 +157,7 @@ class Join extends Component {
             </span>
           </div>
           <div>
-            <label
-              htmlFor="email"
-              className={cx({
-                show: emailFocus
-              })}
-            >
+            <label htmlFor="email" className={cx({ show: emailFocus })}>
               이메일아이디
             </label>
             <input
@@ -158,7 +173,9 @@ class Join extends Component {
               잘못된 이메일 유형입니다.
             </p>
             <span
-              className={cx("clear", { show: email && emailFocus })}
+              className={cx("clear", {
+                show: email && emailFocus
+              })}
               onClick={() => handleRemove("email")}
             >
               <X style={{ fill: "rgba(0,0,0,1)" }} />
@@ -168,12 +185,7 @@ class Join extends Component {
             </span>
           </div>
           <div>
-            <label
-              htmlFor="password"
-              className={cx({
-                show: passFocus
-              })}
-            >
+            <label htmlFor="password" className={cx({ show: passFocus })}>
               비밀번호
             </label>
             <input
@@ -189,7 +201,9 @@ class Join extends Component {
               8~20자의 영문자, 숫자만 가능합니다.
             </p>
             <span
-              className={cx("clear", { show: password && passFocus })}
+              className={cx("clear", {
+                show: password && passFocus
+              })}
               onClick={() => handleRemove("password")}
             >
               <X style={{ fill: "rgba(0,0,0,1)" }} />
