@@ -13,7 +13,8 @@ class AddressSearch extends Component {
   }
 
   render() {
-    return <div className={cx("container")}>
+    return (
+      <div className={cx("container")}>
         <div className={cx("formContainer")}>
           <button className={cx("closeButton")}>X</button>
           <h1 className={cx("header")}>
@@ -21,7 +22,13 @@ class AddressSearch extends Component {
             <p>입력하세요</p>
           </h1>
           <div classNames={cx("addressSearchForm")}>
-            <input className={cx("addressSearchInput")} label="주소검색" type="search" name="address" placeholder="예) 배민동12-3 또는 배민아파트" />
+            <input
+              className={cx("addressSearchInput")}
+              label="주소검색"
+              type="search"
+              name="address"
+              placeholder="예) 배민동12-3 또는 배민아파트"
+            />
             <button className={cx("addressSearchButton")}>돋보기</button>
           </div>
           <button className={cx("addressSettingButton")}>
@@ -31,7 +38,8 @@ class AddressSearch extends Component {
         <div className={cx("listContainer")}>
           <h2 className={cx("listTitle")}>최근 주소</h2>
         </div>
-      </div>;
+      </div>
+    );
   }
 }
 
