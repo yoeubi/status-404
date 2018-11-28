@@ -1,8 +1,8 @@
 import React, { Component } from 'react';
 import {withUser} from '../context/UserContext';
 import MainView from '../components/Main/MainView';
-import Header from '../components/Common/Header';
-import UserModal from '../components/Common/UserModal';
+import Header from '../components/Main/Header';
+import UserModal from '../components/Main/UserModal';
 
 class MainContainer extends Component {
     static defaultProps = {
@@ -18,7 +18,7 @@ class MainContainer extends Component {
     }
 
     handleUserModal = () => {
-        console.log('실행중');
+        console.log(this.state.show);
         this.setState({ show: !this.state.show })
     }
 

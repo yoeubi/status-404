@@ -6,9 +6,7 @@ class MainPage extends Component {
     // 레이아웃 컴포넌트 등과 연결
     render() {
         return (
-            
-        <MainContainer />
-            
+            <MainContainer />
         );
     }
 }
