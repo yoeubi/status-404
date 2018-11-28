@@ -38,7 +38,7 @@ class AddressSearch extends Component {
             지번, 도로명, 건물명을
             <p>입력하세요</p>
           </h1>
-          <div classNames={cx("addressSearchForm")}>
+          <div className={cx("addressSearchForm")}>
             <input
               className={cx("addressSearchInput")}
               label="주소검색"
