@@ -3,6 +3,19 @@ import {withUser} from '../context/UserContext';
 import MainView from '../components/Main/MainView';
 import Header from '../components/Main/Header';
 import UserModal from '../components/Main/UserModal';
+import axios from 'axios';
+
+const apiKey = '1173586d003c2973d03c551fc45e438f'; // 강산이꺼니까 막쓰지마샘
+
+const api = axios.create();
+
+api.interceptors.request.use(function(config) {
+    if (apiKey) {
+        config.headers = config.headers || {};
+        config.headers['Authorization'] = 'KakaoAK ' + apiKey;
+    }
+    return config;
+});
 
 class MainContainer extends Component {
     static defaultProps = {
@@ -14,6 +27,33 @@ class MainContainer extends Component {
         this.state = {
             // 모달 활성화 여부
             show: false,
+            myposition: null
+        }
+    }
+    async componentDidMount(){
+        const {myposition} = this.state;
+        // 브라우저 지오로케이션에서 현재 좌표값 가져오기
+        
+        await window.navigator.geolocation.getCurrentPosition( (position) => {
+            this.setState({
+                myposition: position.coords
+            });
+            
+        });
+        
+        console.log(myposition);
+    }
+
+    async componentDidUpdate(){
+        if(this.state.myposition){
+            const {data} = await api.get('https://dapi.kakao.com//v2/local/geo/coord2address.json',{
+                params: {
+                    x: this.state.myposition.longitude,
+                    y: this.state.myposition.latitude,
+                    input_coord: 'WGS84'
+                }
+            });
+            console.log(data);
         }
     }
 
