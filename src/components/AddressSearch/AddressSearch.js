@@ -38,7 +38,7 @@ class AddressSearch extends Component {
             지번, 도로명, 건물명을
             <p>입력하세요</p>
           </h1>
-          <div classNames={cx("addressSearchForm")}>
+          <div className={cx("addressSearchForm")}>
             <input
               className={cx("addressSearchInput")}
               label="주소검색"
@@ -57,8 +57,12 @@ class AddressSearch extends Component {
           <ul className={cx("recentAddress")}>
             {recentAddressList.map(r => (
               <li key={r.id} className={cx("listItem")}>
-                <span>{r.address}</span>
-                <span>{r.road}</span>
+                <span className={cx("address")}>{r.address}</span>
+                <button className={cx("deleteButton")}>x</button>
+                <div className={cx("box")}>
+                  도로명
+                  <div className={cx("road")}>{r.road}</div>
+                </div>
               </li>
             ))}
           </ul>

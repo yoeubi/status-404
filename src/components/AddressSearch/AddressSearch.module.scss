@@ -48,7 +48,7 @@ $main-border: 1px solid black;
 }
 
 .addressSearchForm {
-  background-color: yellow;
+  // background-color: yellow;
   // display: flex;
   justify-content: center;
 }
@@ -82,7 +82,7 @@ $main-border: 1px solid black;
   width: 100%;
   text-align: center;
   display: block;
-  font-size: 10pt;
+  font-size: 12pt;
   cursor: pointer;
 }
 
@@ -93,7 +93,7 @@ $main-border: 1px solid black;
 }
 
 .listTitle {
-  display: block;
+  // display: block;
   font-weight: bold;
   font-size: 12pt;
   margin-top: 10px;
@@ -103,10 +103,48 @@ $main-border: 1px solid black;
 }
 
 .listItem {
+  position: relative;
+  // flex-direction: column;
   padding: 10px;
-  font-size: 12pt;
-  height: 60px;
+  height: 80px;
   width: 100%;
   background-color: white;
   border-bottom: 1px solid rgba(241, 241, 241, 0.87);
+}
+
+.address {
+  font-size: 12pt;
+  width: 90%;
+  height: 30px;
+  background-color: goldenrod;
+}
+
+.box {
+  // display: block;
+  color: rgb(160, 158, 158);
+  font-size: 9pt;
+  width: 40px;
+  height: 18px;
+  text-align: center;
+  border: 0.5px solid rgb(145, 145, 145);
+  margin-right: 10px;
+  background-color: yellowgreen;
+}
+
+.road {
+  // width: calc(100% - 20px);
+  color: rgb(139, 139, 139);
+  font-size: 11pt;
+  background-color: sandybrown;
+}
+
+.deleteButton {
+  position: absolute;
+  top: 30px;
+  right: 0;
+  width: 30px;
+  // height: 80px;
+  font-size: 15pt;
+  color: silver;
+  background-color: green;
 }
