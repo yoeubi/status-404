@@ -32,16 +32,20 @@ class MainContainer extends Component {
     }
     async componentDidMount(){
         const {myposition} = this.state;
-        // 브라우저 지오로케이션에서 현재 좌표값 가져오기
-        
-        await window.navigator.geolocation.getCurrentPosition( (position) => {
-            this.setState({
-                myposition: position.coords
+        // 로컬스토리지에 geolocation 이 있는지 확인한다.
+        if(!localStorage.getItem('geo')){
+            // 로컬스토리지에 geo 가 없으면 
+            // 브라우저 지오로케이션에서 현재 좌표값 가져오기
+            window.navigator.geolocation.getCurrentPosition( async (position) => {
+                // 가져온 값을 스테이트에 저장하기
+                await this.setState({
+                    myposition: position.coords
+                }); 
+                // 가져온 값을 로컬스토리지에 저장하기
+                localStorage.setItem('geo', JSON.stringify([position.coords]));
             });
-            
-        });
+        }
         
-        console.log(myposition);
     }
 
     async componentDidUpdate(){
