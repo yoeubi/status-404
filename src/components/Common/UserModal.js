@@ -44,7 +44,7 @@ class UserModal extends Component {
   }
   
   render() {
-    const {user,showModal,onUserModal,navList,isLogin} = this.props;
+    const {user,showModal,onUserModal,navList} = this.props;
     // FIXME :: 모달 활성화시 Layout 에스크롤이 생기지 않게 하기 위해 css 트릭을 적용하였으나
     //          활성화시 어떤 위치에서도 최상단으로 이동하는 버그가 있어서 해결해야 함
     return (
@@ -59,8 +59,8 @@ class UserModal extends Component {
       }} className={cx("modal")}>
 
       {
-        isLogin ? (
-          // 로그인시
+        user ? (
+          // 로그인시 : user 존재시
           <div className={cx("header")}>
           <Avater className={cx("avartar")}></Avater>
           <Link 
@@ -75,7 +75,7 @@ class UserModal extends Component {
           </Link>
         </div>
         ):(
-          // 미로그인시
+          // 미로그인시 : user === null
           <div className={cx("headerNoLogin")}>
           <div className={cx("headerNoLoginBanner")}>
             BannerImage

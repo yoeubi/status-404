@@ -10,14 +10,14 @@ const cx = classNames.bind(styles);
 class Header extends Component {
     
     render() {
-        const {user, onUserModal, isLogin} = this.props;
+        const {user, onUserModal} = this.props;
         return (
             <div className={cx('header')}>
                 <Hambergur className={cx('hambergur')} onClick={onUserModal} />
                     
                 <div className={cx('addressInput')}>
                     {
-                        isLogin ? (
+                        user ? (
                             // 로그인시
                             <span className={cx('address')}>
                                 {user.address2}
