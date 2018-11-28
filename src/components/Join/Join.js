@@ -20,14 +20,12 @@ class Join extends Component {
     passValid: false
   };
   handleChange = e => {
-    const  {name , value} = e.target;
-    this.setState({
-      [name]: value
-    });
+    const { name, value } = e.target;
     const result = this.isValid(name, value);
     this.setState({
-        [result.target] : result.flag
-    })
+        [name] : value,
+      [result.target]: result.flag
+    });
   };
   handleNickFocus = () => {
     this.setState({
@@ -56,21 +54,21 @@ class Join extends Component {
     });
   };
   isValid(target, value) {
-      let flag = null;
+    let flag = null;
     switch (target) {
       case "nickname":
-            flag = /^[\u3131-\u314e|\u314f-\u3163|\uac00-\ud7a3|a-z|A-Z|0-9]{2,10}$/g.test(
-                value
-            );
-        return {target : 'nickValid', flag }
+        flag = /^[\u3131-\u314e|\u314f-\u3163|\uac00-\ud7a3|a-z|A-Z|0-9]{2,10}$/g.test(
+          value
+        );
+        return { target: "nickValid", flag };
       case "email":
-            flag = /^[a-zA-Z0-9\-_]+@{1}[a-zA-Z0-9]+.{1}[a-zA-Z]+$/g.test(value);
-            return { target : 'emailValid', flag }
-    case "password":
-            flag = /^[a-zA-Z0-9]{8,20}$/g.test(value);
-            return { target : 'passValid', flag }
+        flag = /^[a-zA-Z0-9\-_]+@{1}[a-zA-Z0-9]+.{1}[a-zA-Z]+$/g.test(value);
+        return { target: "emailValid", flag };
+      case "password":
+        flag = /^[a-zA-Z0-9]{8,20}$/g.test(value);
+        return { target: "passValid", flag };
       default:
-        throw new Error('유효성 검사 실패');
+        throw new Error("유효성 검사 실패");
     }
   }
   render() {
@@ -90,9 +88,10 @@ class Join extends Component {
       handlePassFocus,
       handleNickFocus,
       handleEmailFocus,
-      handleRemove
+      handleRemove,
     } = this;
-      const check = nickValid && emailValid && passValid && nickname && email && password
+    const check =
+      nickValid && emailValid && passValid && nickname && email && password;
     return (
       <div className={cx("join")}>
         <header className={cx("header")}>
@@ -121,6 +120,9 @@ class Join extends Component {
               onChange={handleChange}
               onFocus={handleNickFocus}
             />
+            <p className={cx({ show: nickname && !nickValid })}>
+              2~10자의 한글 영문자 숫자만 입력가능합니다.
+            </p>
             <span
               className={cx("clear", { show: nickname && nickFocus })}
               onClick={() => handleRemove("nickname")}
@@ -149,6 +151,9 @@ class Join extends Component {
               onChange={handleChange}
               onFocus={handleEmailFocus}
             />
+            <p className={cx({ show: email && !emailValid })}>
+              잘못된 이메일 유형입니다.
+            </p>
             <span
               className={cx("clear", { show: email && emailFocus })}
               onClick={() => handleRemove("email")}
@@ -177,6 +182,9 @@ class Join extends Component {
               onChange={handleChange}
               onFocus={handlePassFocus}
             />
+            <p className={cx({ show: password && !passValid })}>
+              8~20자의 영문자, 숫자만 가능합니다.
+            </p>
             <span
               className={cx("clear", { show: password && passFocus })}
               onClick={() => handleRemove("password")}
