@@ -64,7 +64,7 @@ class Join extends Component {
         );
         return { target: "nickValid", flag };
       case "email":
-        flag = /^[a-zA-Z0-9\-_]+\@{1}[a-zA-Z0-9]+\.?[a-zA-Z]+\.{1}[a-zA-Z]+$/g.test(
+        flag = /^[a-zA-Z0-9\-_]+@{1}[a-zA-Z0-9]+\.?[a-zA-Z]+\.{1}[a-zA-Z]+$/g.test(
           value
         );
         return { target: "emailValid", flag };
