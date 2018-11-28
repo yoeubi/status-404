@@ -251,14 +251,14 @@ class Join extends Component {
               type="tell"
               id="phone"
               name="phone"
-              placeholder="9~12자로 입력해주세요"
+              placeholder="11자로 입력해주세요"
               value={phone}
               onChange={handleChange}
               onFocus={handlePhoneFocus}
               autoComplete="off"
             />
             <p className={cx({ show: phone && !phoneValid })}>
-              9~12자의 숫자만 가능합니다.
+              11자의 숫자만 가능합니다.
             </p>
             <span
               className={cx("clear", {
