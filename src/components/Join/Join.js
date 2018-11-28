@@ -116,11 +116,11 @@ class Join extends Component {
           </span>
           <span>회원가입</span>
           {check ? (
-            <span className={cx("complete", "check")}>
+            <span className={cx("complete", "check")} tabIndex="0">
               <Link to="/">완료</Link>
             </span>
           ) : (
-            <span className={cx("complete")}>완료</span>
+            <span className={cx("complete")} tabIndex="0">완료</span>
           )}
         </header>
         <form className={cx("join-form")}>
