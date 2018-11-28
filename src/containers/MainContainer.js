@@ -1,14 +1,10 @@
 import React, { Component } from 'react';
-import Header from './Header';
-import UserModal from './UserModal';
-import styles from './Layout.module.scss';
-import classNames from 'classnames/bind';
-import {withUser} from '../../context/UserContext';
-const cx = classNames.bind(styles);
+import {withUser} from '../context/UserContext';
+import MainView from '../components/Main/MainView';
+import Header from '../components/Common/Header';
+import UserModal from '../components/Common/UserModal';
 
-// 공통 레이아웃이에여
-// Header 컴포넌트를 잘 작성해서 페이지마다 다르게 렌더링 될 수 있도록 해봅시당.
-class Layout extends Component {
+class MainContainer extends Component {
     static defaultProps = {
         // user 정보, 유저 정보 없을시 null 로 기본값 설정
         user : null,
@@ -30,19 +26,19 @@ class Layout extends Component {
         const {show} = this.state;
         const {user} = this.props; // <=== UserContext 에 작성된 상태가 props로 전달됩니다.
         return (
-            <div className={cx('layout',{'noScroll': show })}>
-                <UserModal 
+            <React.Fragment>
+            <UserModal 
                 user={user}
                 onUserModal={this.handleUserModal} showModal={show}
-                />
-                <Header 
+            />
+            <Header 
                 user={user}
                 onUserModal={this.handleUserModal}
-                />
-                {this.props.children}
-            </div>
+            />
+            <MainView/>
+            </React.Fragment>
         );
     }
 }
 
-export default withUser(Layout);
+export default withUser(MainContainer);

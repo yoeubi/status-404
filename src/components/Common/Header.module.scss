@@ -1,11 +1,5 @@
 @import '../../index.scss';
 // header
-.layout{
-    &.noScroll{
-        overflow: hidden;
-        height:100vh;
-    }
-}
 .header{
     position: fixed;
     top:0;

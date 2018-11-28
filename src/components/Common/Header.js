@@ -1,7 +1,7 @@
 import React, { Component } from 'react';
 import { Link } from "react-router-dom";
 import classNames from 'classnames/bind';
-import styles from './Layout.module.scss';
+import styles from './Header.module.scss';
 import {ReactComponent as ChevronDown } from '../../img/chevron-down.svg';
 import {ReactComponent as Hambergur } from '../../img/grabber.svg';
 
