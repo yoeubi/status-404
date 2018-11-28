@@ -52,7 +52,7 @@ class MainContainer extends Component {
                 // 로컬스토리지에 가져온 정보 저장
                 localStorage.setItem('currentAddress', currentAddress);
                 // UserContext 상태에 저장
-                this.props.handleAddress(currentAddress);
+                this.props.handleAddress(JSON.parse(currentAddress));
             });
         }else{
             // 로컬스토리지에 currentAddress 가 있다면 api 요청 하지 않고 로컬스트리지 값을 현재 유저 상태에 저장
