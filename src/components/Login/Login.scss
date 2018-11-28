@@ -11,7 +11,7 @@ $main-font-color: #8f8f8f;
 
 .login {
   width: 100%;
-  padding: 30px;
+  padding: 17px 30px 0 30px;
   color: $main-font-color;
   .exit {
     position: absolute;
@@ -96,7 +96,7 @@ $main-font-color: #8f8f8f;
   // social-login
   .social-login {
     width: 100%;
-    margin: 33% auto 0 auto;
+    margin: 55% auto 0 auto;
     text-align: center;
     button {
       font-size: 1.4rem;
@@ -126,7 +126,7 @@ $main-font-color: #8f8f8f;
   .join {
     width: 100%;
     font-size: 1.2rem;
-    margin-top: 30px;
+    margin-top: 25px;
     text-align: center;
     color: rgba(0, 0, 0, 0.3);
     a {

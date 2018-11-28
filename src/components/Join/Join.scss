@@ -27,7 +27,12 @@ $input-height : 45px;
         span {
             @include center();
             &.close {
-                transform: scale(1.5);
+                a {
+                    @include center();
+                    svg {
+                        transform: scale(1.5);
+                    }
+                }
             }
         }
     }
@@ -57,6 +62,13 @@ $input-height : 45px;
                 }
                 &::placeholder {
                     color : rgba(0, 0, 0, 0.1);
+                }
+            }
+            p {
+                visibility: hidden;
+                color : red;
+                &.show {
+                    visibility: visible;
                 }
             }
             span {
