@@ -59,6 +59,13 @@ $input-height : 45px;
                     color : rgba(0, 0, 0, 0.1);
                 }
             }
+            p {
+                visibility: hidden;
+                color : red;
+                &.show {
+                    visibility: visible;
+                }
+            }
             span {
                 @include center();
                 transform: scale(1.3);
