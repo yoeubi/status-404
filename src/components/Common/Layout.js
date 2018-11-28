@@ -10,19 +10,29 @@ const cx = classNames.bind(styles);
 // Header 컴포넌트를 잘 작성해서 페이지마다 다르게 렌더링 될 수 있도록 해봅시당.
 class Layout extends Component {
     state = {
-        show: false
-      }
+        // 모달 활성화 여부
+        show: false,
+        // 로그인 여부
+        isLogin: false
+    }
+    
     handleUserModal = () => {
         console.log('실행중');
         this.setState({ show: !this.state.show })
     }
 
     render() {
-        const {show} = this.state;
+        const {show, isLogin} = this.state;
         return (
             <div className={cx('layout',{'noScroll': show })}>
-                <UserModal onUserModal={this.handleUserModal} showModal={show}/>
-                <Header onUserModal={this.handleUserModal}/>
+                <UserModal 
+                isLogin={isLogin}
+                onUserModal={this.handleUserModal} showModal={show}
+                />
+                <Header 
+                isLogin={isLogin}
+                onUserModal={this.handleUserModal}
+                />
                 {this.props.children}
             </div>
         );
