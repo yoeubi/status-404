@@ -64,7 +64,9 @@ class Join extends Component {
         );
         return { target: "nickValid", flag };
       case "email":
-        flag = /^[a-zA-Z0-9\-_]+@{1}[a-zA-Z0-9]+.{1}[a-zA-Z]+$/g.test(value);
+        flag = /^[a-zA-Z0-9\-_]+\@{1}[a-zA-Z0-9]+\.?[a-zA-Z]+\.{1}[a-zA-Z]+$/g.test(
+          value
+        );
         return { target: "emailValid", flag };
       case "password":
         flag = /^[a-zA-Z0-9]{8,20}$/g.test(value);
@@ -116,11 +118,13 @@ class Join extends Component {
           </span>
           <span>회원가입</span>
           {check ? (
-            <span className={cx("complete", "check")}>
+            <span className={cx("complete", "check")} tabIndex="0">
               <Link to="/">완료</Link>
             </span>
           ) : (
-            <span className={cx("complete")}>완료</span>
+            <span className={cx("complete")} tabIndex="0">
+              완료
+            </span>
           )}
         </header>
         <form className={cx("join-form")}>
