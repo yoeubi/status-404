@@ -8,8 +8,9 @@ import axios from 'axios';
 
 const apiKey = '1173586d003c2973d03c551fc45e438f'; // 강산이꺼니까 막쓰지마샘
 
-const api = axios.create();
+const api = axios.create(); // 여기서만 쓸 api config를 정의하기 위해
 
+// 이 컴포넌트에서만 쓸 api config 정의
 api.interceptors.request.use(function(config) {
     if (apiKey) {
         config.headers = config.headers || {};
@@ -28,49 +29,45 @@ class MainContainer extends Component {
         this.state = {
             // 모달 활성화 여부
             show: false,
-            myposition: null,
             addressSearchShow: false
         }
     }
     async componentDidMount(){
-        const {myposition} = this.state;
-        // 로컬스토리지에 geolocation 이 있는지 확인한다.
-        if(!localStorage.getItem('geo')){
-            // 로컬스토리지에 geo 가 없으면 
-            // 브라우저 지오로케이션에서 현재 좌표값 가져오기
+        // 최초 접속시 로컬스토리지에 geolocation 이 있는지 확인한다.
+        if(!localStorage.getItem('currentAddress')){
+            // 로컬스토리지에 currentAddress 가 없으면 
             window.navigator.geolocation.getCurrentPosition( async (position) => {
-                // 가져온 값을 스테이트에 저장하기
-                await this.setState({
-                    myposition: position.coords
-                }); 
-                // 가져온 값을 로컬스토리지에 저장하기
-                localStorage.setItem('geo', JSON.stringify([position.coords]));
+                // 브라우저 지오로케이션에서 현재 좌표값 가져오기
+                // 가져온 좌표값으로 api 요청
+                const {data} = await api.get('https://dapi.kakao.com//v2/local/geo/coord2address.json',{
+                    params: {
+                        // 파라미터 정보 확인 https://developers.kakao.com/docs/restapi/local#%EC%A3%BC%EC%86%8C-%EB%B3%80%ED%99%98
+                        x: position.coords.longitude,
+                        y: position.coords.latitude,
+                        input_coord: 'WGS84'
+                    }
+                });
+                
+                const currentAddress = JSON.stringify(data.documents[0].address); // 갹체라서 JSON 으로 변환
+                // 로컬스토리지에 가져온 정보 저장
+                localStorage.setItem('currentAddress', currentAddress);
+                // UserContext 상태에 저장
+                this.props.handleAddress(currentAddress);
             });
+        }else{
+            // 로컬스토리지에 currentAddress 가 있다면 api 요청 하지 않고 로컬스트리지 값을 현재 유저 상태에 저장
+            const currentAddress = JSON.parse(localStorage.getItem('currentAddress')); // 객체형태의 로컬스트리지 저장값을 가져오기 위해 parse
+            this.props.handleAddress(currentAddress);
         }
         
     }
 
-    async componentDidUpdate(){
-        if(this.state.myposition){
-            const {data} = await api.get('https://dapi.kakao.com//v2/local/geo/coord2address.json',{
-                params: {
-                    x: this.state.myposition.longitude,
-                    y: this.state.myposition.latitude,
-                    input_coord: 'WGS84'
-                }
-            });
-            console.log(data);
-        }
-    }
-
 
   handleUserModal = () => {
-    console.log(this.state.show);
     this.setState({ show: !this.state.show });
   };
 
   handleAddressSearch = () => {
-    console.log("address");
     this.setState({ addressSearchShow: !this.state.addressSearchShow });
   };
 
