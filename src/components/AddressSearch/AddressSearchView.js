@@ -26,8 +26,30 @@ class AddressSearchView extends Component {
     ]
   };
 
+  constructor(props) {
+    super(props);
+
+    this.state = {
+      userInput: ""
+    };
+  }
+
+  handleUserInput = e => {
+    const userInput = e.target.value;
+    this.setState({
+      userInput
+    });
+  };
+
   render() {
-    const { recentAddressList, show, onAddressSearch } = this.props;
+    const {
+      recentAddressList,
+      show,
+      onAddressSearch,
+      getAddress,
+      searchResult
+    } = this.props;
+    const { userInput } = this.state;
     return (
       <React.Fragment>
         <div className={cx("container", { show: show })}>
@@ -41,13 +63,20 @@ class AddressSearchView extends Component {
             </h1>
             <div className={cx("addressSearchForm")}>
               <input
+                onChange={e => this.handleUserInput(e)}
+                value={userInput}
                 className={cx("addressSearchInput")}
                 label="주소검색"
                 type="search"
                 name="address"
                 placeholder="예) 배민동12-3 또는 배민아파트"
               />
-              <button className={cx("addressSearchButton")}>돋보기</button>
+              <button
+                className={cx("addressSearchButton")}
+                onClick={() => getAddress(userInput)}
+              >
+                돋보기
+              </button>
             </div>
             <button className={cx("addressSettingButton")}>
               ◎ 현 위치로 주소 설정
@@ -56,14 +85,14 @@ class AddressSearchView extends Component {
           <div className={cx("listContainer")}>
             <h2 className={cx("listTitle")}>최근 주소</h2>
             <ul className={cx("recentAddress")}>
-              {recentAddressList.map(r => (
+              {searchResult.map(r => (
                 <li key={r.id} className={cx("listItem")}>
-                  <span className={cx("address")}>{r.address}</span>
-                  <button className={cx("deleteButton")}>x</button>
+                  <span className={cx("address")}>{r.address_name}</span>
+                  {/* <button className={cx("deleteButton")}>x</button>
                   <div className={cx("textContainer")}>
                     <div className={cx("box")}>도로명</div>
                     <div className={cx("road")}>{r.road}</div>
-                  </div>
+                  </div> */}
                 </li>
               ))}
             </ul>

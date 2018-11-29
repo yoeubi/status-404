@@ -29,7 +29,8 @@ class MainContainer extends Component {
     this.state = {
       // 모달 활성화 여부
       show: false,
-      addressSearchShow: false
+      addressSearchShow: false,
+      searchResult: []
     };
   }
   async componentDidMount() {
@@ -40,8 +41,8 @@ class MainContainer extends Component {
         // 브라우저 지오로케이션에서 현재 좌표값 가져오기
         console.log({
           x: position.coords.longitude,
-          y: position.coords.latitude,
-        })
+          y: position.coords.latitude
+        });
         // 가져온 좌표값으로 api 요청
         const { data } = await api.get(
           "https://dapi.kakao.com//v2/local/geo/coord2address.json",
@@ -55,7 +56,6 @@ class MainContainer extends Component {
           }
         );
 
-        
         const currentAddress = JSON.stringify(data.documents[0].address); // 갹체라서 JSON 으로 변환
         // 로컬스토리지에 가져온 정보 저장
         localStorage.setItem("currentAddress", currentAddress);
@@ -77,8 +77,24 @@ class MainContainer extends Component {
     this.setState({ addressSearchShow: !this.state.addressSearchShow });
   };
 
+  getAddress = async userInput => {
+    const { data } = await api.get(
+      "https://dapi.kakao.com//v2/local/search/address.json",
+      {
+        params: {
+          query: userInput,
+          size: 10
+        }
+      }
+    );
+    const searchResult = data.documents;
+    this.setState({
+      searchResult
+    });
+  };
+
   render() {
-    const { show, addressSearchShow } = this.state;
+    const { show, addressSearchShow, searchResult } = this.state;
     const { user } = this.props; // <=== UserContext 에 작성된 상태가 props로 전달됩니다.
     return (
       <React.Fragment>
@@ -95,6 +111,8 @@ class MainContainer extends Component {
         <AddressSearchView
           show={addressSearchShow}
           onAddressSearch={this.handleAddressSearch}
+          getAddress={this.getAddress}
+          searchResult={searchResult}
         />
         <MainView />
       </React.Fragment>
