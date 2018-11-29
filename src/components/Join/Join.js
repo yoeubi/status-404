@@ -191,7 +191,7 @@ class Join extends Component {
               이메일아이디
             </label>
             <input
-              type="text"
+              type="email"
               id="email"
               name="email"
               placeholder="example@baemin.com"
@@ -248,7 +248,7 @@ class Join extends Component {
               휴대번호
             </label>
             <input
-              type="tell"
+              type="tel"
               id="phone"
               name="phone"
               placeholder="11자로 입력해주세요"
