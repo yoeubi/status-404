@@ -1,6 +1,6 @@
 import React, { Component } from "react";
 import { Link } from "react-router-dom";
-import styles from "./Join.scss";
+import styles from "./Join.module.scss";
 import classNames from "classnames/bind";
 import { ReactComponent as X } from "../../svg/x.svg";
 import { ReactComponent as Left } from "../../svg/chevron-left.svg";
@@ -13,17 +13,20 @@ class Join extends Component {
     nickname: "",
     email: "",
     password: "",
+    phone: "",
     nickFocus: false,
     emailFocus: false,
     passFocus: false,
+    phoneFocus: false,
     nickValid: false,
     emailValid: false,
-    passValid: false
+    passValid: false,
+    phoneValid: false
   };
   handleChange = e => {
     const { name, value } = e.target;
-    const result = this.isValid(name, value);
-    const newValue = this.isMax(name, value);
+    let newValue = this.isMax(name, value);
+    const result = this.isValid(name, newValue);
     this.setState({
       [name]: newValue,
       [result.target]: result.flag
@@ -33,21 +36,32 @@ class Join extends Component {
     this.setState({
       nickFocus: true,
       emailFocus: false,
-      passFocus: false
+      passFocus: false,
+      phoneFocus: false
     });
   };
   handleEmailFocus = () => {
     this.setState({
       nickFocus: false,
       emailFocus: true,
-      passFocus: false
+      passFocus: false,
+      phoneFocus: false
     });
   };
   handlePassFocus = () => {
     this.setState({
       nickFocus: false,
       emailFocus: false,
-      passFocus: true
+      passFocus: true,
+      phoneFocus: false
+    });
+  };
+  handlePhoneFocus = () => {
+    this.setState({
+      nickFocus: false,
+      emailFocus: false,
+      passFocus: false,
+      phoneFocus: true
     });
   };
   handleRemove = target => {
@@ -64,13 +78,16 @@ class Join extends Component {
         );
         return { target: "nickValid", flag };
       case "email":
-        flag = /^[a-zA-Z0-9\-_]+\@{1}[a-zA-Z0-9]+\.?[a-zA-Z]+\.{1}[a-zA-Z]+$/g.test(
+        flag = /^[a-zA-Z0-9\-_]+@{1}[a-zA-Z0-9]+\.?[a-zA-Z]+\.{1}[a-zA-Z]+$/g.test(
           value
         );
         return { target: "emailValid", flag };
       case "password":
         flag = /^[a-zA-Z0-9]{8,20}$/g.test(value);
         return { target: "passValid", flag };
+      case "phone":
+        flag = /^[0-9]{11}$/g.test(value);
+        return { target: "phoneValid", flag };
       default:
         throw new Error("유효성 검사 실패");
     }
@@ -83,6 +100,8 @@ class Join extends Component {
         return value.slice(0, 40);
       case "password":
         return value.slice(0, 20);
+      case "phone":
+        return value.slice(0, 11);
       default:
         throw new Error("길이 검사 실패");
     }
@@ -92,22 +111,33 @@ class Join extends Component {
       nickname,
       email,
       password,
+      phone,
       nickFocus,
       emailFocus,
       passFocus,
+      phoneFocus,
       nickValid,
       emailValid,
-      passValid
+      passValid,
+      phoneValid
     } = this.state;
     const {
       handleChange,
       handlePassFocus,
       handleNickFocus,
       handleEmailFocus,
+      handlePhoneFocus,
       handleRemove
     } = this;
     const check =
-      nickValid && emailValid && passValid && nickname && email && password;
+      nickValid &&
+      emailValid &&
+      passValid &&
+      phoneValid &&
+      nickname &&
+      email &&
+      password &&
+      phone;
     return (
       <div className={cx("join")}>
         <header className={cx("header")}>
@@ -161,10 +191,11 @@ class Join extends Component {
               이메일아이디
             </label>
             <input
-              type="text"
+              type="email"
               id="email"
               name="email"
               placeholder="example@baemin.com"
+              autoComplete="off"
               value={email}
               onChange={handleChange}
               onFocus={handleEmailFocus}
@@ -196,6 +227,7 @@ class Join extends Component {
               value={password}
               onChange={handleChange}
               onFocus={handlePassFocus}
+              autoComplete="off"
             />
             <p className={cx({ show: password && !passValid })}>
               8~20자의 영문자, 숫자만 가능합니다.
@@ -209,6 +241,35 @@ class Join extends Component {
               <X style={{ fill: "rgba(0,0,0,1)" }} />
             </span>
             <span className={cx("check", { show: password && passValid })}>
+              <Check style={{ fill: "#2ac1bc" }} />
+            </span>
+          </div>
+          <div>
+            <label htmlFor="phone" className={cx({ show: phoneFocus })}>
+              휴대번호
+            </label>
+            <input
+              type="tel"
+              id="phone"
+              name="phone"
+              placeholder="11자로 입력해주세요"
+              value={phone}
+              onChange={handleChange}
+              onFocus={handlePhoneFocus}
+              autoComplete="off"
+            />
+            <p className={cx({ show: phone && !phoneValid })}>
+              11자의 숫자만 가능합니다.
+            </p>
+            <span
+              className={cx("clear", {
+                show: phone && phoneFocus
+              })}
+              onClick={() => handleRemove("phone")}
+            >
+              <X style={{ fill: "rgba(0,0,0,1)" }} />
+            </span>
+            <span className={cx("check", { show: phone && phoneValid })}>
               <Check style={{ fill: "#2ac1bc" }} />
             </span>
           </div>

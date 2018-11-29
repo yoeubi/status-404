@@ -1,8 +1,10 @@
 import React, { Component } from "react";
 import { Link } from "react-router-dom";
 import classNames from "classnames/bind";
-import styles from "./Login.scss";
+import styles from "./Login.module.scss";
 import x from "../../svg/x.svg";
+import {ReactComponent as Exit } from "../../svg/x.svg";
+import {ReactComponent as GitHub} from '../../svg/mark-github.svg';
 import github from '../../svg/mark-github.svg';
 
 const cx = classNames.bind(styles);
@@ -40,7 +42,7 @@ class Login extends Component {
   handleClose = () => {
   }
   handleSubmit = (e) => {
-
+    e.preventDefault();
   }
   render() {
     const { username, password, userFocus, passFocus, warning } = this.state;
@@ -54,8 +56,8 @@ class Login extends Component {
     } = this;
     return (
       <div className={cx("login")}>
-        <span className="exit" onClick={handleClose} tabIndex={0}>
-          <img src={x} alt="exit 버튼" />
+        <span className={cx('exit')} onClick={handleClose} tabIndex={0}>
+          <Exit style={{ transform : 'scale(1.5)'}}/>
         </span>
         <p className={cx("notification", {warning})}>
           {warning}
@@ -68,6 +70,7 @@ class Login extends Component {
               id="username"
               name="username"
               placeholder="아이디 또는 이메일"
+              autoComplete="off"
               value={username}
               onChange={handleChange}
               onFocus={handleUserFocus}
@@ -78,7 +81,7 @@ class Login extends Component {
               })}
               onClick={() => handleClear("username")}
             >
-              <img src={x} alt="clear 버튼" />
+              <Exit style={{ transform : 'scale(1.2)', opacity : '0.5'}}/>
             </span>
           </div>
           <div>
@@ -98,27 +101,31 @@ class Login extends Component {
               })}
               onClick={() => handleClear("password")}
             >
-              <img src={x} alt="clear 버튼" />
+              <Exit style={{ transform: 'scale(1.2)', opacity: '0.5' }} />
             </span>
           </div>
           <button>로그인</button>
-          <span className="find-user">
+          <span className={cx('find-user')}>
             <Link to="/find">아이디/비밀번호 찾기</Link>
           </span>
         </form>
 
         <div className={cx("social-login")}>
-          <button className="naver">
-            <span className="icon">
-              <img src={github} alt="소셜 로그인 아이콘" />
+          <button className={cx('naver')}>
+            <span className={cx('icon')}>
+              <GitHub style={{transform : 'scale(1.3)'}} />
             </span>
-            네이버 아이디로 로그인
+            <span>
+              네이버 아이디로 로그인
+            </span>
           </button>
-          <button className="facebook">
-            <span className="icon">
-              <img src={github} alt="소셜 로그인 아이콘"/>
+          <button className={cx('facebook')}>
+            <span className={cx('icon')}>
+              <GitHub style={{ transform: 'scale(1.3)' }} />
             </span>
-            페이스북으로 로그인
+            <span>
+              페이스북으로 로그인
+            </span>
           </button>
         </div>
 

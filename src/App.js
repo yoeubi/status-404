@@ -3,6 +3,7 @@ import { BrowserRouter as Router, Route, Switch } from "react-router-dom";
 import MainPage from "./Pages/MainPage";
 import Login from "./components/Login";
 import Join from "./components/Join/Join";
+import NameSearch from "./components/NameSearch";
 
 class App extends Component {
   render() {
@@ -14,6 +15,7 @@ class App extends Component {
           {/* <Route path="/addressSearch" component={AddressSearch} /> */}
           <Route path="/login" component={Login} />
           <Route path="/join" component={Join} />
+          <Route path="/search" component={NameSearch} />
         </Switch>
       </Router>
     );
