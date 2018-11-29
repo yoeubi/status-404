@@ -38,6 +38,10 @@ class MainContainer extends Component {
       // 로컬스토리지에 currentAddress 가 없으면
       window.navigator.geolocation.getCurrentPosition(async position => {
         // 브라우저 지오로케이션에서 현재 좌표값 가져오기
+        console.log({
+          x: position.coords.longitude,
+          y: position.coords.latitude,
+        })
         // 가져온 좌표값으로 api 요청
         const { data } = await api.get(
           "https://dapi.kakao.com//v2/local/geo/coord2address.json",
@@ -51,6 +55,7 @@ class MainContainer extends Component {
           }
         );
 
+        
         const currentAddress = JSON.stringify(data.documents[0].address); // 갹체라서 JSON 으로 변환
         // 로컬스토리지에 가져온 정보 저장
         localStorage.setItem("currentAddress", currentAddress);
