@@ -107,25 +107,35 @@ $main-border: 1px solid black;
   // flex-direction: column;
   padding: 10px;
   padding-bottom: 20px;
-  height: 80px;
+  // height: 100px;
   width: 100%;
   background-color: white;
   border-bottom: 1px solid rgba(241, 241, 241, 0.87);
 }
 
-.address {
+.place {
   font-size: 12pt;
   width: 90%;
-  height: 30px;
-  margin-bottom: 10px;
+  height: 25px;
+  // margin-bottom: 10px;
   // background-color: goldenrod;
+}
+
+.address {
+  font-size: 10pt;
+  width: 90%;
+  height: 20px;
+  // margin-bottom: 10px;
+  color: rgb(139, 139, 139);
+  // background-color: aqua;
 }
 
 .textContainer {
   display: flex;
-  // background-color: blue;
-  padding: 10px;
+  width: 100%;
+  // padding: 10px;
   // text-align: center;
+  // background-color: blue;
 }
 
 .box {
@@ -153,7 +163,7 @@ $main-border: 1px solid black;
 .deleteButton {
   border: none;
   position: absolute;
-  top: 25px;
+  top: 40%;
   right: 0;
   width: 30px;
   // height: 80px;

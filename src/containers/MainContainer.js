@@ -79,7 +79,8 @@ class MainContainer extends Component {
 
   getAddress = async userInput => {
     const { data } = await api.get(
-      "https://dapi.kakao.com//v2/local/search/address.json",
+      // "https://dapi.kakao.com/v2/local/search/address.json",
+      "https://dapi.kakao.com/v2/local/search/keyword.json?y=37.514322572335935&x=127.06283102249932&radius=20000",
       {
         params: {
           query: userInput,

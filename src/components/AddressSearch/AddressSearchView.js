@@ -42,16 +42,10 @@ class AddressSearchView extends Component {
   };
 
   render() {
-    const {
-      recentAddressList,
-      show,
-      onAddressSearch,
-      getAddress,
-      searchResult
-    } = this.props;
+    const { show, onAddressSearch, getAddress, searchResult } = this.props;
     const { userInput } = this.state;
     return (
-      <React.Fragment>
+      <>
         <div className={cx("container", { show: show })}>
           <div className={cx("formContainer")}>
             <button className={cx("closeButton")} onClick={onAddressSearch}>
@@ -85,12 +79,17 @@ class AddressSearchView extends Component {
           <div className={cx("listContainer")}>
             <h2 className={cx("listTitle")}>최근 주소</h2>
             <ul className={cx("recentAddress")}>
-              {searchResult.map(r => (
-                <li key={r.id} className={cx("listItem")}>
-                  <span className={cx("address")}>{r.address_name}</span>
-                  {/* <button className={cx("deleteButton")}>x</button>
+              {searchResult.map(s => (
+                <li key={s.id} className={cx("listItem")}>
+                  <div className={cx("place")}>{s.place_name}</div>
+                  <div className={cx("address")}>{s.address_name}</div>
                   <div className={cx("textContainer")}>
                     <div className={cx("box")}>도로명</div>
+                    <div className={cx("road")}>{s.road_address_name}</div>
+                  </div>
+                  <button className={cx("deleteButton")}>x</button>
+                  {/* 
+                  
                     <div className={cx("road")}>{r.road}</div>
                   </div> */}
                 </li>
@@ -98,7 +97,7 @@ class AddressSearchView extends Component {
             </ul>
           </div>
         </div>
-      </React.Fragment>
+      </>
     );
   }
 }
