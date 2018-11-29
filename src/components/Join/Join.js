@@ -195,6 +195,7 @@ class Join extends Component {
               id="email"
               name="email"
               placeholder="example@baemin.com"
+              autoComplete="off"
               value={email}
               onChange={handleChange}
               onFocus={handleEmailFocus}
