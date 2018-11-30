@@ -60,7 +60,7 @@ $modal-font-size: 2rem;
       @include center;
     }
     .user {
-      // width:calc(100% - 75px);
+      width: calc(100% - 75px);
       display: flex;
       flex-direction: column;
       justify-content: center;

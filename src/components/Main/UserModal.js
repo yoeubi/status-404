@@ -75,11 +75,6 @@ class UserModal extends Component {
                 <p className={cx("username")}>{user.username}</p>
                 <p className={cx("point", "colored")}>0p</p>
               </Link>
-
-              <button className={cx("logoutBtn")}>
-                {/* 개발용 로그아웃 버튼입니다. */}
-                logout
-              </button>
             </div>
           ) : (
             // 미로그인시 : user === null
