@@ -2,10 +2,8 @@ import React, { Component } from "react";
 import { Link } from "react-router-dom";
 import classNames from "classnames/bind";
 import styles from "./Login.module.scss";
-import x from "../../svg/x.svg";
 import {ReactComponent as Exit } from "../../svg/x.svg";
 import {ReactComponent as GitHub} from '../../svg/mark-github.svg';
-import github from '../../svg/mark-github.svg';
 
 const cx = classNames.bind(styles);
 
@@ -57,7 +55,9 @@ class Login extends Component {
     return (
       <div className={cx("login")}>
         <span className={cx('exit')} onClick={handleClose} tabIndex={0}>
+        <Link to="/">
           <Exit style={{ transform : 'scale(1.5)'}}/>
+        </Link>
         </span>
         <p className={cx("notification", {warning})}>
           {warning}
