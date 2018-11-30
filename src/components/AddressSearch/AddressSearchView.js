@@ -69,7 +69,7 @@ class AddressSearchView extends Component {
                 className={cx("addressSearchButton")}
                 onClick={() => getAddress(userInput)}
               >
-                돋보기
+                😀
               </button>
             </div>
             <button className={cx("addressSettingButton")}>
