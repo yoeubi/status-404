@@ -55,7 +55,9 @@ class Login extends Component {
     return (
       <div className={cx("login")}>
         <span className={cx('exit')} onClick={handleClose} tabIndex={0}>
+        <Link to="/">
           <Exit style={{ transform : 'scale(1.5)'}}/>
+        </Link>
         </span>
         <p className={cx("notification", {warning})}>
           {warning}
