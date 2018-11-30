@@ -57,6 +57,7 @@ class AddressSearchView extends Component {
             </h1>
             <div className={cx("addressSearchForm")}>
               <input
+                autoComplete="off"
                 onChange={e => this.handleUserInput(e)}
                 value={userInput}
                 className={cx("addressSearchInput")}
