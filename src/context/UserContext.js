@@ -1,58 +1,46 @@
-import React, { Component } from 'react';
+import React, { Component } from "react";
 
-const {Provider, Consumer: UserConsumer} = React.createContext();
+const { Provider, Consumer: UserConsumer } = React.createContext();
 
 class UserProvider extends Component {
-    constructor(props){
-        super(props);
+  state = {
+    user: null,
+    address : null,
+    handleAddress: this.handleAddress.bind(this)
+  };
+  handleAddress(address) {
+    this.setState({
+      // FIXME :: user 상태 업데이트를 불변값으로 하기 위해서 ImmutableJS 로 바꿔야함
+      user: {
+        ...this.state.user,
+        address
+      }
+    });
+  }
+  login(){
+      // api 요청을 해서 유저에 대한 정보를 받는다.
+    localStorage.setItem('token', '')
+  }
+  logout(){
+      localStorage.removeItem('token');
+      this.setState({
+          user : null
+      })
+  }
 
-        this.handleAddress = (address) => {
-            this.setState({
-                // FIXME :: user 상태 업데이트를 불변값으로 하기 위해서 ImmutableJS 로 바꿔야함
-                user: {
-                    ...this.state.user,
-                    address
-                }
-            })
-        }
-
-        this.state = {
-            user: {
-                id: 0,
-                nickname: '닉네임 이강산',
-                username: '이강산',
-                phone:'000-0000-0000',
-                is_host: true,
-                address: null,
-                avatar : null
-            },
-            handleAddress: this.handleAddress
-        }
-    }
-
-
-    render() {
-        return (
-            <Provider value={this.state}>
-                {this.props.children}
-            </Provider>
-        );
-    }
+  render() {
+    return <Provider value={this.state}>{this.props.children}</Provider>;
+  }
 }
 
-function withUser(WrappedComponent){
-    return function WithUser(props){
-        return (
-            <UserConsumer>
-                {
-                    (value) => <WrappedComponent {...props} {...value}/>
-                }
-            </UserConsumer>
-        )
-    }
+function withUser(WrappedComponent) {
+  return function WithUser(props) {
+    return (
+      <UserConsumer>
+        {value => <WrappedComponent {...props} {...value} />}
+      </UserConsumer>
+    );
+  };
 }
 
-export {
-    UserProvider,
-    withUser
-}
+export { UserProvider, UserConsumer, withUser };

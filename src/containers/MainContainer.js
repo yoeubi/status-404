@@ -4,33 +4,16 @@ import MainView from '../components/Main/MainView';
 import Header from '../components/Main/Header';
 import UserModal from '../components/Main/UserModal';
 import AddressSearch from "../components/AddressSearch/AddressSearch";
-import axios from 'axios';
-
-const apiKey = '1173586d003c2973d03c551fc45e438f'; // 강산이꺼니까 막쓰지마샘
-
-const api = axios.create(); // 여기서만 쓸 api config를 정의하기 위해
-
-// 이 컴포넌트에서만 쓸 api config 정의
-api.interceptors.request.use(function(config) {
-    if (apiKey) {
-        config.headers = config.headers || {};
-        config.headers['Authorization'] = 'KakaoAK ' + apiKey;
-    }
-    return config;
-});
 
 class MainContainer extends Component {
     static defaultProps = {
         // user 정보, 유저 정보 없을시 null 로 기본값 설정
         user : null,
     }
-    constructor(props){
-        super(props);
-        this.state = {
-            // 모달 활성화 여부
-            show: false,
-            addressSearchShow: false
-        }
+    state = {
+        // 모달 활성화 여부
+        show: false,
+        addressSearchShow: false
     }
     async componentDidMount(){
         // 최초 접속시 로컬스토리지에 geolocation 이 있는지 확인한다.
@@ -54,12 +37,7 @@ class MainContainer extends Component {
                 // UserContext 상태에 저장
                 this.props.handleAddress(JSON.parse(currentAddress));
             });
-        }else{
-            // 로컬스토리지에 currentAddress 가 있다면 api 요청 하지 않고 로컬스트리지 값을 현재 유저 상태에 저장
-            const currentAddress = JSON.parse(localStorage.getItem('currentAddress')); // 객체형태의 로컬스트리지 저장값을 가져오기 위해 parse
-            this.props.handleAddress(currentAddress);
         }
-        
     }
 
 
@@ -74,6 +52,8 @@ class MainContainer extends Component {
   render() {
     const { show, addressSearchShow } = this.state;
     const { user } = this.props; // <=== UserContext 에 작성된 상태가 props로 전달됩니다.
+    console.log('maincontainer - user',user);
+    
     return (
       <React.Fragment>
         <UserModal

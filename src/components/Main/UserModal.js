@@ -47,6 +47,8 @@ class UserModal extends Component {
     const {user,showModal,onUserModal,navList} = this.props;
     // FIXME :: 모달 활성화시 Layout 에스크롤이 생기지 않게 하기 위해 css 트릭을 적용하였으나
     //          활성화시 어떤 위치에서도 최상단으로 이동하는 버그가 있어서 해결해야 함
+    console.log('user',user);
+    
     return (
       <div 
       onClick={onUserModal}
