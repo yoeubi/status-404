@@ -114,6 +114,14 @@ class UserProvider extends Component {
     })
     this.getAddress("default");
   }
+  async join({username, password, nickname, phone}){
+    await mainAPI.post('/members/register/', {
+      username,
+      password,
+      nickname,
+      phone
+    })
+  }
 
   render() {
     const { children } = this.props;
