@@ -9,21 +9,16 @@ const cx = classNames.bind(styles);
 
 class Header extends Component {
   render() {
-    const { user, onUserModal, onAddressSearch } = this.props;
+    const { address, onUserModal, onAddressSearch } = this.props;
     return (
       <div className={cx("header")}>
         <Hambergur className={cx("hambergur")} onClick={onUserModal} />
         <div className={cx("addressInput")} onClick={onAddressSearch}>
-          {user ? (
+          {address ? (
             // 로그인시
             <span className={cx("address")}>
             {
-              user.address ? (
-                user.address.address_name
-              ) : (
-                // FIXME :: 로딩인디케이터 넣을 자리, 전체 로딩인디케이터 넣을시에는 생각해봐야함
-                '조회중입니다...'
-              )
+                address[0].address_name || ('조회중입니다.') 
             }
             </span>
           ) : (
