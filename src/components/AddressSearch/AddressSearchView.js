@@ -3,6 +3,11 @@ import styles from "./AddressSearch.module.scss";
 import classNames from "classnames/bind";
 // import { Input } from "semantic-ui-react";
 
+// import SVG
+import { ReactComponent as MagnifyingGlass } from "../../img/search.svg";
+import { ReactComponent as Crosshair } from "../../img/crosshair.svg";
+import { ReactComponent as Ex } from "../../img/x.svg";
+
 const cx = classNames.bind(styles);
 
 class AddressSearchView extends Component {
@@ -49,7 +54,7 @@ class AddressSearchView extends Component {
         <div className={cx("container", { show: show })}>
           <div className={cx("formContainer")}>
             <button className={cx("closeButton")} onClick={onAddressSearch}>
-              X
+              <Ex />
             </button>
             <h1 className={cx("header")}>
               지번, 도로명, 건물명을
@@ -62,19 +67,19 @@ class AddressSearchView extends Component {
                 value={userInput}
                 className={cx("addressSearchInput")}
                 label="주소검색"
-                type="search"
-                name="address"
+                type="search" // name="address"
                 placeholder="예) 배민동12-3 또는 배민아파트"
               />
               <button
                 className={cx("addressSearchButton")}
                 onClick={() => getAddress(userInput)}
               >
-                😀
+                <MagnifyingGlass />
               </button>
             </div>
             <button className={cx("addressSettingButton")}>
-              ◎ 현 위치로 주소 설정
+              <Crosshair />
+              <p>현 위치로 주소 설정</p>
             </button>
           </div>
           <div className={cx("listContainer")}>
@@ -88,7 +93,9 @@ class AddressSearchView extends Component {
                     <div className={cx("box")}>도로명</div>
                     <div className={cx("road")}>{s.road_address_name}</div>
                   </div>
-                  <button className={cx("deleteButton")}>x</button>
+                  <button className={cx("deleteButton")}>
+                    <Ex />
+                  </button>
                   {/* 
                   
                     <div className={cx("road")}>{r.road}</div>
