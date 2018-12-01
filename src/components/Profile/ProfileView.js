@@ -9,13 +9,13 @@ class ProfileView extends Component {
     const { user } = this.props;
     return (
       <div className={cx("Profile")}>
-        <div className={cx("ProfileHeader")}>
-          <button>prev</button>
-          <div className="title">내 정보 수정</div>
-          <button>save</button>
+        <div className={cx("Header")}>
+          <button className={cx("Prev")}>prev</button>
+          <div className={cx("Title")}>내 정보 수정</div>
+          <button className={cx("Save")}>저장</button>
         </div>
 
-        <div className={cx("ProfileTop")}>
+        <div className={cx("Summary")}>
           <div className={cx("Avatar")}>
             <img
               src="http://mblogthumb4.phinf.naver.net/20151117_151/smartbaedal_1447748320696qYGB3_JPEG/12109275_986494971373814_8759974093703893190_n.jpg?type=w2"
