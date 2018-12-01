@@ -60,15 +60,14 @@ class AddressSearchView extends Component {
               지번, 도로명, 건물명을
               <p>입력하세요</p>
             </h1>
-            <form className={cx("addressSearchForm")}>
+            <div className={cx("addressSearchForm")}>
               <input
                 autoComplete="off"
                 onChange={e => this.handleUserInput(e)}
                 value={userInput}
                 className={cx("addressSearchInput")}
                 label="주소검색"
-                type="search"
-                name="search"
+                type="search" // name="address"
                 placeholder="예) 배민동12-3 또는 배민아파트"
               />
               <button
@@ -77,9 +76,10 @@ class AddressSearchView extends Component {
               >
                 <MagnifyingGlass />
               </button>
-            </form>
+            </div>
             <button className={cx("addressSettingButton")}>
-              <Crosshair />현 위치로 주소 설정
+              <Crosshair />
+              <p>현 위치로 주소 설정</p>
             </button>
           </div>
           <div className={cx("listContainer")}>
