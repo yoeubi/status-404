@@ -11,25 +11,25 @@ import { ReactComponent as Ex } from "../../img/x.svg";
 const cx = classNames.bind(styles);
 
 class AddressSearchView extends Component {
-  static defaultProps = {
-    recentAddressList: [
-      {
-        id: 0,
-        address: "성동구 성수동2가 277-17 제강빌딩",
-        road: "성수이로 118 제강빌딩"
-      },
-      {
-        id: 1,
-        address: "성동구 성수동2가 277-54 서브웨이",
-        road: "아차산로 121 서브웨이"
-      },
-      {
-        id: 2,
-        address: "성동구 성수동2가 300-1 성수역[2호선]",
-        road: "아차산로 113"
-      }
-    ]
-  };
+  // static defaultProps = {
+  //   recentAddressList: [
+  //     {
+  //       id: 0,
+  //       address: "성동구 성수동2가 277-17 제강빌딩",
+  //       road: "성수이로 118 제강빌딩"
+  //     },
+  //     {
+  //       id: 1,
+  //       address: "성동구 성수동2가 277-54 서브웨이",
+  //       road: "아차산로 121 서브웨이"
+  //     },
+  //     {
+  //       id: 2,
+  //       address: "성동구 성수동2가 300-1 성수역[2호선]",
+  //       road: "아차산로 113"
+  //     }
+  //   ]
+  // };
 
   constructor(props) {
     super(props);
@@ -67,7 +67,8 @@ class AddressSearchView extends Component {
                 value={userInput}
                 className={cx("addressSearchInput")}
                 label="주소검색"
-                type="search" // name="address"
+                type="search"
+                name="address"
                 placeholder="예) 배민동12-3 또는 배민아파트"
               />
               <button
@@ -96,10 +97,6 @@ class AddressSearchView extends Component {
                   <button className={cx("deleteButton")}>
                     <Ex />
                   </button>
-                  {/* 
-                  
-                    <div className={cx("road")}>{r.road}</div>
-                  </div> */}
                 </li>
               ))}
             </ul>
