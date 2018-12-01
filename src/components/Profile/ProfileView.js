@@ -13,18 +13,6 @@ class ProfileView extends Component {
     //     phone: null,
     //     img_profile: null
     //   },
-    // address : [
-    //     {
-    //         address_name: "서울 강동구 천호동 225-15",
-    //         main_address_no: "225",
-    //         mountain_yn: "N",
-    //         region_1depth_name: "서울",
-    //         region_2depth_name: "강동구",
-    //         region_3depth_name: "천호동",
-    //         sub_address_no: "15",
-    //         zip_code: ""
-    //     }
-    // ],
     // logout: this.logout.bind(this),
     user: {
       pk: null,
@@ -34,24 +22,12 @@ class ProfileView extends Component {
       img_profile:
         "http://mblogthumb4.phinf.naver.net/20151117_151/smartbaedal_1447748320696qYGB3_JPEG/12109275_986494971373814_8759974093703893190_n.jpg?type=w2"
     },
-    address: [
-      {
-        address_name: "서울 강동구 천호동 225-15",
-        main_address_no: "225",
-        mountain_yn: "N",
-        region_1depth_name: "서울",
-        region_2depth_name: "강동구",
-        region_3depth_name: "천호동",
-        sub_address_no: "15",
-        zip_code: ""
-      }
-    ],
     logout: () => {
       console.log("logout");
     }
   };
   render() {
-    const { user, address, logout } = this.props;
+    const { user, logout } = this.props;
     return (
       <div className={cx("Profile")}>
         <div className={cx("Header")}>
