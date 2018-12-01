@@ -8,4 +8,6 @@ class ProfileContainer extends Component {
   }
 }
 
-export default withUser(ProfileContainer);
+// 실제 유저정보 받아올때까지 userContext 정보 가져오지 않게
+// export default withUser(ProfileContainer);
+export default ProfileContainer;
