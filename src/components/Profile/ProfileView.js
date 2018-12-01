@@ -68,7 +68,44 @@ class ProfileView extends Component {
           <input type="text" defaultValue={user.username} />
         </div>
 
-        <div className={cx("ProfileFooter")}>
+        <form className={cx("Form")}>
+          <div className={cx("Elem")}>
+            <label htmlFor="username">이메일</label>
+            <input type="text" name="username" />
+          </div>
+          <div className={cx("Elem")}>
+            <label htmlFor="password">비밀번호</label>
+            <input type="password" name="password" />
+            <button>변경</button>
+          </div>
+          <div className={cx("Elem")}>
+            <label>
+              휴대폰 인증
+              <span className={cx("Caption")}>
+                주문정보의 연락처로 사용됩니다.
+              </span>
+            </label>
+            <div className={cx("PhoneWrap")}>
+              <input type="number" readOnly value={"000"} />
+              <input type="number" readOnly value={"000"} />
+              <input type="number" readOnly value={"000"} />
+              <button>재인증</button>
+            </div>
+          </div>
+        </form>
+
+        <div className={cx("Marketing")}>
+          <h2>마케팅 정보 수신 동의</h2>
+          <p>이벤트 및 혜택에 대한 다양한 정보를 받으실 수 있습니다.</p>
+          <div className={cx("Eamil")}>
+            <span>메일 수신동의</span> <button>on/off</button>
+          </div>
+          <div className={cx("Eamil")}>
+            <span>SMS 수신동의</span> <button>on/off</button>
+          </div>
+        </div>
+
+        <div className={cx("Footer")}>
           <button>회원탈퇴</button>
           <button onClick={() => logout()}>logout</button>
         </div>
