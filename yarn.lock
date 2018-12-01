@@ -6989,6 +6989,7 @@ react-error-overlay@^5.1.0:
 react-responsive-carousel@^3.1.43:
   version "3.1.43"
   resolved "https://registry.yarnpkg.com/react-responsive-carousel/-/react-responsive-carousel-3.1.43.tgz#c6ccb50867958aea83a216a7d25e63441b766457"
+  integrity sha512-ZFYRtGR1dkC/3TBZKDlwWIvm0OshxCCLq4fWsRgucCja+lOfzB4Pwx9wCgmlZOBj014mne1CDAae/Syd877hIw==
   dependencies:
     classnames "^2.2.5"
     prop-types "^15.5.8"
