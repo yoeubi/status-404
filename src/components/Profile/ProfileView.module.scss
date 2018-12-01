@@ -50,6 +50,60 @@
     }
   }
 
+  .Form {
+    .Elem {
+      width: 100%;
+      display: flex;
+      align-items: center;
+      flex-wrap: wrap;
+      justify-content: space-between;
+      padding: 8px;
+      label {
+        width: 100%;
+        height: 30px;
+        padding: 10px 0;
+        display: flex;
+        align-items: center;
+        font-size: 1.4rem;
+        font-weight: 600;
+        margin-bottom: 10px;
+        .Caption {
+          font-size: 1rem;
+          font-weight: 400;
+          margin-left: 10px;
+          color: rgba(0, 0, 0, 0.5);
+        }
+      }
+      .InputWrap {
+        width: 78%;
+        input {
+          width: 100%;
+          height: 30px;
+          padding: 0 10px;
+          border: 1px solid rgba(0, 0, 0, 0.1);
+          &:read-only {
+            background: rgba(0, 0, 0, 0.1);
+            border: 0;
+          }
+        }
+        .PhoneWrap {
+          display: flex;
+          justify-content: space-between;
+          .PhoneNumber {
+            width: 32%;
+            text-align: center;
+          }
+        }
+      }
+      button {
+        width: 20%;
+        height: 30px;
+        color: #fff;
+        background: rgba(0, 0, 0, 0.2);
+      }
+    }
+  }
+
   .Footer {
     display: flex;
     justify-content: flex-end;

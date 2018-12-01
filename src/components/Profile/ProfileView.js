@@ -24,10 +24,14 @@ class ProfileView extends Component {
     },
     logout: () => {
       console.log("logout");
+    },
+    // 개발예정
+    noService: () => {
+      alert("서비스 준비중입니다.");
     }
   };
   render() {
-    const { user, logout } = this.props;
+    const { user, logout, noService } = this.props;
     return (
       <div className={cx("Profile")}>
         <div className={cx("Header")}>
@@ -44,15 +48,29 @@ class ProfileView extends Component {
           <input type="text" defaultValue={user.username} />
         </div>
 
-        <form className={cx("Form")}>
+        <div className={cx("Form")}>
           <div className={cx("Elem")}>
             <label htmlFor="username">이메일</label>
-            <input type="text" name="username" />
+            <div className={cx("InputWrap")}>
+              <input
+                type="text"
+                name="username"
+                value={user.username}
+                readOnly
+              />
+            </div>
           </div>
           <div className={cx("Elem")}>
             <label htmlFor="password">비밀번호</label>
-            <input type="password" name="password" />
-            <button>변경</button>
+            <div className={cx("InputWrap")}>
+              <input
+                type="password"
+                name="password"
+                placeholder="8 - 20자 이내"
+              />
+            </div>
+
+            <button onClick={() => noService()}>변경</button>
           </div>
           <div className={cx("Elem")}>
             <label>
@@ -61,14 +79,31 @@ class ProfileView extends Component {
                 주문정보의 연락처로 사용됩니다.
               </span>
             </label>
-            <div className={cx("PhoneWrap")}>
-              <input type="number" readOnly value={"000"} />
-              <input type="number" readOnly value={"000"} />
-              <input type="number" readOnly value={"000"} />
-              <button>재인증</button>
+            <div className={cx("InputWrap")}>
+              <div className={cx("PhoneWrap")}>
+                <input
+                  className={cx("PhoneNumber")}
+                  type="number"
+                  readOnly
+                  value={"000"}
+                />
+                <input
+                  className={cx("PhoneNumber")}
+                  type="number"
+                  readOnly
+                  value={"000"}
+                />
+                <input
+                  className={cx("PhoneNumber")}
+                  type="number"
+                  readOnly
+                  value={"000"}
+                />
+              </div>
             </div>
+            <button onClick={() => noService()}>재인증</button>
           </div>
-        </form>
+        </div>
 
         <div className={cx("Marketing")}>
           <h2>마케팅 정보 수신 동의</h2>
