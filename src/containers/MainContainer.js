@@ -81,7 +81,7 @@ class MainContainer extends Component {
     const { data } = await api.get(
       // 1. 주소로 검색
       // "https://dapi.kakao.com/v2/local/search/address.json",
-      // 2. 키워드(지번, 도로명, 건물명)로 검색, 설정값: (임시 설정) 서울 강남구 삼성동 20km 반경 기준
+      // 2. 키워드(지번, 도로명, 건물명)로 검색, 설정값: 전국 단위(기준이되는 위치 설정은 아직 미구현)
       "https://dapi.kakao.com/v2/local/search/keyword.json",
       {
         params: {
