@@ -24,6 +24,7 @@
 1. node-sass
 1. classnames
 1. axios
+1. immutable
 
 
 ## Sass Module 사용법

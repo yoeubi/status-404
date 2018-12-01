@@ -4,6 +4,7 @@ import classNames from "classnames/bind";
 import styles from "./Login.module.scss";
 import {ReactComponent as Exit } from "../../svg/x.svg";
 import {ReactComponent as GitHub} from '../../svg/mark-github.svg';
+import { withUser } from "../../context/UserContext";
 
 const cx = classNames.bind(styles);
 
@@ -37,10 +38,10 @@ class Login extends Component {
       passFocus: true
     });
   };
-  handleClose = () => {
-  }
   handleSubmit = (e) => {
     e.preventDefault();
+    const {username, password} = this.state;
+    this.props.login({username, password})
   }
   render() {
     const { username, password, userFocus, passFocus, warning } = this.state;
@@ -49,12 +50,11 @@ class Login extends Component {
       handleClear,
       handleUserFocus,
       handlePassFocus,
-      handleClose,
       handleSubmit
     } = this;
     return (
       <div className={cx("login")}>
-        <span className={cx('exit')} onClick={handleClose} tabIndex={0}>
+        <span className={cx('exit')} tabIndex={0}>
         <Link to="/">
           <Exit style={{ transform : 'scale(1.5)'}}/>
         </Link>
@@ -137,4 +137,4 @@ class Login extends Component {
   }
 }
 
-export default Login;
+export default withUser(Login);
