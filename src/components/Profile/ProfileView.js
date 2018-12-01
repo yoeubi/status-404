@@ -1,0 +1,37 @@
+import React, { Component } from "react";
+import styles from "./ProfileView.module.scss";
+import classNames from "classnames/bind";
+
+const cx = classNames.bind(styles);
+
+class ProfileView extends Component {
+  render() {
+    const { user } = this.props;
+    return (
+      <div className={cx("Profile")}>
+        <div className={cx("ProfileHeader")}>
+          <button>prev</button>
+          <div className="title">내 정보 수정</div>
+          <button>save</button>
+        </div>
+
+        <div className={cx("ProfileTop")}>
+          <div className={cx("Avatar")}>
+            <img
+              src="http://mblogthumb4.phinf.naver.net/20151117_151/smartbaedal_1447748320696qYGB3_JPEG/12109275_986494971373814_8759974093703893190_n.jpg?type=w2"
+              alt="avatar"
+            />
+            <span>{user.nickname}</span>
+          </div>
+          <input type="text" defaultValue={user.username} />
+        </div>
+
+        <div className={cx("ProfileFooter")}>
+          <button>logout</button>
+        </div>
+      </div>
+    );
+  }
+}
+
+export default ProfileView;
