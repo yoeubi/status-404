@@ -21,12 +21,13 @@ class ProfileView extends Component {
               src="http://mblogthumb4.phinf.naver.net/20151117_151/smartbaedal_1447748320696qYGB3_JPEG/12109275_986494971373814_8759974093703893190_n.jpg?type=w2"
               alt="avatar"
             />
-            <span>{user.nickname}</span>
+            <span className={cx("NickName")}>{user.nickname}</span>
           </div>
           <input type="text" defaultValue={user.username} />
         </div>
 
         <div className={cx("ProfileFooter")}>
+          <button>회원탈퇴</button>
           <button>logout</button>
         </div>
       </div>
