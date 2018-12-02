@@ -54,7 +54,7 @@ class FaceBookLogin extends Component {
 
   render() {
     return (
-      <SocialLogin onClick={this.facebookLogin} socialType="facebook">
+      <SocialLogin facebookLogin={this.facebookLogin} socialType="facebook">
         페이스북으로 로그인
       </SocialLogin>
     );
