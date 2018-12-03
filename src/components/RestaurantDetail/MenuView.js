@@ -1,4 +1,6 @@
 import React, { Component } from "react";
+// react-collapsible
+// DOC :: https://github.com/glennflanagan/react-collapsible#readme
 import Collapsible from "react-collapsible";
 import styles from "./MenuView.module.scss";
 import "./MenuView.scss";

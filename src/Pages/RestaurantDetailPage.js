@@ -1,5 +1,5 @@
 import React, { Component } from "react";
-import RestaurantDetailView from "../components/StoreDetailView/RestaurantDetailView";
+import RestaurantDetailView from "../components/RestaurantDetail/RestaurantDetailView";
 
 class RestaurantDetailPage extends Component {
   render() {
