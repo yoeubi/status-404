@@ -126,6 +126,7 @@ class UserProvider extends Component {
   socialLogin(status, result) {
     if (status === true) {
      console.log(result);
+     alert(result.user.name);
     } else {
       alert('Facebook login error');
     }

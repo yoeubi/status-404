@@ -28,7 +28,10 @@ class StoreDetailView extends Component {
     const { name, address, img_profile } = this.props;
     return (
       <div className={cx("StoreDetail")}>
-        <h1>상점 상세 페이지</h1>
+        <div className={cx("Header")}>
+          <div className={cx("Prev")}>prev</div>
+        </div>
+
         <div>
           <img src={img_profile} alt={name} />{" "}
         </div>
