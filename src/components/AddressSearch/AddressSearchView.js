@@ -47,7 +47,14 @@ class AddressSearchView extends Component {
   };
 
   render() {
-    const { show, onAddressSearch, getAddress, searchResult } = this.props;
+    const {
+      show,
+      onAddressSearch,
+      getAddress,
+      searchResult,
+      onUserInput,
+      onSubmitBtn
+    } = this.props;
     const { userInput } = this.state;
     return (
       <>
@@ -73,7 +80,10 @@ class AddressSearchView extends Component {
               />
               <button
                 className={cx("addressSearchButton")}
-                onClick={() => getAddress(userInput)}
+                onClick={() => {
+                  getAddress(userInput);
+                  onSubmitBtn();
+                }}
               >
                 <MagnifyingGlass />
               </button>
@@ -85,7 +95,7 @@ class AddressSearchView extends Component {
           </div>
           <div className={cx("listContainer")}>
             <h2 className={cx("listTitle")}>최근 주소</h2>
-            <ul className={cx("recentAddress")}>
+            {/* <ul className={cx("recentAddress")}>
               {searchResult.map(s => (
                 <li key={s.id} className={cx("listItem")}>
                   <div className={cx("place")}>{s.place_name}</div>
@@ -99,7 +109,7 @@ class AddressSearchView extends Component {
                   </button>
                 </li>
               ))}
-            </ul>
+            </ul> */}
           </div>
         </div>
       </>

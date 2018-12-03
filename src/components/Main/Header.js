@@ -13,22 +13,23 @@ class Header extends Component {
     return (
       <div className={cx("header")}>
         <Hambergur className={cx("hambergur")} onClick={onUserModal} />
-        <div className={cx("addressInput")} onClick={onAddressSearch}>
-          {address ? (
-            // 로그인시
+        {/* <div className={cx("addressInput")} onClick={onAddressSearch}> */}
+        <div className={cx("addressInput")}>
+          {address ? ( // 로그인시
             <span className={cx("address")}>
-            {
-                address[0].address_name || ('조회중입니다.') 
-            }
-            </span>
+              {address[0].address_name || "조회중입니다."}
+            </span> // 미 로그인시 => 로그인 페이지로
           ) : (
-            // 미 로그인시 => 로그인 페이지로
             <span className={cx("address")}>
               <Link to="/login">배송지 입력하기</Link>
             </span>
           )}
 
-          <ChevronDown className={cx("icon")} alt="down" />
+          <ChevronDown
+            className={cx("icon")}
+            alt="down"
+            onClick={onAddressSearch}
+          />
         </div>
       </div>
     );
