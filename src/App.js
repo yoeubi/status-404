@@ -6,6 +6,8 @@ import ProfilePage from "./Pages/ProfilePage";
 import Login from "./components/Login";
 import Join from "./components/Join/Join";
 import NameSearch from "./components/NameSearch";
+import Header from "./components/Header";
+import RestaurantList from "./components/RestaurantList/RestaurantList";
 
 class App extends Component {
   render() {
@@ -22,6 +24,7 @@ class App extends Component {
           {/* 레스토랑 리스트 */}
           {/* <Route exact path="/restauant" component={Restaurant} />  */}
           <Route path="/restaurant/:id" component={RestaurantDetailPage} />
+          <Route path="/item" component={RestaurantList} />
         </Switch>
       </Router>
     );
