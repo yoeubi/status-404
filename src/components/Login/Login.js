@@ -2,9 +2,10 @@ import React, { Component } from "react";
 import { Link } from "react-router-dom";
 import classNames from "classnames/bind";
 import styles from "./Login.module.scss";
-import {ReactComponent as Exit } from "../../svg/x.svg";
-import {ReactComponent as GitHub} from '../../svg/mark-github.svg';
+import { ReactComponent as Exit } from "../../svg/x.svg";
 import { withUser } from "../../context/UserContext";
+import SocialLogin from "./SocialLogin";
+import FaceBookLogin from "../../containers/FaceBookLogin";
 
 const cx = classNames.bind(styles);
 
@@ -14,7 +15,7 @@ class Login extends Component {
     password: "",
     userFocus: false,
     passFocus: false,
-    warning: '비밀번호를 잘못 입력했습니다.'
+    warning: "비밀번호를 잘못 입력했습니다."
   };
   handleChange = e => {
     this.setState({
@@ -38,11 +39,11 @@ class Login extends Component {
       passFocus: true
     });
   };
-  handleSubmit = (e) => {
+  handleSubmit = e => {
     e.preventDefault();
-    const {username, password} = this.state;
-    this.props.login({username, password})
-  }
+    const { username, password } = this.state;
+    this.props.login({ username, password });
+  };
   render() {
     const { username, password, userFocus, passFocus, warning } = this.state;
     const {
@@ -54,14 +55,12 @@ class Login extends Component {
     } = this;
     return (
       <div className={cx("login")}>
-        <span className={cx('exit')} tabIndex={0}>
-        <Link to="/">
-          <Exit style={{ transform : 'scale(1.5)'}}/>
-        </Link>
+        <span className={cx("exit")} tabIndex={0}>
+          <Link to="/">
+            <Exit style={{ transform: "scale(1.5)" }} />
+          </Link>
         </span>
-        <p className={cx("notification", {warning})}>
-          {warning}
-        </p>
+        <p className={cx("notification", { warning })}>{warning}</p>
         <form className={cx("login-form")} onSubmit={handleSubmit}>
           <div>
             <label htmlFor="username">아이디 또는 이메일</label>
@@ -81,7 +80,7 @@ class Login extends Component {
               })}
               onClick={() => handleClear("username")}
             >
-              <Exit style={{ transform : 'scale(1.2)', opacity : '0.5'}}/>
+              <Exit style={{ transform: "scale(1.2)", opacity: "0.5" }} />
             </span>
           </div>
           <div>
@@ -101,32 +100,19 @@ class Login extends Component {
               })}
               onClick={() => handleClear("password")}
             >
-              <Exit style={{ transform: 'scale(1.2)', opacity: '0.5' }} />
+              <Exit style={{ transform: "scale(1.2)", opacity: "0.5" }} />
             </span>
           </div>
           <button>로그인</button>
-          <span className={cx('find-user')}>
+          <span className={cx("find-user")}>
             <Link to="/find">아이디/비밀번호 찾기</Link>
           </span>
         </form>
 
         <div className={cx("social-login")}>
-          <button className={cx('naver')}>
-            <span className={cx('icon')}>
-              <GitHub style={{transform : 'scale(1.3)'}} />
-            </span>
-            <span>
-              네이버 아이디로 로그인
-            </span>
-          </button>
-          <button className={cx('facebook')}>
-            <span className={cx('icon')}>
-              <GitHub style={{ transform: 'scale(1.3)' }} />
-            </span>
-            <span>
-              페이스북으로 로그인
-            </span>
-          </button>
+          <SocialLogin socialType="naver">네이버 아이디로 로그인</SocialLogin>
+              <FaceBookLogin/>
+          {/* <SocialLogin socialType="facebook">페이스북으로 로그인</SocialLogin> */}
         </div>
 
         <div className={cx("join")}>

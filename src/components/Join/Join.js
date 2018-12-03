@@ -5,6 +5,7 @@ import classNames from "classnames/bind";
 import { ReactComponent as X } from "../../svg/x.svg";
 import { ReactComponent as Left } from "../../svg/chevron-left.svg";
 import { ReactComponent as Check } from "../../svg/check.svg";
+import { withUser } from "../../context/UserContext";
 
 const cx = classNames.bind(styles);
 
@@ -69,6 +70,10 @@ class Join extends Component {
       [target]: ""
     });
   };
+  handleJoin = () => {
+    const {username, nickname, password, email} = this.state;
+    this.props.join({username,password,nickname, email})
+  }
   isValid = (target, value) => {
     let flag = null;
     switch (target) {
@@ -127,7 +132,8 @@ class Join extends Component {
       handleNickFocus,
       handleEmailFocus,
       handlePhoneFocus,
-      handleRemove
+      handleRemove,
+      handleJoin
     } = this;
     const check =
       nickValid &&
@@ -138,8 +144,7 @@ class Join extends Component {
       email &&
       password &&
       phone;
-    return (
-      <div className={cx("join")}>
+    return <div className={cx("join")}>
         <header className={cx("header")}>
           <span className={cx("close")}>
             <Link to="/login">
@@ -147,39 +152,24 @@ class Join extends Component {
             </Link>
           </span>
           <span>회원가입</span>
-          {check ? (
-            <span className={cx("complete", "check")} tabIndex="0">
+        {check ? <span className={cx("complete", "check")} tabIndex="0" onClick={handleJoin}>
               <Link to="/">완료</Link>
-            </span>
-          ) : (
-            <span className={cx("complete")} tabIndex="0">
+            </span> : <span className={cx("complete")} tabIndex="0">
               완료
-            </span>
-          )}
+            </span>}
         </header>
         <form className={cx("join-form")}>
           <div>
             <label htmlFor="nickname" className={cx({ show: nickFocus })}>
               닉네임
             </label>
-            <input
-              type="text"
-              id="nickname"
-              name="nickname"
-              placeholder="2~10자로 입력해주세요"
-              value={nickname}
-              onChange={handleChange}
-              onFocus={handleNickFocus}
-            />
+            <input type="text" id="nickname" name="nickname" placeholder="2~10자로 입력해주세요" value={nickname} onChange={handleChange} onFocus={handleNickFocus} />
             <p className={cx({ show: nickname && !nickValid })}>
               2~10자의 한글 영문자 숫자만 입력가능합니다.
             </p>
-            <span
-              className={cx("clear", {
+            <span className={cx("clear", {
                 show: nickname && nickFocus
-              })}
-              onClick={() => handleRemove("nickname")}
-            >
+              })} onClick={() => handleRemove("nickname")}>
               <X style={{ fill: "rgba(0,0,0,1)" }} />
             </span>
             <span className={cx("check", { show: nickname && nickValid })}>
@@ -190,25 +180,13 @@ class Join extends Component {
             <label htmlFor="email" className={cx({ show: emailFocus })}>
               이메일아이디
             </label>
-            <input
-              type="email"
-              id="email"
-              name="email"
-              placeholder="example@baemin.com"
-              autoComplete="off"
-              value={email}
-              onChange={handleChange}
-              onFocus={handleEmailFocus}
-            />
+            <input type="email" id="email" name="email" placeholder="example@baemin.com" autoComplete="off" value={email} onChange={handleChange} onFocus={handleEmailFocus} />
             <p className={cx({ show: email && !emailValid })}>
               잘못된 이메일 유형입니다.
             </p>
-            <span
-              className={cx("clear", {
+            <span className={cx("clear", {
                 show: email && emailFocus
-              })}
-              onClick={() => handleRemove("email")}
-            >
+              })} onClick={() => handleRemove("email")}>
               <X style={{ fill: "rgba(0,0,0,1)" }} />
             </span>
             <span className={cx("check", { show: email && emailValid })}>
@@ -219,25 +197,13 @@ class Join extends Component {
             <label htmlFor="password" className={cx({ show: passFocus })}>
               비밀번호
             </label>
-            <input
-              type="password"
-              id="password"
-              name="password"
-              placeholder="8~20자로 입력해주세요"
-              value={password}
-              onChange={handleChange}
-              onFocus={handlePassFocus}
-              autoComplete="off"
-            />
+            <input type="password" id="password" name="password" placeholder="8~20자로 입력해주세요" value={password} onChange={handleChange} onFocus={handlePassFocus} autoComplete="off" />
             <p className={cx({ show: password && !passValid })}>
               8~20자의 영문자, 숫자만 가능합니다.
             </p>
-            <span
-              className={cx("clear", {
+            <span className={cx("clear", {
                 show: password && passFocus
-              })}
-              onClick={() => handleRemove("password")}
-            >
+              })} onClick={() => handleRemove("password")}>
               <X style={{ fill: "rgba(0,0,0,1)" }} />
             </span>
             <span className={cx("check", { show: password && passValid })}>
@@ -248,25 +214,13 @@ class Join extends Component {
             <label htmlFor="phone" className={cx({ show: phoneFocus })}>
               휴대번호
             </label>
-            <input
-              type="tel"
-              id="phone"
-              name="phone"
-              placeholder="11자로 입력해주세요"
-              value={phone}
-              onChange={handleChange}
-              onFocus={handlePhoneFocus}
-              autoComplete="off"
-            />
+            <input type="tel" id="phone" name="phone" placeholder="11자로 입력해주세요" value={phone} onChange={handleChange} onFocus={handlePhoneFocus} autoComplete="off" />
             <p className={cx({ show: phone && !phoneValid })}>
               11자의 숫자만 가능합니다.
             </p>
-            <span
-              className={cx("clear", {
+            <span className={cx("clear", {
                 show: phone && phoneFocus
-              })}
-              onClick={() => handleRemove("phone")}
-            >
+              })} onClick={() => handleRemove("phone")}>
               <X style={{ fill: "rgba(0,0,0,1)" }} />
             </span>
             <span className={cx("check", { show: phone && phoneValid })}>
@@ -274,9 +228,8 @@ class Join extends Component {
             </span>
           </div>
         </form>
-      </div>
-    );
+      </div>;
   }
 }
 
-export default Join;
+export default withUser(Join);
