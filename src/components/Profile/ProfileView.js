@@ -108,17 +108,17 @@ class ProfileView extends Component {
         <div className={cx("Marketing")}>
           <h2>마케팅 정보 수신 동의</h2>
           <p>이벤트 및 혜택에 대한 다양한 정보를 받으실 수 있습니다.</p>
-          <div className={cx("Eamil")}>
+          <div className={cx("Email")}>
             <span>메일 수신동의</span> <button>on/off</button>
           </div>
-          <div className={cx("Eamil")}>
+          <div className={cx("SMS")}>
             <span>SMS 수신동의</span> <button>on/off</button>
           </div>
         </div>
 
         <div className={cx("Footer")}>
-          <button>회원탈퇴</button>
-          <button onClick={() => logout()}>logout</button>
+          <span>회원탈퇴</span>
+          <span onClick={() => logout()}>logout</span>
         </div>
       </div>
     );
