@@ -22,6 +22,18 @@ class RestaurantList extends Component {
         })
     }
     
+    componentDidUpdate(prevProps, prevState) {
+        if(this.props.location !== prevProps.location){
+            const query = decodeURI(this.props.location.search);
+            const parsed = new URLSearchParams(query);
+            const category = parsed.get("category");
+            this.setState({
+                category
+            })
+        }
+    }
+    
+
     handleCategory = menu => {
         const { match, history } = this.props;
         history.push(`${match.path}?category=${menu}`);

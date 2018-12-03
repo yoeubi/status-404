@@ -1,7 +1,9 @@
 .restaurant-item {
     display: flex;
     justify-content: space-between;
-    border: 1px solid #eee;
+    & + & {
+        border-top: 1px solid #eee;
+    }
     .restaurant-img {
         width: 7rem;
         height: 7rem;
