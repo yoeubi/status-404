@@ -12,7 +12,7 @@ class UserProvider extends Component {
       phone: null,
       img_profile: null
     },
-    address : null,
+    address: null,
     /* 
         address : [
             {
@@ -27,8 +27,10 @@ class UserProvider extends Component {
             }
         ]
         */
-    login : this.login.bind(this),
-    logout : this.logout.bind(this)
+    login: this.login.bind(this),
+    logout: this.logout.bind(this),
+    join: this.join.bind(this),
+    socialLogin : this.socialLogin.bind(this)
   };
 
   componentDidMount() {
@@ -41,7 +43,6 @@ class UserProvider extends Component {
       this.getAddress("default");
     }
     console.log(this.state);
-    
   }
 
   getAddress(username) {
@@ -70,7 +71,7 @@ class UserProvider extends Component {
           }
         });
         this.setState({
-          address : [ address ]
+          address: [address]
         });
         /* 
              address : {
@@ -98,21 +99,37 @@ class UserProvider extends Component {
     );
   }
 
-  async login({username, password}){
-    const {user , token} = await mainAPI.post('/members/auth/', {
+  async login({ username, password }) {
+    const { user, token } = await mainAPI.post("/members/auth/", {
       username,
       password
     });
     this.getAddress(user.username);
-    localStorage.setItem('token',token);
+    localStorage.setItem("token", token);
   }
 
-  logout(){
-    localStorage.removeItem('token');
+  logout() {
+    localStorage.removeItem("token");
     this.setState({
-      user : null
-    })
+      user: null
+    });
     this.getAddress("default");
+  }
+  async join({ username, password, nickname, phone }) {
+    await mainAPI.post("/members/register/", {
+      username,
+      password,
+      nickname,
+      phone
+    });
+  }
+  socialLogin(status, result) {
+    if (status === true) {
+     console.log(result);
+     alert(result.user.name);
+    } else {
+      alert('Facebook login error');
+    }
   }
 
   render() {

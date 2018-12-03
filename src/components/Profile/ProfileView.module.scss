@@ -1,0 +1,150 @@
+@import "../../index.scss";
+
+.Profile {
+  width: 100%;
+  height: 100vh;
+  .Header {
+    position: relative;
+    width: 100%;
+    height: 50px;
+    border-bottom: 1px solid rgba(0, 0, 0, 0.1);
+    font-size: 1.3rem;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    .Prev {
+      display: flex;
+      align-items: center;
+      padding: 0 12px;
+      height: 100%;
+    }
+    .Title {
+      font-weight: 600;
+    }
+  }
+
+  .Summary {
+    width: 100%;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    flex-direction: column;
+    padding: 12px 0;
+    border-bottom: 10px solid rgba(0, 0, 0, 0.1);
+    .Avatar {
+      display: flex;
+      justify-content: center;
+      align-items: center;
+      flex-direction: column;
+      margin-bottom: 15px;
+      img {
+        width: 50px;
+        height: 50px;
+        border-radius: 50%;
+        border: 1px solid rgba(0, 0, 0, 0.1);
+      }
+      .NickName {
+        font-weight: 600;
+        color: $main-color;
+      }
+    }
+    input {
+      width: 50%;
+      height: 30px;
+      padding: 0 8px;
+      border: 1px solid rgba(0, 0, 0, 0.1);
+    }
+  }
+
+  .Form {
+    width: 100%;
+    padding: 12px;
+    border-bottom: 1px solid rgba(0, 0, 0, 0.1);
+    .Elem {
+      width: 100%;
+      display: flex;
+      align-items: center;
+      flex-wrap: wrap;
+      justify-content: space-between;
+      label {
+        width: 100%;
+        height: 30px;
+        display: flex;
+        align-items: center;
+        font-size: 1.3rem;
+        font-weight: 600;
+        margin-bottom: 10px;
+        .Caption {
+          font-size: 1rem;
+          font-weight: 400;
+          margin-left: 10px;
+          color: rgba(0, 0, 0, 0.5);
+        }
+      }
+      .InputWrap {
+        width: 78%;
+        input {
+          width: 100%;
+          height: 30px;
+          padding: 0 10px;
+          border: 1px solid rgba(0, 0, 0, 0.1);
+          &:read-only {
+            background: rgba(0, 0, 0, 0.1);
+            border: 0;
+          }
+        }
+        .PhoneWrap {
+          display: flex;
+          justify-content: space-between;
+          .PhoneNumber {
+            width: 32%;
+            text-align: center;
+          }
+        }
+      }
+      button {
+        width: 20%;
+        height: 30px;
+        color: #fff;
+        background: rgba(0, 0, 0, 0.2);
+      }
+    }
+  }
+
+  .Marketing {
+    width: 100%;
+    padding: 12px;
+    h2 {
+      font-size: 1.3rem;
+      font-weight: 600;
+    }
+    p {
+      color: rgba(0, 0, 0, 0.3);
+    }
+    .Email,
+    .SMS {
+      width: 100%;
+      height: 30px;
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+    }
+  }
+
+  .Footer {
+    width: 100%;
+    padding: 12px;
+    display: flex;
+    justify-content: flex-end;
+    span {
+      display: inline-block;
+      color: rgba(0, 0, 0, 0.4);
+      text-decoration: underline;
+      padding: 0 10px;
+      border-right: 1px solid rgba(0, 0, 0, 0.4);
+      &:last-child {
+        border: 0;
+      }
+    }
+  }
+}
