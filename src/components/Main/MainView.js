@@ -1,5 +1,6 @@
 import React, { Component } from "react";
 import "react-responsive-carousel/lib/styles/carousel.min.css";
+import { Link } from "react-router-dom";
 import { Carousel } from "react-responsive-carousel";
 // https://www.npmjs.com/package/react-responsive-carousel
 import styles from "./Main.module.scss";
@@ -139,8 +140,10 @@ class MainView extends Component {
             {lists.map(c => {
               return (
                 <li className={cx("item")} key={c.name}>
+                  <Link to={`/list?category=${c.name}`}>
                   {c.img}
                   {c.name}
+                  </Link>
                 </li>
               );
             })}

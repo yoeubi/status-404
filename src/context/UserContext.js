@@ -125,8 +125,13 @@ class UserProvider extends Component {
   }
   socialLogin(status, result) {
     if (status === true) {
+      this.setState({
+        user : {
+          ...this.state.user,
+          name : result.user.name
+        }
+      })
      console.log(result);
-     alert(result.user.name);
     } else {
       alert('Facebook login error');
     }
