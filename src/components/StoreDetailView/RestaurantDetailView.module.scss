@@ -63,16 +63,26 @@
       flex-direction: column;
       justify-content: center;
       text-align: center;
-      h2 {
-        font-size: 2rem;
-        font-weight: 600;
-      }
+
       padding: 12px;
       margin: 0 auto;
       top: -50px;
       width: 80%;
       background: #fff;
       box-shadow: 5px 5px 15px rgba(0, 0, 0, 0.1);
+      h2 {
+        font-size: 2rem;
+        font-weight: 600;
+      }
+      .Stars {
+        .Star {
+          width: 20px;
+          height: 20px;
+          margin: 0 1px;
+          fill: transparent;
+          stroke: rgba(0, 0, 0, 0.3);
+        }
+      }
     }
   }
 }

@@ -6,6 +6,7 @@ import classNames from "classnames/bind";
 // SVG ICONS
 import { ReactComponent as Heart } from "../../img/heart.svg"; // 하트 아이콘
 import { ReactComponent as ChevronLeft } from "../../img/chevron-left.svg"; // 뒤로가기 아이콘
+import { ReactComponent as Star } from "../../img/star.svg"; // 뒤로가기 아이콘
 
 const cx = classNames.bind(styles);
 
@@ -47,6 +48,9 @@ class RestaurantDetailView extends Component {
           <div className={cx("BasicInfo")}>
             <h2>{name}</h2>
             <div className={cx("Stars")}>
+              <Star className={cx("Star", "Empty")} />
+              <Star className={cx("Star", "Half")} />
+              <Star className={cx("Star")} />
               <span>{stars}</span>
               <span className={cx("Rating")}>{rating}</span>
             </div>
