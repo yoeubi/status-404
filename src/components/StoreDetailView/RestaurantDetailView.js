@@ -1,6 +1,8 @@
 import React, { Component } from "react";
 import Rating from "react-rating";
 
+import MenuView from "./MenuView";
+
 import styles from "./RestaurantDetailView.module.scss";
 import classNames from "classnames/bind";
 
@@ -8,8 +10,7 @@ import classNames from "classnames/bind";
 import { ReactComponent as Heart } from "../../img/heart.svg"; // 하트 아이콘
 import { ReactComponent as ChevronLeft } from "../../img/chevron-left.svg"; // 뒤로가기 아이콘
 import { ReactComponent as Star } from "../../img/star.svg"; // 뒤로가기 아이콘
-import { ReactComponent as ArrowUp } from "../../img/arrow-up.svg"; // 뒤로가기 아이콘
-import MenuView from "./MenuView";
+import { ReactComponent as ArrowUp } from "../../img/arrow-up.svg";
 
 const cx = classNames.bind(styles);
 
@@ -107,7 +108,7 @@ class RestaurantDetailView extends Component {
               <label>결재방법</label><span>바로결재, 만나서 결재</span>
             </li>
             <li>
-              <label>최소주문금액</label><span>바로결재, 만나서 결재</span>
+              <label>최소주문금액</label><span>13,000 원</span>
             </li>
             <li>
               <label>배달시간</label>

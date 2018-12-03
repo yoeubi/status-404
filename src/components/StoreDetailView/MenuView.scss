@@ -1,0 +1,52 @@
+@import "../../index.scss";
+
+.MenuBody {
+}
+.Collapsible {
+}
+.Collapsible__trigger {
+  width: 100%;
+  display: flex;
+  justify-content: space-between;
+  background: #fff;
+  border-top: 1px solid rgba(0, 0, 0, 0.1);
+  border-bottom: 1px solid rgba(0, 0, 0, 0.1);
+  padding: 12px;
+  font-size: 1.4rem;
+  font-weight: 600;
+
+  .arrow {
+    width: 16px;
+    height: 16px;
+    transition: all 0.3s;
+  }
+  &.is-open {
+    .arrow {
+      transform: rotate(180deg);
+    }
+    background: #f4f2f4;
+  }
+}
+.Collapsible__contentInner {
+  .menuItem {
+    padding: 12px;
+    font-size: 1.2rem;
+    background: #fff;
+    border-bottom: 1px solid rgba(0, 0, 0, 0.2);
+    &:last-child {
+      border-bottom: 0;
+    }
+    .title {
+      display: inline-block;
+      font-weight: 600;
+    }
+    .description {
+      display: inline-block;
+      color: rgba(0, 0, 0, 0.5);
+      margin: 5px 0;
+    }
+    .price {
+      display: inline-block;
+    }
+  }
+}
