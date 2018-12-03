@@ -1,4 +1,6 @@
 import React, { Component } from "react";
+// react-rating
+// DOC :: https://www.npmjs.com/package/react-rating
 import Rating from "react-rating";
 
 import MenuView from "./MenuView";
@@ -16,18 +18,38 @@ const cx = classNames.bind(styles);
 
 class RestaurantDetailView extends Component {
   static defaultProps = {
-    id: null,
-    name: "배민 상점",
-    rating: 4.5, // 상점 별점
-    userId: null,
-    is_register: null, // 상점 생성 시간?
-    address: "배민구 배민동 000",
-    store_category: "상점 카테고리",
-    store_info: "상점 정보",
-    origin_info: "원산지 정보",
-    img_profile:
-      "https://cdn.dominos.co.kr/admin/upload/goods/20180827_ca1sFpdy.jpg"
+    store: {
+      id: null,
+      name: "배민 상점",
+      rating: 4.5, // 상점 별점
+      userId: null,
+      is_register: null, // 상점 생성 시간?
+      address: "배민구 배민동 000",
+      store_category: "상점 카테고리",
+      store_info: "상점 정보",
+      origin_info: "원산지 정보",
+      img_profile:
+        "https://cdn.dominos.co.kr/admin/upload/goods/20180827_ca1sFpdy.jpg"
+    },
+    delevery: {
+      id: null,
+      // least_const :: 최소 주문 금액
+      least_const: 13000,
+      // take_out :: 배달여부(?)
+      take_out: null,
+      // fee :: 배달료
+      fee: 2000
+    },
+    food: {
+      id: null,
+      name: "음식이름",
+      store_Id: null,
+      price: null,
+      is_register: null,
+      img_profile: null
+    }
   };
+
   constructor(props) {
     super(props);
     this.state = {
@@ -43,7 +65,7 @@ class RestaurantDetailView extends Component {
     document.addEventListener("scroll", this.isTop);
   }
   componentWillUnmount() {
-    // remove scroll event
+    // remove scroll event :: 컴포넌트 언마운트 시에 document 객체에 scroll 이벤트리스너를 제거한다.
     document.removeEventListener("scroll", this.isTop);
   }
 
@@ -56,6 +78,7 @@ class RestaurantDetailView extends Component {
   };
 
   handleTabActive = tabName => {
+    // 메뉴, 정보, 리뷰 탭 활성화 관련 상태 관리 함수
     this.setState({
       activeTab: tabName
     });
@@ -69,7 +92,10 @@ class RestaurantDetailView extends Component {
         params: { id }
       }
     } = this.props;
-    const { name, address, img_profile, rating } = this.props;
+    const { name, address, img_profile, rating } = this.props.store; // 스토어 정보
+    // const { least_const, take_out, fee } = this.props.delevery; // 배달 정보
+    // const { name, price, img_profile } = this.props.food; // 음식 정보
+
     return (
       <div className={cx("StoreDetail")}>
         <div className={cx("Header", { Scroll: !isTop })}>
