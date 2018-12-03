@@ -1,6 +1,10 @@
 import React, { Component } from "react";
+import { Link } from "react-router-dom";
+
 import styles from "./ProfileView.module.scss";
 import classNames from "classnames/bind";
+
+import { ReactComponent as ChevronLeft } from "../../img/chevron-left.svg";
 
 const cx = classNames.bind(styles);
 
@@ -35,7 +39,9 @@ class ProfileView extends Component {
     return (
       <div className={cx("Profile")}>
         <div className={cx("Header")}>
-          <button className={cx("Prev")}>prev</button>
+          <Link to="/" className={cx("Prev")}>
+            <ChevronLeft />
+          </Link>
           <div className={cx("Title")}>내 정보 수정</div>
           <button className={cx("Save")}>저장</button>
         </div>

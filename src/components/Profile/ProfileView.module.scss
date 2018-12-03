@@ -12,6 +12,12 @@
     display: flex;
     justify-content: space-between;
     align-items: center;
+    .Prev {
+      display: flex;
+      align-items: center;
+      padding: 0 12px;
+      height: 100%;
+    }
     .Title {
       font-weight: 600;
     }
