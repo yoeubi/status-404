@@ -8,11 +8,33 @@ import RestaurantItem from '../RestaurantItem';
 const cx = classNames.bind(styles);
 
 class RestaurantList extends Component {
+
+    state = {
+        category : null
+    }
+
+    componentDidMount() {
+        const query = decodeURI(this.props.location.search);
+        const parsed = new URLSearchParams(query);
+        const category = parsed.get("category");
+        this.setState({
+            category
+        })
+    }
+    
+    handleCategory = menu => {
+        const { match, history } = this.props;
+        history.push(`${match.path}?category=${menu}`);
+        this.setState({
+            category : menu
+        })
+    }
     render() {
+        const {category} = this.state;
         return (
-            <div>
-                <Header />
-                <SlideMenu />
+            <div key={category}>
+                <Header category={category} />
+                <SlideMenu category={category} onChange={this.handleCategory} />
                 <RestaurantItem/>
                 <RestaurantItem/>
                 <RestaurantItem/>
