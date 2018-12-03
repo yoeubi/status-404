@@ -29,21 +29,38 @@ class RestaurantDetailView extends Component {
   constructor(props) {
     super(props);
     this.state = {
-      isTop: true
+      // 스크롤 이벤트 flag
+      isTop: true,
+      // actvieTab: 'menu', 'info','review'
+      activeTab: "menu"
     };
   }
 
   componentDidMount() {
-    document.addEventListener("scroll", () => {
-      const isTop = window.scrollY < 100;
-      if (isTop !== this.state.isTop) {
-        this.setState({ isTop });
-      }
-    });
+    // add scroll event
+    document.addEventListener("scroll", this.isTop);
+  }
+  componentWillUnmount() {
+    // remove scroll event
+    document.removeEventListener("scroll", this.isTop);
   }
 
+  isTop = () => {
+    // 스크롤시 최상단 판별 함수
+    const isTop = window.scrollY < 100;
+    if (isTop !== this.state.isTop) {
+      this.setState({ isTop });
+    }
+  };
+
+  handleTabActive = tabName => {
+    this.setState({
+      activeTab: tabName
+    });
+  };
+
   render() {
-    const { isTop } = this.state;
+    const { isTop, activeTab } = this.state;
     const {
       match: {
         // storeId
@@ -66,9 +83,6 @@ class RestaurantDetailView extends Component {
           <div className={cx("BasicInfo")}>
             <h2>{name}</h2>
             <div className={cx("Stars")}>
-              {/* <Star className={cx("Star", "Empty")} />
-              <Star className={cx("Star", "Half")} />
-              <Star className={cx("Star")} /> */}
               <Rating
                 // 빈 별
                 emptySymbol={<Star className={cx("Star", "Empty")} />}
@@ -105,13 +119,34 @@ class RestaurantDetailView extends Component {
 
           <div className={cx("SNS")}>
             <button>
-              <Heart /> 찜 351
+              <Heart /> <span>찜 351</span>
             </button>
             <button>
               <ArrowUp />
               공유
             </button>
           </div>
+
+          <ul className={cx("Tab")}>
+            <li
+              onClick={() => this.handleTabActive("menu")}
+              className={cx("Menu", { Active: activeTab === "menu" })}
+            >
+              메뉴
+            </li>
+            <li
+              onClick={() => this.handleTabActive("info")}
+              className={cx("Info", { Active: activeTab === "info" })}
+            >
+              정보
+            </li>
+            <li
+              onClick={() => this.handleTabActive("review")}
+              className={cx("Review", { Active: activeTab === "review" })}
+            >
+              리뷰
+            </li>
+          </ul>
         </div>
 
         <div>
