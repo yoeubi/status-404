@@ -1,12 +1,9 @@
 import React, { Component } from "react";
+import StoreDetailView from "../components/StoreDetailView/StoreDetailView";
 
 class StoreDetailPage extends Component {
   render() {
-    return (
-      <div>
-        <h1>상점 디테일 페이지</h1>
-      </div>
-    );
+    return <StoreDetailView {...this.props} />;
   }
 }
 
