@@ -9,6 +9,7 @@ import { ReactComponent as Heart } from "../../img/heart.svg"; // 하트 아이�
 import { ReactComponent as ChevronLeft } from "../../img/chevron-left.svg"; // 뒤로가기 아이콘
 import { ReactComponent as Star } from "../../img/star.svg"; // 뒤로가기 아이콘
 import { ReactComponent as ArrowUp } from "../../img/arrow-up.svg"; // 뒤로가기 아이콘
+import MenuView from "./MenuView";
 
 const cx = classNames.bind(styles);
 
@@ -149,57 +150,14 @@ class RestaurantDetailView extends Component {
           </ul>
         </div>
 
-        <div>
-          <p>test</p>
-          <p>test</p>
-          <p>test</p>
-          <p>test</p>
-          <p>test</p>
-          <p>test</p>
-          <p>test</p>
-          <p>test</p>
-          <p>test</p>
-          <p>test</p>
-          <p>test</p>
-          <p>test</p>
-          <p>test</p>
-          <p>test</p>
-          <p>test</p>
-          <p>test</p>
-          <p>test</p>
-          <p>test</p>
-          <p>test</p>
-          <p>test</p>
-          <p>test</p>
-          <p>test</p>
-          <p>test</p>
-          <p>test</p>
-          <p>test</p>
-          <p>test</p>
-          <p>test</p>
-          <p>test</p>
-          <p>test</p>
-          <p>test</p>
-          <p>test</p>
-          <p>test</p>
-          <p>test</p>
-          <p>test</p>
-          <p>test</p>
-          <p>test</p>
-          <p>test</p>
-          <p>test</p>
-          <p>test</p>
-          <p>test</p>
-          <p>test</p>
-          <p>test</p>
-          <p>test</p>
-          <p>test</p>
-          <p>test</p>
-          <p>test</p>
-          <p>test</p>
-          <p>test</p>
-          <p>test</p>
-          <p>test</p>
+        <div className={cx("Body")}>
+          {activeTab === "menu" ? (
+            <MenuView title={"menu"} />
+          ) : activeTab === "info" ? (
+            <MenuView title={"info"} />
+          ) : activeTab === "review" ? (
+            <MenuView title={"review"} />
+          ) : null}
         </div>
       </div>
     );
