@@ -8,10 +8,17 @@ export default class AddressSearchContainer extends Component {
   constructor(props) {
     super(props);
 
-    this.state = { page: "address-search", searchResult: [] };
+    this.state = { page: "address-search", searchResult: [], userInput: "" };
 
     // loading: false
   }
+
+  handleUserInput = e => {
+    const userInput = e.target.value;
+    this.setState({
+      userInput
+    });
+  };
 
   handleSubmitBtn = () => {
     this.setState({
@@ -19,6 +26,7 @@ export default class AddressSearchContainer extends Component {
     });
   };
 
+  async componentDidMount() {}
   getAddress = async userInput => {
     const { data } = await api.get(
       // 1. 주소로 검색
@@ -45,7 +53,7 @@ export default class AddressSearchContainer extends Component {
   };
 
   render() {
-    const { searchResult } = this.state;
+    const { searchResult, userInput } = this.state;
     const { onAddressSearch, show } = this.props;
     return (
       <>
@@ -54,12 +62,16 @@ export default class AddressSearchContainer extends Component {
             onUserInput={e => this.handleUserInput(e)}
             onSubmitBtn={() => this.handleSubmitBtn()}
             getAddress={this.getAddress}
-            searchResult={searchResult}
             onAddressSearch={onAddressSearch}
             show={show}
           />
         ) : this.state.page === "address-search-result" ? (
-          <AddressSearchResult onBackBtn={() => this.handleBackBtn()} />
+          <AddressSearchResult
+            searchResult={searchResult}
+            userInput={userInput}
+            onUserInput={e => this.handleUserInput(e)}
+            onBackBtn={() => this.handleBackBtn()}
+          />
         ) : null}
       </>
     );

@@ -14,21 +14,28 @@ export default class AddressSearchResult extends Component {
     super(props);
 
     this.state = {
-      userInput: "",
-      searchResult: []
+      // userInput: "",
+      // searchResult: []
     };
   }
 
-  handleUserInput = e => {
-    const userInput = e.target.value;
-    this.setState({
-      userInput
-    });
-  };
+  // handleUserInput = e => {
+  //   const userInput = e.target.value;
+  //   this.setState({
+  //     userInput
+  //   });
+  // };
 
   render() {
-    const { show, onAddressSearch, getAddress, onBackBtn } = this.props;
-    const { userInput, searchResult } = this.state;
+    const {
+      // show,
+      // onAddressSearch,
+      getAddress,
+      onBackBtn,
+      onUserInput,
+      userInput,
+      searchResult
+    } = this.props;
     return (
       <>
         <div className={cx("container")}>
@@ -39,8 +46,8 @@ export default class AddressSearchResult extends Component {
             <h1 className={cx("header")}>배달 받을 주소</h1>
             <div className={cx("addressSearchForm")}>
               <input
-                autoComplete="off"
-                onChange={e => this.handleUserInput(e)}
+                autoComplete="off" // onChange={e => userInput(e)}
+                onChange={onUserInput}
                 value={userInput}
                 className={cx("addressSearchInput")}
                 label="주소검색"
@@ -52,29 +59,27 @@ export default class AddressSearchResult extends Component {
                 className={cx("addressSearchButton")}
                 onClick={getAddress}
               >
-                <div className={cx("listContainer")}>
-                  <h2 className={cx("listTitle")}>검색 결과</h2>
-                  <ul className={cx("recentAddress")}>
-                    {searchResult.map(s => (
-                      <li key={s.id} className={cx("listItem")}>
-                        <div className={cx("place")}>{s.place_name}</div>
-                        <div className={cx("address")}>{s.address_name}</div>
-                        <div className={cx("textContainer")}>
-                          <div className={cx("box")}>도로명</div>
-                          <div className={cx("road")}>
-                            {s.road_address_name}
-                          </div>
-                        </div>
-                        <button className={cx("deleteButton")}>
-                          <Ex />
-                        </button>
-                      </li>
-                    ))}
-                  </ul>
-                </div>
                 <MagnifyingGlass />
               </button>
             </div>
+          </div>
+          <div className={cx("listContainer")}>
+            <h2 className={cx("listTitle")} />
+            <ul className={cx("recentAddress")}>
+              {searchResult.map(s => (
+                <li key={s.id} className={cx("listItem")}>
+                  <div className={cx("place")}>{s.place_name}</div>
+                  <div className={cx("address")}>{s.address_name}</div>
+                  <div className={cx("textContainer")}>
+                    <div className={cx("box")}>도로명</div>
+                    <div className={cx("road")}>{s.road_address_name}</div>
+                  </div>
+                  {/* <button className={cx("deleteButton")}>
+                    <Ex />
+                  </button> */}
+                </li>
+              ))}
+            </ul>
           </div>
         </div>
         {/* <div className={cx("formContainer")}>
