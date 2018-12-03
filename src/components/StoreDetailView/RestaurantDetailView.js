@@ -1,11 +1,11 @@
 import React, { Component } from "react";
 
-import styles from "./StoreDetailView.module.scss";
+import styles from "./RestaurantDetailView.module.scss";
 import classNames from "classnames/bind";
 
 const cx = classNames.bind(styles);
 
-class StoreDetailView extends Component {
+class RestaurantDetailView extends Component {
   static defaultProps = {
     id: null,
     name: "배민 상점",
@@ -22,7 +22,7 @@ class StoreDetailView extends Component {
     const {
       match: {
         // storeId
-        params: { storeId }
+        params: { id }
       }
     } = this.props;
     const { name, address, img_profile } = this.props;
@@ -35,7 +35,7 @@ class StoreDetailView extends Component {
         <div>
           <img src={img_profile} alt={name} />{" "}
         </div>
-        <div>상점 아이디 : {storeId}</div>
+        <div>상점 아이디 : {id}</div>
         <div>상점 이름 : {name}</div>
         <div>상점 주소 : {address}</div>
       </div>
@@ -43,4 +43,4 @@ class StoreDetailView extends Component {
   }
 }
 
-export default StoreDetailView;
+export default RestaurantDetailView;
