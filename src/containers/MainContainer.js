@@ -46,6 +46,7 @@ class MainContainer extends Component {
         <AddressSearchContainer
           show={addressSearchShow}
           onAddressSearch={this.handleAddressSearch}
+          address={address}
         />
         <MainView />
       </React.Fragment>

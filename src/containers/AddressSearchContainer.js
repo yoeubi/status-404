@@ -19,12 +19,12 @@ export default class AddressSearchContainer extends Component {
     // loading: false
   }
 
-  componentDidMount = () => {
-    // const { address } = this.state;
-    const address = JSON.parse(localStorage.getItem("address"));
-    this.setState({ address: address.default });
-    console.log(address.default[0]);
-  };
+  // componentDidMount = () => {
+  // // const { address } = this.state;
+  // const address = JSON.parse(localStorage.getItem("address"));
+  // this.setState({ address: address.default });
+  // console.log(address.default[0]);
+  // };
 
   handleUserInput = e => {
     const userInput = e.target.value;
