@@ -82,7 +82,7 @@ class AddressSearchView extends Component {
             <h2 className={cx("listTitle")}>최근 주소</h2>
             <ul className={cx("recentAddress")}>
               {address.map((a, index) => (
-                <li key={a[index]} className={cx("listItem")}>
+                <li key={index} className={cx("listItem")}>
                   <div className={cx("place")}>{a.address.address_name}</div>
                   {/* <div className={cx("address")}>{a.address.address_name}</div> */}
                   <div className={cx("textContainer")}>
