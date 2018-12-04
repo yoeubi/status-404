@@ -41,7 +41,8 @@ class ProductModalView extends Component {
 
     this.state = {
       menu: null,
-      totalPrice: 0
+      totalPrice: 0, // 기본 합계금액
+      quantity: 1 // 기본 수량
     };
   }
 
@@ -58,13 +59,11 @@ class ProductModalView extends Component {
         ...menu,
         options: newOptions
       },
-      totalPrice: menu.price
+      totalPrice: menu.price * this.state.quantity
     }));
   }
 
   handleChange = async optionId => {
-    console.log("handleChange");
-
     const newOptions = this.state.menu.options.map(option => {
       if (option.optionId === optionId) {
         option.checked = !option.checked;
@@ -77,10 +76,20 @@ class ProductModalView extends Component {
         options: newOptions
       }
     }));
+
+    let result = 0; // 옵션 가격의 합을 구하기 위한 변수
+    const { options } = this.state.menu;
+    for (const option of options) {
+      if (option.checked === true) {
+        result += option.price;
+      }
+    }
+    await this.setState(prevState => ({
+      totalPrice: this.state.menu.price + result
+    }));
   };
 
   render() {
-    console.log(this.state);
     const { show, name } = this.props;
     const { menu, totalPrice } = this.state;
     return (
@@ -108,23 +117,33 @@ class ProductModalView extends Component {
                   <span>{menu.options.length} 개 선택 가능</span>
                 </div>
                 <ul className={cx("ProductOptionList")}>
-                  {menu.options.map(o => (
-                    <li key={o.optionId}>
-                      <input
-                        onChange={() => this.handleChange(o.optionId)}
-                        type="checkbox"
-                        id={o.optionId}
-                        checked={o.checked}
-                      />
-                      <label htmlFor={o.optionId}>
-                        <span>{o.name}</span>
-                        <span className={cx("price")}>
-                          + {o.price.toLocaleString()}
-                        </span>
-                      </label>
-                    </li>
-                  ))}
+                  {menu.options &&
+                    menu.options.map(o => (
+                      <li key={o.optionId}>
+                        <input
+                          onChange={() => this.handleChange(o.optionId)}
+                          type="checkbox"
+                          id={o.optionId}
+                          checked={o.checked}
+                        />
+                        <label htmlFor={o.optionId}>
+                          <span>{o.name}</span>
+                          <span className={cx("price")}>
+                            + {o.price.toLocaleString()}
+                          </span>
+                        </label>
+                      </li>
+                    ))}
                 </ul>
+              </div>
+
+              <div className={cx("ProductQuantity")}>
+                <label>수량</label>
+                <div className={cx("ProductQuantityController")}>
+                  <button> - </button>
+                  <input type="number" />
+                  <button> + </button>
+                </div>
               </div>
 
               <p>주문금액 : {totalPrice.toLocaleString()}</p>
