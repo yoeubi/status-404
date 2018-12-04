@@ -16,7 +16,7 @@ class Login extends Component {
     userFocus: false,
     passFocus: false,
     warning: "비밀번호를 잘못 입력했습니다.",
-    facebook : false
+    facebook: false
   };
   handleChange = e => {
     this.setState({
@@ -47,9 +47,9 @@ class Login extends Component {
   };
   handleSocial = e => {
     e.preventDefault();
-    this.setState({facebook : true})
+    this.setState({ facebook: true });
   };
-  
+
   render() {
     const { username, password, userFocus, passFocus, warning } = this.state;
     const {
@@ -120,19 +120,21 @@ class Login extends Component {
           <GoogleLogin
             clientId="104085265728-lvt11mjt0t0sab4lppnjl9n06872r7ri.apps.googleusercontent.com"
             buttonText="Google Login"
-            className={cx('google')}
+            className={cx("google")}
             onSuccess={response =>
               this.props.googleLogin(response, this.props.history)
             }
-            onFailure={() => console.log('Google login error')
-            }
+            onFailure={() => console.log("Google login error")}
           />
           <FacebookLogin
             appId="340137913232680"
             autoLoad={this.state.facebook}
-            callback={response =>
-              this.props.socialLogin(response, this.props.history)
-            }
+            callback={response => {
+              this.props.socialLogin(response, this.props.history);
+              this.setState({
+                facebook : false
+              })
+            }}
             fields="name,email,picture"
             onClick={this.handleSocial}
             cssClass={cx("facebook")}
