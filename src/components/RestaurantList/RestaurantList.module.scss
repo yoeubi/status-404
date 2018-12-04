@@ -1,5 +1,6 @@
 .restaurant-list {
     position: relative;
+    overflow-x: hidden;
     &.show {
         height: 100vh;
         overflow: hidden;
