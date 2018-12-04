@@ -1,11 +1,11 @@
 import React, { Component } from "react";
-import { Link } from "react-router-dom";
+import { Link, Redirect } from "react-router-dom";
 import classNames from "classnames/bind";
 import styles from "./Login.module.scss";
 import { ReactComponent as Exit } from "../../svg/x.svg";
 import { withUser } from "../../context/UserContext";
 import SocialLogin from "./SocialLogin";
-import FaceBookLogin from "../../containers/FaceBookLogin";
+import FacebookLogin from "react-facebook-login";
 
 const cx = classNames.bind(styles);
 
@@ -44,6 +44,9 @@ class Login extends Component {
     const { username, password } = this.state;
     this.props.login({ username, password });
   };
+  handleSocial = e => {
+    e.preventDefault();
+  };
   render() {
     const { username, password, userFocus, passFocus, warning } = this.state;
     const {
@@ -53,6 +56,7 @@ class Login extends Component {
       handlePassFocus,
       handleSubmit
     } = this;
+    if(this.props.user.username) return <Redirect to="/"/>
     return (
       <div className={cx("login")}>
         <span className={cx("exit")} tabIndex={0}>
@@ -111,8 +115,14 @@ class Login extends Component {
 
         <div className={cx("social-login")}>
           <SocialLogin socialType="naver">네이버 아이디로 로그인</SocialLogin>
-              <FaceBookLogin/>
-          {/* <SocialLogin socialType="facebook">페이스북으로 로그인</SocialLogin> */}
+          <FacebookLogin
+            appId="340137913232680"
+            autoLoad={true}
+            callback={(response) => this.props.socialLogin(response,this.props.history)}
+            fields="name,email,picture"
+            onClick={this.handleSocial}
+            cssClass={cx('facebook')}
+          />
         </div>
 
         <div className={cx("join")}>
