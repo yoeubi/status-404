@@ -21,11 +21,17 @@ class SlideMenu extends Component {
     "프랜차이즈",
     "맛집랭킹"
   ]
+  slide = React.createRef();
+
+  
+
   render() {
+    console.log(this.slide.current);
+    
     const {category, onChange} = this.props;
     return (
       <div className={cx("slide-menu")}>
-        <ul>
+        <ul ref={this.slide}>
           {
             this.menuList.map((menu, index) => (<li key={index} className={cx({ active: menu === category })} onClick={() => onChange(menu)}>{menu}</li>))
           }
