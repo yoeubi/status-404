@@ -55,14 +55,14 @@ class RestaurantDetailView extends Component {
 
   componentDidMount() {
     // add scroll event
-    document.addEventListener("scroll", this.isTop);
+    document.addEventListener("scroll", this.handleIsTop);
   }
   componentWillUnmount() {
     // remove scroll event :: 컴포넌트 언마운트 시에 document 객체에 scroll 이벤트리스너를 제거한다.
-    document.removeEventListener("scroll", this.isTop);
+    document.removeEventListener("scroll", this.handleIsTop);
   }
 
-  isTop = () => {
+  handleIsTop = () => {
     // 스크롤시 최상단 판별 함수
     const isTop = window.scrollY < 100;
     if (isTop !== this.state.isTop) {
