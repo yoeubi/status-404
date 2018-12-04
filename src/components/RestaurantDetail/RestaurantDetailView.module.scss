@@ -1,0 +1,21 @@
+@import "../../index.scss";
+
+//Tab
+.Tab {
+  width: 100%;
+  display: flex;
+  justify-content: center;
+  li {
+    width: 33.333%;
+    height: 50px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    font-size: 1.4rem;
+    border: 1px solid rgba(0, 0, 0, 0.1);
+    border-left: 0;
+    &.Active {
+      border-bottom: 0;
+    }
+  }
+}
