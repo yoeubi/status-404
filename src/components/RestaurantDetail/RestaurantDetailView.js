@@ -3,6 +3,8 @@ import React, { Component } from "react";
 import Header from "./RestaurantHeader";
 import MenuView from "./RestaurantMenu";
 import RestaurantSummary from "./RestaurantSummary";
+import OriginInfo from "./OriginInfo";
+import CartBtn from "./CartBtn";
 
 import styles from "./RestaurantDetailView.module.scss";
 import classNames from "classnames/bind";
@@ -129,6 +131,9 @@ class RestaurantDetailView extends Component {
             <MenuView title={"review"} />
           ) : null}
         </div>
+
+        <OriginInfo />
+        <CartBtn fixed={true} />
       </div>
     );
   }

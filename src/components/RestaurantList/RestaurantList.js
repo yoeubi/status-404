@@ -1,5 +1,5 @@
 import React, { Component } from 'react';
-import SlideMenu from '../SliceMenu/SlideMenu';
+import SlideMenu from '../SlideMenu/SlideMenu';
 import Header from '../Header';
 import RestaurantItem from '../RestaurantItem';
 
