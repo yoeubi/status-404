@@ -30,7 +30,7 @@ class UserProvider extends Component {
     login: this.login.bind(this),
     logout: this.logout.bind(this),
     join: this.join.bind(this),
-    socialLogin : this.socialLogin.bind(this)
+    socialLogin: this.socialLogin.bind(this)
   };
 
   componentDidMount() {
@@ -47,11 +47,13 @@ class UserProvider extends Component {
 
   getAddress(username) {
     const address = JSON.parse(localStorage.getItem("address"));
+    console.log("getaddress");
     if (address && address[username]) {
       this.setState({
         address: address[username]
       });
     } else {
+      console.log("getaddress2");
       this.getPosition(username);
     }
   }
@@ -59,12 +61,10 @@ class UserProvider extends Component {
   getPosition(username) {
     navigator.geolocation.getCurrentPosition(
       async ({ coords: { longitude, latitude } }) => {
-        console.log('lon', longitude , 'lat', latitude );
-        
+        console.log("lon", longitude, "lat", latitude);
+
         const {
-          data: {
-            documents
-          }
+          data: { documents }
         } = await kakaoAPI.get("", {
           params: {
             x: longitude,
@@ -73,7 +73,7 @@ class UserProvider extends Component {
           }
         });
         console.log(documents[0]);
-        
+
         this.setState({
           address: [documents[0]]
         });
@@ -130,14 +130,14 @@ class UserProvider extends Component {
   socialLogin(status, result) {
     if (status === true) {
       this.setState({
-        user : {
+        user: {
           ...this.state.user,
-          name : result.user.name
+          name: result.user.name
         }
-      })
-     console.log(result);
+      });
+      console.log(result);
     } else {
-      alert('Facebook login error');
+      alert("Facebook login error");
     }
   }
 

@@ -99,6 +99,7 @@ input {
   border-top: 1px solid silver;
   height: calc(100% - 100px);
   overflow-y: scroll;
+  scroll-behavior: smooth;
 }
 
 .listTitle {
@@ -169,14 +170,14 @@ input {
   // background-color: sandybrown;
 }
 
-.deleteButton {
-  border: none;
+.finishBtn {
+  border: 1px solid black;
   position: absolute;
   top: 40%;
   right: 0;
-  width: 30px;
-  // height: 80px;
-  font-size: 15pt;
+  width: 40px;
+  height: 40px;
+  font-size: 8pt;
   background-color: white;
   svg {
     fill: rgb(207, 207, 207);

@@ -116,6 +116,8 @@ input {
   background-color: rgba(241, 241, 241, 0.87);
   border-top: 1px solid silver;
   height: calc(100% - 230px);
+  overflow-y: scroll;
+  scroll-behavior: smooth;
 }
 
 .listTitle {
