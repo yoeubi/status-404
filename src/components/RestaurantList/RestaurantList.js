@@ -1,12 +1,19 @@
 import React, { Component } from 'react';
-import SlideMenu from '../SlideMenu/SlideMenu';
+import SlideMenu from '../SlideMenu';
 import Header from '../Header';
 import RestaurantItem from '../RestaurantItem';
+import SearchList from '../SearchList';
+import BlackCurtain from '../BlackCurtain';
+import styles from './RestaurantList.module.scss';
+import classNames from 'classnames/bind';
+
+const cx = classNames.bind(styles);
 
 class RestaurantList extends Component {
 
     state = {
-        category : null
+        category : null,
+        show : false
     }
     list = React.createRef();
 
@@ -36,40 +43,46 @@ class RestaurantList extends Component {
         const { match, history } = this.props;
         history.push(`${match.path}?category=${menu}`);
         this.setState({
-            category : menu
+            category : menu,
+            show : false
+        })
+    }
+    handleShowModal = () => {
+        this.setState({
+            show : !this.state.show
         })
     }
     render() {
-        const {category} = this.state;
-        return (
-            <div key={category} ref={this.list}>
-                <Header category={category} />
-                <SlideMenu category={category} onChange={this.handleCategory} />
-                <RestaurantItem/>
-                <RestaurantItem/>
-                <RestaurantItem/>
-                <RestaurantItem/>
-                <RestaurantItem/>
-                <RestaurantItem/>
-                <RestaurantItem/>
-                <RestaurantItem/>
-                <RestaurantItem/>
-                <RestaurantItem/>
-                <RestaurantItem/>
-                <RestaurantItem/>
-                <RestaurantItem/>
-                <RestaurantItem/>
-                <RestaurantItem/>
-                <RestaurantItem/>
-                <RestaurantItem/>
-                <RestaurantItem/>
-                <RestaurantItem/>
-                <RestaurantItem/>
-                <RestaurantItem/>
-                <RestaurantItem/>
-                <RestaurantItem/>
-            </div>
-        );
+        const {category, show} = this.state;
+        return <div key={category} ref={this.list} className={cx('restaurant-list', {show})}>
+            <Header category={category} onShowModal={this.handleShowModal} />
+            <SlideMenu category={category} onChange={this.handleCategory} />
+            <SearchList show={show} />
+            <BlackCurtain show={show} onShowModal={this.handleShowModal} />
+            <RestaurantItem />
+            <RestaurantItem />
+            <RestaurantItem />
+            <RestaurantItem />
+            <RestaurantItem />
+            <RestaurantItem />
+            <RestaurantItem />
+            <RestaurantItem />
+            <RestaurantItem />
+            <RestaurantItem />
+            <RestaurantItem />
+            <RestaurantItem />
+            <RestaurantItem />
+            <RestaurantItem />
+            <RestaurantItem />
+            <RestaurantItem />
+            <RestaurantItem />
+            <RestaurantItem />
+            <RestaurantItem />
+            <RestaurantItem />
+            <RestaurantItem />
+            <RestaurantItem />
+            <RestaurantItem />
+          </div>;
     }
 }
 
