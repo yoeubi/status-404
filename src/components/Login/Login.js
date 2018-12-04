@@ -4,7 +4,6 @@ import classNames from "classnames/bind";
 import styles from "./Login.module.scss";
 import { ReactComponent as Exit } from "../../svg/x.svg";
 import { withUser } from "../../context/UserContext";
-import SocialLogin from "./SocialLogin";
 import FacebookLogin from "react-facebook-login";
 import GoogleLogin from "react-google-login";
 
@@ -16,7 +15,8 @@ class Login extends Component {
     password: "",
     userFocus: false,
     passFocus: false,
-    warning: "비밀번호를 잘못 입력했습니다."
+    warning: "비밀번호를 잘못 입력했습니다.",
+    facebook : false
   };
   handleChange = e => {
     this.setState({
@@ -47,6 +47,7 @@ class Login extends Component {
   };
   handleSocial = e => {
     e.preventDefault();
+    this.setState({facebook : !this.state.facebook})
   };
   
   render() {
@@ -128,7 +129,7 @@ class Login extends Component {
           />
           <FacebookLogin
             appId="340137913232680"
-            autoLoad={true}
+            autoLoad={this.state.facebook}
             callback={response =>
               this.props.socialLogin(response, this.props.history)
             }
