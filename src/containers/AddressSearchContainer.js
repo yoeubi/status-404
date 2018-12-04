@@ -27,6 +27,7 @@ export default class AddressSearchContainer extends Component {
   };
 
   async componentDidMount() {}
+
   getAddress = async userInput => {
     const { data } = await api.get(
       // 1. 주소로 검색
