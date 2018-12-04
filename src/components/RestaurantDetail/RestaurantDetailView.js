@@ -3,6 +3,7 @@ import React, { Component } from "react";
 // DOC :: https://www.npmjs.com/package/react-rating
 import Rating from "react-rating";
 
+import Header from "./Header";
 import MenuView from "./MenuView";
 
 import styles from "./RestaurantDetailView.module.scss";
@@ -10,7 +11,6 @@ import classNames from "classnames/bind";
 
 // SVG ICONS
 import { ReactComponent as Heart } from "../../img/heart.svg"; // 하트 아이콘
-import { ReactComponent as ChevronLeft } from "../../img/chevron-left.svg"; // 뒤로가기 아이콘
 import { ReactComponent as Star } from "../../img/star.svg"; // 뒤로가기 아이콘
 import { ReactComponent as ArrowUp } from "../../img/arrow-up.svg";
 
@@ -98,11 +98,7 @@ class RestaurantDetailView extends Component {
 
     return (
       <div className={cx("StoreDetail")}>
-        <div className={cx("Header", { Scroll: !isTop })}>
-          <ChevronLeft className={cx("Prev")} />
-          <h1 className={cx("Title")}>{name}</h1>
-          <Heart className={cx("Like")} />
-        </div>
+        <Header isTop={isTop} name={name} />
 
         <div className={cx("Summary")}>
           <div className={cx("ImgProfile")}>

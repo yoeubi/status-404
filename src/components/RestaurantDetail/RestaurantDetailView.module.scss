@@ -1,60 +1,6 @@
 @import "../../index.scss";
 
 .StoreDetail {
-  // Header
-  // Header Scroll 활성화 비활성화 나뉘어있음
-  .Header {
-    position: fixed;
-    z-index: 10;
-    top: 0;
-    left: 0;
-    right: 0;
-    width: 100%;
-    height: 50px;
-    display: flex;
-    justify-content: space-between;
-    align-items: center;
-    padding: 0 12px;
-    background: transparent;
-    transition: all 0.3s;
-
-    // 스크롤 비활성화, 스크롤 최상단시
-    .Title {
-      display: none;
-      font-size: 1.4rem;
-      font-weight: 600;
-    }
-    .Like {
-      display: none;
-      width: 25px;
-      height: 25px;
-    }
-    .Prev {
-      width: 25px;
-      height: 25px;
-      fill: #fff;
-    }
-
-    // 스크롤 활성화
-    &.Scroll {
-      height: 40px;
-      background: #fff;
-      border-bottom: 1px solid rgba(0, 0, 0, 0.1);
-      .Title {
-        display: block;
-        fill: #000;
-      }
-      .Like {
-        display: block;
-        fill: transparent;
-        stroke: rgba(0, 0, 0, 0.5);
-      }
-      .Prev {
-        fill: #000;
-      }
-    }
-  }
-
   //Summary :: 상점정보 상단 요약 부분
   .Summary {
     .ImgProfile {
