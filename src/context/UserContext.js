@@ -141,6 +141,13 @@ class UserProvider extends Component {
       console.log('facebook error')
     }
   }
+  googleLogin(response){
+    if(response){
+      console.log(response)
+    } else {
+      console.log('Google login fail')
+    }
+  }
 
   render() {
     const { children } = this.props;
