@@ -47,7 +47,7 @@ class Login extends Component {
   };
   handleSocial = e => {
     e.preventDefault();
-    this.setState({facebook : !this.state.facebook})
+    this.setState({facebook : true})
   };
   
   render() {

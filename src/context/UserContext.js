@@ -129,6 +129,8 @@ class UserProvider extends Component {
     });
   }
   socialLogin(result, history) {
+    console.log(result);
+    
     if (result != null) {
       this.setState({
         user: {
