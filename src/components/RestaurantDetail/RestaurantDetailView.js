@@ -88,9 +88,9 @@ class RestaurantDetailView extends Component {
     const { name, address, img_profile, rating } = this.props.store; // 스토어 정보
     // const { least_const, take_out, fee } = this.props.delevery; // 배달 정보
     // const { name, price, img_profile } = this.props.food; // 음식 정보
-
+    console.log({ id, address });
     return (
-      <div className={cx("")}>
+      <div className={cx("RestaurantDetailWrap")}>
         <Header isTop={isTop} name={name} />
 
         <RestaurantSummary

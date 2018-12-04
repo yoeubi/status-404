@@ -76,8 +76,7 @@ class RestaurantMenu extends Component {
 
   render() {
     const { title, menus } = this.props;
-    const newMenus = menus.map(m => ({ ...m, active: false }));
-    console.log(newMenus);
+
     return (
       <div className={classNames("MenuBody")}>
         <div>저는 {title} 입니다.</div>
@@ -86,13 +85,13 @@ class RestaurantMenu extends Component {
             triggerTagName="div"
             trigger={
               <React.Fragment>
-                <span>{m.category}</span>{" "}
+                <span>{m.category}</span>
                 <ArrowDown className={classNames("arrow")} />
               </React.Fragment>
             }
             triggerWhenOpen={
               <React.Fragment>
-                <span>{m.category}</span>{" "}
+                <span>{m.category}</span>
                 <ArrowDown className={classNames("arrow")} />
               </React.Fragment>
             }
