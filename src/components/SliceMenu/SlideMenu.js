@@ -20,14 +20,17 @@ class SlideMenu extends Component {
     "패스트푸드",
     "프랜차이즈",
     "맛집랭킹"
-  ]
+  ];
+  left = [6]
   slide = React.createRef();
 
+  componentDidMount() {
+    this.slide.current.scrollLeft = this.menuList.findIndex( menu => menu === this.props.category) * 45;
+  }
+  
   
 
   render() {
-    console.log(this.slide.current);
-    
     const {category, onChange} = this.props;
     return (
       <div className={cx("slide-menu")}>
