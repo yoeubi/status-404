@@ -132,6 +132,13 @@ class UserProvider extends Component {
     if (result != null) {
       this.setState({
         user: {
+          /* 
+          pk: null,
+        username: null,
+        nickname: null,
+        phone: null,
+        img_profile: null
+        */
           username: result.email,
           nickname: result.name,
           img_profile: result.picture.data.url
@@ -142,9 +149,17 @@ class UserProvider extends Component {
       console.log("facebook error");
     }
   }
-  googleLogin(response) {
+  googleLogin({ profileObj: { email, googleId, imageUrl, name } }) {
     if (response) {
-      console.log(response);
+      this.setState({
+        user: {
+          pk: googleId,
+          username: email,
+          nickname: name,
+          phone: null,
+          img_profile: imageUrl
+        }
+      });
     } else {
       console.log("Google login fail");
     }

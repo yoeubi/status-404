@@ -48,6 +48,12 @@ class Login extends Component {
   handleSocial = e => {
     e.preventDefault();
   };
+  componentDidMount() {
+    if (this.props.user.username){
+      return this.props.history.replace('/')
+    }
+  }
+  
   render() {
     const { username, password, userFocus, passFocus, warning } = this.state;
     const {
