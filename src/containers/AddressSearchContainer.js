@@ -8,10 +8,23 @@ export default class AddressSearchContainer extends Component {
   constructor(props) {
     super(props);
 
-    this.state = { page: "address-search", searchResult: [], userInput: "" };
+    this.state = {
+      page: "address-search",
+      searchResult: [],
+      userInput: "",
+      recentAddress: [],
+      address: []
+    };
 
     // loading: false
   }
+
+  componentDidMount = () => {
+    // const { address } = this.state;
+    const address = JSON.parse(localStorage.getItem("address"));
+    this.setState({ address: address.default });
+    console.log(address.default[0]);
+  };
 
   handleUserInput = e => {
     const userInput = e.target.value;
@@ -26,8 +39,6 @@ export default class AddressSearchContainer extends Component {
     });
   };
 
-  async componentDidMount() {}
-
   getAddress = async userInput => {
     const { data } = await api.get(
       // 1. 주소로 검색
@@ -37,7 +48,7 @@ export default class AddressSearchContainer extends Component {
       {
         params: {
           query: userInput,
-          size: 10
+          size: 15
         }
       }
     );
@@ -53,8 +64,15 @@ export default class AddressSearchContainer extends Component {
     });
   };
 
+  handleFinishBtn = e => {
+    const { searchResult, recentAddress, page, address } = this.state;
+    console.log(searchResult);
+    this.setState({ recentAddress: searchResult, page: "address-search" });
+    // localStorage.setItem("address");
+  };
+
   render() {
-    const { searchResult, userInput } = this.state;
+    const { searchResult, userInput, recentAddress, address } = this.state;
     const { onAddressSearch, show } = this.props;
     return (
       <>
@@ -65,6 +83,8 @@ export default class AddressSearchContainer extends Component {
             getAddress={this.getAddress}
             onAddressSearch={onAddressSearch}
             show={show}
+            recentAddress={recentAddress}
+            address={address}
           />
         ) : this.state.page === "address-search-result" ? (
           <AddressSearchResult
@@ -72,6 +92,9 @@ export default class AddressSearchContainer extends Component {
             userInput={userInput}
             onUserInput={e => this.handleUserInput(e)}
             onBackBtn={() => this.handleBackBtn()}
+            onFinishBtn={e => this.handleFinishBtn(e)}
+            recentAddress={recentAddress}
+            address={address}
           />
         ) : null}
       </>

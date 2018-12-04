@@ -18,6 +18,10 @@ class AddressSearchView extends Component {
     };
   }
 
+  // componentDidMount = () => {
+  //   localStorage.getItem("address");
+  // };
+
   handleUserInput = e => {
     const userInput = e.target.value;
     this.setState({
@@ -32,7 +36,9 @@ class AddressSearchView extends Component {
       getAddress,
       searchResult,
       onUserInput,
-      onSubmitBtn
+      onSubmitBtn,
+      recentAddress,
+      address
     } = this.props;
     const { userInput } = this.state;
     return (
@@ -74,21 +80,21 @@ class AddressSearchView extends Component {
           </div>
           <div className={cx("listContainer")}>
             <h2 className={cx("listTitle")}>최근 주소</h2>
-            {/* <ul className={cx("recentAddress")}>
-              {searchResult.map(s => (
-                <li key={s.id} className={cx("listItem")}>
-                  <div className={cx("place")}>{s.place_name}</div>
-                  <div className={cx("address")}>{s.address_name}</div>
+            <ul className={cx("recentAddress")}>
+              {address.map((a, index) => (
+                <li key={a[index]} className={cx("listItem")}>
+                  <div className={cx("place")}>{a.address.address_name}</div>
+                  {/* <div className={cx("address")}>{a.address.address_name}</div> */}
                   <div className={cx("textContainer")}>
                     <div className={cx("box")}>도로명</div>
-                    <div className={cx("road")}>{s.road_address_name}</div>
+                    <div className={cx("road")}>{a.road_address}</div>
                   </div>
                   <button className={cx("deleteButton")}>
                     <Ex />
                   </button>
                 </li>
               ))}
-            </ul> */}
+            </ul>
           </div>
         </div>
       </>
