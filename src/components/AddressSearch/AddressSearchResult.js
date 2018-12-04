@@ -34,7 +34,8 @@ export default class AddressSearchResult extends Component {
       onBackBtn,
       onUserInput,
       userInput,
-      searchResult
+      searchResult,
+      onFinishBtn
     } = this.props;
     return (
       <>
@@ -74,6 +75,12 @@ export default class AddressSearchResult extends Component {
                     <div className={cx("box")}>도로명</div>
                     <div className={cx("road")}>{s.road_address_name}</div>
                   </div>
+                  <button
+                    className={cx("finishBtn")}
+                    onClick={() => onFinishBtn(s.id)}
+                  >
+                    선택
+                  </button>
                 </li>
               ))}
             </ul>
