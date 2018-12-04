@@ -4,6 +4,7 @@ import Header from "./RestaurantHeader";
 import MenuView from "./RestaurantMenu";
 import RestaurantSummary from "./RestaurantSummary";
 import OriginInfo from "./OriginInfo";
+import CartBtn from "./CartBtn";
 
 import styles from "./RestaurantDetailView.module.scss";
 import classNames from "classnames/bind";
@@ -132,11 +133,7 @@ class RestaurantDetailView extends Component {
         </div>
 
         <OriginInfo />
-
-        <button className={cx("CartBtn")}>
-          <span> 장바구니 </span>
-          <span className={cx("Quantity")}>1</span>
-        </button>
+        <CartBtn fixed={true} />
       </div>
     );
   }
