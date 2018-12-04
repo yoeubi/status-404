@@ -17,7 +17,7 @@ class Header extends Component {
         <div className={cx("addressInput")}>
           {address ? ( // 로그인시
             <span className={cx("address")}>
-              {address[0].address_name || "조회중입니다."}
+              {address[0].address.address_name || "조회중입니다."}
             </span> // 미 로그인시 => 로그인 페이지로
           ) : (
             <span className={cx("address")}>
