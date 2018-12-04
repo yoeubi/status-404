@@ -150,7 +150,7 @@ class UserProvider extends Component {
     }
   }
   googleLogin({ profileObj: { email, googleId, imageUrl, name } }) {
-    if (response) {
+    if (email) {
       this.setState({
         user: {
           pk: googleId,
