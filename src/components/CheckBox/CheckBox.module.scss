@@ -1,0 +1,11 @@
+.check {
+  display: inline-block;
+  opacity: 0;
+  width: 1.7rem;
+  height: 1.7rem;
+  background: #2fc0be;
+  border-radius: 50%;
+  &.show {
+      opacity: 1;
+  }
+}

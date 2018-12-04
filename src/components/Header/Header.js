@@ -9,7 +9,7 @@ import { ReactComponent as List } from "../../svg/list-unordered.svg";
 const cx = classNames.bind(styles);
 
 const Header = props => {
-  const { category } = props;
+  const { category, onShowModal } = props;
   return (
     <header className={cx("header")}>
       <div className={cx("close")}>
@@ -22,7 +22,7 @@ const Header = props => {
         <div>
           <Location style={{ transform: "scale(1.5)" }} />
         </div>
-        <div>
+        <div onClick={onShowModal}>
           <List style={{ transform: "scale(1.5)" }} />
         </div>
       </div>
