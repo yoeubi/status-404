@@ -3,12 +3,12 @@ import React, { Component } from "react";
 // DOC :: https://github.com/glennflanagan/react-collapsible#readme
 import Collapsible from "react-collapsible";
 // collapsible 라이브러리를 사용하기 위해 모듈을 적용하지 않음
-import "./MenuView.scss";
+import "./RestaurantMenu.scss";
 import classNames from "classnames/bind";
 
 import { ReactComponent as ArrowDown } from "../../img/chevron-down.svg";
 
-class MenuView extends Component {
+class RestaurantMenu extends Component {
   static defaultProps = {
     menus: [
       {
@@ -122,4 +122,4 @@ class MenuView extends Component {
   }
 }
 
-export default MenuView;
+export default RestaurantMenu;
