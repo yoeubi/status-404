@@ -1,0 +1,7 @@
+.restaurant-list {
+    position: relative;
+    &.show {
+        height: 100vh;
+        overflow: hidden;
+    }
+}

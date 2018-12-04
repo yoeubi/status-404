@@ -4,6 +4,10 @@ import Header from '../Header';
 import RestaurantItem from '../RestaurantItem';
 import SearchList from '../SearchList';
 import BlackCurtain from '../BlackCurtain';
+import styles from './RestaurantList.module.scss';
+import classNames from 'classnames/bind';
+
+const cx = classNames.bind(styles);
 
 class RestaurantList extends Component {
 
@@ -50,7 +54,7 @@ class RestaurantList extends Component {
     }
     render() {
         const {category, show} = this.state;
-        return <div key={category} ref={this.list} style={{ position: "relative" }}>
+        return <div key={category} ref={this.list} className={cx('restaurant-list', {show})}>
             <Header category={category} onShowModal={this.handleShowModal} />
             <SlideMenu category={category} onChange={this.handleCategory} />
             <SearchList show={show} />
