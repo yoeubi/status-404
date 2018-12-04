@@ -6,7 +6,6 @@ import ProfilePage from "./Pages/ProfilePage";
 import Login from "./components/Login";
 import Join from "./components/Join/Join";
 import NameSearch from "./components/NameSearch";
-import Header from "./components/Header";
 import RestaurantList from "./components/RestaurantList/RestaurantList";
 
 class App extends Component {

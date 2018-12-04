@@ -1,9 +1,9 @@
 import React, { Component } from "react";
-import RestaurantDetailView from "../components/StoreDetailView/RestaurantDetailView";
+import RestaurantDetail from "../containers/RestaurantDetail";
 
 class RestaurantDetailPage extends Component {
   render() {
-    return <RestaurantDetailView {...this.props} />;
+    return <RestaurantDetail {...this.props} />;
   }
 }
 
