@@ -1,0 +1,184 @@
+@import "../../index.scss";
+
+$main-color: white;
+$main-border: 1px solid black;
+
+button,
+input {
+  outline: none;
+}
+
+.container {
+  // display: block;
+  position: fixed;
+  top: 0;
+  right: 0;
+  width: 100%;
+  height: 100%;
+  background-color: $main-color;
+  // border: $main-border;
+  color: black;
+  transform: translateY(0%);
+  transition: all 0.5s;
+  z-index: 100;
+  // background-color: rgb(255, 255, 152);
+
+  // &.showPopup {
+  //   // display: none;
+  // }
+  // &.show {
+  //   transform: translateY(0%);
+  // }
+}
+
+.formContainer {
+  height: 200x;
+  padding: 10px;
+}
+
+.backBtn {
+  display: block;
+  height: 30px;
+  width: 30px;
+  font-size: 15pt;
+  border: none;
+  background-color: white;
+  svg {
+    transform: scale(1.5);
+  }
+}
+
+.header {
+  position: absolute;
+  top: 5px;
+  left: 40%;
+  display: block;
+  margin: 10px 0px;
+  // background-color: yellowgreen;
+  font-size: 12pt;
+}
+
+.addressSearchForm {
+  // background-color: yellow;
+  display: flex;
+  justify-content: space-between;
+}
+
+.addressSearchInput {
+  width: calc(100% - 40px);
+  height: 40px;
+  margin: 10px 10px 10px 0px;
+  padding: 10px;
+  background-color: white;
+  border: 1px solid silver;
+  box-sizing: border-box;
+  font-size: 12pt;
+  background-color: rgba(241, 241, 241, 0.87);
+}
+
+.addressSearchButton {
+  // position: relative;
+  margin-top: 10px;
+  background-color: white;
+  border: 1px solid silver;
+  color: black;
+  height: 40px;
+  width: 40px;
+  text-decoration: none;
+  font-size: 20px;
+  cursor: pointer;
+  svg {
+    // position: absolute;
+    transform: scale(1.2);
+    vertical-align: middle;
+  }
+}
+
+.listContainer {
+  background-color: rgba(241, 241, 241, 0.87);
+  border-top: 1px solid silver;
+  height: calc(100% - 100px);
+  overflow-y: scroll;
+}
+
+.listTitle {
+  // display: block;
+  // font-weight: bold;
+  // font-size: 12pt;
+  margin-top: 10px;
+  // background-color: rgba(241, 241, 241, 0.87);
+}
+
+.listItem {
+  position: relative;
+  // flex-direction: column;
+  padding: 10px;
+  padding-bottom: 20px;
+  // height: 100px;
+  width: 100%;
+  background-color: white;
+  border-bottom: 1px solid rgba(241, 241, 241, 0.87);
+}
+
+.place {
+  font-size: 12pt;
+  width: 90%;
+  height: 25px;
+  // margin-bottom: 10px;
+  // background-color: goldenrod;
+}
+
+.address {
+  font-size: 11pt;
+  width: 90%;
+  height: 20px;
+  // margin-bottom: 10px;
+  color: rgb(139, 139, 139);
+  // background-color: aqua;
+}
+
+.textContainer {
+  display: flex;
+  width: 100%;
+  align-items: center;
+  margin-top: 3px;
+  // padding: 10px;
+  // text-align: center;
+  // background-color: blue;
+}
+
+.box {
+  display: flex;
+  flex-direction: row;
+  color: rgb(160, 158, 158);
+  font-size: 9pt;
+  width: 40px;
+  height: 16px;
+  text-align: center;
+  border: 0.5px solid rgb(145, 145, 145);
+  margin-right: 5px;
+  padding-left: 3px;
+  line-height: 1.1;
+  // background-color: yellowgreen;
+}
+
+.road {
+  width: calc(100% - 80px);
+  color: rgb(139, 139, 139);
+  font-size: 11pt;
+  // background-color: sandybrown;
+}
+
+.deleteButton {
+  border: none;
+  position: absolute;
+  top: 40%;
+  right: 0;
+  width: 30px;
+  // height: 80px;
+  font-size: 15pt;
+  background-color: white;
+  svg {
+    fill: rgb(207, 207, 207);
+  }
+}

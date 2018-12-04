@@ -1,0 +1,136 @@
+body {
+  margin: 0px;
+  padding: 0px;
+  font-family: "Noto", sans-serif;
+  text-align: center;
+}
+
+button {
+  outline: none;
+}
+
+.map_wrap {
+  position: relative;
+  width: 1080px;
+  height: 1920px;
+}
+
+#map {
+  /* display: none; */
+  position: absolute;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  /* transform: scale(2); */
+}
+
+.backBtn {
+  position: absolute;
+  top: 80px;
+  left: 50px;
+  transform: scale(8);
+  z-index: 10;
+  border: none;
+  background: none;
+}
+
+.guideTxt {
+  line-height: 2.5;
+  position: absolute;
+  border-radius: 50px 50px;
+  top: 120px;
+  left: 150px;
+  width: 70%;
+  height: 100px;
+  color: rgba(0, 0, 0, 0.616);
+  background-color: rgba(255, 255, 255, 0.452);
+  font-size: 30pt;
+  z-index: 10;
+  box-shadow: -5px 5px 30px rgba(0, 0, 0, 0.212);
+}
+
+.hAddr {
+  display: flex;
+  flex-direction: column;
+  line-height: 3;
+  position: absolute;
+  text-align: center;
+  width: calc(100% - 70px);
+  height: 250px;
+  left: 30px;
+  bottom: 210px;
+  background: #fff;
+  z-index: 1;
+  padding: 5px;
+  font-size: 40pt;
+  border-radius: 10px;
+  border: 1px solid grey;
+}
+
+.addressTypeBtn {
+  font-size: 40pt;
+  color: #2fc0be;
+  /* font-weight: bold; */
+  display: block;
+}
+
+.marker {
+  position: absolute;
+  transform: scale(12);
+  top: 40%;
+  left: 50%;
+  color: rgba(250, 58, 58, 0.664);
+  z-index: 100;
+}
+
+/* .bottomContainer {
+  display: flex;
+  padding: 20px;
+} */
+
+.currentLocationBtn {
+  position: absolute;
+  bottom: 510px;
+  right: 30px;
+  border: 1px solid grey;
+  border-radius: 10px;
+  background-color: white;
+  width: 150px;
+  height: 150px;
+  font-size: 50pt;
+  z-index: 10;
+  font-size: 80pt;
+}
+
+.marker .p {
+  font-size: 20pt;
+}
+
+#centerAddr {
+  display: block;
+  margin-top: 2px;
+  font-weight: normal;
+}
+
+.settingBtn {
+  border-radius: 10px;
+  position: absolute;
+  bottom: 30px;
+  left: 30px;
+  width: calc(100% - 60px);
+  height: 150px;
+  font-size: 45pt;
+  font-weight: bold;
+  color: white;
+  background-color: #2fc0be;
+  z-index: 10;
+}
+
+.bAddr {
+  font-size: 30pt;
+  padding: 5px;
+  text-overflow: ellipsis;
+  overflow: hidden;
+  white-space: nowrap;
+}
