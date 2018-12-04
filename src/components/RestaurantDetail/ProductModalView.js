@@ -91,7 +91,7 @@ class ProductModalView extends Component {
 
   render() {
     const { show, name } = this.props;
-    const { menu, totalPrice } = this.state;
+    const { menu, totalPrice, quantity } = this.state;
     return (
       <div className={cx("ProductModalWrap", { Show: show })}>
         {!menu ? (
@@ -141,7 +141,7 @@ class ProductModalView extends Component {
                 <label>수량</label>
                 <div className={cx("ProductQuantityController")}>
                   <button> - </button>
-                  <input type="number" />
+                  <span>{quantity}</span>
                   <button> + </button>
                 </div>
               </div>
