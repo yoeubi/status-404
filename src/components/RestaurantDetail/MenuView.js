@@ -2,13 +2,11 @@ import React, { Component } from "react";
 // react-collapsible
 // DOC :: https://github.com/glennflanagan/react-collapsible#readme
 import Collapsible from "react-collapsible";
-import styles from "./MenuView.module.scss";
+// collapsible 라이브러리를 사용하기 위해 모듈을 적용하지 않음
 import "./MenuView.scss";
 import classNames from "classnames/bind";
 
 import { ReactComponent as ArrowDown } from "../../img/chevron-down.svg";
-
-const cx = classNames.bind(styles);
 
 class MenuView extends Component {
   static defaultProps = {
@@ -81,7 +79,7 @@ class MenuView extends Component {
     const newMenus = menus.map(m => ({ ...m, active: false }));
     console.log(newMenus);
     return (
-      <div className={cx("MenuBody")}>
+      <div className={classNames("MenuBody")}>
         <div>저는 {title} 입니다.</div>
         {menus.map((m, index) => (
           <Collapsible
