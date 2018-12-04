@@ -1,7 +1,6 @@
 import React, { Component } from "react";
 import styles from "./SlideMenu.module.scss";
 import classNames from "classnames/bind";
-import { withRouter } from 'react-router';
 
 const cx = classNames.bind(styles);
 
