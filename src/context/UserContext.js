@@ -127,17 +127,18 @@ class UserProvider extends Component {
       phone
     });
   }
-  socialLogin(status, result) {
-    if (status === true) {
+  socialLogin(result,history) {
+    if(result != null){
       this.setState({
         user: {
-          ...this.state.user,
-          name: result.user.name
+          username: result.email,
+          nickname: result.name,
+          img_profile : result.picture.data.url
         }
       });
-      console.log(result);
+      history.push('/');
     } else {
-      alert("Facebook login error");
+      console.log('facebook error')
     }
   }
 

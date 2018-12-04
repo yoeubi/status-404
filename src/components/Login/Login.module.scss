@@ -110,6 +110,11 @@ $main-font-color: #8f8f8f;
       .icon {
         transform: translate(-5px, 3px);
       }
+      &.facebook {
+        background: #4c69ba;
+        color: #fff;
+        text-transform: uppercase;
+      }
     }
   }
 
