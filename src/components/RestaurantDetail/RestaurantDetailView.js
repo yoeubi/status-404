@@ -5,6 +5,8 @@ import MenuView from "./RestaurantMenu";
 import RestaurantSummary from "./RestaurantSummary";
 import OriginInfo from "./OriginInfo";
 import CartBtn from "./CartBtn";
+import StoreInfoTap from "./StoreInfoTap";
+import StoreReviewTap from "./StoreReviewTap";
 
 import styles from "./RestaurantDetailView.module.scss";
 import classNames from "classnames/bind";
@@ -126,9 +128,9 @@ class RestaurantDetailView extends Component {
           {activeTab === "menu" ? (
             <MenuView title={"menu"} />
           ) : activeTab === "info" ? (
-            <MenuView title={"info"} />
+            <StoreInfoTap />
           ) : activeTab === "review" ? (
-            <MenuView title={"review"} />
+            <StoreReviewTap />
           ) : null}
         </div>
 
