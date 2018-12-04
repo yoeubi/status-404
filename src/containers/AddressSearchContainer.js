@@ -12,19 +12,19 @@ export default class AddressSearchContainer extends Component {
       page: "address-search",
       searchResult: [],
       userInput: "",
-      recentAddress: []
+      recentAddress: [],
+      address: []
     };
 
     // loading: false
   }
 
-  // componentDidMount = () => {
-  //   const { address } = this.state;
-  //   localStorage.getItem("address");
-  //   this.setState({
-  //     address
-  //   });
-  // };
+  componentDidMount = () => {
+    // const { address } = this.state;
+    const address = JSON.parse(localStorage.getItem("address"));
+    this.setState({ address: address.default });
+    console.log(address.default[0]);
+  };
 
   handleUserInput = e => {
     const userInput = e.target.value;
@@ -65,14 +65,14 @@ export default class AddressSearchContainer extends Component {
   };
 
   handleFinishBtn = e => {
-    const { searchResult, recentAddress, page } = this.state;
+    const { searchResult, recentAddress, page, address } = this.state;
     console.log(searchResult);
     this.setState({ recentAddress: searchResult, page: "address-search" });
-    console.log();
+    // localStorage.setItem("address");
   };
 
   render() {
-    const { searchResult, userInput, recentAddress } = this.state;
+    const { searchResult, userInput, recentAddress, address } = this.state;
     const { onAddressSearch, show } = this.props;
     return (
       <>
@@ -84,6 +84,7 @@ export default class AddressSearchContainer extends Component {
             onAddressSearch={onAddressSearch}
             show={show}
             recentAddress={recentAddress}
+            address={address}
           />
         ) : this.state.page === "address-search-result" ? (
           <AddressSearchResult
@@ -93,6 +94,7 @@ export default class AddressSearchContainer extends Component {
             onBackBtn={() => this.handleBackBtn()}
             onFinishBtn={e => this.handleFinishBtn(e)}
             recentAddress={recentAddress}
+            address={address}
           />
         ) : null}
       </>

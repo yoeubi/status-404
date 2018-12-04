@@ -67,7 +67,7 @@ export default class AddressSearchResult extends Component {
           <div className={cx("listContainer")}>
             <h2 className={cx("listTitle")} />
             <ul className={cx("recentAddress")}>
-              {searchResult.map(s => (
+              {searchResult.map((s, index) => (
                 <li key={s.id} className={cx("listItem")}>
                   <div className={cx("place")}>{s.place_name}</div>
                   <div className={cx("address")}>{s.address_name}</div>
