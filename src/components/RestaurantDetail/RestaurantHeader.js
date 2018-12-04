@@ -23,7 +23,7 @@ class RestaurantHeader extends Component {
       isTop,
       name
     } = this.props;
-    console.log(this.props);
+
     return (
       <div className={cx("HeaderWrap", { Scroll: !isTop })}>
         <ChevronLeft className={cx("Prev")} onClick={() => goBack()} />

@@ -8,6 +8,7 @@ import CartBtn from "./CartBtn";
 
 import styles from "./RestaurantDetailView.module.scss";
 import classNames from "classnames/bind";
+import ProductModalView from "./ProductModalView";
 
 const cx = classNames.bind(styles);
 
@@ -90,7 +91,8 @@ class RestaurantDetailView extends Component {
     const { name, address, img_profile, rating } = this.props.store; // 스토어 정보
     // const { least_const, take_out, fee } = this.props.delevery; // 배달 정보
     // const { name, price, img_profile } = this.props.food; // 음식 정보
-    console.log({ id, address });
+    const { menus } = this.props;
+    // console.log({ id, address });
     return (
       <div className={cx("RestaurantDetailWrap")}>
         <Header isTop={isTop} name={name} />
@@ -124,7 +126,7 @@ class RestaurantDetailView extends Component {
 
         <div className={cx("Body")}>
           {activeTab === "menu" ? (
-            <MenuView title={"menu"} />
+            <MenuView title={"menu"} menus={menus} />
           ) : activeTab === "info" ? (
             <MenuView title={"info"} />
           ) : activeTab === "review" ? (
@@ -134,6 +136,7 @@ class RestaurantDetailView extends Component {
 
         <OriginInfo />
         <CartBtn fixed={true} />
+        <ProductModalView show={true} name={name} />
       </div>
     );
   }
