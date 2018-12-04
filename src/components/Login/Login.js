@@ -120,7 +120,7 @@ class Login extends Component {
             buttonText="Google Login"
             className={cx('google')}
             onSuccess={response =>
-              this.props.socialLogin(response, this.props.history)
+              this.props.googleLogin(response, this.props.history)
             }
             onFailure={() => console.log('Google login error')
             }

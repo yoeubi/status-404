@@ -30,7 +30,8 @@ class UserProvider extends Component {
     login: this.login.bind(this),
     logout: this.logout.bind(this),
     join: this.join.bind(this),
-    socialLogin: this.socialLogin.bind(this)
+    socialLogin: this.socialLogin.bind(this),
+    googleLogin: this.googleLogin.bind(this)
   };
 
   componentDidMount() {
@@ -127,25 +128,25 @@ class UserProvider extends Component {
       phone
     });
   }
-  socialLogin(result,history) {
-    if(result != null){
+  socialLogin(result, history) {
+    if (result != null) {
       this.setState({
         user: {
           username: result.email,
           nickname: result.name,
-          img_profile : result.picture.data.url
+          img_profile: result.picture.data.url
         }
       });
-      history.push('/');
+      history.push("/");
     } else {
-      console.log('facebook error')
+      console.log("facebook error");
     }
   }
-  googleLogin(response){
-    if(response){
-      console.log(response)
+  googleLogin(response) {
+    if (response) {
+      console.log(response);
     } else {
-      console.log('Google login fail')
+      console.log("Google login fail");
     }
   }
 
