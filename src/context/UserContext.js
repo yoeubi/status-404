@@ -59,9 +59,11 @@ class UserProvider extends Component {
   getPosition(username) {
     navigator.geolocation.getCurrentPosition(
       async ({ coords: { longitude, latitude } }) => {
+        console.log('lon', longitude , 'lat', latitude );
+        
         const {
           data: {
-            documents: [{ address }]
+            documents
           }
         } = await kakaoAPI.get("", {
           params: {
@@ -70,8 +72,10 @@ class UserProvider extends Component {
             input_coord: "WGS84"
           }
         });
+        console.log(documents[0]);
+        
         this.setState({
-          address: [address]
+          address: [documents[0]]
         });
         /* 
              address : {
@@ -92,7 +96,7 @@ class UserProvider extends Component {
         localStorage.setItem(
           "address",
           JSON.stringify({
-            [username]: [address]
+            [username]: [documents[0]]
           })
         );
       }
