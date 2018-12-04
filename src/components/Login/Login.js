@@ -48,11 +48,6 @@ class Login extends Component {
   handleSocial = e => {
     e.preventDefault();
   };
-  componentDidMount() {
-    if (this.props.user.username){
-      return this.props.history.replace('/')
-    }
-  }
   
   render() {
     const { username, password, userFocus, passFocus, warning } = this.state;
@@ -133,7 +128,7 @@ class Login extends Component {
           />
           <FacebookLogin
             appId="340137913232680"
-            autoLoad={true}
+            // autoLoad={true}
             callback={response =>
               this.props.socialLogin(response, this.props.history)
             }
