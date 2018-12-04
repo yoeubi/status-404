@@ -1,6 +1,6 @@
 import React, { Component } from "react";
 
-import styles from "./Header.module.scss";
+import styles from "./RestaurantHeader.module.scss";
 import classNames from "classnames/bind";
 
 // SVG ICONS
@@ -9,7 +9,7 @@ import { ReactComponent as ChevronLeft } from "../../img/chevron-left.svg"; // �
 
 const cx = classNames.bind(styles);
 
-class Header extends Component {
+class RestaurantHeader extends Component {
   static defaultProps = {
     // 상점 이름
     name: "상점 이름",
@@ -20,7 +20,7 @@ class Header extends Component {
   render() {
     const { isTop, name } = this.props;
     return (
-      <div className={cx("Header", { Scroll: !isTop })}>
+      <div className={cx("HeaderWrap", { Scroll: !isTop })}>
         <ChevronLeft className={cx("Prev")} />
         <h1 className={cx("Title")}>{name}</h1>
         <Heart className={cx("Like")} />
@@ -29,4 +29,4 @@ class Header extends Component {
   }
 }
 
-export default Header;
+export default RestaurantHeader;

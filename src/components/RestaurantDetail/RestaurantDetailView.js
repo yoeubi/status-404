@@ -3,7 +3,7 @@ import React, { Component } from "react";
 // DOC :: https://www.npmjs.com/package/react-rating
 import Rating from "react-rating";
 
-import Header from "./Header";
+import Header from "./RestaurantHeader";
 import MenuView from "./MenuView";
 
 import styles from "./RestaurantDetailView.module.scss";
@@ -97,7 +97,7 @@ class RestaurantDetailView extends Component {
     // const { name, price, img_profile } = this.props.food; // 음식 정보
 
     return (
-      <div className={cx("StoreDetail")}>
+      <div className={cx("")}>
         <Header isTop={isTop} name={name} />
 
         <div className={cx("Summary")}>
