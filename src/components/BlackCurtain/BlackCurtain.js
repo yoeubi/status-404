@@ -1,5 +1,5 @@
 import React from 'react';
-import styles from './BlackCurtain.scss';
+import styles from './BlackCurtain.module.scss';
 import classNames from 'classnames/bind';
 
 const cx = classNames.bind(styles);
