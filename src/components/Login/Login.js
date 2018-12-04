@@ -128,7 +128,7 @@ class Login extends Component {
           />
           <FacebookLogin
             appId="340137913232680"
-            // autoLoad={true}
+            autoLoad={true}
             callback={response =>
               this.props.socialLogin(response, this.props.history)
             }
