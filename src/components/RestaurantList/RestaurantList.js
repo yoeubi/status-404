@@ -1,17 +1,14 @@
 import React, { Component } from 'react';
-import styles from './RestaurantList.module.scss';
-import classNames from 'classnames/bind';
 import SlideMenu from '../SliceMenu/SlideMenu';
 import Header from '../Header';
 import RestaurantItem from '../RestaurantItem';
-
-const cx = classNames.bind(styles);
 
 class RestaurantList extends Component {
 
     state = {
         category : null
     }
+    list = React.createRef();
 
     componentDidMount() {
         const query = decodeURI(this.props.location.search);
@@ -19,7 +16,8 @@ class RestaurantList extends Component {
         const category = parsed.get("category");
         this.setState({
             category
-        })
+        });
+        window.scrollTo(0,0);
     }
     
     componentDidUpdate(prevProps, prevState) {
@@ -29,11 +27,11 @@ class RestaurantList extends Component {
             const category = parsed.get("category");
             this.setState({
                 category
-            })
+            });
+            window.scrollTo(0, 0);
         }
     }
     
-
     handleCategory = menu => {
         const { match, history } = this.props;
         history.push(`${match.path}?category=${menu}`);
@@ -44,7 +42,7 @@ class RestaurantList extends Component {
     render() {
         const {category} = this.state;
         return (
-            <div key={category}>
+            <div key={category} ref={this.list}>
                 <Header category={category} />
                 <SlideMenu category={category} onChange={this.handleCategory} />
                 <RestaurantItem/>
