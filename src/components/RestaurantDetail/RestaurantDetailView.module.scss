@@ -1,5 +1,8 @@
 @import "../../index.scss";
-
+//RestaurantDetailWrap
+.RestaurantDetailWrap {
+  margin-bottom: 60px;
+}
 //Tab
 .Tab {
   width: 100%;
@@ -17,5 +20,39 @@
     &.Active {
       border-bottom: 0;
     }
+  }
+}
+
+//CartBtn
+.CartBtn {
+  width: 100%;
+  height: 60px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  position: fixed;
+  right: 0;
+  left: 0;
+  bottom: 0;
+  transition: "background" 0.3s;
+  background: #27c1bc;
+  color: #fff;
+  font-weight: 600;
+  font-size: 1.5rem;
+  border: 0;
+  &:hover {
+    background: #25a6a1;
+  }
+  .Quantity {
+    width: 15px;
+    height: 15px;
+    margin-left: 5px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    border-radius: 50%;
+    background: #fff;
+    color: #27c1bc;
+    font-size: 1.3rem;
   }
 }

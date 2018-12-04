@@ -132,6 +132,11 @@ class RestaurantDetailView extends Component {
         </div>
 
         <OriginInfo />
+
+        <button className={cx("CartBtn")}>
+          <span> 장바구니 </span>
+          <span className={cx("Quantity")}>1</span>
+        </button>
       </div>
     );
   }
