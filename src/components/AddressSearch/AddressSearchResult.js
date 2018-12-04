@@ -1,55 +1,53 @@
 import React, { Component } from "react";
-import styles from "./AddressSearch.module.scss";
+import styles from "./AddressSearchResult.module.scss";
 import classNames from "classnames/bind";
-
 // import SVG
 import { ReactComponent as MagnifyingGlass } from "../../img/search.svg";
 import { ReactComponent as Crosshair } from "../../img/crosshair.svg";
 import { ReactComponent as Ex } from "../../img/x.svg";
+import { ReactComponent as BackBtn } from "../../svg/arrow-left.svg";
 
 const cx = classNames.bind(styles);
 
-class AddressSearchView extends Component {
+export default class AddressSearchResult extends Component {
   constructor(props) {
     super(props);
 
     this.state = {
-      userInput: ""
+      // userInput: "",
+      // searchResult: []
     };
   }
 
-  handleUserInput = e => {
-    const userInput = e.target.value;
-    this.setState({
-      userInput
-    });
-  };
+  // handleUserInput = e => {
+  //   const userInput = e.target.value;
+  //   this.setState({
+  //     userInput
+  //   });
+  // };
 
   render() {
     const {
-      show,
-      onAddressSearch,
+      // show,
+      // onAddressSearch,
       getAddress,
-      searchResult,
+      onBackBtn,
       onUserInput,
-      onSubmitBtn
+      userInput,
+      searchResult
     } = this.props;
-    const { userInput } = this.state;
     return (
       <>
-        <div className={cx("container", { show: show })}>
+        <div className={cx("container")}>
           <div className={cx("formContainer")}>
-            <button className={cx("closeButton")} onClick={onAddressSearch}>
-              <Ex />
+            <button className={cx("backBtn")} onClick={onBackBtn}>
+              <BackBtn />
             </button>
-            <h1 className={cx("header")}>
-              지번, 도로명, 건물명을
-              <p>입력하세요</p>
-            </h1>
+            <h1 className={cx("header")}>배달 받을 주소</h1>
             <div className={cx("addressSearchForm")}>
               <input
-                autoComplete="off"
-                onChange={e => this.handleUserInput(e)}
+                autoComplete="off" // onChange={e => userInput(e)}
+                onChange={onUserInput}
                 value={userInput}
                 className={cx("addressSearchInput")}
                 label="주소검색"
@@ -59,22 +57,15 @@ class AddressSearchView extends Component {
               />
               <button
                 className={cx("addressSearchButton")}
-                onClick={() => {
-                  getAddress(userInput);
-                  onSubmitBtn();
-                }}
+                onClick={getAddress}
               >
                 <MagnifyingGlass />
               </button>
             </div>
-            <button className={cx("addressSettingButton")}>
-              <Crosshair />
-              <p>현 위치로 주소 설정</p>
-            </button>
           </div>
           <div className={cx("listContainer")}>
-            <h2 className={cx("listTitle")}>최근 주소</h2>
-            {/* <ul className={cx("recentAddress")}>
+            <h2 className={cx("listTitle")} />
+            <ul className={cx("recentAddress")}>
               {searchResult.map(s => (
                 <li key={s.id} className={cx("listItem")}>
                   <div className={cx("place")}>{s.place_name}</div>
@@ -83,17 +74,12 @@ class AddressSearchView extends Component {
                     <div className={cx("box")}>도로명</div>
                     <div className={cx("road")}>{s.road_address_name}</div>
                   </div>
-                  <button className={cx("deleteButton")}>
-                    <Ex />
-                  </button>
                 </li>
               ))}
-            </ul> */}
+            </ul>
           </div>
         </div>
       </>
     );
   }
 }
-
-export default AddressSearchView;
