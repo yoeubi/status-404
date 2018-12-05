@@ -101,11 +101,13 @@ $main-font-color: #8f8f8f;
       display: flex;
       justify-content: center;
       align-items: center;
-      &:hover , &:focus {
+      &:hover,
+      &:focus {
         background: #eee;
       }
-      &.naver {
+      &.google {
         margin-bottom: 10px;
+        text-transform: uppercase;
       }
       .icon {
         transform: translate(-5px, 3px);
@@ -114,6 +116,10 @@ $main-font-color: #8f8f8f;
         background: #4c69ba;
         color: #fff;
         text-transform: uppercase;
+        box-shadow: rgba(0, 0, 0, 0.24) 0px 2px 2px 0px,
+          rgba(0, 0, 0, 0.24) 0px 0px 1px 0px;
+        border-radius: 2px;
+        border: 1px solid transparent;
       }
     }
   }
