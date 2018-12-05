@@ -3,6 +3,7 @@ import styles from "./ProductModalView.module.scss";
 import classNames from "classnames/bind";
 
 import { ReactComponent as ChevronLeft } from "../../img/chevron-left.svg"; // 뒤로가기 아이콘
+import { ReactComponent as Check } from "../../img/check.svg"; // checkbox 아이콘
 
 const cx = classNames.bind(styles);
 class ProductModalView extends Component {
@@ -77,6 +78,10 @@ class ProductModalView extends Component {
       }
     }));
 
+    this.sumTotalPrice();
+  };
+
+  sumTotalPrice = async () => {
     let result = 0; // 옵션 가격의 합을 구하기 위한 변수
     const { options } = this.state.menu;
     for (const option of options) {
@@ -85,8 +90,23 @@ class ProductModalView extends Component {
       }
     }
     await this.setState(prevState => ({
-      totalPrice: this.state.menu.price + result
+      totalPrice: this.state.menu.price * this.state.quantity + result
     }));
+  };
+
+  handleQuantity = async mode => {
+    const { quantity } = this.state;
+
+    if (mode === "plus") {
+      await this.setState(prevState => ({
+        quantity: prevState.quantity + 1
+      }));
+    } else if (mode === "minus" && quantity > 1) {
+      await this.setState(prevState => ({
+        quantity: prevState.quantity - 1
+      }));
+    }
+    this.sumTotalPrice();
   };
 
   render() {
@@ -120,6 +140,9 @@ class ProductModalView extends Component {
                   {menu.options &&
                     menu.options.map(o => (
                       <li key={o.optionId}>
+                        <Check
+                          className={cx("CheckBox", { Checked: o.checked })}
+                        />
                         <input
                           onChange={() => this.handleChange(o.optionId)}
                           type="checkbox"
@@ -136,17 +159,27 @@ class ProductModalView extends Component {
                     ))}
                 </ul>
               </div>
-
               <div className={cx("ProductQuantity")}>
                 <label>수량</label>
                 <div className={cx("ProductQuantityController")}>
-                  <button> - </button>
-                  <span>{quantity}</span>
-                  <button> + </button>
+                  <button onClick={() => this.handleQuantity("minus")}>
+                    -
+                  </button>
+                  <div className={cx("Quantity")}>{quantity}</div>
+                  <button onClick={() => this.handleQuantity("plus")}>+</button>
                 </div>
               </div>
-
-              <p>주문금액 : {totalPrice.toLocaleString()}</p>
+              <div className={cx("TotalPrice")}>
+                <span className={cx("Title")}>총 주문 금액</span>
+                <span className={cx("Price")}>
+                  {totalPrice.toLocaleString()} 원
+                </span>
+                <span className={cx("Least")}>
+                  최소 주문 금액 : {menu.price}
+                </span>
+                
+              </div>
+              <button className={cx("CartButton")}>장바구니 담기</button>
             </div>
           </React.Fragment>
         )}
