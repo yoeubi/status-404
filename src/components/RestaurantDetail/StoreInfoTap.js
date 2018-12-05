@@ -50,7 +50,7 @@ export default class StoreInfoTap extends Component {
       section: "사업자 정보",
       owner: "박윤재",
       name: "패스트 피자",
-      address: "서울 성동구 성수동",
+      address: "서울 성동구 성수2가3동 289-10 제강빌딩 8층",
       number: "123-45-67890"
     }
   };
