@@ -1,6 +1,6 @@
 import React, { Component } from 'react';
 import { Link } from 'react-router-dom';
-import styles from './CartList.scss';
+import styles from './CartList.module.scss';
 import classNames from 'classnames/bind';
 import BackHeader from '../BackHeader';
 import CartItem from '../CartItem';

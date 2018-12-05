@@ -34,12 +34,14 @@ class UserProvider extends Component {
     googleLogin: this.googleLogin.bind(this)
   };
 
-  componentDidMount() {
+  async componentDidMount() {
     const token = localStorage.getItem("token");
     if (token) {
-      // TODO : axios로 토큰가지고 유저 데이터 끌고 오기
-      //
-      this.getAddress(/* 유저 이름 */);
+      const { data } = await mainAPI.get('/members/profile/');
+      this.setState({
+        user : data
+      })
+      this.getAddress(data.username);
     } else {
       this.getAddress("default");
     }
