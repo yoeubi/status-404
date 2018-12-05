@@ -1,7 +1,7 @@
 import React, { Component } from "react";
 
 import Header from "./RestaurantHeader";
-import MenuView from "./RestaurantMenu";
+import RestaurantMenu from "./RestaurantMenu";
 import RestaurantSummary from "./RestaurantSummary";
 import OriginInfo from "./OriginInfo";
 import CartBtn from "./CartBtn";
@@ -52,7 +52,8 @@ class RestaurantDetailView extends Component {
       // 스크롤 이벤트 flag
       isTop: true,
       // actvieTab: 'menu', 'info','review'
-      activeTab: "menu"
+      activeTab: "menu",
+      productModal: true
     };
   }
 
@@ -80,8 +81,14 @@ class RestaurantDetailView extends Component {
     });
   };
 
+  handleProductModal = () => {
+    this.setState(prevState => ({
+      productModal: !prevState.productModal
+    }));
+  };
+
   render() {
-    const { isTop, activeTab } = this.state;
+    const { isTop, activeTab, productModal } = this.state;
     const {
       match: {
         // storeId
@@ -126,17 +133,25 @@ class RestaurantDetailView extends Component {
 
         <div className={cx("Body")}>
           {activeTab === "menu" ? (
-            <MenuView title={"menu"} menus={menus} />
+            <RestaurantMenu
+              title={"menu"}
+              menus={menus}
+              onProductModal={this.handleProductModal}
+            />
           ) : activeTab === "info" ? (
-            <MenuView title={"info"} />
+            <RestaurantMenu title={"info"} />
           ) : activeTab === "review" ? (
-            <MenuView title={"review"} />
+            <RestaurantMenu title={"review"} />
           ) : null}
         </div>
 
         <OriginInfo />
         <CartBtn fixed={true} />
-        <ProductModalView show={true} name={name} />
+        <ProductModalView
+          show={productModal}
+          name={name}
+          onProductModal={this.handleProductModal}
+        />
       </div>
     );
   }

@@ -110,7 +110,7 @@ class ProductModalView extends Component {
   };
 
   render() {
-    const { show, name } = this.props;
+    const { show, name, onProductModal } = this.props;
     const { menu, totalPrice, quantity } = this.state;
     return (
       <div className={cx("ProductModalWrap", { Show: show })}>
@@ -119,7 +119,10 @@ class ProductModalView extends Component {
         ) : (
           <React.Fragment>
             <div className={cx("ProductModalHeader")}>
-              <ChevronLeft className={cx("Close")} />
+              <ChevronLeft
+                className={cx("Close")}
+                onClick={() => onProductModal()}
+              />
               <h1>{name}</h1>
             </div>
             <div className={cx("ProductModalBody")}>
