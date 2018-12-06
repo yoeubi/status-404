@@ -26,7 +26,7 @@ class UserModal extends Component {
         id: 2,
         title: "장바구니",
         img: <Avater />,
-        url: ""
+        url: "/cart"
       },
       {
         id: 3,
