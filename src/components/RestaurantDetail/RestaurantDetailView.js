@@ -6,6 +6,8 @@ import RestaurantSummary from "./RestaurantSummary";
 import OriginInfo from "./OriginInfo";
 import CartBtn from "./CartBtn";
 import withLoading from "../../HOC/withLoading";
+import StoreInfoTap from "./StoreInfoTap";
+import StoreReviewTap from "./StoreReviewTap";
 
 import styles from "./RestaurantDetailView.module.scss";
 import classNames from "classnames/bind";
@@ -136,19 +138,17 @@ class RestaurantDetailView extends Component {
 
         <div className={cx("Body")}>
           {activeTab === "menu" ? (
-            <RestaurantMenu
-              title={"menu"}
-              menus={menus}
-              onProductModal={this.handleProductModal}
-            />
+            <>
+              <RestaurantMenu title={"menu"} />
+              <OriginInfo />
+            </>
           ) : activeTab === "info" ? (
-            <RestaurantMenu title={"info"} />
+            <StoreInfoTap />
           ) : activeTab === "review" ? (
-            <RestaurantMenu title={"review"} />
+            <StoreReviewTap />
           ) : null}
         </div>
 
-        <OriginInfo />
         <CartBtn fixed={true} />
         <ProductModalView
           show={productModal}
