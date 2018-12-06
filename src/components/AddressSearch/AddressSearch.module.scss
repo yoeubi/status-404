@@ -141,7 +141,7 @@ input {
   border-bottom: 1px solid rgba(241, 241, 241, 0.87);
 }
 
-.place {
+.address {
   font-size: 12pt;
   width: 90%;
   height: 25px;
@@ -149,14 +149,14 @@ input {
   // background-color: goldenrod;
 }
 
-.address {
-  font-size: 11pt;
-  width: 90%;
-  height: 20px;
-  // margin-bottom: 10px;
-  color: rgb(139, 139, 139);
-  // background-color: aqua;
-}
+// .address {
+//   font-size: 11pt;
+//   width: 90%;
+//   height: 20px;
+//   // margin-bottom: 10px;
+//   color: rgb(139, 139, 139);
+//   // background-color: aqua;
+// }
 
 .textContainer {
   display: flex;
