@@ -126,7 +126,10 @@ class RestaurantDetailView extends Component {
 
         <div className={cx("Body")}>
           {activeTab === "menu" ? (
-            <MenuView title={"menu"} />
+            <>
+              <MenuView title={"menu"} />
+              <OriginInfo />
+            </>
           ) : activeTab === "info" ? (
             <StoreInfoTap />
           ) : activeTab === "review" ? (
@@ -134,7 +137,6 @@ class RestaurantDetailView extends Component {
           ) : null}
         </div>
 
-        <OriginInfo />
         <CartBtn fixed={true} />
       </div>
     );
