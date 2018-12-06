@@ -41,7 +41,7 @@ class CartList extends Component {
                     배달의 민족은 상품 거래 정보 및 거래에 책임을 지지 않습니다.
                 </p>
                 <Nothing style={{ fontSize: '1.7rem', background: '#2ac1bc' ,color :'#fff' ,position :'fixed', bottom: 0 , left: 0}}>
-                    <Link to="/">
+                    <Link to="/pay">
                         2개 43700원 주문하기
                     </Link>
                 </Nothing>
