@@ -78,21 +78,25 @@ export default class StoreInfoTap extends Component {
             <span className={cx("title")}>가게 통계</span>
             <div className={cx("textArea")}>
               <span className={cx("subTitle")}>주문수</span>
-              <span className={cx("text")}>{store_statistics.order}</span>
+              <span className={cx("text")}>
+                {store_statistics.order.toLocaleString()}
+              </span>
               <span className={cx("subTitle")}>찜</span>
-              <span className={cx("text")}>{store_statistics.like}</span>
+              <span className={cx("text")}>
+                {store_statistics.like.toLocaleString()}
+              </span>
             </div>
           </div>
           <div className={cx("section")}>
             <span className={cx("title")}>배달팁 안내</span>
             <span className={cx("titleText")}>
-              가게운영방침에 따라 지역, 특정 시가넹 배달팁이 추가됩니다. 아래
+              가게운영방침에 따라 지역, 특정 시간에 배달팁이 추가됩니다. 아래
               배달팁 상세를 참고해주세요
             </span>
             <div className={cx("textArea")}>
               <span className={cx("subTitle")}>지역</span>
               <span className={cx("deliveryTip")}>
-                {delivery_tip.fee}원
+                {delivery_tip.fee.toLocaleString()}원
                 <span className={cx("text")}>{delivery_tip.region}</span>
               </span>
             </div>
