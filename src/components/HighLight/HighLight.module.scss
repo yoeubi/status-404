@@ -1,0 +1,11 @@
+.high-light {
+    width: 100%;
+    padding: 1rem 1.5rem;
+    font-size: 2rem;
+    font-weight: 700;
+    background: #fff;
+    .title {
+        display: inline-block;
+        background: linear-gradient( #fff 0%, #fff 80%, rgba(47,192,190, 0.4) 80% , rgba(47,192,190, 0.4) 100% );
+    }
+}

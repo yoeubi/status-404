@@ -28,7 +28,7 @@ class App extends Component {
           <Route path="/restaurant/:id" component={RestaurantDetailPage} />
           <Route path="/list" component={RestaurantList} />
           <Route path="/cart" component={CartList} />
-          <Route path="/test" component={Payment} />
+          <Route path="/pay" component={Payment} />
           <Route path="/myorder" component={MyOrderPage} />
         </Switch>
       </Router>
