@@ -139,7 +139,10 @@ class RestaurantDetailView extends Component {
         <div className={cx("Body")}>
           {activeTab === "menu" ? (
             <>
-              <RestaurantMenu title={"menu"} />
+              <RestaurantMenu
+                title={"menu"}
+                onProductModal={this.handleProductModal}
+              />
               <OriginInfo />
             </>
           ) : activeTab === "info" ? (
