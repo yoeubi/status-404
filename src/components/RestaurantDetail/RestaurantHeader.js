@@ -1,5 +1,5 @@
 import React, { Component } from "react";
-
+import { withRouter } from "react-router-dom";
 import styles from "./RestaurantHeader.module.scss";
 import classNames from "classnames/bind";
 
@@ -18,10 +18,15 @@ class RestaurantHeader extends Component {
   };
 
   render() {
-    const { isTop, name } = this.props;
+    const {
+      history: { goBack },
+      isTop,
+      name
+    } = this.props;
+
     return (
       <div className={cx("HeaderWrap", { Scroll: !isTop })}>
-        <ChevronLeft className={cx("Prev")} />
+        <ChevronLeft className={cx("Prev")} onClick={() => goBack()} />
         <h1 className={cx("Title")}>{name}</h1>
         <Heart className={cx("Like")} />
       </div>
@@ -29,4 +34,4 @@ class RestaurantHeader extends Component {
   }
 }
 
-export default RestaurantHeader;
+export default withRouter(RestaurantHeader);

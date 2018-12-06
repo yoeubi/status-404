@@ -25,7 +25,9 @@ class MainContainer extends Component {
   };
 
   handleAddressSearch = () => {
+    // const { address } = this.props;
     this.setState({ addressSearchShow: !this.state.addressSearchShow });
+    // this.setState({ address: address[0] });
   };
 
   render() {

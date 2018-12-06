@@ -1,13 +1,18 @@
 import React, { Component } from "react";
 
 import Header from "./RestaurantHeader";
-import MenuView from "./RestaurantMenu";
+import RestaurantMenu from "./RestaurantMenu";
 import RestaurantSummary from "./RestaurantSummary";
 import OriginInfo from "./OriginInfo";
 import CartBtn from "./CartBtn";
+import withLoading from "../../HOC/withLoading";
+import StoreInfoTap from "./StoreInfoTap";
+import StoreReviewTap from "./StoreReviewTap";
+import { withUi } from "../../context/UiContext";
 
 import styles from "./RestaurantDetailView.module.scss";
 import classNames from "classnames/bind";
+import ProductModalView from "./ProductModalView";
 
 const cx = classNames.bind(styles);
 
@@ -51,7 +56,9 @@ class RestaurantDetailView extends Component {
       // 스크롤 이벤트 flag
       isTop: true,
       // actvieTab: 'menu', 'info','review'
-      activeTab: "menu"
+      activeTab: "menu",
+      // 상품 옵션 모달 호출 : true,false
+      productModal: false
     };
   }
 
@@ -79,8 +86,15 @@ class RestaurantDetailView extends Component {
     });
   };
 
+  handleProductModal = () => {
+    // 상품 옵션 선택 모달 호출 함수
+    this.setState(prevState => ({
+      productModal: !prevState.productModal
+    }));
+  };
+
   render() {
-    const { isTop, activeTab } = this.state;
+    const { isTop, activeTab, productModal } = this.state;
     const {
       match: {
         // storeId
@@ -90,7 +104,7 @@ class RestaurantDetailView extends Component {
     const { name, address, img_profile, rating } = this.props.store; // 스토어 정보
     // const { least_const, take_out, fee } = this.props.delevery; // 배달 정보
     // const { name, price, img_profile } = this.props.food; // 음식 정보
-    console.log({ id, address });
+    const { menus, handleBodyOnModal } = this.props;
     return (
       <div className={cx("RestaurantDetailWrap")}>
         <Header isTop={isTop} name={name} />
@@ -124,19 +138,31 @@ class RestaurantDetailView extends Component {
 
         <div className={cx("Body")}>
           {activeTab === "menu" ? (
-            <MenuView title={"menu"} />
+            <>
+              <RestaurantMenu
+                title={"menu"}
+                onProductModal={this.handleProductModal}
+                onHandleBodyOnModal={handleBodyOnModal}
+              />
+              <OriginInfo />
+            </>
           ) : activeTab === "info" ? (
-            <MenuView title={"info"} />
+            <StoreInfoTap />
           ) : activeTab === "review" ? (
-            <MenuView title={"review"} />
+            <StoreReviewTap />
           ) : null}
         </div>
 
-        <OriginInfo />
         <CartBtn fixed={true} />
+        <ProductModalView
+          show={productModal}
+          name={name}
+          onProductModal={this.handleProductModal}
+          onHandleBodyOnModal={handleBodyOnModal}
+        />
       </div>
     );
   }
 }
 
-export default RestaurantDetailView;
+export default withUi(withLoading(RestaurantDetailView));

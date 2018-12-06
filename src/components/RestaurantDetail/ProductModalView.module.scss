@@ -1,0 +1,196 @@
+@import "../../index.scss";
+
+.ProductModalWrap {
+  width: 100%;
+  height: 100vh;
+  overflow: auto;
+
+  position: fixed;
+  top: 0;
+  bottom: 0;
+  right: -150%;
+
+  background: #fff;
+  z-index: 100;
+  transition: right 0.3s;
+  &.Show {
+    right: 0;
+  }
+
+  .ProductModalHeader {
+    width: 100%;
+    height: 50px;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    position: relative;
+    border-bottom: 1px solid rgba(0, 0, 0, 0.1);
+    .Close {
+      position: absolute;
+      width: 25px;
+      height: 25px;
+      fill: #000;
+      top: 12px;
+      left: 6px;
+    }
+    h1 {
+      font-size: 1.4rem;
+      font-weight: 600;
+    }
+  }
+  .ProductModalBody {
+    width: 100%;
+    padding: 12px;
+  }
+
+  .ProductImg {
+    width: 100%;
+    text-align: center;
+    padding: 12px;
+    img {
+      max-width: 100%;
+      max-height: 200px;
+    }
+  }
+
+  .ProductName {
+    width: 100%;
+    text-align: center;
+    font-size: 1.4rem;
+    font-weight: 600;
+    padding: 6px;
+  }
+
+  .ProductPrice {
+    width: 100%;
+    padding: 12px;
+    border-bottom: 1px solid rgba(0, 0, 0, 0.1);
+    display: flex;
+    justify-content: space-between;
+    font-size: 1.4rem;
+    label {
+      font-weight: 600;
+    }
+  }
+
+  .ProductOptionsHeader {
+    width: 100%;
+    display: flex;
+    justify-content: space-between;
+    padding: 12px 0;
+    font-size: 1.4rem;
+    label {
+      font-weight: 600;
+    }
+    span {
+      color: #fc873a;
+    }
+  }
+  .ProductOptionList {
+    border-bottom: 1px solid rgba(0, 0, 0, 0.1);
+    padding-bottom: 15px;
+    li {
+      width: 100%;
+      height: 30px;
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      .CheckBox {
+        width: 18px;
+        height: 18px;
+        fill: #fff;
+        background: #dddddd;
+        border-radius: 2px;
+        &.Checked {
+          background: $main-color;
+        }
+      }
+      input[type="checkbox"] {
+        display: none;
+      }
+      label {
+        width: 100%;
+        padding-left: 10px;
+        font-size: 1.4rem;
+        display: flex;
+        justify-content: space-between;
+        align-items: center;
+      }
+    }
+  }
+
+  .ProductQuantity {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    font-size: 1.4rem;
+    padding: 15px 0;
+    border-bottom: 1px solid rgba(0, 0, 0, 0.1);
+    label {
+      font-weight: 600;
+    }
+    .ProductQuantityController {
+      display: flex;
+      height: 30px;
+      align-items: center;
+      border: 1px solid rgba(0, 0, 0, 0.1);
+      font-size: 1.4rem;
+      button {
+        width: 30px;
+        height: 100%;
+        font-weight: 600;
+        font-size: 1.8rem;
+        color: rgba(0, 0, 0, 0.3);
+        &:active {
+          background: $main-color;
+          border: 0;
+          color: #fff;
+        }
+      }
+      .Quantity {
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        width: 50px;
+        height: 100%;
+        text-align: center;
+        border-left: 1px solid rgba(0, 0, 0, 0.1);
+        border-right: 1px solid rgba(0, 0, 0, 0.1);
+      }
+    }
+  }
+
+  .TotalPrice {
+    width: 100%;
+    padding: 15px;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    .Title {
+      font-weight: 600;
+      font-size: 1.2rem;
+    }
+    .Price {
+      font-size: 3rem;
+      color: $main-color;
+      font-weight: 600;
+    }
+    .Least {
+      font-size: 1rem;
+    }
+  }
+
+  .CartButton {
+    color: #fff;
+    background: $main-color;
+    width: 100%;
+    height: 50px;
+    font-size: 1.5rem;
+    font-weight: 600;
+    &:hover,
+    &:active {
+      background: #23aaa6;
+    }
+  }
+}

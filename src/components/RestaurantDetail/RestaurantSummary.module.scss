@@ -46,7 +46,12 @@
       }
     }
     .Reviews {
+      display: flex;
+      justify-content: center;
       color: rgba(0, 0, 0, 0.4);
+      .Bar {
+        margin: 0 5px;
+      }
     }
   }
 
