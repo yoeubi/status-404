@@ -79,7 +79,6 @@ class RestaurantMenu extends Component {
 
     return (
       <div className={classNames("MenuBody")}>
-        <div>저는 {title} 입니다.</div>
         {menus.map((m, index) => (
           <Collapsible
             triggerTagName="div"

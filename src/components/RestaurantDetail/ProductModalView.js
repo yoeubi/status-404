@@ -182,7 +182,16 @@ class ProductModalView extends Component {
                 </span>
                 
               </div>
-              <button className={cx("CartButton")}>장바구니 담기</button>
+              <button
+                onClick={() => {
+                  alert("상품이 장바구니에 담겼습니다.");
+                  onProductModal();
+                }}
+                className={cx("CartButton")}
+              >
+                장바구니 담기
+              </button>
+              
             </div>
           </React.Fragment>
         )}

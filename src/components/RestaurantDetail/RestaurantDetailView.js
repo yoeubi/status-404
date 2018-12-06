@@ -53,7 +53,8 @@ class RestaurantDetailView extends Component {
       isTop: true,
       // actvieTab: 'menu', 'info','review'
       activeTab: "menu",
-      productModal: true
+      // 상품 옵션 모달 호출 : true,false
+      productModal: false
     };
   }
 
@@ -82,6 +83,7 @@ class RestaurantDetailView extends Component {
   };
 
   handleProductModal = () => {
+    // 상품 옵션 선택 모달 호출 함수
     this.setState(prevState => ({
       productModal: !prevState.productModal
     }));
