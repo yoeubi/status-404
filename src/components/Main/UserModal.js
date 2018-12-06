@@ -13,32 +13,38 @@ class UserModal extends Component {
       {
         id: 0,
         title: "포인트",
-        img: <Avater />
+        img: <Avater />,
+        url: ""
       },
       {
         id: 1,
         title: "쿠폰함",
-        img: <Avater />
+        img: <Avater />,
+        url: ""
       },
       {
         id: 2,
         title: "장바구니",
-        img: <Avater />
+        img: <Avater />,
+        url: ""
       },
       {
         id: 3,
-        title: "바로결제내역",
-        img: <Avater />
+        title: "주문내역",
+        img: <Avater />,
+        url: "/myorder"
       },
       {
         id: 4,
         title: "단골매장",
-        img: <Avater />
+        img: <Avater />,
+        url: ""
       },
       {
         id: 5,
         title: "리뷰관리",
-        img: <Avater />
+        img: <Avater />,
+        url: ""
       }
     ]
   };
@@ -90,8 +96,10 @@ class UserModal extends Component {
             <ul className={cx("nav")}>
               {navList.map(n => (
                 <li key={n.id} className={cx("item")}>
-                  {n.img}
-                  {n.title}
+                  <Link to={n.url}>
+                    {n.img}
+                    {n.title}
+                  </Link>
                 </li>
               ))}
             </ul>
