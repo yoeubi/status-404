@@ -110,7 +110,7 @@ class ProductModalView extends Component {
   };
 
   render() {
-    const { show, name, onProductModal } = this.props;
+    const { show, name, onProductModal, onHandleBodyOnModal } = this.props;
     const { menu, totalPrice, quantity } = this.state;
     return (
       <div className={cx("ProductModalWrap", { Show: show })}>
@@ -121,7 +121,10 @@ class ProductModalView extends Component {
             <div className={cx("ProductModalHeader")}>
               <ChevronLeft
                 className={cx("Close")}
-                onClick={() => onProductModal()}
+                onClick={() => {
+                  onProductModal();
+                  onHandleBodyOnModal("close");
+                }}
               />
               <h1>{name}</h1>
             </div>

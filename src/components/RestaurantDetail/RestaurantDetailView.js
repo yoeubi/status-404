@@ -8,11 +8,11 @@ import CartBtn from "./CartBtn";
 import withLoading from "../../HOC/withLoading";
 import StoreInfoTap from "./StoreInfoTap";
 import StoreReviewTap from "./StoreReviewTap";
+import { withUi } from "../../context/UiContext";
 
 import styles from "./RestaurantDetailView.module.scss";
 import classNames from "classnames/bind";
 import ProductModalView from "./ProductModalView";
-import { withUi } from "../../context/UiContext";
 
 const cx = classNames.bind(styles);
 
@@ -104,8 +104,7 @@ class RestaurantDetailView extends Component {
     const { name, address, img_profile, rating } = this.props.store; // 스토어 정보
     // const { least_const, take_out, fee } = this.props.delevery; // 배달 정보
     // const { name, price, img_profile } = this.props.food; // 음식 정보
-    const { menus } = this.props;
-    // console.log({ id, address });
+    const { menus, handleBodyOnModal } = this.props;
     return (
       <div className={cx("RestaurantDetailWrap")}>
         <Header isTop={isTop} name={name} />
@@ -143,6 +142,7 @@ class RestaurantDetailView extends Component {
               <RestaurantMenu
                 title={"menu"}
                 onProductModal={this.handleProductModal}
+                onHandleBodyOnModal={handleBodyOnModal}
               />
               <OriginInfo />
             </>
@@ -158,10 +158,11 @@ class RestaurantDetailView extends Component {
           show={productModal}
           name={name}
           onProductModal={this.handleProductModal}
+          onHandleBodyOnModal={handleBodyOnModal}
         />
       </div>
     );
   }
 }
 
-export default withLoading(RestaurantDetailView);
+export default withUi(withLoading(RestaurantDetailView));

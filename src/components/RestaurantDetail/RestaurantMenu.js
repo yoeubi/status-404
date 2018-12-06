@@ -75,7 +75,7 @@ class RestaurantMenu extends Component {
   };
 
   render() {
-    const { title, menus, onProductModal } = this.props;
+    const { title, menus, onProductModal, onHandleBodyOnModal } = this.props;
 
     return (
       <div className={classNames("MenuBody")}>
@@ -102,7 +102,10 @@ class RestaurantMenu extends Component {
             <ul>
               {m.list.map(l => (
                 <li
-                  onClick={() => onProductModal()}
+                  onClick={() => {
+                    onProductModal();
+                    onHandleBodyOnModal("open");
+                  }}
                   className={classNames("menuItem")}
                   key={l.id}
                 >

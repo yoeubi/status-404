@@ -6,9 +6,14 @@ class UiProvider extends Component {
   constructor(props) {
     super(props);
 
-    this.handleBodyOnModal = () => {
+    this.handleBodyOnModal = mode => {
       // 모달 활성화시 body 고정해주는 함수
       console.log("handleBodyOnModal");
+      if (mode === "open") {
+        document.body.style.overflow = "hidden";
+      } else if (mode === "close") {
+        document.body.style.overflow = "auto";
+      }
     };
 
     this.state = {
@@ -23,12 +28,13 @@ class UiProvider extends Component {
 }
 
 function withUi(WrappedComponent) {
-  function WithUi(props) {
+  return function WithUi(props) {
     return (
       <UiConsumer>
-        {value => <WrappedComponent {...value} {...props} />}}
+        {value => <WrappedComponent {...value} {...props} />}
       </UiConsumer>
     );
-  }
+  };
 }
+
 export { UiProvider, withUi };
