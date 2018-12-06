@@ -3,6 +3,7 @@ import { BrowserRouter as Router, Route, Switch } from "react-router-dom";
 import MainPage from "./Pages/MainPage";
 import RestaurantDetailPage from "./Pages/RestaurantDetailPage";
 import ProfilePage from "./Pages/ProfilePage";
+import MyOrderPage from "./Pages/MyOrderPage";
 import Login from "./components/Login";
 import Join from "./components/Join/Join";
 import NameSearch from "./components/NameSearch";
@@ -26,8 +27,9 @@ class App extends Component {
           {/* <Route exact path="/restauant" component={Restaurant} />  */}
           <Route path="/restaurant/:id" component={RestaurantDetailPage} />
           <Route path="/list" component={RestaurantList} />
-          <Route path="/cart" component={CartList}  />
+          <Route path="/cart" component={CartList} />
           <Route path="/test" component={Payment} />
+          <Route path="/myorder" component={MyOrderPage} />
         </Switch>
       </Router>
     );

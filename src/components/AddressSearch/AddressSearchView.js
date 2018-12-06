@@ -93,7 +93,7 @@ class AddressSearchView extends Component {
                         <>
                           <div className={cx("box")}>도로명</div>
                           <div className={cx("road")}>
-                            {a.road_address && a.road_address}
+                            {a.road_address && a.road_address.address_name}
                           </div>
                         </>
                       )}
