@@ -24,11 +24,11 @@
     background-position: center center;
     background-repeat: no-repeat;
     background-color: rgba(0, 0, 0, 0.1);
-    background-image: url(../../img/01_hansik.svg);
+    // background-image: url(../../img/01_hansik.svg);
     animation-name: spinner;
-    animation-timing-function: linear;
+    animation-timing-function: step-end;
     animation-iteration-count: infinite;
-    animation-duration: 6s;
+    animation-duration: 3s;
   }
 }
 
