@@ -10,8 +10,6 @@ import NameSearch from "./components/NameSearch";
 import RestaurantList from "./components/RestaurantList/RestaurantList";
 import CartList from "./components/CartList/CartList";
 import Payment from "./components/Payment";
-import RightNothing from './components/RightNothing';
-import CustomCheckBox from "./components/CustomCheckBox/CustomCheckBox";
 
 class App extends Component {
   render() {
@@ -30,7 +28,7 @@ class App extends Component {
           <Route path="/restaurant/:id" component={RestaurantDetailPage} />
           <Route path="/list" component={RestaurantList} />
           <Route path="/cart" component={CartList} />
-          <Route path="/test" component={Payment} />
+          <Route path="/pay" component={Payment} />
           <Route path="/myorder" component={MyOrderPage} />
         </Switch>
       </Router>
