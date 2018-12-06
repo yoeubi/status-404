@@ -5,7 +5,7 @@ import RestaurantMenu from "./RestaurantMenu";
 import RestaurantSummary from "./RestaurantSummary";
 import OriginInfo from "./OriginInfo";
 import CartBtn from "./CartBtn";
-import Loading from "../Loading";
+import withLoading from "../../HOC/withLoading";
 
 import styles from "./RestaurantDetailView.module.scss";
 import classNames from "classnames/bind";
@@ -155,10 +155,9 @@ class RestaurantDetailView extends Component {
           name={name}
           onProductModal={this.handleProductModal}
         />
-        <Loading />
       </div>
     );
   }
 }
 
-export default RestaurantDetailView;
+export default withLoading(RestaurantDetailView);
