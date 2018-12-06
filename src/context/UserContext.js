@@ -34,27 +34,26 @@ class UserProvider extends Component {
     googleLogin: this.googleLogin.bind(this)
   };
 
-  componentDidMount() {
-    const token = JSON.parse(localStorage.getItem("token"));
+  async componentDidMount() {
+    const token = localStorage.getItem("token");
     if (token) {
-      // TODO : axios로 토큰가지고 유저 데이터 끌고 오기
-      //
-      this.getAddress(/* 유저 이름 */);
+      const { data } = await mainAPI.get('/members/profile/');
+      this.setState({
+        user : data
+      })
+      this.getAddress(data.username);
     } else {
       this.getAddress("default");
     }
-    console.log(this.state);
   }
 
   getAddress(username) {
     const address = JSON.parse(localStorage.getItem("address"));
-    console.log("getaddress");
     if (address && address[username]) {
       this.setState({
         address: address[username]
       });
     } else {
-      console.log("getaddress2");
       this.getPosition(username);
     }
   }
@@ -62,8 +61,6 @@ class UserProvider extends Component {
   getPosition(username) {
     navigator.geolocation.getCurrentPosition(
       async ({ coords: { longitude, latitude } }) => {
-        console.log("lon", longitude, "lat", latitude);
-
         const {
           data: { documents }
         } = await kakaoAPI.get("", {
@@ -73,8 +70,6 @@ class UserProvider extends Component {
             input_coord: "WGS84"
           }
         });
-        console.log(documents[0]);
-
         this.setState({
           address: [documents[0]]
         });
@@ -105,10 +100,11 @@ class UserProvider extends Component {
   }
 
   async login({ username, password }) {
-    const { user, token } = await mainAPI.post("/members/auth/", {
+    const {data : {user, token}} = await mainAPI.post("/members/auth/", {
       username,
       password
     });
+    
     this.getAddress(user.username);
     localStorage.setItem("token", token);
   }
