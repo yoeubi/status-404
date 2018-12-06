@@ -37,7 +37,8 @@ class RestaurantSummary extends Component {
             <span className={cx("Rating")}>{rating}</span>
           </div>
           <div className={cx("Reviews")}>
-            <span>최근 리뷰 00</span> | <span>사장님 최근 댓글 00</span>
+            <span>최근 리뷰 00</span> <div className={cx("Bar")}>|</div>
+            <span>사장님 최근 댓글 00</span>
           </div>
         </div>
 
