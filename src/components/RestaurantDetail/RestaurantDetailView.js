@@ -12,6 +12,7 @@ import StoreReviewTap from "./StoreReviewTap";
 import styles from "./RestaurantDetailView.module.scss";
 import classNames from "classnames/bind";
 import ProductModalView from "./ProductModalView";
+import { withUi } from "../../context/UiContext";
 
 const cx = classNames.bind(styles);
 

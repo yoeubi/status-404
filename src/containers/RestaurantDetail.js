@@ -1,6 +1,6 @@
 import React, { Component } from "react";
 import RestaurantDetailView from "../components/RestaurantDetail/RestaurantDetailView";
-
+import { UiProvider } from "../context/UiContext";
 class RestaurantDetail extends Component {
   constructor(props) {
     super(props);
@@ -23,7 +23,11 @@ class RestaurantDetail extends Component {
   render() {
     const { loading } = this.state;
 
-    return <RestaurantDetailView loading={loading} {...this.props} />;
+    return (
+      <UiProvider>
+        <RestaurantDetailView loading={loading} {...this.props} />
+      </UiProvider>
+    );
   }
 }
 
