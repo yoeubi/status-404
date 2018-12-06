@@ -1,6 +1,6 @@
 import React, { Component } from "react";
 import { Link } from "react-router-dom";
-import styles from "./Payment.scss";
+import styles from "./Payment.module.scss";
 import classNames from "classnames/bind";
 import Nothing from "../Nothing";
 import BackHeader from "../BackHeader";
