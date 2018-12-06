@@ -9,6 +9,8 @@ import NameSearch from "./components/NameSearch";
 import RestaurantList from "./components/RestaurantList/RestaurantList";
 import CartList from "./components/CartList/CartList";
 import Payment from "./components/Payment";
+import RightNothing from './components/RightNothing';
+import CustomCheckBox from "./components/CustomCheckBox/CustomCheckBox";
 
 class App extends Component {
   render() {

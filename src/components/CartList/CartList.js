@@ -14,8 +14,8 @@ class CartList extends Component {
     render() {
         return (
             <div className={cx('cart-list')}>
-                <BackHeader title="장바구니" />
-                <Nothing style={{ fontSize: '2rem', background: '#fff'}}>
+                <BackHeader title="장바구니" style={{ borderBottom: '1px solid #eee' }} />
+                <Nothing style={{ fontSize: '2rem', background: '#fff' ,marginTop : '5rem' }}>
                     피자네플러스 상계1호점
                 </Nothing>
                 <div className={cx('cart-item-gap')}>
