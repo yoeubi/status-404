@@ -75,11 +75,10 @@ class RestaurantMenu extends Component {
   };
 
   render() {
-    const { title, menus } = this.props;
+    const { title, menus, onProductModal, onHandleBodyOnModal } = this.props;
 
     return (
       <div className={classNames("MenuBody")}>
-        <div>저는 {title} 입니다.</div>
         {menus.map((m, index) => (
           <Collapsible
             triggerTagName="div"
@@ -102,7 +101,14 @@ class RestaurantMenu extends Component {
           >
             <ul>
               {m.list.map(l => (
-                <li className={classNames("menuItem")} key={l.id}>
+                <li
+                  onClick={() => {
+                    onProductModal();
+                    onHandleBodyOnModal("open");
+                  }}
+                  className={classNames("menuItem")}
+                  key={l.id}
+                >
                   <span className={classNames("title")}>{l.name}</span> <br />
                   <span className={classNames("description")}>
                     {l.description}

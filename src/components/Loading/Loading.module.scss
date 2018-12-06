@@ -1,0 +1,78 @@
+@import "../../index.scss";
+
+.LoadingWrap {
+  position: fixed;
+  top: 0;
+  left: 0;
+
+  width: 100%;
+  height: 100vh;
+  z-index: 999;
+  background: #fff;
+
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  overflow: hidden;
+
+  .ImgSpinner {
+    width: 80px;
+    height: 80px;
+    transform: translateY(-50%);
+    border-radius: 50%;
+    background-size: 90% 90%;
+    background-position: center center;
+    background-repeat: no-repeat;
+    background-color: rgba(0, 0, 0, 0.1);
+    // background-image: url(../../img/01_hansik.svg);
+    animation-name: spinner;
+    animation-timing-function: step-end;
+    animation-iteration-count: infinite;
+    animation-duration: 3s;
+  }
+}
+
+@keyframes spinner {
+  0% {
+    background-image: url(../../img/01_hansik.svg);
+  }
+  8% {
+    background-image: url(../../img/02_bunsik.svg);
+  }
+  16% {
+    background-image: url(../../img/03_ilsik.svg);
+  }
+  24% {
+    background-image: url(../../img/04_chicken.svg);
+  }
+  32% {
+    background-image: url(../../img/05_pizza.svg);
+  }
+  40% {
+    background-image: url(../../img/06_chinese.svg);
+  }
+  48% {
+    background-image: url(../../img/07_zokbal.svg);
+  }
+  56% {
+    background-image: url(../../img/08_yasik.svg);
+  }
+  64% {
+    background-image: url(../../img/09_zzim.svg);
+  }
+  72% {
+    background-image: url(../../img/10_dosirak.svg);
+  }
+  80% {
+    background-image: url(../../img/11_desert.svg);
+  }
+  88% {
+    background-image: url(../../img/12_fastfood.svg);
+  }
+  96% {
+    background-image: url(../../img/13_franchise.svg);
+  }
+  100% {
+    background-image: url(../../img/14_matzip.svg);
+  }
+}

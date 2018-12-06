@@ -4,8 +4,8 @@ import classNames from "classnames/bind";
 import styles from "./Login.module.scss";
 import { ReactComponent as Exit } from "../../svg/x.svg";
 import { withUser } from "../../context/UserContext";
-import SocialLogin from "./SocialLogin";
 import FacebookLogin from "react-facebook-login";
+import GoogleLogin from "react-google-login";
 
 const cx = classNames.bind(styles);
 
@@ -15,7 +15,8 @@ class Login extends Component {
     password: "",
     userFocus: false,
     passFocus: false,
-    warning: "비밀번호를 잘못 입력했습니다."
+    warning: "비밀번호를 잘못 입력했습니다.",
+    facebook: false
   };
   handleChange = e => {
     this.setState({
@@ -46,7 +47,9 @@ class Login extends Component {
   };
   handleSocial = e => {
     e.preventDefault();
+    this.setState({ facebook: true });
   };
+
   render() {
     const { username, password, userFocus, passFocus, warning } = this.state;
     const {
@@ -56,7 +59,7 @@ class Login extends Component {
       handlePassFocus,
       handleSubmit
     } = this;
-    if(this.props.user.username) return <Redirect to="/"/>
+    if (this.props.user.username) return <Redirect to="/" />;
     return (
       <div className={cx("login")}>
         <span className={cx("exit")} tabIndex={0}>
@@ -114,14 +117,27 @@ class Login extends Component {
         </form>
 
         <div className={cx("social-login")}>
-          <SocialLogin socialType="naver">네이버 아이디로 로그인</SocialLogin>
+          <GoogleLogin
+            clientId="104085265728-lvt11mjt0t0sab4lppnjl9n06872r7ri.apps.googleusercontent.com"
+            buttonText="Google Login"
+            className={cx("google")}
+            onSuccess={response =>
+              this.props.googleLogin(response, this.props.history)
+            }
+            onFailure={() => console.log("Google login error")}
+          />
           <FacebookLogin
             appId="340137913232680"
-            autoLoad={true}
-            callback={(response) => this.props.socialLogin(response,this.props.history)}
+            autoLoad={this.state.facebook}
+            callback={response => {
+              this.props.socialLogin(response, this.props.history);
+              this.setState({
+                facebook : false
+              })
+            }}
             fields="name,email,picture"
             onClick={this.handleSocial}
-            cssClass={cx('facebook')}
+            cssClass={cx("facebook")}
           />
         </div>
 

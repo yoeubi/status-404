@@ -3,8 +3,9 @@ import React, { Component } from "react";
 import AddressSearchView from "../components/AddressSearch/AddressSearchView";
 import AddressSearchResult from "../components/AddressSearch/AddressSearchResult";
 import api from "../api/kakaoAPI";
+import { withUser } from "../context/UserContext";
 
-export default class AddressSearchContainer extends Component {
+class AddressSearchContainer extends Component {
   constructor(props) {
     super(props);
 
@@ -12,19 +13,12 @@ export default class AddressSearchContainer extends Component {
       page: "address-search",
       searchResult: [],
       userInput: "",
-      recentAddress: [],
-      address: []
+      recentAddress: []
+      // address: []
     };
 
     // loading: false
   }
-
-  // componentDidMount = () => {
-  // // const { address } = this.state;
-  // const address = JSON.parse(localStorage.getItem("address"));
-  // this.setState({ address: address.default });
-  // console.log(address.default[0]);
-  // };
 
   handleUserInput = e => {
     const userInput = e.target.value;
@@ -72,8 +66,8 @@ export default class AddressSearchContainer extends Component {
   };
 
   render() {
-    const { searchResult, userInput, recentAddress, address } = this.state;
-    const { onAddressSearch, show } = this.props;
+    const { searchResult, userInput, recentAddress } = this.state;
+    const { onAddressSearch, show, address } = this.props;
     return (
       <>
         {this.state.page === "address-search" ? (
@@ -101,3 +95,5 @@ export default class AddressSearchContainer extends Component {
     );
   }
 }
+
+export default withUser(AddressSearchContainer);

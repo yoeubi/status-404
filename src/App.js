@@ -7,9 +7,8 @@ import Login from "./components/Login";
 import Join from "./components/Join/Join";
 import NameSearch from "./components/NameSearch";
 import RestaurantList from "./components/RestaurantList/RestaurantList";
-import SearchList from './components/SearchList';
-import CheckBox from './components/CheckBox';
-import BlackCurtain from "./components/BlackCurtain";
+import CartList from "./components/CartList/CartList";
+import Payment from "./components/Payment";
 
 class App extends Component {
   render() {
@@ -27,7 +26,8 @@ class App extends Component {
           {/* <Route exact path="/restauant" component={Restaurant} />  */}
           <Route path="/restaurant/:id" component={RestaurantDetailPage} />
           <Route path="/list" component={RestaurantList} />
-          <Route path="/test" component={BlackCurtain}  />
+          <Route path="/cart" component={CartList}  />
+          <Route path="/test" component={Payment} />
         </Switch>
       </Router>
     );
