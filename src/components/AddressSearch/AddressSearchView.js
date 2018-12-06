@@ -85,12 +85,18 @@ class AddressSearchView extends Component {
               {address &&
                 address.map((a, index) => (
                   <li key={index} className={cx("listItem")}>
-                    <div className={cx("place")}>{a.address.address_name}</div>
+                    <div className={cx("address")}>
+                      {a.address.address_name}
+                    </div>
                     <div className={cx("textContainer")}>
-                      <div className={cx("box")}>도로명</div>
-                      <div className={cx("road")}>
-                        {a.road_address && a.road_address}
-                      </div>
+                      {a.road_address && (
+                        <>
+                          <div className={cx("box")}>도로명</div>
+                          <div className={cx("road")}>
+                            {a.road_address && a.road_address}
+                          </div>
+                        </>
+                      )}
                     </div>
                     <button className={cx("deleteButton")}>
                       <Ex />
