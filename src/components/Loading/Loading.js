@@ -9,7 +9,7 @@ class Loading extends Component {
   render() {
     return (
       <div className={cx("LoadingWrap")}>
-        <h1>Loading...</h1>
+        <div className={cx("ImgSpinner")} />
       </div>
     );
   }
