@@ -10,7 +10,7 @@ import NameSearch from "./components/NameSearch";
 import RestaurantList from "./components/RestaurantList/RestaurantList";
 import CartList from "./components/CartList/CartList";
 import Payment from "./components/Payment";
-import PaymentMethod from "./components/PaymentMethod";
+import PayResult from "./components/PayResult";
 
 class App extends Component {
   render() {
@@ -31,7 +31,7 @@ class App extends Component {
           <Route path="/cart" component={CartList} />
           <Route path="/pay" component={Payment} />
           <Route path="/myorder" component={MyOrderPage} />
-          <Route path="/test" component={PaymentMethod} />
+          <Route path="/test" component={PayResult} />
         </Switch>
       </Router>
     );

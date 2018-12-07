@@ -24,8 +24,20 @@ class SlideMenu extends Component {
   slide = React.createRef();
 
   componentDidMount() {
-    this.slide.current.scrollLeft = this.menuList.findIndex( menu => menu === this.props.category) * 45;
+    // this.slide.current.scrollLeft = this.menuList.findIndex( menu => menu === this.props.category) * 45;
   }
+  shouldComponentUpdate(nextProps, nextState) {
+    if (nextProps.category !== this.props.category){
+      return true;
+    };
+    return false;
+  }
+  
+  componentDidUpdate(prevProps, prevState) {
+    console.log(this.slide.current.scrollLeft);
+    
+  }
+  
   render() {
     const {category, onChange} = this.props;
     return (
