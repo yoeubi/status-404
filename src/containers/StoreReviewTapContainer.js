@@ -1,7 +1,7 @@
 import React, { Component } from "react";
 import StoreReviewTap from "../components/RestaurantDetail/StoreReviewTap";
 
-class StoreReviewTapContainer extends Component {
+export default class StoreReviewTapContainer extends Component {
   // constructor(props) {
   //   super(props);
 
@@ -32,15 +32,8 @@ class StoreReviewTapContainer extends Component {
     // const { activePhotoReviewBtn, orderBtn } = this.state;
     return (
       <>
-        <StoreReviewTap
-        // activePhotoReviewBtn={activePhotoReviewBtn}
-        // orderBtn={orderBtn}
-        // onHandlePhotoReviewBtn={this.handlePhotoReviewBtn}
-        // onHandleOrderBtn={this.handleOrderBtn}
-        />
+        <StoreReviewTap />
       </>
     );
   }
 }
-
-export default StoreReviewTapContainer;

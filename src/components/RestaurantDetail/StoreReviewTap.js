@@ -1,10 +1,92 @@
 import React, { Component } from "react";
 import styles from "./StoreReviewTap.module.scss";
 import classNames from "classnames/bind";
+import Rating from "react-rating";
+
+// SVG ICON
+import { ReactComponent as Star } from "../../img/star.svg"; // 별 아이콘
+import { ReactComponent as Right } from "../../svg/chevron-right.svg"; // 오른쪽 화살표
 
 const cx = classNames.bind(styles);
 
 export default class StoreReviewTap extends Component {
+  static defaultProps = {
+    users: [
+      {
+        pk: null,
+        id: 0,
+        username: "박윤재",
+        nickname: "윤재",
+        phone: "010-1234-5678",
+        img_profile:
+          "http://mblogthumb4.phinf.naver.net/20151117_151/smartbaedal_1447748320696qYGB3_JPEG/12109275_986494971373814_8759974093703893190_n.jpg?type=w2",
+        review: [
+          {
+            id: 0,
+            content:
+              "맛있네요! 맛있네요! 맛있네요! 맛있네요! 맛있네요! 맛있네요! 맛있네요! 맛있네요! 맛있네요! 맛있네요! 맛있네요! 맛있네요! 맛있네요! 맛있네요! 맛있네요! 맛있네요! ",
+            rating: 5,
+            store: "패스트 피자"
+          }
+          // {
+          //   id: 1,
+          //   content: "맛없어요... ",
+          //   rating: 1,
+          //   store: "패스트 치킨"
+          // }
+        ]
+      },
+      {
+        pk: null,
+        id: 1,
+        username: "나배민",
+        nickname: "배민",
+        phone: "011-1234-5678",
+        img_profile:
+          "http://mblogthumb4.phinf.naver.net/20151117_151/smartbaedal_1447748320696qYGB3_JPEG/12109275_986494971373814_8759974093703893190_n.jpg?type=w2",
+        review: [
+          {
+            id: 0,
+            content:
+              "맛없네요! 맛없네요! 맛없네요! 맛없네요! 맛없네요! 맛없네요! 맛없네요! 맛없네요! 맛없네요! 맛없네요! 맛없네요! 맛없네요! 맛없네요! 맛없네요! 맛없네요! 맛없네요! 맛없네요! ",
+            rating: 1,
+            store: "패스트 피자"
+          }
+          // {
+          //   id: 1,
+          //   content: "맛없어요... ",
+          //   rating: 1,
+          //   store: "패스트 치킨"
+          // }
+        ]
+      },
+      {
+        pk: null,
+        id: 2,
+        username: "나배달",
+        nickname: "배달",
+        phone: "016-1234-5678",
+        img_profile:
+          "http://mblogthumb4.phinf.naver.net/20151117_151/smartbaedal_1447748320696qYGB3_JPEG/12109275_986494971373814_8759974093703893190_n.jpg?type=w2",
+        review: [
+          {
+            id: 0,
+            content:
+              "보통이네요 보통이네요 보통이네요 보통이네요 보통이네요 보통이네요 보통이네요 보통이네요 보통이네요 보통이네요 보통이네요 보통이네요 보통이네요 보통이네요 보통이네요 보통이네요 보통이네요 보통이네요",
+            rating: 3,
+            store: "패스트 피자"
+          }
+          // {
+          //   id: 1,
+          //   content: "맛없어요... ",
+          //   rating: 1,
+          //   store: "패스트 치킨"
+          // }
+        ]
+      }
+    ]
+  };
+
   constructor(props) {
     super(props);
 
@@ -33,6 +115,7 @@ export default class StoreReviewTap extends Component {
 
   render() {
     // const { onHandlePhotoReviewBtn, onHandleOrderBtn } = this.props;
+    const { users, review, rating } = this.props;
     const { activePhotoReviewBtn, orderBtn } = this.state;
     return (
       <>
@@ -48,7 +131,7 @@ export default class StoreReviewTap extends Component {
           <div className={cx("ReviewListContainer")}>
             <div className={cx("TitleContainer")}>
               <span className={cx("title")}>
-                총 <p>{0}</p>개의 리뷰가 있어요
+                총 <p>{3}</p>개의 리뷰가 있어요
               </span>
               <div className={cx("listOrderContainer")}>
                 <button
@@ -80,7 +163,58 @@ export default class StoreReviewTap extends Component {
                 </div>
               </div>
             </div>
-            <div className={cx("listItem")}>listItem</div>
+            <ul>
+              {users.map(u => (
+                <li className={cx("listItem")} key={u.id}>
+                  <div className={cx("HeadContainer")}>
+                    <div className={cx("Avatar")}>
+                      <img src={u.img_profile} alt={u.username} />
+                    </div>
+                    <div className={cx("IdContainer")}>
+                      <span className={cx("NickName")}>{u.nickname}</span>
+                      <Right
+                        className={cx("Right")}
+                        style={{ transform: "scale(1.5)", fill: "#666" }}
+                      />
+                      {/* <div className={cx("Rating")}>
+                        {u.review[0].rating} ️ ️ ️ ️ ️ ️
+                      </div> */}
+                      <div className={cx("Stars")}>
+                        <Rating
+                          emptySymbol={
+                            <Star
+                              className={
+                                cx("Star", "Empty") // 빈 별
+                              }
+                            />
+                          }
+                          fullSymbol={
+                            <Star
+                              className={
+                                cx("Star") // 꽉찬별
+                              }
+                            />
+                          }
+                          fractions={
+                            2 // 분할
+                          }
+                          initialRating={
+                            u.review[0].rating // 레이팅 정보
+                          }
+                          readonly
+                        />
+                        <span className={cx("Rating")}>
+                          {u.review[0].rating}
+                        </span>
+                      </div>
+                    </div>
+                  </div>
+                  <div className={cx("ContentContainer")}>
+                    <div className={cx("Content")}>{u.review[0].content}</div>
+                  </div>
+                </li>
+              ))}
+            </ul>
           </div>
         </div>
       </>
