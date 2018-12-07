@@ -2,6 +2,7 @@ import React, { Component } from "react";
 import styles from "./StoreReviewTap.module.scss";
 import classNames from "classnames/bind";
 import Rating from "react-rating";
+import ReviewWriteModal from "./ReviewWriteModal";
 
 // SVG ICON
 import { ReactComponent as Star } from "../../img/star.svg"; // 별 아이콘
@@ -52,12 +53,6 @@ export default class StoreReviewTap extends Component {
             rating: 1,
             store: "패스트 피자"
           }
-          // {
-          //   id: 1,
-          //   content: "맛없어요... ",
-          //   rating: 1,
-          //   store: "패스트 치킨"
-          // }
         ]
       },
       {
@@ -76,12 +71,6 @@ export default class StoreReviewTap extends Component {
             rating: 3,
             store: "패스트 피자"
           }
-          // {
-          //   id: 1,
-          //   content: "맛없어요... ",
-          //   rating: 1,
-          //   store: "패스트 치킨"
-          // }
         ]
       }
     ]
@@ -95,6 +84,7 @@ export default class StoreReviewTap extends Component {
       activePhotoReviewBtn: false,
       // 리뷰탭에 리뷰 정렬 버튼 활성화 상태
       orderBtn: ""
+      // show: false
     };
   }
 
@@ -115,13 +105,18 @@ export default class StoreReviewTap extends Component {
 
   render() {
     // const { onHandlePhotoReviewBtn, onHandleOrderBtn } = this.props;
-    const { users, review, rating } = this.props;
+    const { users, onReviewWriteModal } = this.props;
     const { activePhotoReviewBtn, orderBtn } = this.state;
     return (
       <>
         <div className={cx("ReviewTapContainer")}>
           <div className={cx("TopContainer")}>
-            <button className={cx("reviewBtn")}>✏️ 리뷰를 남겨주세요</button>
+            <button
+              className={cx("reviewBtn")}
+              // onClick={() => onReviewWriteModal()}
+            >
+              ✏️ 리뷰를 남겨주세요
+            </button>
           </div>
           <div className={cx("MiddleContainer")}>
             <span className={cx("title")}>📣 알려드립니다</span>
