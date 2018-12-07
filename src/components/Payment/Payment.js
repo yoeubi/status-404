@@ -142,7 +142,7 @@ class Payment extends Component {
           style={{
             background: "#2fc0be",
             color: "#fff",
-            fontSize: "2rem",
+            fontSize: "1.7rem",
             position: "fixed",
             bottom: "0",
             left: "0"
