@@ -44,7 +44,9 @@ button {
   .TitleContainer {
     margin: 10px;
     border-bottom: 1px solid #dbd9dc;
+    // background-color: beige;
     .title {
+      font-size: 1.6rem;
       p {
         display: inline;
         color: #2fc0be;
@@ -56,16 +58,19 @@ button {
       text-align: center;
       font-size: 1.6rem;
       font-weight: bold;
-      margin-bottom: 20px;
+      margin: 20px 0px 20px;
     }
     .listOrderContainer {
       display: flex;
       justify-content: space-between;
-      margin: 10px;
+      // background-color: yellow;
+      margin: 10px 0px 10px;
       button {
         border: none;
       }
       .photoReviewBtn {
+        margin: 0px;
+        padding: 0px;
         display: flex;
         align-items: center;
         // background-color: green;
@@ -73,11 +78,11 @@ button {
         font-size: 1.4rem;
         .checkBox {
           display: inline-block;
-          height: 30px;
-          width: 30px;
+          height: 25px;
+          width: 25px;
           border-radius: 2px;
           color: white;
-          font-size: 20pt;
+          font-size: 15pt;
           margin-right: 5px;
           background-color: #dbd9dc;
         }
@@ -93,7 +98,7 @@ button {
         display: flex;
         button {
           color: #828282;
-          font-size: 1.2rem;
+          font-size: 1.4rem;
           &.Active {
             font-weight: bold;
             color: black;
