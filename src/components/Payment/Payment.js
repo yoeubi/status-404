@@ -27,7 +27,11 @@ class Payment extends Component {
   generalList = ["만나서 카드결제", "만나서 현금결제"];
   state = {
     popup: false,
-    method: this.payList[0]
+    method: this.payList[0],
+    // API로 디데일 주소 + 전화번호 받아오기
+    detail : '',
+    tel : '',
+    request : ''
   };
   handlePopup = () => {
     this.setState({
@@ -37,6 +41,11 @@ class Payment extends Component {
   handleToggle = method => {
     this.setState({ method, popup: !this.state.popup });
   };
+  handleChange = e => {
+    this.setState({
+      [e.target.name] : e.target.value
+    })
+  }
   render() {
     return (
       <div className={cx("payment")}>
@@ -48,24 +57,27 @@ class Payment extends Component {
         <Detail main="노원구 상계동 666" sub="(도로명) 노원로 564" />
         <CustomInput
           type="text"
-          value="주공10단지 1018-101"
-          onChange={() => console.log("커스텀 인풋 실행중")}
+          value={this.state.detail}
+          name="detail"
+          onChange={this.handleChange}
           placeholder="상세주소를 입력해주세요"
         />
         <CustomInput
           type="tel"
-          value="01072278748"
-          onChange={() => console.log("커스텀 인풋 실행중")}
+          value={this.state.tel}
+          name="tel"
+          onChange={this.handleChange}
           placeholder="전화번호를 입력해주세요"
         />
         <CustomCheckBox text="안심번호 사용" />
         <CustomInput
           type="text"
-          value="1"
-          onChange={() => console.log("커스텀 인풋 실행중")}
+          value={this.state.request}
+          name="request"
+          onChange={this.handleChange}
           placeholder="요청사항을 입력해주세요"
         />
-        <CustomCheckBox text="요청사항 저장" right="0/40" />
+        <CustomCheckBox text="요청사항 저장" right={`${this.state.request.length}/40`} />
         <HighLight title="결제금액" />
         <Detail main="23400원" sub="주문금액 20400원 + 배달팁 3000원" />
         <RightNothing
