@@ -57,7 +57,7 @@ export default class StoreReviewTap extends Component {
                     Active: activePhotoReviewBtn
                   })}
                 >
-                  <div className={cx("checkBox")}>V</div> 사진리뷰만
+                  <div className={cx("checkBox")}>✓</div> 사진리뷰만
                 </button>
                 <div className={cx("rightSide")}>
                   <button
