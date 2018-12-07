@@ -1,6 +1,7 @@
 @import "../../index.scss";
 
 button {
+  display: block;
   outline: none;
   background-color: white;
   border: 1px solid #e5e5e5;
@@ -9,9 +10,11 @@ button {
 .ReviewTapContainer {
 }
 
+.reviewBtn {
+}
+
 .TopContainer {
   padding: 10px;
-  border-bottom: 1px solid #dbd9dc;
 }
 
 .reviewBtn {
@@ -26,17 +29,83 @@ button {
   font-weight: bold;
 }
 
+.MiddleContainer {
+  padding: 10px;
+  border-bottom: 1px solid #dbd9dc;
+}
+
+.border {
+  border: 5px solid #f4f2f5;
+}
+
 .ReviewListContainer {
   height: 200px;
   font-size: 20pt;
-  border-top: 10px solid #f4f2f5;
-}
-
-.TitleContainer {
-  margin: 10px;
-  border-bottom: 1px solid #dbd9dc;
-  .title {
-    font-size: 1.6rem;
-    font-weight: bold;
+  .TitleContainer {
+    margin: 10px;
+    border-bottom: 1px solid #dbd9dc;
+    .title {
+      p {
+        display: inline;
+        color: #2fc0be;
+      }
+    }
+    .title {
+      // background-color: blue;
+      width: 100%;
+      text-align: center;
+      font-size: 1.6rem;
+      font-weight: bold;
+      margin-bottom: 20px;
+    }
+    .listOrderContainer {
+      display: flex;
+      justify-content: space-between;
+      margin: 10px;
+      button {
+        border: none;
+      }
+      .photoReviewBtn {
+        display: flex;
+        align-items: center;
+        // background-color: green;
+        color: #828282;
+        font-size: 1.4rem;
+        .checkBox {
+          display: inline-block;
+          height: 30px;
+          width: 30px;
+          border-radius: 2px;
+          color: white;
+          font-size: 20pt;
+          margin-right: 5px;
+          background-color: #dbd9dc;
+        }
+        &.Active {
+          font-weight: bold;
+          color: black;
+          .checkBox {
+            background-color: #2fc0be;
+          }
+        }
+      }
+      .rightSide {
+        display: flex;
+        button {
+          color: #828282;
+          font-size: 1.2rem;
+          &.Active {
+            font-weight: bold;
+            color: black;
+          }
+        }
+        .divider {
+          border-right: 1px solid #dbd9dc;
+        }
+      }
+    }
+  }
+  .listItem {
+    padding: 10px;
   }
 }
