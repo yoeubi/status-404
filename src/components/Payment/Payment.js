@@ -38,6 +38,7 @@ class Payment extends Component {
     IMP.init("imp19043807");
   }
   handlePay = () => {
+    const {history} = this.props;
     window.IMP.request_pay(
       {
         pg: "html5_inicis",
@@ -64,6 +65,7 @@ class Payment extends Component {
         }
         console.dir('결제',rsp);
         alert(msg);
+        history.push('/');
       }
     );
   };
@@ -83,7 +85,7 @@ class Payment extends Component {
   render() {
     return (
       <div className={cx("payment")}>
-        <BackHeader backURL="/" title="" />
+        <BackHeader backURL="/cart" title="" />
         <HighLight
           title="배달정보"
           style={{ marginTop: "5rem", paddingTop: "0.5rem" }}
