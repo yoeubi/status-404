@@ -1,5 +1,4 @@
 import React, { Component } from "react";
-import { Link } from "react-router-dom";
 import styles from "./Payment.module.scss";
 import classNames from "classnames/bind";
 import Nothing from "../Nothing";
@@ -39,6 +38,7 @@ class Payment extends Component {
   }
   handlePay = () => {
     const {history} = this.props;
+    // TODO: 사용자 정보를 받아서 표시해야 함
     window.IMP.request_pay(
       {
         pg: "html5_inicis",
@@ -60,7 +60,7 @@ class Payment extends Component {
           msg += "결제 금액 : " + rsp.paid_amount;
           msg += "카드 승인번호 : " + rsp.apply_num;
         } else {
-          var msg = "결제에 실패하였습니다.";
+          msg = "결제에 실패하였습니다.";
           msg += "에러내용 : " + rsp.error_msg;
         }
         console.dir('결제',rsp);

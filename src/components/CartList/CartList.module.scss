@@ -1,5 +1,6 @@
 .cart-list {
     background: #eee;
+    min-height: calc(100vh - 11rem);
     .cart-item-gap {
         margin-top: 1rem;
     }

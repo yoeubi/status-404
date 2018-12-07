@@ -24,6 +24,7 @@
         transition: max-height .5s linear;
         p {
             padding: 1rem 1.5rem;
+            border-bottom: 1px solid #ccc;
         }
         &.show {
             max-height: 100rem;
