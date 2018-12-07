@@ -161,6 +161,8 @@ class UserProvider extends Component {
           img_profile: imageUrl
         }
       });
+      console.log(email, googleId, imageUrl, name);
+      
     } else {
       console.log("Google login fail");
     }

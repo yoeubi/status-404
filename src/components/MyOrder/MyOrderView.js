@@ -3,6 +3,7 @@ import styles from "./MyOrderView.module.scss";
 import classNames from "classnames/bind";
 import MyOrderHeader from "./MyOrderHeader";
 import MyOrderList from "./MyOrderList";
+import withLoading from "../../HOC/withLoading";
 
 const cx = classNames.bind(styles);
 
@@ -17,4 +18,4 @@ class MyOrderView extends Component {
   }
 }
 
-export default MyOrderView;
+export default withLoading(MyOrderView);
