@@ -27,16 +27,16 @@ class MyOrderList extends Component {
       {
         id: 0,
         category_Id: 1,
-        date: "2018-12-03T12:48:57.962148+09:00",
+        date: "3일전",
         store_name: "백종원의 골목식당",
         ordered_menu: ["한식은 백종원찡", "백종원 짱짱"],
         ordered_price: 14000,
-        writed_review: false
+        writed_review: true
       },
       {
         id: 1,
         category_Id: 12,
-        date: "2018-12-04T12:48:57.962148+09:00",
+        date: "12월 4일",
         store_name: "써브웨이 아산 온양점",
         ordered_menu: ["스테이트&치즈", "에그마요", "아보카도맨"],
         ordered_price: 18800,
@@ -45,7 +45,7 @@ class MyOrderList extends Component {
       {
         id: 2,
         category_Id: 3,
-        date: "2018-12-05T12:48:57.962148+09:00",
+        date: "12월 5일",
         store_name: "돈까스&냉면 9단",
         ordered_menu: [
           "정성돈까스",
@@ -91,13 +91,6 @@ class MyOrderList extends Component {
     }
   };
 
-  canIwriteReview = date => {
-    const now = new Date(Date.now());
-
-    console.log(now.toLocaleTimeString(), date);
-    return "asdf";
-  };
-
   render() {
     const { orders } = this.props;
     return (
@@ -123,9 +116,12 @@ class MyOrderList extends Component {
 
                 <div className={cx("OrderAgain")}>
                   <button className={cx("Again")}>다시 주문하기</button>
-                  <button className={cx("Review")}>
-                    {this.canIwriteReview(o.date)}
-                  </button>
+                  {o.writed_review && (
+                    <button className={cx("Review")}>
+                      <span className={cx("Title")}>리뷰 쓰기</span>
+                      <span className={cx("Caption")}>(7일간 작성 가능)</span>
+                    </button>
+                  )}
                 </div>
               </li>
             ))}
