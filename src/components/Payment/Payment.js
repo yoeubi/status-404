@@ -65,7 +65,7 @@ class Payment extends Component {
         }
         console.dir('결제',rsp);
         alert(msg);
-        history.push('/');
+        history.replace('/');
       }
     );
   };
