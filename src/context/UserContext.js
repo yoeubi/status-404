@@ -104,7 +104,10 @@ class UserProvider extends Component {
       username,
       password
     });
-    
+    console.log('token',user,token);
+    this.setState({
+      user
+    })
     this.getAddress(user.username);
     localStorage.setItem("token", token);
   }

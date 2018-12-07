@@ -5,12 +5,15 @@
 }
 
 .back-header {
-  position: relative;
+  position: fixed;
+  top: 0;
+  left: 0;
+  z-index: 10;
   height: 5rem;
   width: 100%;
   font-weight: 700;
   font-size: 1.4rem;
-  border-bottom: 1px solid #eee;
+  // border-bottom: 1px solid #eee;
   background: #fff;
   a , div {
       @include center();

@@ -27,6 +27,9 @@
         .detail {
             font-size: 1.2rem;
             color: #666;
+            span {
+                display: inline-block;
+            }
             & > span {
                 margin-right: 0.5rem;
             }
