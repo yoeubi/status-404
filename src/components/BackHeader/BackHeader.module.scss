@@ -19,8 +19,11 @@
       @include center();
   }
   .back {
-    padding: 0 1.5rem;
+    padding-right: 1.5rem;
     height: 100%;
+    a {
+      padding: 1.5rem;
+    }
   }
   .title {
       position: absolute;
