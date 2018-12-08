@@ -46,9 +46,7 @@ export default class AddressSearchResult extends Component {
             <div className={cx("addressSearchForm")}>
               <input
                 autoComplete="off"
-                onChange={
-                  onUserInput // onChange={e => userInput(e)}
-                }
+                onChange={onUserInput}
                 value={userInput}
                 className={cx("addressSearchInput")}
                 label="주소검색"
@@ -58,7 +56,9 @@ export default class AddressSearchResult extends Component {
               />
               <button
                 className={cx("addressSearchButton")}
-                onClick={getAddress}
+                onClick={() => {
+                  getAddress(userInput);
+                }}
               >
                 <MagnifyingGlass />
               </button>
