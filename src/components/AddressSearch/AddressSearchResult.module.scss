@@ -32,8 +32,9 @@ input {
 }
 
 .formContainer {
-  height: 200x;
-  padding: 10px;
+  height: 100x;
+  padding: 10px 10px 0px;
+  border-bottom: 1px solid silver;
 }
 
 .backBtn {
@@ -67,20 +68,20 @@ input {
 .addressSearchInput {
   width: calc(100% - 40px);
   height: 40px;
-  margin: 10px 10px 10px 0px;
+  margin: 10px 10px 0px 0px;
   padding: 10px;
   background-color: white;
-  border: 1px solid silver;
+  border: none;
   box-sizing: border-box;
   font-size: 12pt;
-  background-color: rgba(241, 241, 241, 0.87);
+  background-color: white;
 }
 
 .addressSearchButton {
   // position: relative;
   margin-top: 10px;
   background-color: white;
-  border: 1px solid silver;
+  border: none;
   color: black;
   height: 40px;
   width: 40px;
@@ -96,7 +97,7 @@ input {
 
 .listContainer {
   background-color: rgba(241, 241, 241, 0.87);
-  border-top: 1px solid silver;
+  border-top: 10px solid #f3f3f3;
   height: calc(100% - 100px);
   overflow-y: scroll;
   scroll-behavior: smooth;

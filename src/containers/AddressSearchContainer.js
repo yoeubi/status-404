@@ -79,6 +79,7 @@ class AddressSearchContainer extends Component {
             show={show}
             recentAddress={recentAddress}
             address={address}
+            userInput={userInput}
           />
         ) : this.state.page === "address-search-result" ? (
           <AddressSearchResult
@@ -88,6 +89,7 @@ class AddressSearchContainer extends Component {
             onBackBtn={() => this.handleBackBtn()}
             onFinishBtn={e => this.handleFinishBtn(e)}
             recentAddress={recentAddress}
+            getAddress={this.getAddress}
             address={address}
           />
         ) : null}

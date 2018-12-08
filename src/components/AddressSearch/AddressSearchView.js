@@ -22,12 +22,12 @@ class AddressSearchView extends Component {
   //   localStorage.getItem("address");
   // };
 
-  handleUserInput = e => {
-    const userInput = e.target.value;
-    this.setState({
-      userInput
-    });
-  };
+  // handleUserInput = e => {
+  //   const userInput = e.target.value;
+  //   this.setState({
+  //     userInput
+  //   });
+  // };
 
   render() {
     const {
@@ -35,9 +35,11 @@ class AddressSearchView extends Component {
       onAddressSearch,
       getAddress,
       onSubmitBtn,
-      address
+      address,
+      userInput,
+      onUserInput
     } = this.props;
-    const { userInput } = this.state;
+    // const { userInput } = this.state;
     // console.log(address);
     return (
       <>
@@ -53,7 +55,7 @@ class AddressSearchView extends Component {
             <div className={cx("addressSearchForm")}>
               <input
                 autoComplete="off"
-                onChange={e => this.handleUserInput(e)}
+                onChange={onUserInput}
                 value={userInput}
                 className={cx("addressSearchInput")}
                 label="주소검색"
