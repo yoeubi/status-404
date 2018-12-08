@@ -59,7 +59,7 @@ class AddressSearchContainer extends Component {
   };
 
   handleFinishBtn = e => {
-    const { searchResult, recentAddress, page, address } = this.state;
+    const { searchResult } = this.state;
     console.log(searchResult);
     this.setState({ recentAddress: searchResult, page: "address-search" });
     // localStorage.setItem("address");

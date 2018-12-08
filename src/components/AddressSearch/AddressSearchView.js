@@ -34,10 +34,7 @@ class AddressSearchView extends Component {
       show,
       onAddressSearch,
       getAddress,
-      searchResult,
-      onUserInput,
       onSubmitBtn,
-      recentAddress,
       address
     } = this.props;
     const { userInput } = this.state;
