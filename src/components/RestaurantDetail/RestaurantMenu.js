@@ -75,7 +75,7 @@ class RestaurantMenu extends Component {
   };
 
   render() {
-    const { title, menus, onProductModal, onHandleBodyOnModal } = this.props;
+    const { menus, onProductModal, onHandleBodyOnModal } = this.props;
 
     return (
       <div className={classNames("MenuBody")}>

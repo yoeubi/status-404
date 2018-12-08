@@ -95,16 +95,16 @@ class RestaurantDetailView extends Component {
 
   render() {
     const { isTop, activeTab, productModal } = this.state;
-    const {
-      match: {
-        // storeId
-        params: { id }
-      }
-    } = this.props;
-    const { name, address, img_profile, rating } = this.props.store; // 스토어 정보
+    // const {
+    //   match: {
+    //     // storeId
+    //     params: { id }
+    //   }
+    // } = this.props;
+    const { name, img_profile, rating } = this.props.store; // 스토어 정보
     // const { least_const, take_out, fee } = this.props.delevery; // 배달 정보
     // const { name, price, img_profile } = this.props.food; // 음식 정보
-    const { menus, handleBodyOnModal } = this.props;
+    const { handleBodyOnModal } = this.props;
     return (
       <div className={cx("RestaurantDetailWrap")}>
         <Header isTop={isTop} name={name} />

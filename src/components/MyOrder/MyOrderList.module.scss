@@ -1,0 +1,72 @@
+@import "../../index.scss";
+
+.List {
+  width: 100%;
+  padding: 12px;
+  .Item {
+    display: flex;
+    flex-direction: column;
+    justify-content: flex-start;
+    align-items: flex-start;
+    padding: 12px;
+    border-bottom: 1px solid rgba(0, 0, 0, 0.1);
+
+    .OrderDate {
+      display: flex;
+      align-items: center;
+      height: 24px;
+      .Icon {
+        margin-right: 3px;
+        svg {
+          width: 25px;
+          height: 25px;
+        }
+      }
+      .Date {
+        font-size: 1.2rem;
+        color: rgba(0, 0, 0, 0.5);
+      }
+    }
+
+    .StoreName {
+      width: 100%;
+      padding: 5px 0;
+      font-family: "Hanna";
+      font-size: 1.8rem;
+    }
+
+    .OrderedMenuPrice {
+      width: 100%;
+      display: flex;
+      padding-bottom: 5px;
+      font-size: 1.4rem;
+      span:first-child {
+        margin-right: 10px;
+      }
+    }
+  }
+  .OrderAgain {
+    width: 100%;
+    margin: 15px 0 0 0;
+    .Again {
+      width: 100%;
+      height: 40px;
+      border: 1px solid $main-color;
+      color: $main-color;
+    }
+    .Review {
+      width: 100%;
+      border: 0;
+      margin-top: 15px;
+      display: flex;
+      justify-content: center;
+
+      .Title {
+        color: $main-color;
+      }
+      .Caption {
+        color: rgba(0, 0, 0, 0.5);
+      }
+    }
+  }
+}

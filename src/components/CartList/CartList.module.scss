@@ -1,6 +1,13 @@
 .cart-list {
     background: #eee;
+    min-height: calc(100vh - 11rem);
     .cart-item-gap {
         margin-top: 1rem;
+    }
+    .cart-notification {
+        color: #aaa;
+        padding: 1rem 1.5rem;
+        font-size: 1.2rem;
+        margin-bottom: 6rem;
     }
 }

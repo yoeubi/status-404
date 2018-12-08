@@ -3,8 +3,6 @@ import styles from "./AddressSearchResult.module.scss";
 import classNames from "classnames/bind";
 // import SVG
 import { ReactComponent as MagnifyingGlass } from "../../img/search.svg";
-import { ReactComponent as Crosshair } from "../../img/crosshair.svg";
-import { ReactComponent as Ex } from "../../img/x.svg";
 import { ReactComponent as BackBtn } from "../../svg/arrow-left.svg";
 
 const cx = classNames.bind(styles);
@@ -47,8 +45,10 @@ export default class AddressSearchResult extends Component {
             <h1 className={cx("header")}>배달 받을 주소</h1>
             <div className={cx("addressSearchForm")}>
               <input
-                autoComplete="off" // onChange={e => userInput(e)}
-                onChange={onUserInput}
+                autoComplete="off"
+                onChange={
+                  onUserInput // onChange={e => userInput(e)}
+                }
                 value={userInput}
                 className={cx("addressSearchInput")}
                 label="주소검색"
@@ -65,15 +65,19 @@ export default class AddressSearchResult extends Component {
             </div>
           </div>
           <div className={cx("listContainer")}>
-            <h2 className={cx("listTitle")} />
+            {/* <h2 className={cx("listTitle")} /> */}
             <ul className={cx("recentAddress")}>
               {searchResult.map((s, index) => (
                 <li key={s.id} className={cx("listItem")}>
                   <div className={cx("place")}>{s.place_name}</div>
                   <div className={cx("address")}>{s.address_name}</div>
                   <div className={cx("textContainer")}>
-                    <div className={cx("box")}>도로명</div>
-                    <div className={cx("road")}>{s.road_address_name}</div>
+                    {s.road_address_name && (
+                      <>
+                        <div className={cx("box")}>도로명</div>
+                        <div className={cx("road")}>{s.road_address_name}</div>
+                      </>
+                    )}
                   </div>
                   <button
                     className={cx("finishBtn")}

@@ -55,6 +55,15 @@ export default class StoreInfoTap extends Component {
     }
   };
 
+  constructor(props) {
+    super(props);
+
+    this.state = {
+      photoReivew: false,
+      orderTaps: "date-order"
+    };
+  }
+
   render() {
     const {
       store_info,

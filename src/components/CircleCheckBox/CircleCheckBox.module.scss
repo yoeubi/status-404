@@ -1,0 +1,30 @@
+.circle-checkbox {
+  width: 100%;
+  height: 5.5rem;
+  background: #fff;
+  padding: 0.5rem 1.5rem;
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  .check {
+    position: relative;
+    background: #eee;
+    width: 2.5rem;
+    height: 2.5rem;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    border-radius: 50%;
+    &.disabled {
+        background: #2fc0be;
+    }
+    .text {
+      font-size: 1.5rem;
+      position: absolute;
+      top: 0;
+      left: 3rem;
+      color: #000;
+      white-space: nowrap;
+    }
+  }
+}
