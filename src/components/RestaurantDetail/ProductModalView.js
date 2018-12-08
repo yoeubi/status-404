@@ -183,7 +183,6 @@ class ProductModalView extends Component {
                 <span className={cx("Least")}>
                   최소 주문 금액 : {menu.price}
                 </span>
-                
               </div>
               <button
                 onClick={() => {
@@ -194,7 +193,6 @@ class ProductModalView extends Component {
               >
                 장바구니 담기
               </button>
-              
             </div>
           </React.Fragment>
         )}
