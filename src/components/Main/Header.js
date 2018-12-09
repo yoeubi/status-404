@@ -8,6 +8,10 @@ import { ReactComponent as Hambergur } from "../../img/grabber.svg";
 const cx = classNames.bind(styles);
 
 class Header extends Component {
+  componentWillUnmount() {
+    const { handleBodyOnModal } = this.props;
+    handleBodyOnModal("close");
+  }
   render() {
     const {
       handleBodyOnModal,

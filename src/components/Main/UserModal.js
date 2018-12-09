@@ -57,7 +57,10 @@ class UserModal extends Component {
       }
     ]
   };
-
+  componentWillUnmount() {
+    const { handleBodyOnModal } = this.props;
+    handleBodyOnModal("close");
+  }
   render() {
     const {
       handleBodyOnModal,
