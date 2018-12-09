@@ -2,7 +2,6 @@ import React, { Component } from "react";
 import styles from "./StoreReviewTap.module.scss";
 import classNames from "classnames/bind";
 import Rating from "react-rating";
-// import ReviewWriteModal from "./ReviewWriteModal";
 
 // SVG ICON
 import { ReactComponent as Star } from "../../img/star.svg"; // 별 아이콘

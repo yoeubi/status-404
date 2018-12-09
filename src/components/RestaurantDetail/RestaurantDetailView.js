@@ -149,7 +149,7 @@ class RestaurantDetailView extends Component {
           ) : activeTab === "info" ? (
             <StoreInfoTap />
           ) : activeTab === "review" ? (
-            <StoreReviewTapContainer />
+            <StoreReviewTapContainer name={name} />
           ) : null}
         </div>
 
