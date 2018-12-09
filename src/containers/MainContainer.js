@@ -17,8 +17,17 @@ class MainContainer extends Component {
     this.state = {
       // 모달 활성화 여부
       show: false,
-      addressSearchShow: false
+      addressSearchShow: false,
+      loading: true
     };
+  }
+
+  componentDidMount() {
+    setTimeout(() => {
+      this.setState({
+        loading: false
+      });
+    }, 1000);
   }
 
   handleUserModal = () => {
@@ -32,7 +41,7 @@ class MainContainer extends Component {
   };
 
   render() {
-    const { show, addressSearchShow } = this.state;
+    const { show, addressSearchShow, loading } = this.state;
     const { user, address } = this.props; // <=== UserContext 에 작성된 상태가 props로 전달됩니다.
     return (
       <React.Fragment>
@@ -53,7 +62,7 @@ class MainContainer extends Component {
           show={addressSearchShow}
           onAddressSearch={this.handleAddressSearch}
         />
-        <MainView />
+        <MainView loading={loading} />
       </React.Fragment>
     );
   }

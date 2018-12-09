@@ -8,7 +8,7 @@ class UiProvider extends Component {
 
     this.handleBodyOnModal = mode => {
       // 모달 활성화시 body 고정해주는 함수
-      console.log("handleBodyOnModal");
+      // console.log("handleBodyOnModal");
       if (mode === "open") {
         document.body.style.overflow = "hidden";
       } else if (mode === "close") {
