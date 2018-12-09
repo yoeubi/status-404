@@ -1,4 +1,5 @@
 import React, { Component } from "react";
+import { withUi } from "../../context/UiContext";
 import classNames from "classnames/bind";
 import styles from "./Header.module.scss";
 import { ReactComponent as ChevronDown } from "../../img/chevron-down.svg";
@@ -8,10 +9,21 @@ const cx = classNames.bind(styles);
 
 class Header extends Component {
   render() {
-    const { address, onUserModal, onAddressSearch } = this.props;
+    const {
+      handleBodyOnModal,
+      address,
+      onUserModal,
+      onAddressSearch
+    } = this.props;
     return (
       <div className={cx("header")}>
-        <Hambergur className={cx("hambergur")} onClick={onUserModal} />
+        <Hambergur
+          className={cx("hambergur")}
+          onClick={() => {
+            handleBodyOnModal("open");
+            onUserModal();
+          }}
+        />
 
         <div onClick={onAddressSearch} className={cx("addressInput")}>
           <span className={cx("address")}>
@@ -24,4 +36,4 @@ class Header extends Component {
   }
 }
 
-export default Header;
+export default withUi(Header);

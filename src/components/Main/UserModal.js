@@ -1,6 +1,7 @@
 import React, { Component } from "react";
 import styles from "./UserModal.module.scss";
 import classNames from "classnames/bind";
+import { withUi } from "../../context/UiContext";
 import { Link } from "react-router-dom";
 
 import { ReactComponent as Avater } from "../../img/mark-github.svg";
@@ -58,12 +59,21 @@ class UserModal extends Component {
   };
 
   render() {
-    const { user, showModal, onUserModal, navList } = this.props;
+    const {
+      handleBodyOnModal,
+      user,
+      showModal,
+      onUserModal,
+      navList
+    } = this.props;
     // FIXME :: 모달 활성화시 Layout 에스크롤이 생기지 않게 하기 위해 css 트릭을 적용하였으나
     //          활성화시 어떤 위치에서도 최상단으로 이동하는 버그가 있어서 해결해야 함
     return (
       <div
-        onClick={onUserModal}
+        onClick={() => {
+          handleBodyOnModal("close");
+          onUserModal();
+        }}
         className={cx("background", { show: showModal })}
       >
         <div
@@ -145,4 +155,4 @@ class UserModal extends Component {
   }
 }
 
-export default UserModal;
+export default withUi(UserModal);

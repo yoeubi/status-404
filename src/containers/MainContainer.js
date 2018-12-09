@@ -1,5 +1,6 @@
 import React, { Component } from "react";
 import { withUser } from "../context/UserContext";
+import { UiProvider } from "../context/UiContext";
 import MainView from "../components/Main/MainView";
 import Header from "../components/Main/Header";
 import UserModal from "../components/Main/UserModal";
@@ -35,17 +36,19 @@ class MainContainer extends Component {
     const { user, address } = this.props; // <=== UserContext 에 작성된 상태가 props로 전달됩니다.
     return (
       <React.Fragment>
-        <UserModal
-          user={user}
-          onUserModal={this.handleUserModal}
-          showModal={show}
-        />
-        <Header
-          user={user}
-          address={address}
-          onUserModal={this.handleUserModal}
-          onAddressSearch={this.handleAddressSearch}
-        />
+        <UiProvider>
+          <UserModal
+            user={user}
+            onUserModal={this.handleUserModal}
+            showModal={show}
+          />
+          <Header
+            user={user}
+            address={address}
+            onUserModal={this.handleUserModal}
+            onAddressSearch={this.handleAddressSearch}
+          />
+        </UiProvider>
         <AddressSearchContainer
           show={addressSearchShow}
           onAddressSearch={this.handleAddressSearch}
