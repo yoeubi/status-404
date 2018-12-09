@@ -8,22 +8,6 @@ import { ReactComponent as BackBtn } from "../../svg/arrow-left.svg";
 const cx = classNames.bind(styles);
 
 export default class AddressSearchResult extends Component {
-  constructor(props) {
-    super(props);
-
-    this.state = {
-      // userInput: "",
-      // searchResult: []
-    };
-  }
-
-  // handleUserInput = e => {
-  //   const userInput = e.target.value;
-  //   this.setState({
-  //     userInput
-  //   });
-  // };
-
   render() {
     const {
       // show,

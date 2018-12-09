@@ -14,7 +14,6 @@ class AddressSearchContainer extends Component {
       searchResult: [],
       userInput: "",
       recentAddress: []
-      // address: []
     };
 
     // loading: false

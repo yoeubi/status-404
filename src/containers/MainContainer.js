@@ -26,9 +26,7 @@ class MainContainer extends Component {
   };
   // 주소 검색 모달 활성화 handle function
   handleAddressSearch = () => {
-    // const { address } = this.props;
     this.setState({ addressSearchShow: !this.state.addressSearchShow });
-    // this.setState({ address: address[0] });
   };
 
   render() {
