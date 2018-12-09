@@ -1,11 +1,10 @@
 import React, { Component } from "react";
 import StoreReviewTap from "../components/RestaurantDetail/StoreReviewTap";
-import ReviewWriteModal from "../components/RestaurantDetail/ReviewWriteModal";
+import ReviewModalContainer from "./ReviewModalContainer";
 
 export default class StoreReviewTapContainer extends Component {
   constructor(props) {
     super(props);
-
     this.state = {
       // 리뷰 작성 모달의 활성화 여부
       show: false
@@ -28,7 +27,7 @@ export default class StoreReviewTapContainer extends Component {
           show={show}
           onReviewWriteModal={() => this.handleReviewWriteModal()}
         />
-        <ReviewWriteModal
+        <ReviewModalContainer
           name={name}
           show={show}
           onReviewWriteModal={() => this.handleReviewWriteModal()}

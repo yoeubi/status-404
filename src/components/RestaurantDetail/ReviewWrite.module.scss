@@ -1,0 +1,19 @@
+@import "../../index.scss";
+
+.container {
+  position: fixed;
+  top: 0;
+  right: 0;
+  width: 100%;
+  height: 100%;
+  color: black;
+  z-index: 100;
+  .HeaderContainer {
+    height: 150px;
+    background-color: rgb(243, 242, 242);
+  }
+  .BodyContainer {
+    height: calc(100% - 150px);
+    background-color: white;
+  }
+}

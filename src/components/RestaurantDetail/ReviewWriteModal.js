@@ -11,7 +11,7 @@ const cx = classNames.bind(styles);
 
 export default class ReviewWriteModal extends Component {
   render() {
-    const { show, name, onReviewWriteModal } = this.props;
+    const { show, name, onReviewWriteModal, onReviewWritePage } = this.props;
     return (
       <>
         <div className={cx("container", { show: show })}>
@@ -24,7 +24,7 @@ export default class ReviewWriteModal extends Component {
             </p>
             드신 음식은 어떠셨어요?
           </h1>
-          <div className={cx("Stars")}>
+          <div className={cx("Stars")} onClick={onReviewWritePage}>
             <Rating
               emptySymbol={
                 <Star
