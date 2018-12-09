@@ -57,11 +57,12 @@ class AddressSearchContainer extends Component {
     });
   };
 
-  handleFinishBtn = e => {
+  handleFinishBtn = index => {
     const { searchResult } = this.state;
-    console.log(searchResult);
-    this.setState({ recentAddress: searchResult, page: "address-search" });
-    // localStorage.setItem("address");
+    this.setState({
+      recentAddress: searchResult[index],
+      page: "address-search"
+    });
   };
 
   render() {
