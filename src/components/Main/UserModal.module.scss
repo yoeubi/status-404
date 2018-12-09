@@ -93,9 +93,9 @@ $modal-font-size: 2rem;
       display: flex;
       justify-content: center;
       align-items: center;
-      img {
+      svg {
         width: 100%;
-        height: 100%;
+        height: auto;
       }
     }
     .headerLogin {
@@ -138,8 +138,9 @@ $modal-font-size: 2rem;
   .banner {
     background: $main-color;
     @include center;
-    img {
+    svg {
       width: 100%;
+      height: auto;
     }
   }
   .menu {

@@ -22,7 +22,7 @@ import { ReactComponent as Fastfood } from "../../img/12_fastfood.svg";
 import { ReactComponent as Franchise } from "../../img/13_franchise.svg";
 import { ReactComponent as Matzip } from "../../img/14_matzip.svg";
 import { ReactComponent as SearchIcon } from "../../img/search.svg";
-import BottomBanner from "../../img/main_bottom_banner.png";
+import { ReactComponent as BottomBanner } from "../../img/main_bottom_banner.svg";
 
 const cx = classNames.bind(styles);
 
@@ -181,7 +181,7 @@ class MainView extends Component {
           </ul>
 
           <div className={cx("bottomBanner")}>
-            <img src={BottomBanner} alt="BottomBanner" />
+            <BottomBanner />
           </div>
         </div>
 

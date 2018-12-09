@@ -11,8 +11,8 @@ import { ReactComponent as Cart } from "../../img/shopping-cart.svg";
 import { ReactComponent as Payment } from "../../img/payment.svg";
 import { ReactComponent as Heart } from "../../img/heart.svg";
 import { ReactComponent as Review } from "../../img/consulting-message.svg";
-import BannerImg01 from "../../img/banner_img_01.png";
-import BannerImg02 from "../../img/banner_img_02.png";
+import { ReactComponent as BannerImg01 } from "../../img/banner_img_01.svg";
+import { ReactComponent as BannerImg02 } from "../../img/banner_img_02.svg";
 
 const cx = classNames.bind(styles);
 
@@ -107,7 +107,7 @@ class UserModal extends Component {
             // 미로그인시 : user === null
             <div className={cx("headerNoLogin")}>
               <div className={cx("headerNoLoginBanner")}>
-                <img src={BannerImg02} alt="banner_img_02.png" />
+                <BannerImg02 />
               </div>
               <Link to="/login" className={cx("headerLogin")}>
                 로그인
@@ -128,7 +128,7 @@ class UserModal extends Component {
             </ul>
           </div>
           <div className={cx("banner")}>
-            <img src={BannerImg01} alt="banner_img_01.png" />
+            <BannerImg01 />
           </div>
           <div>
             <ul className={cx("menu")}>
