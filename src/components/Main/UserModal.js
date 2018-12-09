@@ -4,7 +4,14 @@ import classNames from "classnames/bind";
 import { Link } from "react-router-dom";
 
 import { ReactComponent as Avater } from "../../img/mark-github.svg";
-import BannerImg from "../../img/banner_img_01.png";
+import { ReactComponent as Coin } from "../../img/coins.svg";
+import { ReactComponent as Coupon } from "../../img/coupon.svg";
+import { ReactComponent as Cart } from "../../img/shopping-cart.svg";
+import { ReactComponent as Payment } from "../../img/payment.svg";
+import { ReactComponent as Heart } from "../../img/heart.svg";
+import { ReactComponent as Review } from "../../img/consulting-message.svg";
+import BannerImg01 from "../../img/banner_img_01.png";
+import BannerImg02 from "../../img/banner_img_02.png";
 
 const cx = classNames.bind(styles);
 
@@ -14,37 +21,37 @@ class UserModal extends Component {
       {
         id: 0,
         title: "포인트",
-        img: <Avater />,
+        img: <Coin />,
         url: ""
       },
       {
         id: 1,
         title: "쿠폰함",
-        img: <Avater />,
+        img: <Coupon />,
         url: ""
       },
       {
         id: 2,
         title: "장바구니",
-        img: <Avater />,
+        img: <Cart />,
         url: "/cart"
       },
       {
         id: 3,
         title: "주문내역",
-        img: <Avater />,
+        img: <Payment />,
         url: "/myorder"
       },
       {
         id: 4,
         title: "단골매장",
-        img: <Avater />,
+        img: <Heart style={{ fill: "#F25452", stroke: "black" }} />,
         url: ""
       },
       {
         id: 5,
         title: "리뷰관리",
-        img: <Avater />,
+        img: <Review />,
         url: ""
       }
     ]
@@ -87,7 +94,7 @@ class UserModal extends Component {
             // 미로그인시 : user === null
             <div className={cx("headerNoLogin")}>
               <div className={cx("headerNoLoginBanner")}>
-                <img src={BannerImg} alt="banner_img_01.png" />
+                <img src={BannerImg02} alt="banner_img_02.png" />
               </div>
               <Link to="/login" className={cx("headerLogin")}>
                 로그인
@@ -107,7 +114,9 @@ class UserModal extends Component {
               ))}
             </ul>
           </div>
-          <div className={cx("banner")}>banner</div>
+          <div className={cx("banner")}>
+            <img src={BannerImg01} alt="banner_img_01.png" />
+          </div>
           <div>
             <ul className={cx("menu")}>
               <li className={cx("item")}>공지사항</li>

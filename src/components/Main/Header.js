@@ -1,5 +1,4 @@
 import React, { Component } from "react";
-import { Link } from "react-router-dom";
 import classNames from "classnames/bind";
 import styles from "./Header.module.scss";
 import { ReactComponent as ChevronDown } from "../../img/chevron-down.svg";
