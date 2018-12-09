@@ -12,10 +12,10 @@ export default class StoreReviewTapContainer extends Component {
   }
 
   handleReviewWriteModal = () => {
+    console.log("된다!");
     this.setState({
       show: true
     });
-    console.log("된다!");
   };
 
   render() {
@@ -24,7 +24,7 @@ export default class StoreReviewTapContainer extends Component {
     return (
       <>
         <StoreReviewTap
-          // show={show}
+          show={show}
           onReviewWriteModal={() => this.handleReviewWriteModal()}
         />
         <ReviewWriteModal show={show} />

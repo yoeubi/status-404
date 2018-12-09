@@ -7,12 +7,12 @@ import OriginInfo from "./OriginInfo";
 import CartBtn from "./CartBtn";
 import withLoading from "../../HOC/withLoading";
 import StoreInfoTap from "./StoreInfoTap";
-import StoreReviewTap from "./StoreReviewTap";
 import { withUi } from "../../context/UiContext";
 
 import styles from "./RestaurantDetailView.module.scss";
 import classNames from "classnames/bind";
 import ProductModalView from "./ProductModalView";
+import StoreReviewTapContainer from "../../containers/StoreReviewTapContainer";
 
 const cx = classNames.bind(styles);
 
@@ -149,7 +149,7 @@ class RestaurantDetailView extends Component {
           ) : activeTab === "info" ? (
             <StoreInfoTap />
           ) : activeTab === "review" ? (
-            <StoreReviewTap />
+            <StoreReviewTapContainer />
           ) : null}
         </div>
 
