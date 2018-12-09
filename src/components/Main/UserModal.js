@@ -4,6 +4,7 @@ import classNames from "classnames/bind";
 import { Link } from "react-router-dom";
 
 import { ReactComponent as Avater } from "../../img/mark-github.svg";
+import BannerImg from "../../img/banner_img_01.png";
 
 const cx = classNames.bind(styles);
 
@@ -85,7 +86,9 @@ class UserModal extends Component {
           ) : (
             // 미로그인시 : user === null
             <div className={cx("headerNoLogin")}>
-              <div className={cx("headerNoLoginBanner")}>BannerImage</div>
+              <div className={cx("headerNoLoginBanner")}>
+                <img src={BannerImg} alt="banner_img_01.png" />
+              </div>
               <Link to="/login" className={cx("headerLogin")}>
                 로그인
               </Link>
