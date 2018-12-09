@@ -41,6 +41,7 @@ class MainContainer extends Component {
           showModal={show}
         />
         <Header
+          user={user}
           address={address}
           onUserModal={this.handleUserModal}
           onAddressSearch={this.handleAddressSearch}
