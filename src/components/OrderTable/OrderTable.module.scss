@@ -1,0 +1,27 @@
+.order-table {
+    padding: 1.5rem;
+    font-size: 1.3rem;
+    background: #fff;
+    table {
+        width: 100%;
+        tr {
+            border-top: 1px solid #eee;
+            &:nth-child(1) ,&:nth-child(2), &:nth-child(4){
+                border-top: none;
+            }
+            td {
+                width: 50%;
+                padding: 1rem 0;
+                &:not(:first-child){
+                    text-align: right;
+                }
+                &.detail {
+                    font-size: 1.1rem;
+                    color: #999;
+                    padding: 0;
+                    padding-bottom: 1rem;
+                }
+            }
+        }
+    }
+}

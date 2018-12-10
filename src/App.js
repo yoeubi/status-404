@@ -10,7 +10,9 @@ import NameSearch from "./components/NameSearch";
 import RestaurantList from "./components/RestaurantList/RestaurantList";
 import CartList from "./components/CartList/CartList";
 import Payment from "./components/Payment";
-import PayResult from "./components/PayResult";
+import OrderTable from './components/OrderTable';
+import PayResult from "./components/PayResult/PayResult";
+import Order from "./components/Order/Order";
 
 class App extends Component {
   render() {

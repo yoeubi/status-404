@@ -12,6 +12,8 @@
         transform: translateY(0);
     }
     .list {
-        border-bottom: 1px solid #eee; 
+        &:nth-child(2n) {
+            border-bottom: 1px solid #eee; 
+        }
     }
 }
