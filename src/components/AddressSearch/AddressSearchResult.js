@@ -3,8 +3,6 @@ import styles from "./AddressSearchResult.module.scss";
 import classNames from "classnames/bind";
 // import SVG
 import { ReactComponent as MagnifyingGlass } from "../../img/search.svg";
-import { ReactComponent as Crosshair } from "../../img/crosshair.svg";
-import { ReactComponent as Ex } from "../../img/x.svg";
 import { ReactComponent as BackBtn } from "../../svg/arrow-left.svg";
 
 const cx = classNames.bind(styles);
@@ -67,7 +65,7 @@ export default class AddressSearchResult extends Component {
             </div>
           </div>
           <div className={cx("listContainer")}>
-            <h2 className={cx("listTitle")} />
+            {/* <h2 className={cx("listTitle")} /> */}
             <ul className={cx("recentAddress")}>
               {searchResult.map((s, index) => (
                 <li key={s.id} className={cx("listItem")}>
