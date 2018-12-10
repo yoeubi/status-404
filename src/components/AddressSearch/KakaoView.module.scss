@@ -1,0 +1,24 @@
+.Wrap {
+  width: 100%;
+  height: 100vh;
+  position: fixed;
+  top: 0;
+  left: 0;
+  background: #fff;
+  z-index: 10;
+
+  .Map {
+    width: 100%;
+    height: 100vh;
+  }
+  .MarkedAddress {
+    width: 90%;
+    height: 45px;
+    background: #fff;
+    font-size: 1.5rem;
+    position: fixed;
+    bottom: 0;
+    left: 5%;
+    z-index: 11;
+  }
+}

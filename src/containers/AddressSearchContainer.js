@@ -4,6 +4,7 @@ import AddressSearchView from "../components/AddressSearch/AddressSearchView";
 import AddressSearchResult from "../components/AddressSearch/AddressSearchResult";
 import api from "../api/kakaoAPI";
 import { withUser } from "../context/UserContext";
+import KakaoView from "../components/AddressSearch/KakaoView";
 
 class AddressSearchContainer extends Component {
   constructor(props) {
@@ -65,6 +66,12 @@ class AddressSearchContainer extends Component {
     // localStorage.setItem("address");
   };
 
+  handleKakaoView = () => {
+    this.setState({
+      page: "kakao"
+    });
+  };
+
   render() {
     const { searchResult, userInput, recentAddress } = this.state;
     const { onAddressSearch, show, address } = this.props;
@@ -79,6 +86,7 @@ class AddressSearchContainer extends Component {
             show={show}
             recentAddress={recentAddress}
             address={address}
+            onKakaoView={this.handleKakaoView}
           />
         ) : this.state.page === "address-search-result" ? (
           <AddressSearchResult
@@ -90,6 +98,8 @@ class AddressSearchContainer extends Component {
             recentAddress={recentAddress}
             address={address}
           />
+        ) : this.state.page === "kakao" ? (
+          <KakaoView />
         ) : null}
       </>
     );
