@@ -1,33 +1,55 @@
 import React, { Component } from "react";
 import StoreReviewTap from "../components/RestaurantDetail/StoreReviewTap";
-import ReviewWriteModal from "../components/RestaurantDetail/ReviewWriteModal";
+import ReviewModalContainer from "./ReviewModalContainer";
 
 export default class StoreReviewTapContainer extends Component {
   constructor(props) {
     super(props);
-
     this.state = {
-      show: false
+      // 리뷰 작성 모달의 활성화 여부
+      show: false,
+      // 사용자의 리뷰 작성 내용
+      review: ""
     };
   }
 
+  // 리뷰 작성 모달의 활성화를 제어하는 함수
   handleReviewWriteModal = () => {
+    this.setState(prevState => ({
+      show: !prevState.show
+    }));
+  };
+
+  handleUesrInput = e => {
+    const review = e.target.value;
     this.setState({
-      show: true
+      review
     });
-    console.log("된다!");
+  };
+
+  handleSubmitBtn = () => {
+    this.setState({
+      show: false
+    });
   };
 
   render() {
-    // const { activePhotoReviewBtn, orderBtn } = this.state;
-    const { show } = this.state;
+    const { name } = this.props;
+    const { show, review } = this.state;
     return (
       <>
         <StoreReviewTap
-          // show={show}
+          show={show}
           onReviewWriteModal={() => this.handleReviewWriteModal()}
         />
-        <ReviewWriteModal show={show} />
+        <ReviewModalContainer
+          review={review}
+          name={name}
+          show={show}
+          onReviewWriteModal={() => this.handleReviewWriteModal()}
+          onUserInput={e => this.handleUesrInput(e)}
+          onSubmitBtn={() => this.handleSubmitBtn()}
+        />
       </>
     );
   }
