@@ -10,7 +10,9 @@ class KakaoView extends Component {
     this.daumMap = React.createRef();
 
     this.state = {
-      markedAddress: null
+      markedAddress: null,
+      detailMode: false,
+      detailAddress: ""
     };
   }
 
@@ -98,12 +100,41 @@ class KakaoView extends Component {
     });
   };
 
+  handleDetailAddress = address => {
+    this.setState({
+      detailAddress: address
+    });
+  };
+
+  handleDetailMode = () => {
+    this.setState(prevState => ({
+      detailMode: !prevState.detailMode
+    }));
+  };
+
   render() {
+    console.log(this.state.detailAddress);
     return (
       <div className={cx("Wrap")}>
         <div ref={this.daumMap} className={cx("Map")} />
         <div className={cx("MarkedAddress")}>
           {this.state.markedAddress ? this.state.markedAddress : "마커마커마커"}
+          {this.state.detailMode && (
+            <React.Fragment>
+              <input
+                type="text"
+                onChange={e => this.handleDetailAddress(e.target.value)}
+                value={this.state.detailAddress}
+                placeholder="ㅎㅇ"
+                autoFocus
+              />
+              <button>상세 주소로 설정하기</button>
+            </React.Fragment>
+          )}
+
+          <button onClick={() => this.handleDetailMode()}>
+            이 위치로 주소 설정
+          </button>
         </div>
       </div>
     );
