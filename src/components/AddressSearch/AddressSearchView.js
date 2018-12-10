@@ -2,7 +2,7 @@ import React, { Component } from "react";
 import styles from "./AddressSearch.module.scss";
 import classNames from "classnames/bind";
 
-// import SVG
+// SVG
 import { ReactComponent as MagnifyingGlass } from "../../img/search.svg";
 import { ReactComponent as Crosshair } from "../../img/crosshair.svg";
 import { ReactComponent as Ex } from "../../img/x.svg";
@@ -10,37 +10,17 @@ import { ReactComponent as Ex } from "../../img/x.svg";
 const cx = classNames.bind(styles);
 
 class AddressSearchView extends Component {
-  constructor(props) {
-    super(props);
-
-    this.state = {
-      userInput: ""
-    };
-  }
-
-  // componentDidMount = () => {
-  //   localStorage.getItem("address");
-  // };
-
-  // handleUserInput = e => {
-  //   const userInput = e.target.value;
-  //   this.setState({
-  //     userInput
-  //   });
-  // };
-
   render() {
     const {
       show,
       onAddressSearch,
       getAddress,
       onSubmitBtn,
-      address,
       userInput,
-      onUserInput
+      onUserInput,
+      // address,
+      recentAddress
     } = this.props;
-    // const { userInput } = this.state;
-    // console.log(address);
     return (
       <>
         <div className={cx("container", { show: show })}>
@@ -81,18 +61,16 @@ class AddressSearchView extends Component {
           <div className={cx("listContainer")}>
             <h2 className={cx("listTitle")}>최근 주소</h2>
             <ul className={cx("recentAddress")}>
-              {address &&
-                address.map((a, index) => (
+              {recentAddress &&
+                recentAddress.map((r, index) => (
                   <li key={index} className={cx("listItem")}>
-                    <div className={cx("address")}>
-                      {a.address.address_name}
-                    </div>
+                    <div className={cx("address")}>{r.address_name}</div>
                     <div className={cx("textContainer")}>
-                      {a.road_address && (
+                      {r.road_address && (
                         <>
                           <div className={cx("box")}>도로명</div>
                           <div className={cx("road")}>
-                            {a.road_address && a.road_address.address_name}
+                            {r.road_address && r.road_address}
                           </div>
                         </>
                       )}

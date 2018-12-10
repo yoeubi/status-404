@@ -1,33 +1,15 @@
 import React, { Component } from "react";
 import styles from "./AddressSearchResult.module.scss";
 import classNames from "classnames/bind";
-// import SVG
+// SVG
 import { ReactComponent as MagnifyingGlass } from "../../img/search.svg";
 import { ReactComponent as BackBtn } from "../../svg/arrow-left.svg";
 
 const cx = classNames.bind(styles);
 
 export default class AddressSearchResult extends Component {
-  constructor(props) {
-    super(props);
-
-    this.state = {
-      // userInput: "",
-      // searchResult: []
-    };
-  }
-
-  // handleUserInput = e => {
-  //   const userInput = e.target.value;
-  //   this.setState({
-  //     userInput
-  //   });
-  // };
-
   render() {
     const {
-      // show,
-      // onAddressSearch,
       getAddress,
       onBackBtn,
       onUserInput,
@@ -65,10 +47,9 @@ export default class AddressSearchResult extends Component {
             </div>
           </div>
           <div className={cx("listContainer")}>
-            {/* <h2 className={cx("listTitle")} /> */}
             <ul className={cx("recentAddress")}>
               {searchResult.map((s, index) => (
-                <li key={s.id} className={cx("listItem")}>
+                <li key={index} className={cx("listItem")}>
                   <div className={cx("place")}>{s.place_name}</div>
                   <div className={cx("address")}>{s.address_name}</div>
                   <div className={cx("textContainer")}>
@@ -81,7 +62,10 @@ export default class AddressSearchResult extends Component {
                   </div>
                   <button
                     className={cx("finishBtn")}
-                    onClick={() => onFinishBtn(s.id)}
+                    onClick={index =>
+                      // onFinishBtn(s.address_name, s.road_address_name)
+                      onFinishBtn(index)
+                    }
                   >
                     선택
                   </button>

@@ -8,7 +8,14 @@ const cx = classNames.bind(styles);
 
 class PaymentMethod extends Component {
   render() {
-    const { popup, handlePopup, method, handleToggle ,payList, generalList } = this.props;
+    const {
+      popup,
+      handlePopup,
+      method,
+      handleToggle,
+      payList,
+      generalList
+    } = this.props;
     return (
       <div className={cx("payment-method", { popup })}>
         <CloseHeader title="결제수단" onClick={handlePopup} />
@@ -22,14 +29,16 @@ class PaymentMethod extends Component {
             />
           ))}
         </div>
-        {generalList.map((pay, index) => (
-          <CircleCheckBox
-            key={index}
-            text={pay}
-            handleToggle={() => handleToggle(pay)}
-            disabled={method === pay}
-          />
-        ))}
+        <div className={cx("list")}>
+          {generalList.map((pay, index) => (
+            <CircleCheckBox
+              key={index}
+              text={pay}
+              handleToggle={() => handleToggle(pay)}
+              disabled={method === pay}
+            />
+          ))}
+        </div>
       </div>
     );
   }

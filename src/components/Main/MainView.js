@@ -1,5 +1,6 @@
 import React, { Component } from "react";
 import "react-responsive-carousel/lib/styles/carousel.min.css";
+import withLoading from "../../HOC/withLoading";
 import { Link } from "react-router-dom";
 import { Carousel } from "react-responsive-carousel";
 // https://www.npmjs.com/package/react-responsive-carousel
@@ -21,6 +22,7 @@ import { ReactComponent as Fastfood } from "../../img/12_fastfood.svg";
 import { ReactComponent as Franchise } from "../../img/13_franchise.svg";
 import { ReactComponent as Matzip } from "../../img/14_matzip.svg";
 import { ReactComponent as SearchIcon } from "../../img/search.svg";
+import { ReactComponent as BottomBanner } from "../../img/main_bottom_banner.svg";
 
 const cx = classNames.bind(styles);
 
@@ -141,8 +143,8 @@ class MainView extends Component {
               return (
                 <li className={cx("item")} key={c.name}>
                   <Link to={`/list?category=${c.name}`}>
-                  {c.img}
-                  {c.name}
+                    {c.img}
+                    {c.name}
                   </Link>
                 </li>
               );
@@ -178,7 +180,9 @@ class MainView extends Component {
             </li>
           </ul>
 
-          <div className={cx("bottomBanner")}>bottomBanner</div>
+          <div className={cx("bottomBanner")}>
+            <BottomBanner />
+          </div>
         </div>
 
         <div className={cx("footer")}>
@@ -203,4 +207,4 @@ class MainView extends Component {
   }
 }
 
-export default MainView;
+export default withLoading(MainView);
