@@ -33,7 +33,7 @@ class App extends Component {
           <Route path="/cart" component={CartList} />
           <Route path="/pay" component={Payment} />
           <Route path="/myorder" component={MyOrderPage} />
-          <Route path="/test" component={PayResult} />
+          <Route path="/payresult" component={PayResult} />
         </Switch>
       </Router>
     );
