@@ -7,7 +7,9 @@ export default class StoreReviewTapContainer extends Component {
     super(props);
     this.state = {
       // 리뷰 작성 모달의 활성화 여부
-      show: false
+      show: false,
+      // 사용자의 리뷰 작성 내용
+      review: ""
     };
   }
 
@@ -18,9 +20,22 @@ export default class StoreReviewTapContainer extends Component {
     }));
   };
 
+  handleUesrInput = e => {
+    const review = e.target.value;
+    this.setState({
+      review
+    });
+  };
+
+  handleSubmitBtn = () => {
+    this.setState({
+      show: false
+    });
+  };
+
   render() {
     const { name } = this.props;
-    const { show } = this.state;
+    const { show, review } = this.state;
     return (
       <>
         <StoreReviewTap
@@ -28,9 +43,12 @@ export default class StoreReviewTapContainer extends Component {
           onReviewWriteModal={() => this.handleReviewWriteModal()}
         />
         <ReviewModalContainer
+          review={review}
           name={name}
           show={show}
           onReviewWriteModal={() => this.handleReviewWriteModal()}
+          onUserInput={e => this.handleUesrInput(e)}
+          onSubmitBtn={() => this.handleSubmitBtn()}
         />
       </>
     );

@@ -8,9 +8,7 @@ export default class ReviewModalContainer extends Component {
 
     this.state = {
       // 리뷰 작성 모달 내의 페이지 상태
-      reviewWritePage: false,
-      // 사용자의 리뷰 작성 내용
-      review: ""
+      reviewWritePage: false
     };
   }
   // 리뷰 작성 모달에서의 페이지 상태를 제어하는 함수
@@ -18,11 +16,16 @@ export default class ReviewModalContainer extends Component {
     this.setState(prevState => ({
       reviewWritePage: !prevState.reviewWritePage
     }));
-    console.log("done!");
   };
 
   render() {
-    const { show, name, onReviewWriteModal } = this.props;
+    const {
+      show,
+      name,
+      onReviewWriteModal,
+      onUserInput,
+      onSubmitBtn
+    } = this.props;
     const { review } = this.state;
     return (
       <>
@@ -35,8 +38,11 @@ export default class ReviewModalContainer extends Component {
           />
         ) : this.state.reviewWritePage === true ? (
           <ReviewWrite
+            name={name}
             review={review}
             onReviewWritePage={() => this.handleReviewWritePage()}
+            onUserInput={onUserInput}
+            onSubmitBtn={onSubmitBtn}
           />
         ) : null}
       </>
