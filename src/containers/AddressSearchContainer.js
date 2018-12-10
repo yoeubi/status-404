@@ -57,10 +57,11 @@ class AddressSearchContainer extends Component {
     });
   };
 
-  handleFinishBtn = index => {
+  handleFinishBtn = id => {
     const { searchResult } = this.state;
+    const index = searchResult.findIndex(item => item.id === id);
+    this.state.recentAddress.push(searchResult[index]);
     this.setState({
-      recentAddress: searchResult[index],
       page: "address-search"
     });
   };
