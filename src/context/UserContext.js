@@ -197,10 +197,7 @@ class UserProvider extends Component {
           success: true
         });
       } catch (e) {
-        this.setState({
-          warning: "token 로그인 실패",
-          success: false
-        });
+        console.log('token 로그인 실패 or token 미존재')
       }
     }
   }
@@ -249,8 +246,17 @@ class UserProvider extends Component {
       warning: `${target} 로그인이 실패했습니다.`
     });
   }
-  join({nickname, phone, password, username}){
-    console.log(nickname, phone, password, username);
+  async join({nickname, phone, password, username}){
+    try {
+      await mainAPI.post("/members/register/", {
+        username,
+        password,
+        nickname,
+        phone
+      });
+    } catch(e) {
+      throw e;
+    }
   }
   render() {
     const { children } = this.props;
