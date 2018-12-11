@@ -78,7 +78,14 @@ class RestaurantDetailView extends Component {
 
   render() {
     const { isTop, activeTab, productModal } = this.state;
-    const { name, storeimage_set, fee, least_cost, rating } = this.props.store; // 스토어 정보
+    const {
+      name,
+      storeimage_set,
+      fee,
+      least_cost,
+      rating,
+      menu
+    } = this.props.store; // 스토어 정보
     const { handleBodyOnModal } = this.props;
     return (
       <div className={cx("RestaurantDetailWrap")}>
@@ -118,6 +125,7 @@ class RestaurantDetailView extends Component {
             <>
               <RestaurantMenu
                 title={"menu"}
+                menu={menu}
                 onProductModal={this.handleProductModal}
                 onHandleBodyOnModal={handleBodyOnModal}
               />
