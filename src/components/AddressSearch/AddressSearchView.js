@@ -19,7 +19,8 @@ class AddressSearchView extends Component {
       userInput,
       onUserInput,
       // address,
-      recentAddress
+      recentAddress,
+      onDeleteBtn
     } = this.props;
     return (
       <>
@@ -75,7 +76,10 @@ class AddressSearchView extends Component {
                         </>
                       )}
                     </div>
-                    <button className={cx("deleteButton")}>
+                    <button
+                      onClick={onDeleteBtn}
+                      className={cx("deleteButton")}
+                    >
                       <Ex />
                     </button>
                   </li>

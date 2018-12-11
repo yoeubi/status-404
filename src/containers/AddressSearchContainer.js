@@ -66,6 +66,12 @@ class AddressSearchContainer extends Component {
     });
   };
 
+  handleDeleteBtn = index => {
+    // const { recentAddress } = this.props;
+    // console.log(recentAddress[index]);
+    this.state.recentAddress.splice(index, 1);
+  };
+
   render() {
     const { searchResult, userInput, recentAddress } = this.state;
     const { onAddressSearch, show, address } = this.props;
@@ -81,13 +87,14 @@ class AddressSearchContainer extends Component {
             recentAddress={recentAddress}
             address={address}
             userInput={userInput}
+            onDeleteBtn={() => this.handleDeleteBtn()}
           />
         ) : this.state.page === "address-search-result" ? (
           <AddressSearchResult
             searchResult={searchResult}
             userInput={userInput}
             onUserInput={e => this.handleUserInput(e)}
-            onBackBtn={() => this.handleBackBtn()}
+            onBackBtn={index => this.handleBackBtn(index)}
             onFinishBtn={e => this.handleFinishBtn(e)}
             recentAddress={recentAddress}
             getAddress={this.getAddress}
