@@ -13,7 +13,7 @@ class UserProvider extends Component {
   //     img_profile: null
   //   },
   //   address: null,
-  //   /* 
+  //   /*
   //       address : [
   //           {
   //               address_name: "서울 강동구 천호동 225-15",
@@ -73,7 +73,7 @@ class UserProvider extends Component {
   //       this.setState({
   //         address: [documents[0]]
   //       });
-  //       /* 
+  //       /*
   //            address : {
   //                test :  [
   //                 {
@@ -129,11 +129,11 @@ class UserProvider extends Component {
   // }
   // socialLogin(result, history) {
   //   console.log(result);
-    
+
   //   if (result && result.status !== "unknown") {
   //     this.setState({
   //       user: {
-  //         /* 
+  //         /*
   //         pk: null,
   //       username: null,
   //       nickname: null,
@@ -162,7 +162,7 @@ class UserProvider extends Component {
   //       }
   //     });
   //     console.log(email, googleId, imageUrl, name);
-      
+
   //   } else {
   //     console.log("Google login fail");
   //   }
@@ -178,7 +178,7 @@ class UserProvider extends Component {
       img_profile: null
     },
     warning: null,
-    success : false,
+    success: false,
     login: this.login.bind(this),
     logout: this.logout.bind(this),
     facebookLogin: this.facebookLogin.bind(this),
@@ -193,13 +193,13 @@ class UserProvider extends Component {
         const { data } = await mainAPI.post("/members/profile/");
         this.setState({
           user: data,
-          warning: '',
-          success : true
+          warning: "",
+          success: true
         });
       } catch (e) {
         this.setState({
           warning: "token 로그인 실패",
-          success : false
+          success: false
         });
       }
     }
@@ -215,39 +215,39 @@ class UserProvider extends Component {
       });
       this.setState({
         user,
-        warning: '',
-          success : true
+        warning: "",
+        success: true
       });
       localStorage.setItem("token", token);
     } catch (e) {
       this.setState({
         warning: "로그인 실패했습니다.",
-          success : false
+        success: false
       });
     }
   }
   logout() {
     this.setState({
       user: null,
-      warning: '',
-      success : false
+      warning: "",
+      success: false
     });
     localStorage.removeItem("token");
   }
   facebookLogin(response) {
     // mainAPI 연결
-    console.log('facebook 로그인')
+    console.log("facebook 로그인");
     // this.failLogin('facebook')
   }
   googleLogin(response) {
     // mainAPI 연결
-    console.log('google 로그인')
+    console.log("google 로그인");
   }
   failLogin(target) {
     console.log(`${target} 로그인이 실패했습니다.`);
     this.setState({
       warning: `${target} 로그인이 실패했습니다.`
-    })
+    });
   }
 
   render() {
