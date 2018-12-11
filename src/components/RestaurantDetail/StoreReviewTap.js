@@ -103,11 +103,15 @@ export default class StoreReviewTap extends Component {
   };
 
   render() {
-    const { users, onReviewWriteModal } = this.props;
+    const { users, onReviewWriteModal, activeTab } = this.props;
     const { activePhotoReviewBtn, orderBtn } = this.state;
     return (
       <>
-        <div className={cx("ReviewTapContainer")}>
+        <div
+          className={cx("ReviewTapContainer", {
+            open: activeTab === "review"
+          })}
+        >
           <div className={cx("TopContainer")}>
             <button onClick={onReviewWriteModal} className={cx("reviewBtn")}>
               <span role="img" aria-label="Review">
