@@ -9,7 +9,6 @@ import NameSearch from "./components/NameSearch";
 import RestaurantList from "./components/RestaurantList/RestaurantList";
 import CartList from "./components/CartList/CartList";
 import Payment from "./components/Payment";
-import PayResult from "./components/PayResult/PayResult";
 import LoginContainer from "./containers/LoginContainer";
 import PayResult from "./components/PayResult/PayResult";
 import RestaurantSearchContainer from "./containers/RestaurantSearchContainer";
