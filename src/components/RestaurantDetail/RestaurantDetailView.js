@@ -86,7 +86,12 @@ class RestaurantDetailView extends Component {
       rating,
       menu
     } = this.props.store; // 스토어 정보
-    const { handleBodyOnModal, selectedMenuOnModal, selectedMenu } = this.props;
+    const {
+      handleBodyOnModal,
+      selectedMenuOnModal,
+      selectedMenu,
+      addItemToCart
+    } = this.props;
     return (
       <div className={cx("RestaurantDetailWrap")}>
         <Header isTop={isTop} name={name} />
@@ -135,16 +140,16 @@ class RestaurantDetailView extends Component {
         </div>
 
         <CartBtn fixed={true} />
-        {productModal && (
-          <ProductModalView
-            show={productModal}
-            name={name}
-            selectedMenu={selectedMenu}
-            least_cost={least_cost}
-            onProductModal={this.handleProductModal}
-            onHandleBodyOnModal={handleBodyOnModal}
-          />
-        )}
+
+        <ProductModalView
+          addItemToCart={addItemToCart}
+          show={productModal}
+          name={name}
+          selectedMenu={selectedMenu}
+          least_cost={least_cost}
+          onProductModal={this.handleProductModal}
+          onHandleBodyOnModal={handleBodyOnModal}
+        />
       </div>
     );
   }

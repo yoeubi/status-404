@@ -56,6 +56,13 @@ class RestaurantDetail extends Component {
     });
   };
 
+  addItemToCart = (food, quantity) => {
+    console.log({
+      food,
+      quantity
+    });
+  };
+
   render() {
     const { loading, store, selectedMenu } = this.state;
     return (
@@ -63,6 +70,7 @@ class RestaurantDetail extends Component {
         <RestaurantDetailView
           selectedMenu={selectedMenu}
           selectedMenuOnModal={this.selectedMenuOnModal}
+          addItemToCart={this.addItemToCart}
           loading={loading}
           store={store}
           {...this.props}
