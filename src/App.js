@@ -12,6 +12,7 @@ import Payment from "./components/Payment";
 import LoginContainer from "./containers/LoginContainer";
 import PayResult from "./components/PayResult/PayResult";
 import RestaurantSearchContainer from "./containers/RestaurantSearchContainer";
+import NewJoin from "./components/NewJoin";
 
 class App extends Component {
   render() {
@@ -37,6 +38,7 @@ class App extends Component {
           <Route path="/pay" component={Payment} />
           <Route path="/myorder" component={MyOrderPage} />
           <Route path="/payresult" component={PayResult} />
+          <Route paht="/test" component={NewJoin} />
         </Switch>
       </Router>
     );

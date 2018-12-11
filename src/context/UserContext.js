@@ -234,6 +234,7 @@ class UserProvider extends Component {
   facebookLogin(response) {
     // mainAPI 연결
     console.log("facebook 로그인");
+    console.log(response);
     // this.failLogin('facebook')
   }
   googleLogin(response) {
