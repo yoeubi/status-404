@@ -15,7 +15,9 @@ class NewLogin extends Component {
   state = {
     username: "",
     password: "",
-    focus: ""
+    focus: "",
+    google : false,
+    facebook : false
   };
   handleChange = e => {
     this.setState({
@@ -33,13 +35,13 @@ class NewLogin extends Component {
     });
   };
   render() {
-    const { username, password, focus } = this.state;
-    const { login , logout, facebookLogin , googleLogin , failLogin,  warning} = this.props;
-    console.log(this.props);
+    const { username, password, focus , google, facebook } = this.state;
+    const { login , facebookLogin , googleLogin , failLogin,  warning ,success ,history} = this.props;
+    if(success) history.replace('/');
     return <Page left={<Link to="/">
             <X style={{ transform: "scale(1.5)" }} />
           </Link>}>
-        <div className={cx("notification")}></div>
+        <div className={cx("notification")}>{warning}</div>
         <div>
           <NewInput type="text" value={username} name="username" placeholder="아이디 또는 이메일" onChange={this.handleChange} autoComplete="off" onFocus={this.handleFocus} className={cx("input", 'line')}>
             <span className={cx("clear", {
@@ -58,18 +60,15 @@ class NewLogin extends Component {
             </span>
           </NewInput>
         </div>
-        <Nothing style={{ background: "#2ac1bc", color: "#fff", fontSize: "1.4rem", height: "45px", marginTop: "3rem" , cursor :'pointer' }} onClick={login}>
+        <Nothing style={{ background: "#2ac1bc", color: "#fff", fontSize: "1.4rem", height: "45px", marginTop: "3rem" , cursor :'pointer' }} onClick={() => login(username, password)}>
           로그인
         </Nothing>
         <p className={cx("find")}><Link to="/">아아디/비밀번호 찾기</Link></p>
         <div className={cx("social-login")}>
-          <GoogleLogin clientId={process.env.REACT_APP_GOOGLE_KEY} buttonText="Google Login" className={cx("google")} onSuccess={response => this.props.googleLogin(response, this.props.history)} onFailure={() => this.setState(
-                { warning: "구글 로그인이 실패했습니다." }
-              )} />
-        <FacebookLogin appId={process.env.REACT_APP_FACEBOOK_KEY} autoLoad={this.state.facebook} callback={response => {
-              this.props.socialLogin(response, this.props.history);
-              this.setState({ facebook: false });
-            }} fields="name,email,picture" onClick={this.handleSocial} cssClass={cx("facebook")} />
+          <GoogleLogin clientId={process.env.REACT_APP_GOOGLE_KEY} buttonText="Google Login" className={cx("google")} onSuccess={googleLogin} onFailure={() => google && failLogin('google')} render={renderProps => (
+            <button onClick={() => { this.setState({ google : true }); renderProps.onClick();  } }>Google Login</button>
+          )} />
+        <FacebookLogin appId={process.env.REACT_APP_FACEBOOK_KEY} autoLoad={facebook} callback={(response) => facebook && facebookLogin(response)} fields="name,email,picture" cssClass={cx("facebook")} onClick={() => this.setState({facebook : true})} />
         </div>
         <p className={cx("join")}>
           혹시, 배달의민족이 처음이신가요? <Link to="/join">회원가입</Link>

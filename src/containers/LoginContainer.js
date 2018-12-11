@@ -1,12 +1,9 @@
 import React, { Component } from 'react';
 import NewLogin from '../components/NewLogin/NewLogin';
-import {mainAPI} from '../api';
-import { withUser } from '../context/MemberContext';
+import { withUser } from '../context/UserContext';
 
 class LoginContainer extends Component {
     render() {
-        console.log(this.props);
-        console.log(withUser)
         return (
             <NewLogin {...this.props} />
         );

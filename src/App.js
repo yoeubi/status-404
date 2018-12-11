@@ -4,7 +4,6 @@ import MainPage from "./Pages/MainPage";
 import RestaurantDetailPage from "./Pages/RestaurantDetailPage";
 import ProfilePage from "./Pages/ProfilePage";
 import MyOrderPage from "./Pages/MyOrderPage";
-import Login from "./components/Login";
 import Join from "./components/Join/Join";
 import NameSearch from "./components/NameSearch";
 import RestaurantList from "./components/RestaurantList/RestaurantList";
@@ -21,7 +20,7 @@ class App extends Component {
           <Route exact path={"/"} component={MainPage} />
           {/* 라우터는 여기다가 일단 작성하시오 */}
           {/* <Route path="/addressSearch" component={AddressSearch} /> */}
-          <Route path="/login" component={Login} />
+          <Route path="/login" component={LoginContainer} />
           <Route path="/join" component={Join} />
           <Route path="/search" component={NameSearch} />
           <Route path="/profile" component={ProfilePage} />
@@ -33,7 +32,6 @@ class App extends Component {
           <Route path="/pay" component={Payment} />
           <Route path="/myorder" component={MyOrderPage} />
           <Route path="/payresult" component={PayResult} />
-          <Route path="/test" component={LoginContainer} />
         </Switch>
       </Router>
     );
