@@ -3,7 +3,7 @@ import React, { Component } from "react";
 import Header from "./RestaurantHeader";
 import RestaurantMenu from "./RestaurantMenu";
 import RestaurantSummary from "./RestaurantSummary";
-import OriginInfo from "./OriginInfo";
+
 import CartBtn from "./CartBtn";
 import withLoading from "../../HOC/withLoading";
 import StoreInfoTap from "./StoreInfoTap";
@@ -86,7 +86,7 @@ class RestaurantDetailView extends Component {
       rating,
       menu
     } = this.props.store; // 스토어 정보
-    const { handleBodyOnModal } = this.props;
+    const { handleBodyOnModal, selectedMenuOnModal, selectedMenu } = this.props;
     return (
       <div className={cx("RestaurantDetailWrap")}>
         <Header isTop={isTop} name={name} />
@@ -121,30 +121,30 @@ class RestaurantDetailView extends Component {
         </ul>
 
         <div className={cx("Body")}>
-          {activeTab === "menu" ? (
-            <>
-              <RestaurantMenu
-                title={"menu"}
-                menu={menu}
-                onProductModal={this.handleProductModal}
-                onHandleBodyOnModal={handleBodyOnModal}
-              />
-              <OriginInfo />
-            </>
-          ) : activeTab === "info" ? (
-            <StoreInfoTap />
-          ) : activeTab === "review" ? (
-            <StoreReviewTapContainer name={name} />
-          ) : null}
+          <RestaurantMenu
+            menu={menu}
+            onProductModal={this.handleProductModal}
+            onHandleBodyOnModal={handleBodyOnModal}
+            selectedMenuOnModal={selectedMenuOnModal}
+            activeTab={activeTab}
+          />
+
+          <StoreInfoTap activeTab={activeTab} />
+
+          <StoreReviewTapContainer activeTab={activeTab} />
         </div>
 
         <CartBtn fixed={true} />
-        <ProductModalView
-          show={productModal}
-          name={name}
-          onProductModal={this.handleProductModal}
-          onHandleBodyOnModal={handleBodyOnModal}
-        />
+        {productModal && (
+          <ProductModalView
+            show={productModal}
+            name={name}
+            selectedMenu={selectedMenu}
+            least_cost={least_cost}
+            onProductModal={this.handleProductModal}
+            onHandleBodyOnModal={handleBodyOnModal}
+          />
+        )}
       </div>
     );
   }

@@ -1,4 +1,5 @@
 import React, { Component } from "react";
+import OriginInfo from "./OriginInfo";
 // react-collapsible
 // DOC :: https://github.com/glennflanagan/react-collapsible#readme
 import Collapsible from "react-collapsible";
@@ -10,10 +11,16 @@ import { ReactComponent as ArrowDown } from "../../img/chevron-down.svg";
 
 class RestaurantMenu extends Component {
   render() {
-    const { menu, onProductModal, onHandleBodyOnModal } = this.props;
+    const {
+      menu,
+      onProductModal,
+      onHandleBodyOnModal,
+      selectedMenuOnModal,
+      activeTab
+    } = this.props;
 
     return (
-      <div className={classNames("MenuBody")}>
+      <div className={classNames("MenuBody", { open: activeTab === "menu" })}>
         {menu &&
           menu.map((m, index) => (
             <Collapsible
@@ -41,6 +48,7 @@ class RestaurantMenu extends Component {
                     onClick={() => {
                       onProductModal();
                       onHandleBodyOnModal("open");
+                      selectedMenuOnModal(fs.pk);
                     }}
                     className={classNames("menuItem")}
                     key={fs.pk}
@@ -59,6 +67,7 @@ class RestaurantMenu extends Component {
               </ul>
             </Collapsible>
           ))}
+        <OriginInfo />
       </div>
     );
   }

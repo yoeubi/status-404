@@ -7,90 +7,54 @@ import { ReactComponent as Check } from "../../img/check.svg"; // checkbox 아�
 
 const cx = classNames.bind(styles);
 class ProductModalView extends Component {
-  static defaultProps = {
-    // 모달 토글 여부
-    show: false,
-    menu: {
-      id: 0,
-      name: "페퍼로니",
-      description: "설명 설명 설명충 이거슨 설명",
-      price: 12000,
-      img:
-        "https://i2.wp.com/pizzaschool.net/wp-content/uploads/2015/11/%ED%8E%98%ED%8D%BC%EB%A1%9C%EB%8B%88%ED%94%BC%EC%9E%90%EC%88%98%EC%A0%95.jpg?fit=800%2C800&ssl=1",
-      options: [
-        {
-          optionId: 1,
-          name: "파인애플 토핑",
-          price: 3000
-        },
-        {
-          optionId: 2,
-          name: "치즈 토핑",
-          price: 3000
-        },
-        {
-          optionId: 3,
-          name: "아보카도 토핑",
-          price: 3000
-        }
-      ]
-    }
-  };
-
   constructor(props) {
     super(props);
 
     this.state = {
       menu: null,
       totalPrice: 0, // 기본 합계금액
-      quantity: 1 // 기본 수량
+      quantity: 1, // 기본 수량
+      selectedMenu: null,
+      show: false
     };
   }
 
   async componentDidMount() {
-    const { menu } = this.props;
-
-    const newOptions = menu.options.map(option => {
-      option.checked = false;
-      return option;
+    const { selectedMenu } = this.props;
+    this.setState({
+      totalPrice: selectedMenu.price * this.state.quantity,
+      show: true
     });
-
-    await this.setState(prevState => ({
-      menu: {
-        ...menu,
-        options: newOptions
-      },
-      totalPrice: menu.price * this.state.quantity
-    }));
   }
 
-  handleChange = async optionId => {
-    const newOptions = this.state.menu.options.map(option => {
-      if (option.optionId === optionId) {
-        option.checked = !option.checked;
-      }
-      return option;
-    });
-    await this.setState(prevState => ({
-      menu: {
-        ...prevState.menu,
-        options: newOptions
-      }
-    }));
+  // handleChange = async optionId => {
+  //   const newOptions = this.state.menu.options.map(option => {
+  //     if (option.optionId === optionId) {
+  //       option.checked = !option.checked;
+  //     }
+  //     return option;
+  //   });
+  //   await this.setState(prevState => ({
+  //     menu: {
+  //       ...prevState.menu,
+  //       options: newOptions
+  //     }
+  //   }));
 
-    this.sumTotalPrice();
-  };
+  //   this.sumTotalPrice();
+  // };
 
   sumTotalPrice = async () => {
-    let result = 0; // 옵션 가격의 합을 구하기 위한 변수
-    const { options } = this.state.menu;
-    for (const option of options) {
-      if (option.checked === true) {
-        result += option.price;
-      }
-    }
+    const { selectedMenu } = this.props;
+    // let result = 0; // 옵션 가격의 합을 구하기 위한 변수
+    // const { options } = this.state.menu;
+    // for (const option of options) {
+    //   if (option.checked === true) {
+    //     result += option.price;
+    //   }
+    // }
     await this.setState(prevState => ({
-      totalPrice: this.state.menu.price * this.state.quantity + result
+      totalPrice: selectedMenu.price * this.state.quantity
     }));
   };
 
@@ -110,11 +74,21 @@ class ProductModalView extends Component {
   };
 
   render() {
-    const { show, name, onProductModal, onHandleBodyOnModal } = this.props;
-    const { menu, totalPrice, quantity } = this.state;
+    const {
+      name,
+      onProductModal,
+      onHandleBodyOnModal,
+      selectedMenu,
+      least_cost
+    } = this.props;
+    const { totalPrice, quantity, show } = this.state;
     return (
-      <div className={cx("ProductModalWrap", { Show: show })}>
-        {!menu ? (
+      <div
+        className={cx("ProductModalWrap", {
+          Show: show
+        })}
+      >
+        {!selectedMenu ? (
           "...loading" // 로딩인디케이터 들어갈자리
         ) : (
           <React.Fragment>
@@ -129,22 +103,27 @@ class ProductModalView extends Component {
               <h1>{name}</h1>
             </div>
             <div className={cx("ProductModalBody")}>
-              <div className={cx("ProductImg")}>
-                <img src={menu.img} alt={menu.name} />
-              </div>
-              <h2 className={cx("ProductName")}>{menu.name}</h2>
+              {selectedMenu.foodimage_set.length > 0 && (
+                <div className={cx("ProductImg")}>
+                  <img
+                    src={selectedMenu.foodimage_set[0]}
+                    alt={selectedMenu.name}
+                  />
+                </div>
+              )}
+              <h2 className={cx("ProductName")}>{selectedMenu.name}</h2>
               <div className={cx("ProductPrice")}>
                 <label>가격</label>
-                <span>{menu.price.toLocaleString()} 원</span>
+                <span>{selectedMenu.price.toLocaleString()} 원</span>
               </div>
               <div className={cx("ProductOptions")}>
                 <div className={cx("ProductOptionsHeader")}>
                   <label>추가선택</label>
-                  <span>{menu.options.length} 개 선택 가능</span>
+                  <span>{selectedMenu.sidedishes_set.length} 개 선택 가능</span>
                 </div>
                 <ul className={cx("ProductOptionList")}>
-                  {menu.options &&
-                    menu.options.map(o => (
+                  {selectedMenu.sidedishes_set &&
+                    selectedMenu.sidedishes_set.map(o => (
                       <li key={o.optionId}>
                         <Check
                           className={cx("CheckBox", { Checked: o.checked })}
@@ -181,7 +160,7 @@ class ProductModalView extends Component {
                   {totalPrice.toLocaleString()} 원
                 </span>
                 <span className={cx("Least")}>
-                  최소 주문 금액 : {menu.price}
+                  최소 주문 금액 : {least_cost.toLocaleString()}
                 </span>
               </div>
               <button

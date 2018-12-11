@@ -11,7 +11,8 @@ class RestaurantDetail extends Component {
 
     this.state = {
       loading: true,
-      store: null
+      store: null,
+      selectedMenu: null
     };
   }
   async componentDidMount() {
@@ -40,12 +41,32 @@ class RestaurantDetail extends Component {
 
     console.log(this.state.store);
   }
-  render() {
-    const { loading, store } = this.state;
 
+  selectedMenuOnModal = menuId => {
+    const { store } = this.state;
+    store.menu.find(item => {
+      const food_set = item.food_set;
+      food_set.find(item => {
+        if (item.pk === menuId) {
+          this.setState({
+            selectedMenu: item
+          });
+        }
+      });
+    });
+  };
+
+  render() {
+    const { loading, store, selectedMenu } = this.state;
     return (
       <UiProvider>
-        <RestaurantDetailView loading={loading} store={store} {...this.props} />
+        <RestaurantDetailView
+          selectedMenu={selectedMenu}
+          selectedMenuOnModal={this.selectedMenuOnModal}
+          loading={loading}
+          store={store}
+          {...this.props}
+        />
       </UiProvider>
     );
   }
