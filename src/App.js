@@ -11,6 +11,8 @@ import CartList from "./components/CartList/CartList";
 import Payment from "./components/Payment";
 import PayResult from "./components/PayResult/PayResult";
 import LoginContainer from "./containers/LoginContainer";
+import PayResult from "./components/PayResult/PayResult";
+import RestaurantSearchContainer from "./containers/RestaurantSearchContainer";
 
 class App extends Component {
   render() {
@@ -24,6 +26,10 @@ class App extends Component {
           <Route path="/join" component={Join} />
           <Route path="/search" component={NameSearch} />
           <Route path="/profile" component={ProfilePage} />
+          <Route
+            path="/restaurant-search"
+            component={RestaurantSearchContainer}
+          />
           {/* 레스토랑 리스트 */}
           {/* <Route exact path="/restauant" component={Restaurant} />  */}
           <Route path="/restaurant/:id" component={RestaurantDetailPage} />

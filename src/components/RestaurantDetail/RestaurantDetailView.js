@@ -3,26 +3,26 @@ import React, { Component } from "react";
 import Header from "./RestaurantHeader";
 import RestaurantMenu from "./RestaurantMenu";
 import RestaurantSummary from "./RestaurantSummary";
-import OriginInfo from "./OriginInfo";
+
 import CartBtn from "./CartBtn";
 import withLoading from "../../HOC/withLoading";
 import StoreInfoTap from "./StoreInfoTap";
-import StoreReviewTap from "./StoreReviewTap";
 import { withUi } from "../../context/UiContext";
 
 import styles from "./RestaurantDetailView.module.scss";
 import classNames from "classnames/bind";
 import ProductModalView from "./ProductModalView";
+import StoreReviewTapContainer from "../../containers/StoreReviewTapContainer";
 
 const cx = classNames.bind(styles);
 
 class RestaurantDetailView extends Component {
   static defaultProps = {
     store: {
-      id: null,
+      pk: null,
       name: "배민 상점",
-      rating: 4.5, // 상점 별점
-      userId: null,
+      fee: 0,
+      least_cost: 0,
       is_register: null, // 상점 생성 시간?
       address: "배민구 배민동 000",
       store_category: "상점 카테고리",
@@ -30,23 +30,6 @@ class RestaurantDetailView extends Component {
       origin_info: "원산지 정보",
       img_profile:
         "https://cdn.dominos.co.kr/admin/upload/goods/20180827_ca1sFpdy.jpg"
-    },
-    delevery: {
-      id: null,
-      // least_const :: 최소 주문 금액
-      least_const: 13000,
-      // take_out :: 배달여부(?)
-      take_out: null,
-      // fee :: 배달료
-      fee: 2000
-    },
-    food: {
-      id: null,
-      name: "음식이름",
-      store_Id: null,
-      price: null,
-      is_register: null,
-      img_profile: null
     }
   };
 
@@ -95,16 +78,15 @@ class RestaurantDetailView extends Component {
 
   render() {
     const { isTop, activeTab, productModal } = this.state;
-    // const {
-    //   match: {
-    //     // storeId
-    //     params: { id }
-    //   }
-    // } = this.props;
-    const { name, img_profile, rating } = this.props.store; // 스토어 정보
-    // const { least_const, take_out, fee } = this.props.delevery; // 배달 정보
-    // const { name, price, img_profile } = this.props.food; // 음식 정보
-    const { handleBodyOnModal } = this.props;
+    const {
+      name,
+      storeimage_set,
+      fee,
+      least_cost,
+      rating,
+      menu
+    } = this.props.store; // 스토어 정보
+    const { handleBodyOnModal, selectedMenuOnModal, selectedMenu } = this.props;
     return (
       <div className={cx("RestaurantDetailWrap")}>
         <Header isTop={isTop} name={name} />
@@ -112,7 +94,9 @@ class RestaurantDetailView extends Component {
         <RestaurantSummary
           name={name}
           rating={rating}
-          img_profile={img_profile}
+          storeimage_set={storeimage_set}
+          fee={fee}
+          least_cost={least_cost}
         />
 
         <ul className={cx("Tab")}>
@@ -137,29 +121,30 @@ class RestaurantDetailView extends Component {
         </ul>
 
         <div className={cx("Body")}>
-          {activeTab === "menu" ? (
-            <>
-              <RestaurantMenu
-                title={"menu"}
-                onProductModal={this.handleProductModal}
-                onHandleBodyOnModal={handleBodyOnModal}
-              />
-              <OriginInfo />
-            </>
-          ) : activeTab === "info" ? (
-            <StoreInfoTap />
-          ) : activeTab === "review" ? (
-            <StoreReviewTap />
-          ) : null}
+          <RestaurantMenu
+            menu={menu}
+            onProductModal={this.handleProductModal}
+            onHandleBodyOnModal={handleBodyOnModal}
+            selectedMenuOnModal={selectedMenuOnModal}
+            activeTab={activeTab}
+          />
+
+          <StoreInfoTap activeTab={activeTab} />
+
+          <StoreReviewTapContainer activeTab={activeTab} />
         </div>
 
         <CartBtn fixed={true} />
-        <ProductModalView
-          show={productModal}
-          name={name}
-          onProductModal={this.handleProductModal}
-          onHandleBodyOnModal={handleBodyOnModal}
-        />
+        {productModal && (
+          <ProductModalView
+            show={productModal}
+            name={name}
+            selectedMenu={selectedMenu}
+            least_cost={least_cost}
+            onProductModal={this.handleProductModal}
+            onHandleBodyOnModal={handleBodyOnModal}
+          />
+        )}
       </div>
     );
   }

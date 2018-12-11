@@ -17,6 +17,7 @@ class MainContainer extends Component {
     this.state = {
       // 모달 활성화 여부
       show: false,
+      // 주소 검색 모달 활성화 여부
       addressSearchShow: false,
       loading: true
     };
@@ -33,11 +34,9 @@ class MainContainer extends Component {
   handleUserModal = () => {
     this.setState({ show: !this.state.show });
   };
-
+  // 주소 검색 모달 활성화 handle function
   handleAddressSearch = () => {
-    // const { address } = this.props;
     this.setState({ addressSearchShow: !this.state.addressSearchShow });
-    // this.setState({ address: address[0] });
   };
 
   render() {
@@ -61,6 +60,7 @@ class MainContainer extends Component {
         <AddressSearchContainer
           show={addressSearchShow}
           onAddressSearch={this.handleAddressSearch}
+          address={address}
         />
         <MainView loading={loading} />
       </React.Fragment>

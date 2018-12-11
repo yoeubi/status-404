@@ -14,7 +14,6 @@ class AddressSearchContainer extends Component {
       searchResult: [],
       userInput: "",
       recentAddress: []
-      // address: []
     };
 
     // loading: false
@@ -58,11 +57,19 @@ class AddressSearchContainer extends Component {
     });
   };
 
-  handleFinishBtn = e => {
+  handleFinishBtn = id => {
     const { searchResult } = this.state;
-    console.log(searchResult);
-    this.setState({ recentAddress: searchResult, page: "address-search" });
-    // localStorage.setItem("address");
+    const index = searchResult.findIndex(item => item.id === id);
+    this.state.recentAddress.push(searchResult[index]);
+    this.setState({
+      page: "address-search"
+    });
+  };
+
+  handleDeleteBtn = index => {
+    // const { recentAddress } = this.props;
+    // console.log(recentAddress[index]);
+    this.state.recentAddress.splice(index, 1);
   };
 
   render() {
@@ -79,15 +86,18 @@ class AddressSearchContainer extends Component {
             show={show}
             recentAddress={recentAddress}
             address={address}
+            userInput={userInput}
+            onDeleteBtn={() => this.handleDeleteBtn()}
           />
         ) : this.state.page === "address-search-result" ? (
           <AddressSearchResult
             searchResult={searchResult}
             userInput={userInput}
             onUserInput={e => this.handleUserInput(e)}
-            onBackBtn={() => this.handleBackBtn()}
+            onBackBtn={index => this.handleBackBtn(index)}
             onFinishBtn={e => this.handleFinishBtn(e)}
             recentAddress={recentAddress}
+            getAddress={this.getAddress}
             address={address}
           />
         ) : null}

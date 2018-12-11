@@ -72,11 +72,12 @@ export default class StoreInfoTap extends Component {
       guide,
       operation,
       location,
-      business
+      business,
+      activeTab
     } = this.props;
     return (
       <>
-        <div className={cx("InfoTapContainer")}>
+        <div className={cx("InfoTapContainer", { open: activeTab === "info" })}>
           <div className={cx("section")}>
             <span className={cx("title")}>가게 소개</span>
             <span className={cx("storeInfoText")}>

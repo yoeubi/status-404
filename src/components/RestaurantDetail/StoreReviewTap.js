@@ -2,7 +2,6 @@ import React, { Component } from "react";
 import styles from "./StoreReviewTap.module.scss";
 import classNames from "classnames/bind";
 import Rating from "react-rating";
-// import ReviewWriteModal from "./ReviewWriteModal";
 
 // SVG ICON
 import { ReactComponent as Star } from "../../img/star.svg"; // 별 아이콘
@@ -104,16 +103,17 @@ export default class StoreReviewTap extends Component {
   };
 
   render() {
-    // const { users, onReviewWriteModal } = this.props;
-    const { users } = this.props;
+    const { users, onReviewWriteModal, activeTab } = this.props;
     const { activePhotoReviewBtn, orderBtn } = this.state;
     return (
       <>
-        <div className={cx("ReviewTapContainer")}>
+        <div
+          className={cx("ReviewTapContainer", {
+            open: activeTab === "review"
+          })}
+        >
           <div className={cx("TopContainer")}>
-            <button // onClick={() => onReviewWriteModal()}
-              className={cx("reviewBtn")}
-            >
+            <button onClick={onReviewWriteModal} className={cx("reviewBtn")}>
               <span role="img" aria-label="Review">
                 ✏️ 리뷰를 남겨주세요
               </span>
