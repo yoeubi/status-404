@@ -100,7 +100,7 @@ class UserProvider extends Component {
   }
 
   async login({ username, password }) {
-    const {data : {user, token}} = await mainAPI.post("/members/auth/", {
+    const {data : {user, token}} = await mainAPI.post("/members/login/", {
       username,
       password
     });
