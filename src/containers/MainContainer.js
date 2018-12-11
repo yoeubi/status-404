@@ -60,6 +60,7 @@ class MainContainer extends Component {
         <AddressSearchContainer
           show={addressSearchShow}
           onAddressSearch={this.handleAddressSearch}
+          address={address}
         />
         <MainView loading={loading} />
       </React.Fragment>

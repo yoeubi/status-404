@@ -1,0 +1,68 @@
+@import "../../index.scss";
+
+input,
+button {
+  outline: none;
+  border: none;
+}
+
+.container {
+  font-size: 1.4rem;
+  width: 100%;
+  height: 100%;
+
+  .backBtn {
+    display: block;
+    height: 39px;
+    width: 40px;
+    font-size: 15pt;
+    border: none;
+    background-color: white;
+    svg {
+      transform: scale(1.5);
+    }
+  }
+  .InputContainer {
+    border-bottom: 1px solid rgb(214, 214, 214);
+    display: flex;
+    flex-direction: row;
+    height: 40px;
+    width: 100%;
+
+    .InputForm {
+      .Input {
+        font-size: 12pt;
+        // width: calc(100% - 80px);
+        width: 320px;
+        height: 100%;
+        // background-color: blue;
+      }
+    }
+    .SubmitBtn {
+      position: absolute;
+      right: 0px;
+      top: 0px;
+      width: 40px;
+      height: 39px;
+      // background-color: pink;
+      svg {
+        transform: scale(1.2);
+        vertical-align: middle;
+      }
+    }
+  }
+  .HistoryContainer {
+    padding: 10px;
+    border-top: 10px solid rgb(238, 238, 238);
+    background-color: skyblue;
+    height: calc(100% - 40px);
+    width: 100%;
+    .HistoryList {
+      .listItem {
+        color: black;
+        height: 40px;
+        width: 100%;
+      }
+    }
+  }
+}
