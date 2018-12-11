@@ -255,7 +255,7 @@ class UserProvider extends Component {
         phone
       });
     } catch(e) {
-      throw e;
+      console.log('회원가입 실패했습니다.')
     }
   }
   render() {

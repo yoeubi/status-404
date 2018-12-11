@@ -38,7 +38,7 @@ class NewLogin extends Component {
     const { username, password, focus , google, facebook } = this.state;
     const { login , facebookLogin , googleLogin , failLogin,  warning ,success} = this.props;
     if(success) return <Redirect to="/" />
-    return <Page left={<Link to="/">
+    return <Page left={<Link to="/" style={{padding : '1.5rem'}}>
             <X style={{ transform: "scale(1.5)" }} />
           </Link>}>
         <div className={cx("notification")}>{warning}</div>
