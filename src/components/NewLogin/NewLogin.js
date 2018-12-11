@@ -65,8 +65,8 @@ class NewLogin extends Component {
         </Nothing>
         <p className={cx("find")}><Link to="/">아아디/비밀번호 찾기</Link></p>
         <div className={cx("social-login")}>
-          <GoogleLogin clientId={process.env.REACT_APP_GOOGLE_KEY} buttonText="Google Login" className={cx("google")} onSuccess={googleLogin} onFailure={() => google && failLogin('google')} render={renderProps => (
-            <button onClick={() => { this.setState({ google : true }); renderProps.onClick();  } }>Google Login</button>
+          <GoogleLogin clientId={process.env.REACT_APP_GOOGLE_KEY} buttonText="Google Login"  onSuccess={googleLogin} onFailure={() => google && failLogin('google')} render={renderProps => (
+          <button className={cx("google")} onClick={() => { this.setState({ google : true }); renderProps.onClick();  } }>Google Login</button>
           )} />
         <FacebookLogin appId={process.env.REACT_APP_FACEBOOK_KEY} autoLoad={facebook} callback={(response) => facebook && facebookLogin(response)} fields="name,email,picture" cssClass={cx("facebook")} onClick={() => this.setState({facebook : true})} />
         </div>
