@@ -1,37 +1,75 @@
 import React, { Component } from "react";
 import RestaurantDetailView from "../components/RestaurantDetail/RestaurantDetailView";
 import { UiProvider } from "../context/UiContext";
-
+import api from "../api/mainAPI";
 import { withUser } from "../context/UserContext";
+import { withRouter } from "react-router-dom";
 
 class RestaurantDetail extends Component {
   constructor(props) {
     super(props);
 
     this.state = {
-      loading: true
+      loading: true,
+      store: null,
+      selectedMenu: null
     };
   }
-  componentDidMount() {
-    // TODO :: 선택한 상점의 정보를 불러오는 ajax 요청을 작성해야 함
-    // 불러온 정보를 state 에 저장한다.
-    // api 연동 전 로딩인디케이터 테스트를 위한 함수
-    // FIXME :: API 연동시 수정해주세요.
-    setTimeout(() => {
+  async componentDidMount() {
+    const { match, history } = this.props;
+    const storeId = match.params.id;
+    try {
+      // TODO : api 요청
+      const res = await api.get(`/store/${storeId}`);
+      const { data, status } = res;
+      if (status === 404) {
+        alert("잘못된 요청입니다. 404");
+        history.goBack();
+      }
+      // 1. 불러온 정보를 state 에 저장한다.
+      // 2. 로딩 인디케이터 flag 를 false 로 설정한다.
       this.setState({
+        store: data,
         loading: false
       });
-    }, 2000);
+    } catch (e) {
+      // TODO :: 에러처리 및 404 처리를 어떻게 할지 논의해 봐야 함
+      console.log(e);
+      alert("잘못된 요청입니다. 500");
+      history.goBack();
+    }
+
+    console.log(this.state.store);
   }
+
+  selectedMenuOnModal = menuId => {
+    const { store } = this.state;
+    store.menu.find(item => {
+      const food_set = item.food_set;
+      food_set.find(item => {
+        if (item.pk === menuId) {
+          this.setState({
+            selectedMenu: item
+          });
+        }
+      });
+    });
+  };
+
   render() {
-    const { loading } = this.state;
-    console.log(this.props);
+    const { loading, store, selectedMenu } = this.state;
     return (
       <UiProvider>
-        <RestaurantDetailView loading={loading} {...this.props} />
+        <RestaurantDetailView
+          selectedMenu={selectedMenu}
+          selectedMenuOnModal={this.selectedMenuOnModal}
+          loading={loading}
+          store={store}
+          {...this.props}
+        />
       </UiProvider>
     );
   }
 }
 
-export default withUser(RestaurantDetail);
+export default withRouter(withUser(RestaurantDetail));
