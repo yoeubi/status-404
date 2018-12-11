@@ -7,18 +7,31 @@ import classNames from "classnames/bind";
 
 // SVG ICONS
 import { ReactComponent as Heart } from "../../img/heart.svg"; // 하트 아이콘
-import { ReactComponent as Star } from "../../img/star.svg"; // 뒤로가기 아이콘
-import { ReactComponent as ArrowUp } from "../../img/arrow-up.svg";
+import { ReactComponent as Star } from "../../img/star.svg"; // 별 아이콘
+import { ReactComponent as ArrowUp } from "../../img/arrow-up.svg"; // 화살표 아이콘
 
 const cx = classNames.bind(styles);
 
 class RestaurantSummary extends Component {
+  static defaultProps = {
+    // 상점 이름
+    name: "상점 이름",
+    // 별점
+    rating: 4.5,
+    // 상점 이미지
+    storeimage_set: []
+  };
+
   render() {
-    const { name, rating, img_profile } = this.props;
+    const { name, rating, storeimage_set } = this.props;
     return (
       <div className={cx("SummaryWrap")}>
         <div className={cx("ImgProfile")}>
-          <img style={{ width: "100%" }} src={img_profile} alt={name} />
+          {storeimage_set.length > 0 ? (
+            <img style={{ width: "100%" }} src={storeimage_set[0]} alt={name} />
+          ) : (
+            <div className={cx("ImgEmpty")} />
+          )}
         </div>
         <div className={cx("BasicInfo")}>
           <h2>{name}</h2>

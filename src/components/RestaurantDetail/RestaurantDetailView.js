@@ -101,7 +101,7 @@ class RestaurantDetailView extends Component {
     //     params: { id }
     //   }
     // } = this.props;
-    const { name, img_profile, rating } = this.props.store; // 스토어 정보
+    const { name, storeimage_set, rating } = this.props.store; // 스토어 정보
     // const { least_const, take_out, fee } = this.props.delevery; // 배달 정보
     // const { name, price, img_profile } = this.props.food; // 음식 정보
     const { handleBodyOnModal } = this.props;
@@ -112,7 +112,7 @@ class RestaurantDetailView extends Component {
         <RestaurantSummary
           name={name}
           rating={rating}
-          img_profile={img_profile}
+          storeimage_set={storeimage_set}
         />
 
         <ul className={cx("Tab")}>
