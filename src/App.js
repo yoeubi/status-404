@@ -4,16 +4,15 @@ import MainPage from "./Pages/MainPage";
 import RestaurantDetailPage from "./Pages/RestaurantDetailPage";
 import ProfilePage from "./Pages/ProfilePage";
 import MyOrderPage from "./Pages/MyOrderPage";
-import Login from "./components/Login";
 import Join from "./components/Join/Join";
 import NameSearch from "./components/NameSearch";
 import RestaurantList from "./components/RestaurantList/RestaurantList";
 import CartList from "./components/CartList/CartList";
 import Payment from "./components/Payment";
-import OrderTable from "./components/OrderTable";
+import LoginContainer from "./containers/LoginContainer";
 import PayResult from "./components/PayResult/PayResult";
-import Order from "./components/Order/Order";
 import RestaurantSearchContainer from "./containers/RestaurantSearchContainer";
+import NewJoin from "./components/NewJoin";
 
 class App extends Component {
   render() {
@@ -22,7 +21,8 @@ class App extends Component {
         <Switch>
           <Route exact path={"/"} component={MainPage} />
           {/* 라우터는 여기다가 일단 작성하시오 */}
-          <Route path="/login" component={Login} />
+          {/* <Route path="/addressSearch" component={AddressSearch} /> */}
+          <Route path="/login" component={LoginContainer} />
           <Route path="/join" component={Join} />
           <Route path="/search" component={NameSearch} />
           <Route path="/profile" component={ProfilePage} />
@@ -38,6 +38,7 @@ class App extends Component {
           <Route path="/pay" component={Payment} />
           <Route path="/myorder" component={MyOrderPage} />
           <Route path="/payresult" component={PayResult} />
+          <Route paht="/test" component={NewJoin} />
         </Switch>
       </Router>
     );
