@@ -15,11 +15,16 @@ class RestaurantDetail extends Component {
     };
   }
   async componentDidMount() {
-    const { match } = this.props;
+    const { match, history } = this.props;
     const storeId = match.params.id;
     try {
       // TODO : api 요청
-      const { data } = await api.get(`/store/${storeId}`);
+      const res = await api.get(`/store/${storeId}`);
+      const { data, status } = res;
+      if (status === 404) {
+        alert("잘못된 요청입니다. 404");
+        history.goBack();
+      }
       // 1. 불러온 정보를 state 에 저장한다.
       // 2. 로딩 인디케이터 flag 를 false 로 설정한다.
       this.setState({
@@ -29,6 +34,8 @@ class RestaurantDetail extends Component {
     } catch (e) {
       // TODO :: 에러처리 및 404 처리를 어떻게 할지 논의해 봐야 함
       console.log(e);
+      alert("잘못된 요청입니다. 500");
+      history.goBack();
     }
 
     console.log(this.state.store);

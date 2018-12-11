@@ -19,11 +19,25 @@ class RestaurantSummary extends Component {
     // 별점
     rating: 4.5,
     // 상점 이미지
-    storeimage_set: []
+    storeimage_set: [],
+    // 배달료
+    fee: 3000,
+    // 최소주문금액
+    least_cost: 13000,
+    delivery_time: 45,
+    likes: 15
   };
 
   render() {
-    const { name, rating, storeimage_set } = this.props;
+    const {
+      name,
+      rating,
+      storeimage_set,
+      fee,
+      least_cost,
+      delivery_time,
+      likes
+    } = this.props;
     return (
       <div className={cx("SummaryWrap")}>
         <div className={cx("ImgProfile")}>
@@ -60,20 +74,21 @@ class RestaurantSummary extends Component {
             <label>결재방법</label><span>바로결재, 만나서 결재</span>
           </li>
           <li>
-            <label>최소주문금액</label><span>13,000 원</span>
+            <label>최소주문금액</label>
+            <span>{least_cost.toLocaleString()} 원</span>
           </li>
           <li>
             <label>배달시간</label>
-            <span>45분 소요 예상</span>
+            <span>{delivery_time}분 소요 예상</span>
           </li>
           <li>
-            <label>배달팁</label><span>2,000원</span>
+            <label>배달팁</label><span>{fee.toLocaleString()} 원</span>
           </li>
         </ul>
 
         <div className={cx("SNS")}>
           <button>
-            <Heart /> <span>찜 351</span>
+            <Heart /> <span>찜 {likes}</span>
           </button>
           <button>
             <ArrowUp />
