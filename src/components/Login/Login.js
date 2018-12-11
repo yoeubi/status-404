@@ -15,8 +15,9 @@ class Login extends Component {
     password: "",
     userFocus: false,
     passFocus: false,
-    warning: "비밀번호를 잘못 입력했습니다.",
-    facebook: false
+    warning: null,
+    facebook: false,
+    clicked : false
   };
   handleChange = e => {
     this.setState({
@@ -51,7 +52,7 @@ class Login extends Component {
   };
 
   render() {
-    const { username, password, userFocus, passFocus, warning } = this.state;
+    const { username, password, userFocus, passFocus, warning, clicked } = this.state;
     const {
       handleChange,
       handleClear,
@@ -67,7 +68,7 @@ class Login extends Component {
             <Exit style={{ transform: "scale(1.5)" }} />
           </Link>
         </span>
-        <p className={cx("notification", { warning })}>{warning}</p>
+        <p className={cx("notification", { warning : warning && clicked })}>{warning}</p>
         <form className={cx("login-form")} onSubmit={handleSubmit}>
           <div>
             <label htmlFor="username">아이디 또는 이메일</label>
@@ -118,13 +119,14 @@ class Login extends Component {
 
         <div className={cx("social-login")}>
           <GoogleLogin
+            onClick={() => { console.log(1); this.setState({clicked : !this.state.clicked})}}
             clientId="104085265728-lvt11mjt0t0sab4lppnjl9n06872r7ri.apps.googleusercontent.com"
             buttonText="Google Login"
             className={cx("google")}
             onSuccess={response =>
               this.props.googleLogin(response, this.props.history)
             }
-            onFailure={() => console.log("Google login error")}
+            onFailure={() => this.setState({warning : '구글 로그인이 실패했습니다.'})}
           />
           <FacebookLogin
             appId="340137913232680"

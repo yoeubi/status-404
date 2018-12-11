@@ -10,9 +10,8 @@ import NameSearch from "./components/NameSearch";
 import RestaurantList from "./components/RestaurantList/RestaurantList";
 import CartList from "./components/CartList/CartList";
 import Payment from "./components/Payment";
-import OrderTable from './components/OrderTable';
 import PayResult from "./components/PayResult/PayResult";
-import Order from "./components/Order/Order";
+import LoginContainer from "./containers/LoginContainer";
 
 class App extends Component {
   render() {
@@ -34,6 +33,7 @@ class App extends Component {
           <Route path="/pay" component={Payment} />
           <Route path="/myorder" component={MyOrderPage} />
           <Route path="/payresult" component={PayResult} />
+          <Route path="/test" component={LoginContainer} />
         </Switch>
       </Router>
     );

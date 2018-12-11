@@ -1,0 +1,77 @@
+
+.input.line {
+  border-bottom: 1px solid rgba(0, 0, 0, 0.4);
+  &:focus {
+    outline: none;
+    border-bottom: 1px solid #2ac1bc;
+  }
+}
+span.clear {
+  position: absolute;
+  display: none;
+  top: 0;
+  right: 0;
+  z-index: 10;
+  padding: 15px;
+  cursor: pointer;
+  &.show {
+    display: block;
+  }
+}
+.find {
+  margin-top: 3rem;
+  font-size: 1.4rem;
+  text-align: center;
+  color: rgba(0, 0, 0, 0.3);
+  text-decoration: underline;
+}
+.join {
+  margin-top: 2rem;
+  color: rgba(0, 0, 0, 0.3);
+  font-size: 1.2rem;
+  text-align: center;
+  a {
+    color: #000;
+    font-weight: 700;
+    text-decoration: underline;
+  }
+}
+.notification {
+  height: 8rem;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  word-wrap: break-word;
+  font-size: 1.5rem;
+  color: rgb(179, 58, 58);
+  font-weight: 700;
+}
+.form {
+  margin-top: 3rem;
+}
+.social-login {
+  width: 100%;
+  margin-top: 21rem;
+  button {
+    width: 100%;
+    height: 45px;
+    text-align: center;
+  }
+  .google {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+  }
+  .facebook {
+    cursor : pointer;
+    margin-top: 1rem;
+    box-shadow: rgba(0, 0, 0, 0.24) 0px 2px 2px 0px, rgba(0, 0, 0, 0.24) 0px 0px;
+    border-radius: 2px;
+    border: 1px solid transparent;
+    font-size: 14px;
+    font-weight: 500;
+    font-family: Roboto, sans-serif;
+    background: #4c69ba;
+    color: #fff;
+  }
+}
