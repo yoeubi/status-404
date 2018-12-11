@@ -19,7 +19,7 @@ const cx = classNames.bind(styles);
 class RestaurantDetailView extends Component {
   static defaultProps = {
     store: {
-      id: null,
+      pk: null,
       name: "배민 상점",
       rating: 4.5, // 상점 별점
       userId: null,

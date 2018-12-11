@@ -1,37 +1,47 @@
 import React, { Component } from "react";
 import RestaurantDetailView from "../components/RestaurantDetail/RestaurantDetailView";
 import { UiProvider } from "../context/UiContext";
-
+import api from "../api/mainAPI";
 import { withUser } from "../context/UserContext";
+import { withRouter } from "react-router-dom";
 
 class RestaurantDetail extends Component {
   constructor(props) {
     super(props);
 
     this.state = {
-      loading: true
+      loading: true,
+      store: null
     };
   }
-  componentDidMount() {
-    // TODO :: 선택한 상점의 정보를 불러오는 ajax 요청을 작성해야 함
-    // 불러온 정보를 state 에 저장한다.
-    // api 연동 전 로딩인디케이터 테스트를 위한 함수
-    // FIXME :: API 연동시 수정해주세요.
-    setTimeout(() => {
+  async componentDidMount() {
+    const { match } = this.props;
+    const storeId = match.params.id;
+    try {
+      // TODO : api 요청
+      const { data } = await api.get(`/store/${storeId}`);
+      // 1. 불러온 정보를 state 에 저장한다.
+      // 2. 로딩 인디케이터 flag 를 false 로 설정한다.
       this.setState({
+        store: data,
         loading: false
       });
-    }, 2000);
+    } catch (e) {
+      // TODO :: 에러처리 및 404 처리를 어떻게 할지 논의해 봐야 함
+      console.log(e);
+    }
+
+    console.log(this.state.store);
   }
   render() {
-    const { loading } = this.state;
-    console.log(this.props);
+    const { loading, store } = this.state;
+
     return (
       <UiProvider>
-        <RestaurantDetailView loading={loading} {...this.props} />
+        <RestaurantDetailView loading={loading} store={store} {...this.props} />
       </UiProvider>
     );
   }
 }
 
-export default withUser(RestaurantDetail);
+export default withRouter(withUser(RestaurantDetail));
