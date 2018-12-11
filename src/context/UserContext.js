@@ -206,7 +206,6 @@ class UserProvider extends Component {
   }
 
   async login({ username, password }) {
-<<<<<<< HEAD
     try {
       const {
         data: { user, token }
@@ -226,18 +225,6 @@ class UserProvider extends Component {
           success : false
       });
     }
-=======
-    const {data : {user, token}} = await mainAPI.post("/members/login/", {
-      username,
-      password
-    });
-    console.log('token',user,token);
-    this.setState({
-      user
-    })
-    this.getAddress(user.username);
-    localStorage.setItem("token", token);
->>>>>>> c2691f845596261bae281671768937c836b374b4
   }
   logout() {
     this.setState({
