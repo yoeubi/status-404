@@ -190,7 +190,7 @@ class UserProvider extends Component {
     const token = localStorage.getItem("token");
     if (token) {
       try {
-        const { data } = await mainAPI.post("/members/profile/");
+        const { data } = await mainAPI.get("/members/profile/");
         this.setState({
           user: data,
           warning: "",
@@ -249,7 +249,9 @@ class UserProvider extends Component {
       warning: `${target} 로그인이 실패했습니다.`
     });
   }
-
+  join({nickname, phone, password, username}){
+    console.log(nickname, phone, password, username);
+  }
   render() {
     const { children } = this.props;
     return <Provider value={this.state}>{children}</Provider>;

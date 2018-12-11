@@ -1,5 +1,5 @@
 import React, { Component } from "react";
-import { Link } from "react-router-dom";
+import { Link, Redirect } from "react-router-dom";
 import styles from "./NewLogin.module.scss";
 import classNames from "classnames/bind";
 import { ReactComponent as X } from "../../svg/x.svg";
@@ -36,8 +36,8 @@ class NewLogin extends Component {
   };
   render() {
     const { username, password, focus , google, facebook } = this.state;
-    const { login , facebookLogin , googleLogin , failLogin,  warning ,success ,history} = this.props;
-    if(success) history.replace('/');
+    const { login , facebookLogin , googleLogin , failLogin,  warning ,success} = this.props;
+    if(success) return <Redirect to="/" />
     return <Page left={<Link to="/">
             <X style={{ transform: "scale(1.5)" }} />
           </Link>}>
@@ -60,7 +60,7 @@ class NewLogin extends Component {
             </span>
           </NewInput>
         </div>
-        <Nothing style={{ background: "#2ac1bc", color: "#fff", fontSize: "1.4rem", height: "45px", marginTop: "3rem" , cursor :'pointer' }} onClick={() => login(username, password)}>
+        <Nothing style={{ background: "#2ac1bc", color: "#fff", fontSize: "1.4rem", height: "45px", marginTop: "3rem" , cursor :'pointer' }} onClick={() => username && password && login({username, password})}>
           로그인
         </Nothing>
         <p className={cx("find")}><Link to="/">아아디/비밀번호 찾기</Link></p>
