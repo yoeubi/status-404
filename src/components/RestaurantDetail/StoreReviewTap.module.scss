@@ -8,6 +8,11 @@ button {
 }
 
 .ReviewTapContainer {
+  display: none;
+  height: 100%;
+  &.open {
+    display: block;
+  }
 }
 
 .reviewBtn {

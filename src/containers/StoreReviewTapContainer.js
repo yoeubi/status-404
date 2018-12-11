@@ -34,11 +34,12 @@ export default class StoreReviewTapContainer extends Component {
   };
 
   render() {
-    const { name } = this.props;
+    const { name, activeTab } = this.props;
     const { show, review } = this.state;
     return (
       <>
         <StoreReviewTap
+          activeTab={activeTab}
           show={show}
           onReviewWriteModal={() => this.handleReviewWriteModal()}
         />
