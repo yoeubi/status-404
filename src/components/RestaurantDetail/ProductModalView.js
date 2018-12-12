@@ -14,49 +14,61 @@ class ProductModalView extends Component {
       menu: null,
       totalPrice: 0, // 기본 합계금액
       quantity: 1, // 기본 수량
-      selectedMenu: null
+      options: null
     };
   }
-
-  // handleChange = async optionId => {
-  //   const newOptions = this.state.menu.options.map(option => {
-  //     if (option.optionId === optionId) {
-  //       option.checked = !option.checked;
-  //     }
-  //     return option;
-  //   });
-  //   await this.setState(prevState => ({
-  //     menu: {
-  //       ...prevState.menu,
-  //       options: newOptions
-  //     }
-  //   }));
-
-  //   this.sumTotalPrice();
-  // };
 
   componentDidUpdate(prevProps) {
     // 컴포넌트 업데이트시 최초 합계 금액 설정하기
     const { selectedMenu } = this.props;
-    console.log(selectedMenu);
+    console.log(selectedMenu.sidedishes_set);
+
     if (prevProps.selectedMenu !== selectedMenu) {
-      this.setState({
-        totalPrice: selectedMenu.price,
-        quantity: 1
-      });
+      if (selectedMenu.sidedishes_set) {
+        // 선택한 메뉴에 옵션이 있을 경우 : options 상태에 sidedishes_set 으로부터 checked 값을 추가한 배열을 새로 생성하여 넣어준다.
+        const options = selectedMenu.sidedishes_set.map(item => {
+          item.checked = false;
+          return item;
+        });
+        this.setState({
+          totalPrice: selectedMenu.price,
+          quantity: 1,
+          options
+        });
+      } else {
+        this.setState({
+          totalPrice: selectedMenu.price,
+          quantity: 1
+        });
+      }
     }
   }
+
+  handleChange = async optionId => {
+    const newOptions = this.state.options.map(option => {
+      if (option.pk === optionId) {
+        option.checked = !option.checked;
+      }
+      return option;
+    });
+    await this.setState(prevState => ({
+      options: newOptions
+    }));
+
+    this.sumTotalPrice();
+  };
+
   sumTotalPrice = async () => {
     const { selectedMenu } = this.props;
-    // let result = 0; // 옵션 가격의 합을 구하기 위한 변수
-    // const { options } = this.state.menu;
-    // for (const option of options) {
-    //   if (option.checked === true) {
-    //     result += option.price;
-    //   }
-    // }
+    let result = 0; // 옵션 가격의 합을 구하기 위한 변수
+    const { options } = this.state;
+    for (const option of options) {
+      if (option.checked === true) {
+        result += option.price;
+      }
+    }
     await this.setState(prevState => ({
-      totalPrice: selectedMenu.price * this.state.quantity
+      totalPrice: selectedMenu.price * this.state.quantity + result
     }));
   };
 
@@ -85,7 +97,8 @@ class ProductModalView extends Component {
       show,
       addItemToCart
     } = this.props;
-    const { totalPrice, quantity } = this.state;
+    const { totalPrice, quantity, options } = this.state;
+    console.log(this.state);
     return (
       <div
         className={cx("ProductModalWrap", {
@@ -126,19 +139,19 @@ class ProductModalView extends Component {
                   <span>{selectedMenu.sidedishes_set.length} 개 선택 가능</span>
                 </div>
                 <ul className={cx("ProductOptionList")}>
-                  {selectedMenu.sidedishes_set &&
-                    selectedMenu.sidedishes_set.map(o => (
-                      <li key={o.optionId}>
+                  {options &&
+                    options.map(o => (
+                      <li key={o.pk}>
                         <Check
                           className={cx("CheckBox", { Checked: o.checked })}
                         />
                         <input
-                          onChange={() => this.handleChange(o.optionId)}
+                          onChange={() => this.handleChange(o.pk)}
                           type="checkbox"
-                          id={o.optionId}
+                          id={o.pk}
                           checked={o.checked}
                         />
-                        <label htmlFor={o.optionId}>
+                        <label htmlFor={o.pk}>
                           <span>{o.name}</span>
                           <span className={cx("price")}>
                             + {o.price.toLocaleString()}
