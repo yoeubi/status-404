@@ -21,7 +21,7 @@ class ProductModalView extends Component {
   componentDidUpdate(prevProps) {
     // 컴포넌트 업데이트시 최초 합계 금액 설정하기
     const { selectedMenu } = this.props;
-    console.log(selectedMenu.sidedishes_set);
+    console.log("componentDidUpdate");
 
     if (prevProps.selectedMenu !== selectedMenu) {
       if (selectedMenu.sidedishes_set) {
@@ -41,6 +41,7 @@ class ProductModalView extends Component {
           quantity: 1
         });
       }
+    } else {
     }
   }
 
@@ -109,7 +110,6 @@ class ProductModalView extends Component {
       show
     } = this.props;
     const { totalPrice, quantity, options } = this.state;
-    console.log(this.state);
     return (
       <div
         className={cx("ProductModalWrap", {

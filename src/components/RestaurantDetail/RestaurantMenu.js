@@ -10,14 +10,29 @@ import classNames from "classnames/bind";
 import { ReactComponent as ArrowDown } from "../../img/chevron-down.svg";
 
 class RestaurantMenu extends Component {
-  render() {
+  static defaultProps = {};
+  handleClick = pk => {
+    // param  :::
+    // pk : 선택한 메뉴 pk
     const {
-      menu,
       onProductModal,
       onHandleBodyOnModal,
-      selectedMenuOnModal,
-      activeTab
+      selectedMenuOnModal
     } = this.props;
+
+    // 토큰확인 :: 로그인 여부 확인
+    if (localStorage.getItem("token")) {
+      // 로그인
+      onProductModal();
+      onHandleBodyOnModal("open");
+      selectedMenuOnModal(pk);
+    } else {
+      // 미로그인
+      alert("로그인이 필요한 서비스입니다.");
+    }
+  };
+  render() {
+    const { menu, activeTab } = this.props;
 
     return (
       <div className={classNames("MenuBody", { open: activeTab === "menu" })}>
@@ -46,9 +61,7 @@ class RestaurantMenu extends Component {
                 {m.food_set.map(fs => (
                   <li
                     onClick={() => {
-                      onProductModal();
-                      onHandleBodyOnModal("open");
-                      selectedMenuOnModal(fs.pk);
+                      this.handleClick(fs.pk);
                     }}
                     className={classNames("menuItem")}
                     key={fs.pk}
