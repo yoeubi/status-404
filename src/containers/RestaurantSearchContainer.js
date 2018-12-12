@@ -7,7 +7,8 @@ export default class RestaurantSearchContainer extends Component {
 
     this.state = {
       userInput: "",
-      searchList: []
+      searchList: [],
+      searchResult: false
     };
   }
 
@@ -30,12 +31,16 @@ export default class RestaurantSearchContainer extends Component {
     });
   };
   // 입력된 맛집 검색 키워드를 다루는 함수
-  handleSubmitBtn = () => {
+  handleSubmitBtn = e => {
+    e.preventDefault();
     const { userInput } = this.state;
     // 상태에 있는 검색 키워드 목록에 사용자 입력을 저장
     this.state.searchList.push(userInput);
     // local storage에 키워드를 저장
     localStorage.setItem("searchList", JSON.stringify(this.state.searchList));
+    this.setState(prevState => ({
+      searchResult: !prevState.searchResult
+    }));
   };
   // 삭제 버튼으로 검색 키워드 history 목록에 있는 item을 지우는 함수
   handleDeleteBtn = index => {
@@ -44,17 +49,26 @@ export default class RestaurantSearchContainer extends Component {
     localStorage.setItem("searchList", JSON.stringify(this.state.searchList));
     this.setState({});
   };
+  // 맛집 검색 페이지 안의 검색 결과 목록을 바꾸는 함수
+  handleSearchResult = () => {
+    this.setState(prevState => ({
+      searchResult: !prevState.searchResult
+    }));
+  };
 
   render() {
-    const { userInput, searchList } = this.state;
+    const { userInput, searchList, searchResult } = this.state;
     return (
       <div>
         <RestaurantSearch
+          searchResult={searchResult}
           searchList={searchList}
-          onSubmitBtn={() => this.handleSubmitBtn()}
+          onSubmitBtn={this.handleSubmitBtn}
           onUserInput={e => this.handleUserInput(e)}
           userInput={userInput}
           onDeleteBtn={index => this.handleDeleteBtn(index)}
+          onList={this.handleList}
+          onSearchResult={() => this.handleSearchResult()}
         />
       </div>
     );

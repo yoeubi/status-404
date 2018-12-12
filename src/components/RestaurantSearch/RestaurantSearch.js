@@ -6,6 +6,7 @@ import { Link } from "react-router-dom";
 import { ReactComponent as MagnifyingGlass } from "../../img/search.svg";
 import { ReactComponent as BackBtn } from "../../svg/arrow-left.svg";
 import { ReactComponent as Ex } from "../../img/x.svg";
+import RestaurantSearchList from "./RestaurantSearchList";
 const cx = classNames.bind(styles);
 
 export default class RestaurantSearch extends Component {
@@ -15,19 +16,30 @@ export default class RestaurantSearch extends Component {
       onUserInput,
       onSubmitBtn,
       searchList,
-      onDeleteBtn
+      onDeleteBtn,
+      searchResult,
+      onSearchResult
     } = this.props;
     return (
       <div className={cx("container")}>
         <div className={cx("InputContainer")}>
-          <button className={cx("backBtn")}>
-            <Link to={"/"}>
+          {searchResult ? (
+            <button className={cx("backBtn")} onClick={onSearchResult}>
               <BackBtn />
-            </Link>
-          </button>
+            </button>
+          ) : (
+            <button className={cx("backBtn")}>
+              <Link to={"/"}>
+                <BackBtn />
+              </Link>
+            </button>
+          )}
           <form
             className={cx("InputForm")}
-            // onSubmit={onSubmitBtn}
+            onSubmit={e => {
+              e.preventDefault();
+              onSubmitBtn(e);
+            }}
           >
             <label>
               <input
@@ -41,29 +53,32 @@ export default class RestaurantSearch extends Component {
             </label>
             <button
               className={cx("SubmitBtn")}
-              onClick={onSubmitBtn}
-              // type="submit"
+              onClick={e => onSubmitBtn(e)}
               value="검색"
             >
               <MagnifyingGlass />
             </button>
           </form>
         </div>
-        <div className={cx("HistoryContainer")}>
-          <ul className={cx("HistoryList")}>
-            {searchList &&
-              searchList.map((s, index) => (
-                <li key={index} className={cx("listItem")}>
-                  {s}
-                  <button
-                    onClick={() => onDeleteBtn(index)}
-                    className={cx("deleteButton")}
-                  >
-                    <Ex />
-                  </button>
-                </li>
-              ))}
-          </ul>
+        <div className={cx("ListContainer")}>
+          {searchResult ? (
+            <RestaurantSearchList />
+          ) : (
+            <ul className={cx("HistoryList")}>
+              {searchList &&
+                searchList.map((s, index) => (
+                  <li key={index} className={cx("listItem")}>
+                    {s}
+                    <button
+                      onClick={() => onDeleteBtn(index)}
+                      className={cx("deleteButton")}
+                    >
+                      <Ex />
+                    </button>
+                  </li>
+                ))}
+            </ul>
+          )}
         </div>
       </div>
     );
