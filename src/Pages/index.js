@@ -10,4 +10,3 @@ export const List = withSplitting(() => import('./ListPage'));
 export const Cart = withSplitting(() => import('./CartPage'));
 export const Pay = withSplitting(() => import('./PayPage'));
 export const Result = withSplitting(() => import('./ResultPage'));
-export const Search = withSplitting(() => import('./SearchPage'));

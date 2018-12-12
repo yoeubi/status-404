@@ -1,5 +1,5 @@
 import React, { Component } from "react";
-import { kakaoAPI, mainAPI } from "../api";
+import { mainAPI } from "../api";
 
 const { Provider, Consumer } = React.createContext();
 
@@ -183,7 +183,8 @@ class UserProvider extends Component {
     logout: this.logout.bind(this),
     facebookLogin: this.facebookLogin.bind(this),
     googleLogin: this.googleLogin.bind(this),
-    failLogin: this.failLogin.bind(this)
+    failLogin: this.failLogin.bind(this),
+    join : this.join.bind(this)
   };
 
   async componentDidMount() {
@@ -231,11 +232,22 @@ class UserProvider extends Component {
     });
     localStorage.removeItem("token");
   }
-  facebookLogin(response) {
+  async facebookLogin(response) {
     // mainAPI 연결
-    console.log("facebook 로그인");
-    console.log(response);
-    // this.failLogin('facebook')
+    try {
+      const {data : {user, token}} = await mainAPI.post('/members/facebook/', {
+        facebook_id: response.userID,
+        name: response.name,
+        email: response.email
+      })
+      localStorage.setItem('user',JSON.stringify(user));
+      localStorage.setItem('token',token );
+      this.setState({
+        user
+      })
+    } catch(e){
+      this.failLogin('facebook');
+    }
   }
   googleLogin(response) {
     // mainAPI 연결

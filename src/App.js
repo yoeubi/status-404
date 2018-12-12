@@ -13,6 +13,7 @@ import {
   Pay,
   Result
 } from "./Pages";
+import NewList from "./components/NewList/NewList";
 
 class App extends Component {
   render() {
@@ -23,7 +24,6 @@ class App extends Component {
           {/* 라우터는 여기다가 일단 작성하시오 */}
           <Route path="/login" component={Login} />
           <Route path="/join" component={Join} />
-          {/* <Route path="/search" component={Search} /> */}
           <Route path="/profile" component={Profile} />
           <Route
             path="/restaurant-search"
@@ -38,6 +38,7 @@ class App extends Component {
           <Route path="/pay" component={Pay} />
           <Route path="/myorder" component={Order} />
           <Route path="/payresult" component={Result} />
+          <Route path="/test" component={NewList} />
         </Switch>
       </Router>
     );

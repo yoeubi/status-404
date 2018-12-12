@@ -1,11 +1,11 @@
 .search-list {
-  position: absolute;
-  top: 90px;
+  position: fixed;
+  top: 8.5rem;
   right: 0;
   transform: translateX(19rem);
   background: #fff;
   width: 19rem;
-  height: calc(100vh - 90px);
+  height: calc(100vh - 8.5rem);
   color: #aaa;
   z-index: 100;
   transition: all 0.5s ease-in-out;

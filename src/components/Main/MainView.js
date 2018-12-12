@@ -13,16 +13,16 @@ import { ReactComponent as Ilsik } from "../../img/03_ilsik.svg";
 import { ReactComponent as Chicken } from "../../img/04_chicken.svg";
 import { ReactComponent as Pizza } from "../../img/05_pizza.svg";
 import { ReactComponent as Chinese } from "../../img/06_chinese.svg";
-import { ReactComponent as Zokbal } from "../../img/07_zokbal.svg";
-import { ReactComponent as Yasik } from "../../img/08_yasik.svg";
-import { ReactComponent as Zzim } from "../../img/09_zzim.svg";
-import { ReactComponent as Dosirak } from "../../img/10_dosirak.svg";
+// import { ReactComponent as Zokbal } from "../../img/07_zokbal.svg";
+// import { ReactComponent as Yasik } from "../../img/08_yasik.svg";
+// import { ReactComponent as Zzim } from "../../img/09_zzim.svg";
+// import { ReactComponent as Dosirak } from "../../img/10_dosirak.svg";
 import { ReactComponent as Desert } from "../../img/11_desert.svg";
 import { ReactComponent as Fastfood } from "../../img/12_fastfood.svg";
 import { ReactComponent as Franchise } from "../../img/13_franchise.svg";
-import { ReactComponent as Matzip } from "../../img/14_matzip.svg";
+// import { ReactComponent as Matzip } from "../../img/14_matzip.svg";
 import { ReactComponent as SearchIcon } from "../../img/search.svg";
-import { ReactComponent as BottomBanner } from "../../img/main_bottom_banner.svg";
+// import { ReactComponent as BottomBanner } from "../../img/main_bottom_banner.svg";
 
 const cx = classNames.bind(styles);
 
@@ -38,69 +38,69 @@ class MainView extends Component {
       },
       {
         id: 1,
-        name: "분식",
-        img: <Bunsik />
-      },
-      {
-        id: 2,
-        name: "돈까스·회·일식",
+        name: "일식",
         img: <Ilsik />
       },
       {
+        id: 2,
+        name: "양식",
+        img: <Franchise />
+      },
+      {
         id: 3,
+        name: "카페",
+        img: <Desert />
+      },
+      {
+        id: 4,
+        name: "햄버거",
+        img: <Fastfood />
+      },
+      {
+        id: 5,
         name: "치킨",
         img: <Chicken />
       },
       {
-        id: 4,
+        id: 6,
         name: "피자",
         img: <Pizza />
       },
       {
-        id: 5,
+        id: 7,
         name: "중국집",
         img: <Chinese />
       },
       {
-        id: 6,
-        name: "족발·보쌈",
-        img: <Zokbal />
-      },
-      {
-        id: 7,
-        name: "야식",
-        img: <Yasik />
-      },
-      {
         id: 8,
-        name: "찜·탕",
-        img: <Zzim />
+        name: "분식",
+        img: <Bunsik />
       },
-      {
-        id: 9,
-        name: "도시락",
-        img: <Dosirak />
-      },
-      {
-        id: 10,
-        name: "카페·디저트",
-        img: <Desert />
-      },
-      {
-        id: 11,
-        name: "패스트푸드",
-        img: <Fastfood />
-      },
-      {
-        id: 12,
-        name: "프랜차이즈",
-        img: <Franchise />
-      },
-      {
-        id: 13,
-        name: "맛집랭킹",
-        img: <Matzip />
-      }
+      // {
+      //   id: 6,
+      //   name: "족발·보쌈",
+      //   img: <Zokbal />
+      // },
+      // {
+      //   id: 7,
+      //   name: "야식",
+      //   img: <Yasik />
+      // },
+      // {
+      //   id: 8,
+      //   name: "찜·탕",
+      //   img: <Zzim />
+      // },
+      // {
+      //   id: 9,
+      //   name: "도시락",
+      //   img: <Dosirak />
+      // },
+      // {
+      //   id: 13,
+      //   name: "맛집랭킹",
+      //   img: <Matzip />
+      // }
     ]
   };
 
@@ -142,7 +142,7 @@ class MainView extends Component {
             {lists.map(c => {
               return (
                 <li className={cx("item")} key={c.name}>
-                  <Link to={`/list?category=${c.name}`}>
+                  <Link to={`/list?category=${c.id}`}>
                     {c.img}
                     {c.name}
                   </Link>
