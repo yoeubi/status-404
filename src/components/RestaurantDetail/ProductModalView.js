@@ -87,6 +87,18 @@ class ProductModalView extends Component {
     this.sumTotalPrice();
   };
 
+  handleCartBtn = () => {
+    const pk = this.props.selectedMenu.pk;
+    const quantity = this.state.quantity;
+    const options = this.state.options.map(item => item.pk);
+
+    this.props.addItemToCart(pk, quantity, options);
+    this.props.onProductModal();
+    this.props.onHandleBodyOnModal("close");
+
+    console.log(pk, quantity, options);
+  };
+
   render() {
     const {
       name,
@@ -94,8 +106,7 @@ class ProductModalView extends Component {
       onHandleBodyOnModal,
       selectedMenu,
       least_cost,
-      show,
-      addItemToCart
+      show
     } = this.props;
     const { totalPrice, quantity, options } = this.state;
     console.log(this.state);
@@ -187,9 +198,8 @@ class ProductModalView extends Component {
                   if (!localStorage.getItem("token")) {
                     alert("로그인이 필요한 서비스입니다.");
                   }
-                  addItemToCart(selectedMenu.pk, this.state.quantity);
-                  onProductModal();
-                  onHandleBodyOnModal("close");
+
+                  this.handleCartBtn();
                 }}
                 className={cx("CartButton")}
               >

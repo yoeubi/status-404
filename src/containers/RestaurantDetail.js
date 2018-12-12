@@ -63,14 +63,14 @@ class RestaurantDetail extends Component {
     });
   };
 
-  addItemToCart = async (food, quantity, sidedishes_set) => {
+  addItemToCart = async (food_pk, quantity, side_dishes_pk) => {
+    console.log(food_pk, quantity, side_dishes_pk);
+
     try {
-      const res = await api.post("/cart/items/", {
-        params: {
-          food,
-          quantity,
-          sidedishes_set
-        }
+      const res = await api.post("/cart/items", {
+        food_pk,
+        quantity,
+        side_dishes_pk
       });
       console.log(res);
     } catch (error) {
