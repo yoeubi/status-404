@@ -18,7 +18,10 @@ export default class RestaurantSearch extends Component {
               <BackBtn />
             </Link>
           </button>
-          <form className={cx("InputForm")} onSubmit={onSubmitBtn}>
+          <form
+            className={cx("InputForm")}
+            // onSubmit={onSubmitBtn}
+          >
             <label>
               <input
                 className={cx("Input")}
@@ -29,7 +32,12 @@ export default class RestaurantSearch extends Component {
                 onChange={onUserInput}
               />
             </label>
-            <button className={cx("SubmitBtn")} type="submit" value="검색">
+            <button
+              className={cx("SubmitBtn")}
+              onClick={onSubmitBtn}
+              // type="submit"
+              value="검색"
+            >
               <MagnifyingGlass />
             </button>
           </form>
