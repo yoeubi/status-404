@@ -41,11 +41,11 @@ class ProductModalView extends Component {
           quantity: 1
         });
       }
-    } else {
     }
   }
 
   handleChange = async optionId => {
+    // 옵션 체크를 위한 함수
     const newOptions = this.state.options.map(option => {
       if (option.pk === optionId) {
         option.checked = !option.checked;
@@ -60,6 +60,7 @@ class ProductModalView extends Component {
   };
 
   sumTotalPrice = async () => {
+    // 선택한 메뉴의 총 주문 가격을 구하는 함수
     const { selectedMenu } = this.props;
     let result = 0; // 옵션 가격의 합을 구하기 위한 변수
     const { options } = this.state;
@@ -74,6 +75,7 @@ class ProductModalView extends Component {
   };
 
   handleQuantity = async mode => {
+    // 선택한 메뉴의 갯수를 수정하는 함수
     const { quantity } = this.state;
 
     if (mode === "plus") {
@@ -92,12 +94,17 @@ class ProductModalView extends Component {
     const pk = this.props.selectedMenu.pk;
     const quantity = this.state.quantity;
     const options = this.state.options.map(item => item.pk);
+    const { onHandleBodyOnModal, addItemToCart, onProductModal } = this.props;
 
-    this.props.addItemToCart(pk, quantity, options);
-    this.props.onProductModal();
-    this.props.onHandleBodyOnModal("close");
-
-    console.log(pk, quantity, options);
+    if (!localStorage.getItem("token")) {
+      alert("로그인이 필요한 서비스입니다.");
+      onHandleBodyOnModal("close");
+      onProductModal();
+    } else {
+      addItemToCart(pk, quantity, options);
+      onProductModal();
+      onHandleBodyOnModal("close");
+    }
   };
 
   render() {
@@ -195,10 +202,6 @@ class ProductModalView extends Component {
               </div>
               <button
                 onClick={() => {
-                  if (!localStorage.getItem("token")) {
-                    alert("로그인이 필요한 서비스입니다.");
-                  }
-
                   this.handleCartBtn();
                 }}
                 className={cx("CartButton")}
