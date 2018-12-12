@@ -197,7 +197,7 @@ class UserProvider extends Component {
           success: true
         });
       } catch (e) {
-        console.log('token 로그인 실패 or token 미존재')
+        console.log("token 로그인 실패 or token 미존재");
       }
     }
   }
@@ -247,7 +247,7 @@ class UserProvider extends Component {
       warning: `${target} 로그인이 실패했습니다.`
     });
   }
-  async join({nickname, phone, password, username}){
+  async join({ nickname, phone, password, username }) {
     try {
       await mainAPI.post("/members/register/", {
         username,
@@ -255,8 +255,8 @@ class UserProvider extends Component {
         nickname,
         phone
       });
-    } catch(e) {
-      console.log('회원가입 실패했습니다.')
+    } catch (e) {
+      console.log("회원가입 실패했습니다.");
     }
   }
   render() {
