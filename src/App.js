@@ -2,6 +2,8 @@ import React, { Component } from "react";
 import { BrowserRouter as Router, Route, Switch } from "react-router-dom";
 // import RestaurantSearchContainer from "./containers/RestaurantSearchContainer";
 import { Main, Login, Join, Order, Profile, Detail, List, Cart, Pay, Result} from './Pages';
+import NewLabelInput from "./components/NewLabelInput/NewLabelInput";
+import NewJoin from "./components/NewJoin/NewJoin";
 
 class App extends Component {
   render() {
@@ -13,7 +15,6 @@ class App extends Component {
           {/* <Route path="/addressSearch" component={AddressSearch} /> */}
           <Route path="/login" component={Login} />
           <Route path="/join" component={Join} />
-          {/* <Route path="/search" component={Search} /> */}
           <Route path="/profile" component={Profile} />
           {/* <Route
             path="/restaurant-search"
@@ -27,6 +28,7 @@ class App extends Component {
           <Route path="/pay" component={Pay} />
           <Route path="/myorder" component={Order} />
           <Route path="/payresult" component={Result} />
+          <Route paht="/test" component={NewJoin} />
         </Switch>
       </Router>
     );

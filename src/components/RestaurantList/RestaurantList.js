@@ -13,14 +13,16 @@ class RestaurantList extends Component {
 
     state = {
         category : null,
-        show : false
+        show : false,
+        scroll : 0,
     }
     list = React.createRef();
+    categoryList = [
+        '한식','일식','양식', '카페','햄버거','치킨','피자','중식','분식'
+    ]
 
     componentDidMount() {
-        const query = decodeURI(this.props.location.search);
-        const parsed = new URLSearchParams(query);
-        const category = parsed.get("category");
+        const category = this.parseQuery();
         this.setState({
             category
         });
@@ -29,21 +31,27 @@ class RestaurantList extends Component {
     
     componentDidUpdate(prevProps, prevState) {
         if(this.props.location !== prevProps.location){
-            const query = decodeURI(this.props.location.search);
-            const parsed = new URLSearchParams(query);
-            const category = parsed.get("category");
+            const category = this.parseQuery();
             this.setState({
                 category
             });
             window.scrollTo(0, 0);
         }
     }
+    parseQuery = () => {
+        const query = decodeURI(this.props.location.search);
+        const parsed = new URLSearchParams(query);
+        const idx = parsed.get("category");
+        const category = this.categoryList.find( ( category , index ) => index === parseInt(idx));
+        return category;
+    }
     
-    handleCategory = menu => {
+    handleCategory = idx => {
         const { match, history } = this.props;
-        history.push(`${match.path}?category=${menu}`);
+        const category = this.categoryList.find( (category, index) => index === idx );
+        history.push(`${match.path}?category=${idx}`);
         this.setState({
-            category : menu,
+            category,
             show : false
         })
     }
@@ -52,11 +60,16 @@ class RestaurantList extends Component {
             show : !this.state.show
         })
     }
+    handleScroll = scroll => {
+        this.setState({
+            scroll
+        })
+    }
     render() {
-        const {category, show} = this.state;
+        const {category, show , scroll} = this.state;
         return <div key={category} ref={this.list} className={cx('restaurant-list', {show})}>
             <Header category={category} onShowModal={this.handleShowModal} />
-            <SlideMenu category={category} onChange={this.handleCategory} />
+            <SlideMenu category={category} onChange={this.handleCategory} scroll={scroll} onScroll={this.handleScroll} />
             <SearchList show={show} />
             <BlackCurtain show={show} onShowModal={this.handleShowModal} />
             <RestaurantItem />
