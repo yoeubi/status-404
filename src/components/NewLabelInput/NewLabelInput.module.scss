@@ -1,0 +1,66 @@
+$font-size : 1.5rem;
+$second-font-size : 1.3rem;
+$main-color : #2ac1bc;
+$input-height : 45px;
+
+@mixin center {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}
+
+.label-input {
+  margin: 1.5rem 0;
+  position: relative;
+  label {
+    font-size: $second-font-size;
+    color: rgba(0, 0, 0, 0.1);
+    font-weight: 700;
+    &.show {
+      color: black;
+    }
+  }
+  input {
+    width: 100%;
+    height: 40px;
+    font-weight: 700;
+    border: none;
+    border-bottom: 1px solid rgba(0, 0, 0, 0.3);
+    &:focus {
+      outline: none;
+      border-bottom: 1px solid $main-color;
+    }
+    &::placeholder {
+      color: rgba(0, 0, 0, 0.1);
+    }
+  }
+  p {
+    font-size: $second-font-size;
+    visibility: hidden;
+    color: red;
+    &.show {
+      visibility: visible;
+    }
+  }
+  span {
+    @include center();
+    transform: scale(1.3);
+  }
+  .clear,
+  .check {
+    position: absolute;
+    top: calc(50% + 3px);
+    transform: translateY(-50%);
+    padding: 10px;
+    display: none;
+    &.show {
+      display: block;
+    }
+  }
+  .clear {
+    right: 35px;
+  }
+  .check {
+    right: 0;
+  }
+}

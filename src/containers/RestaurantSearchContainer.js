@@ -18,7 +18,7 @@ export default class RestaurantSearchContainer extends Component {
         searchList
       });
     } else {
-      return;
+      localStorage.setItem("searchList", JSON.stringify(this.state.searchList));
     }
     console.log(searchList);
   }
@@ -36,8 +36,15 @@ export default class RestaurantSearchContainer extends Component {
     localStorage.setItem("searchList", JSON.stringify(this.state.searchList));
   };
 
+  handleDeleteBtn = index => {
+    this.state.searchList.splice(index, 1);
+    localStorage.removeItem("searchList");
+    localStorage.setItem("searchList", JSON.stringify(this.state.searchList));
+    this.setState({});
+  };
+
   render() {
-    const { userInput, searchList } = this.props;
+    const { userInput, searchList } = this.state;
     return (
       <div>
         <RestaurantSearch
@@ -45,6 +52,7 @@ export default class RestaurantSearchContainer extends Component {
           onSubmitBtn={() => this.handleSubmitBtn()}
           onUserInput={e => this.handleUserInput(e)}
           userInput={userInput}
+          onDeleteBtn={index => this.handleDeleteBtn(index)}
         />
       </div>
     );
