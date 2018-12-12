@@ -5,11 +5,18 @@ import { Link } from "react-router-dom";
 // svg
 import { ReactComponent as MagnifyingGlass } from "../../img/search.svg";
 import { ReactComponent as BackBtn } from "../../svg/arrow-left.svg";
+import { ReactComponent as Ex } from "../../img/x.svg";
 const cx = classNames.bind(styles);
 
 export default class RestaurantSearch extends Component {
   render() {
-    const { userInput, onUserInput, onSubmitBtn, searchList } = this.props;
+    const {
+      userInput,
+      onUserInput,
+      onSubmitBtn,
+      searchList,
+      onDeleteBtn
+    } = this.props;
     return (
       <div className={cx("container")}>
         <div className={cx("InputContainer")}>
@@ -18,7 +25,10 @@ export default class RestaurantSearch extends Component {
               <BackBtn />
             </Link>
           </button>
-          <form className={cx("InputForm")} onSubmit={onSubmitBtn}>
+          <form
+            className={cx("InputForm")}
+            // onSubmit={onSubmitBtn}
+          >
             <label>
               <input
                 className={cx("Input")}
@@ -29,7 +39,12 @@ export default class RestaurantSearch extends Component {
                 onChange={onUserInput}
               />
             </label>
-            <button className={cx("SubmitBtn")} type="submit" value="검색">
+            <button
+              className={cx("SubmitBtn")}
+              onClick={onSubmitBtn}
+              // type="submit"
+              value="검색"
+            >
               <MagnifyingGlass />
             </button>
           </form>
@@ -40,6 +55,12 @@ export default class RestaurantSearch extends Component {
               searchList.map((s, index) => (
                 <li key={index} className={cx("listItem")}>
                   {s}
+                  <button
+                    onClick={() => onDeleteBtn(index)}
+                    className={cx("deleteButton")}
+                  >
+                    <Ex />
+                  </button>
                 </li>
               ))}
           </ul>

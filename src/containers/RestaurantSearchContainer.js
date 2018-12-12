@@ -7,8 +7,20 @@ export default class RestaurantSearchContainer extends Component {
 
     this.state = {
       userInput: "",
-      searchList: ["김밥"]
+      searchList: []
     };
+  }
+
+  componentDidMount() {
+    const searchList = JSON.parse(localStorage.getItem("searchList"));
+    if (searchList) {
+      this.setState({
+        searchList
+      });
+    } else {
+      localStorage.setItem("searchList", JSON.stringify(this.state.searchList));
+    }
+    console.log(searchList);
   }
 
   handleUserInput = e => {
@@ -19,22 +31,28 @@ export default class RestaurantSearchContainer extends Component {
   };
 
   handleSubmitBtn = () => {
-    const { searchList, userInput } = this.props;
+    const { userInput } = this.state;
     this.state.searchList.push(userInput);
-    // this.setState({
+    localStorage.setItem("searchList", JSON.stringify(this.state.searchList));
+  };
 
-    // });
-    console.log(searchList);
+  handleDeleteBtn = index => {
+    this.state.searchList.splice(index, 1);
+    localStorage.removeItem("searchList");
+    localStorage.setItem("searchList", JSON.stringify(this.state.searchList));
+    this.setState({});
   };
 
   render() {
-    const { userInput } = this.props;
+    const { userInput, searchList } = this.state;
     return (
       <div>
         <RestaurantSearch
+          searchList={searchList}
           onSubmitBtn={() => this.handleSubmitBtn()}
           onUserInput={e => this.handleUserInput(e)}
           userInput={userInput}
+          onDeleteBtn={index => this.handleDeleteBtn(index)}
         />
       </div>
     );
