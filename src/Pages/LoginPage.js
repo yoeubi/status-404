@@ -1,9 +1,9 @@
 import React from 'react';
-import NewLogin from '../components/NewLogin/NewLogin';
+import LoginContainer from '../containers/LoginContainer';
 
 const LoginPage = (props) => {
     return (
-        <NewLogin {...props}/>
+        <LoginContainer {...props} />
     );
 };
 
