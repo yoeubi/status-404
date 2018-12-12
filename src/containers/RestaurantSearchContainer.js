@@ -13,9 +13,13 @@ export default class RestaurantSearchContainer extends Component {
 
   componentDidMount() {
     const searchList = JSON.parse(localStorage.getItem("searchList"));
-    this.setState({
-      searchList
-    });
+    if (searchList) {
+      this.setState({
+        searchList
+      });
+    } else {
+      localStorage.setItem("searchList", JSON.stringify(this.state.searchList));
+    }
     console.log(searchList);
   }
 
