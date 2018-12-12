@@ -17,12 +17,37 @@ class RestaurantHeader extends Component {
     isTop: () => {}
   };
 
+  constructor(props) {
+    super(props);
+    this.state = {
+      // 스크롤 이벤트 flag
+      isTop: true
+    };
+  }
+
+  componentDidMount() {
+    // add scroll event
+    document.addEventListener("scroll", this.handleIsTop);
+  }
+  componentWillUnmount() {
+    // remove scroll event :: 컴포넌트 언마운트 시에 document 객체에 scroll 이벤트리스너를 제거한다.
+    document.removeEventListener("scroll", this.handleIsTop);
+  }
+
+  handleIsTop = () => {
+    // 스크롤시 최상단 판별 함수
+    const isTop = window.scrollY < 100;
+    if (isTop !== this.state.isTop) {
+      this.setState({ isTop });
+    }
+  };
+
   render() {
     const {
       history: { goBack },
-      isTop,
       name
     } = this.props;
+    const { isTop } = this.state;
 
     return (
       <div className={cx("HeaderWrap", { Scroll: !isTop })}>

@@ -36,31 +36,12 @@ class RestaurantDetailView extends Component {
   constructor(props) {
     super(props);
     this.state = {
-      // 스크롤 이벤트 flag
-      isTop: true,
       // actvieTab: 'menu', 'info','review'
       activeTab: "menu",
       // 상품 옵션 모달 호출 : true,false
       productModal: false
     };
   }
-
-  componentDidMount() {
-    // add scroll event
-    document.addEventListener("scroll", this.handleIsTop);
-  }
-  componentWillUnmount() {
-    // remove scroll event :: 컴포넌트 언마운트 시에 document 객체에 scroll 이벤트리스너를 제거한다.
-    document.removeEventListener("scroll", this.handleIsTop);
-  }
-
-  handleIsTop = () => {
-    // 스크롤시 최상단 판별 함수
-    const isTop = window.scrollY < 100;
-    if (isTop !== this.state.isTop) {
-      this.setState({ isTop });
-    }
-  };
 
   handleTabActive = tabName => {
     // 메뉴, 정보, 리뷰 탭 활성화 관련 상태 관리 함수
@@ -77,7 +58,7 @@ class RestaurantDetailView extends Component {
   };
 
   render() {
-    const { isTop, activeTab, productModal } = this.state;
+    const { activeTab, productModal } = this.state;
     const {
       name,
       storeimage_set,
@@ -95,7 +76,7 @@ class RestaurantDetailView extends Component {
     } = this.props;
     return (
       <div className={cx("RestaurantDetailWrap")}>
-        <Header isTop={isTop} name={name} />
+        <Header name={name} />
 
         <RestaurantSummary
           name={name}
