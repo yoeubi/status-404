@@ -90,7 +90,8 @@ class RestaurantDetailView extends Component {
       handleBodyOnModal,
       selectedMenuOnModal,
       selectedMenu,
-      addItemToCart
+      addItemToCart,
+      numberOfCart
     } = this.props;
     return (
       <div className={cx("RestaurantDetailWrap")}>
@@ -139,7 +140,7 @@ class RestaurantDetailView extends Component {
           <StoreReviewTapContainer activeTab={activeTab} />
         </div>
 
-        <CartBtn fixed={true} />
+        <CartBtn fixed={true} numberOfCart={numberOfCart} />
 
         <ProductModalView
           addItemToCart={addItemToCart}
