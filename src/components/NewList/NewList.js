@@ -32,6 +32,30 @@ class NewList extends Component {
     "중식",
     "분식"
   ];
+    componentDidMount() {
+        const category = this.parseQuery();
+        this.setState({
+            category
+        });
+        window.scrollTo(0, 0);
+    }
+
+    componentDidUpdate(prevProps, prevState) {
+        if (this.props.location !== prevProps.location) {
+            const category = this.parseQuery();
+            this.setState({
+                category
+            });
+            window.scrollTo(0, 0);
+        }
+    }
+    parseQuery = () => {
+        const query = decodeURI(this.props.location.search);
+        const parsed = new URLSearchParams(query);
+        const idx = parsed.get("category");
+        const category = this.categoryList.find((category, index) => index === parseInt(idx));
+        return category;
+    }
   handleScroll = scroll => {
     this.setState({
       scroll

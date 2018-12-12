@@ -1,9 +1,9 @@
 import React from 'react';
-import RestaurantList from '../components/RestaurantList/RestaurantList';
+import NewList from '../components/NewList/NewList';
 
 const ListPage = (props) => {
     return (
-        <RestaurantList {...props} />
+        <NewList {...props} />
     );
 };
 
