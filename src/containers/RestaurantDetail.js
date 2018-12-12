@@ -20,19 +20,32 @@ class RestaurantDetail extends Component {
     const { match } = this.props;
     const storeId = match.params.id;
     try {
-      // 상점 정보 요청
-      const { data } = await api.get(`/store/${storeId}/`);
+      if (localStorage.getItem("token")) {
+        // 로그인
+        // 상점 정보 요청
+        const { data } = await api.get(`/store/${storeId}/`);
+        // 장바구니 정보 요청
+        const { data: cartData } = await api.get(`/cart/items/`);
 
-      // 장바구니 정보 요청
-      const { data: cartData } = await api.get(`/cart/items/`);
+        // 1. 불러온 정보를 state 에 저장한다.
+        // 2. 로딩 인디케이터 flag 를 false 로 설정한다.
+        this.setState({
+          store: data,
+          numberOfCart: cartData.item.length,
+          loading: false
+        });
+      } else {
+        // 미로그인
+        // 상점 정보 요청
+        const { data } = await api.get(`/store/${storeId}/`);
 
-      // 1. 불러온 정보를 state 에 저장한다.
-      // 2. 로딩 인디케이터 flag 를 false 로 설정한다.
-      this.setState({
-        store: data,
-        numberOfCart: cartData.item.length,
-        loading: false
-      });
+        // 1. 불러온 정보를 state 에 저장한다.
+        // 2. 로딩 인디케이터 flag 를 false 로 설정한다.
+        this.setState({
+          store: data,
+          loading: false
+        });
+      }
     } catch (error) {
       // TODO :: 에러처리 및 404 처리를 어떻게 할지 논의해 봐야 함
       console.log(error);
