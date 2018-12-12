@@ -113,24 +113,25 @@ class KakaoView extends Component {
   };
 
   render() {
-    console.log(this.state.detailAddress);
     return (
       <div className={cx("Wrap")}>
         <div ref={this.daumMap} className={cx("Map")} />
         <div className={cx("MarkedAddress")}>
-          {this.state.markedAddress ? this.state.markedAddress : "마커마커마커"}
-          {this.state.detailMode && (
-            <React.Fragment>
-              <input
-                type="text"
-                onChange={e => this.handleDetailAddress(e.target.value)}
-                value={this.state.detailAddress}
-                placeholder="ㅎㅇ"
-                autoFocus
-              />
-              <button>상세 주소로 설정하기</button>
-            </React.Fragment>
-          )}
+          <div className={cx("AddressHere")}>
+            {this.state.markedAddress && this.state.markedAddress}
+            {this.state.detailMode && (
+              <div className={cx("AddressDetail")}>
+                <input
+                  type="text"
+                  onChange={e => this.handleDetailAddress(e.target.value)}
+                  value={this.state.detailAddress}
+                  placeholder="상세주소 입력하기"
+                  autoFocus
+                />
+                <button>상세 주소로 설정하기</button>
+              </div>
+            )}
+          </div>
 
           <button
             className={cx("HereIam")}
