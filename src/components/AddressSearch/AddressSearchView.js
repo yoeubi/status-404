@@ -21,7 +21,8 @@ class AddressSearchView extends Component {
       userInput,
       onUserInput,
       // address,
-      recentAddress
+      recentAddress,
+      onDeleteBtn
     } = this.props;
     return (
       <>
@@ -71,16 +72,19 @@ class AddressSearchView extends Component {
                   <li key={index} className={cx("listItem")}>
                     <div className={cx("address")}>{r.address_name}</div>
                     <div className={cx("textContainer")}>
-                      {r.road_address && (
+                      {r.road_address_name && (
                         <>
                           <div className={cx("box")}>도로명</div>
                           <div className={cx("road")}>
-                            {r.road_address && r.road_address}
+                            {r.road_address_name && r.road_address_name}
                           </div>
                         </>
                       )}
                     </div>
-                    <button className={cx("deleteButton")}>
+                    <button
+                      onClick={onDeleteBtn}
+                      className={cx("deleteButton")}
+                    >
                       <Ex />
                     </button>
                   </li>
