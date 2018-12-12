@@ -2,7 +2,6 @@ import React, { Component } from "react";
 import { BrowserRouter as Router, Route, Switch } from "react-router-dom";
 // import RestaurantSearchContainer from "./containers/RestaurantSearchContainer";
 import { Main, Login, Join, Order, Profile, Detail, List, Cart, Pay, Result} from './Pages';
-import NewLabelInput from "./components/NewLabelInput/NewLabelInput";
 import NewJoin from "./components/NewJoin/NewJoin";
 
 class App extends Component {
@@ -28,7 +27,6 @@ class App extends Component {
           <Route path="/pay" component={Pay} />
           <Route path="/myorder" component={Order} />
           <Route path="/payresult" component={Result} />
-          <Route paht="/test" component={NewJoin} />
         </Switch>
       </Router>
     );

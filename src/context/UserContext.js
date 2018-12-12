@@ -183,7 +183,8 @@ class UserProvider extends Component {
     logout: this.logout.bind(this),
     facebookLogin: this.facebookLogin.bind(this),
     googleLogin: this.googleLogin.bind(this),
-    failLogin: this.failLogin.bind(this)
+    failLogin: this.failLogin.bind(this),
+    join : this.join.bind(this)
   };
 
   async componentDidMount() {

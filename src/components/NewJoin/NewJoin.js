@@ -79,6 +79,7 @@ class NewJoin extends Component {
       passValid,
       phoneValid
     } = this.state;
+    const {join} = this.props;
     const complete = nickValid && userValid && passValid && phoneValid;
     return (
       <Page
@@ -94,7 +95,7 @@ class NewJoin extends Component {
               완료
             </span>
           ) : (
-              <Link to="/" style={{ padding: "1.5rem", color: '#2fc0be' }}>
+              <Link to="/" style={{ padding: "1.5rem", color: '#2fc0be' }} onClick={() => join({username, password, nickname, phone})}>
               완료
             </Link>
           )
