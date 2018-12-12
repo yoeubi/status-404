@@ -13,12 +13,21 @@
   }
   .MarkedAddress {
     width: 90%;
-    height: 45px;
+    padding: 15px;
     background: #fff;
     font-size: 1.5rem;
     position: fixed;
-    bottom: 12px;
+    bottom: 10%;
     left: 5%;
     z-index: 11;
+    .HereIam {
+      width: 100%;
+      height: 45px;
+      background: #2fc0be;
+      border: 0;
+      color: #fff;
+      font-size: 1.5rem;
+      font-weight: 600;
+    }
   }
 }

@@ -132,7 +132,10 @@ class KakaoView extends Component {
             </React.Fragment>
           )}
 
-          <button onClick={() => this.handleDetailMode()}>
+          <button
+            className={cx("HereIam")}
+            onClick={() => this.handleDetailMode()}
+          >
             이 위치로 주소 설정
           </button>
         </div>
