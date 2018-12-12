@@ -14,7 +14,9 @@ class KakaoView extends Component {
       markedAddress: null,
       detailMode: false,
       detailAddress: "",
-      loading: true
+      loading: true,
+      longitude: null,
+      latitude: null
     };
   }
 
@@ -60,7 +62,11 @@ class KakaoView extends Component {
         if (status === window.daum.maps.services.Status.OK) {
           console.log(result[0]);
           if (result[0].address.address_name) {
-            stateController(result[0].address.address_name);
+            stateController(
+              result[0].address.address_name,
+              latitude,
+              longitude
+            );
           }
 
           marker.setPosition(mouseEvent.latLng);
@@ -88,20 +94,22 @@ class KakaoView extends Component {
         for (let i = 0; i < result.length; i++) {
           // 행정동의 region_type 값은 'H' 이므로
           if (result[i].region_type === "H") {
-            stateController(result[i].address_name);
+            stateController(result[i].address_name, latitude, longitude);
             break;
           }
         }
       }
     }
-    this.setState({
+    this.setState(prev => ({
       loading: false
-    });
+    }));
   };
 
-  stateController = address => {
+  stateController = (address, latitude, longitude) => {
     this.setState({
-      markedAddress: address
+      markedAddress: address,
+      longitude,
+      latitude
     });
   };
 
@@ -120,6 +128,7 @@ class KakaoView extends Component {
   render() {
     const { onShippingAddress } = this.props;
     const { loading } = this.state;
+    console.log(this.state);
     return (
       <div className={cx("Wrap")}>
         {loading && <Loading />}
