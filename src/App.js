@@ -1,10 +1,5 @@
 import React, { Component } from "react";
 import { BrowserRouter as Router, Route, Switch } from "react-router-dom";
-<<<<<<< HEAD
-// import RestaurantSearchContainer from "./containers/RestaurantSearchContainer";
-import { Main, Login, Join, Order, Profile, Detail, List, Cart, Pay, Result} from './Pages';
-import NewJoin from "./components/NewJoin/NewJoin";
-=======
 import RestaurantSearchContainer from "./containers/RestaurantSearchContainer";
 import {
   Main,
@@ -18,7 +13,6 @@ import {
   Pay,
   Result
 } from "./Pages";
->>>>>>> a4a4539259b17dec5f1f5d19d5bb27a4754a1d58
 
 class App extends Component {
   render() {
