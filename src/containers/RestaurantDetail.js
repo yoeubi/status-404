@@ -58,12 +58,21 @@ class RestaurantDetail extends Component {
 
   addItemToCart = async (food_pk, quantity, side_dishes_pk) => {
     console.log(food_pk, quantity, side_dishes_pk);
-
+    this.setState({
+      loading: true
+    });
     try {
-      const res = await api.post("/cart/items", {
+      const res = await api.post("/cart/items/", {
         food_pk,
         quantity,
         side_dishes_pk
+      });
+      // 장바구니 정보 요청
+      const { data: cartData } = await api.get(`/cart/items/`);
+
+      this.setState({
+        numberOfCart: cartData.item.length,
+        loading: false
       });
       console.log(res);
     } catch (error) {
