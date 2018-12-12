@@ -57,7 +57,6 @@ class RestaurantDetail extends Component {
   };
 
   addItemToCart = async (food_pk, quantity, side_dishes_pk) => {
-    console.log(food_pk, quantity, side_dishes_pk);
     this.setState({
       loading: true
     });
@@ -70,12 +69,17 @@ class RestaurantDetail extends Component {
       // 장바구니 정보 요청
       const { data: cartData } = await api.get(`/cart/items/`);
 
+      alert("장바구니에 상품이 담겼습니다.");
       this.setState({
         numberOfCart: cartData.item.length,
         loading: false
       });
-      console.log(res);
+      console.log(res.data);
     } catch (error) {
+      alert("이미 장바구니에 같은 상품이 담겨 있습니다.");
+      this.setState({
+        loading: false
+      });
       console.log(error);
     }
   };
