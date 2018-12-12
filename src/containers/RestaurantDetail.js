@@ -26,7 +26,7 @@ class RestaurantDetail extends Component {
 
       // 장바구니 정보 요청
       const { data: cartData } = await api.get(`/cart/items/`);
-      console.log(cartData);
+
       if (status === 404) {
         alert("잘못된 요청입니다. 404");
         // history.goBack();
@@ -45,7 +45,8 @@ class RestaurantDetail extends Component {
       // history.goBack();
     }
 
-    console.log(this.state.store);
+    console.log("상점 정보", this.state.store);
+    console.log("장바구니 개수 ", this.state.numberOfCart);
   }
 
   selectedMenuOnModal = menuId => {

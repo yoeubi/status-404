@@ -12,9 +12,7 @@ const cx = classNames.bind(styles);
 class RestaurantHeader extends Component {
   static defaultProps = {
     // 상점 이름
-    name: "상점 이름",
-    // 스크롤시 최상단 판별 함수
-    isTop: () => {}
+    name: "상점 이름"
   };
 
   constructor(props) {
