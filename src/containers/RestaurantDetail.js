@@ -56,11 +56,19 @@ class RestaurantDetail extends Component {
     });
   };
 
-  addItemToCart = (food, quantity) => {
-    console.log({
-      food,
-      quantity
-    });
+  addItemToCart = async (food, quantity, sidedishes_set) => {
+    try {
+      const res = await api.post("/cart/items/", {
+        params: {
+          food,
+          quantity,
+          sidedishes_set
+        }
+      });
+      console.log(res);
+    } catch (error) {
+      console.log(error);
+    }
   };
 
   render() {
