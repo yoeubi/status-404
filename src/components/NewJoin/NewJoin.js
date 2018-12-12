@@ -44,6 +44,8 @@ class NewJoin extends Component {
         return value.slice(0, 20);
       case "phone":
         return value.slice(0, 11);
+      default:
+        return null;
     }
   }
   isValid(target, value) {
@@ -65,6 +67,8 @@ class NewJoin extends Component {
       case "phone":
         flag = /^[0-9]{11}$/g.test(value);
         return { target: "phoneValid", flag };
+      default:
+        return null;
     }
   }
   render() {
@@ -79,10 +83,11 @@ class NewJoin extends Component {
       passValid,
       phoneValid
     } = this.state;
-    const {join} = this.props;
+    const { join } = this.props;
     const complete = nickValid && userValid && passValid && phoneValid;
     return (
       <Page
+        padding="0 2.5rem"
         left={
           <Link to="/" style={{ padding: "1.5rem" }}>
             <Left style={{ transform: "scale(1.5)" }} />
@@ -91,11 +96,13 @@ class NewJoin extends Component {
         middle="회원가입"
         right={
           !complete ? (
-            <span style={{ padding: "1.5rem" }}>
-              완료
-            </span>
+            <span style={{ padding: "1.5rem" }}>완료</span>
           ) : (
-              <Link to="/" style={{ padding: "1.5rem", color: '#2fc0be' }} onClick={() => join({username, password, nickname, phone})}>
+            <Link
+              to="/"
+              style={{ padding: "1.5rem", color: "#2fc0be" }}
+              onClick={() => join({ username, password, nickname, phone })}
+            >
               완료
             </Link>
           )
