@@ -1,6 +1,7 @@
 import React, { Component } from "react";
 import styles from "./KakaoView.module.scss";
 import classNames from "classnames/bind";
+import Loading from "../Loading";
 
 const cx = classNames.bind(styles);
 
@@ -12,7 +13,8 @@ class KakaoView extends Component {
     this.state = {
       markedAddress: null,
       detailMode: false,
-      detailAddress: ""
+      detailAddress: "",
+      loading: true
     };
   }
 
@@ -92,6 +94,9 @@ class KakaoView extends Component {
         }
       }
     }
+    this.setState({
+      loading: false
+    });
   };
 
   stateController = address => {
@@ -113,8 +118,12 @@ class KakaoView extends Component {
   };
 
   render() {
+    const { onShippingAddress } = this.props;
+    const { loading } = this.state;
     return (
       <div className={cx("Wrap")}>
+        {loading && <Loading />}
+        {/* Kakao Map API 사용을 위해서는 일단 렌더링된 */}
         <div ref={this.daumMap} className={cx("Map")} />
         <div className={cx("MarkedAddress")}>
           <div className={cx("AddressHere")}>
@@ -128,17 +137,20 @@ class KakaoView extends Component {
                   placeholder="상세주소 입력하기"
                   autoFocus
                 />
-                <button>상세 주소로 설정하기</button>
+                <button onClick={() => onShippingAddress("aa")}>
+                  상세 주소로 설정하기
+                </button>
               </div>
             )}
           </div>
-
-          <button
-            className={cx("HereIam")}
-            onClick={() => this.handleDetailMode()}
-          >
-            이 위치로 주소 설정
-          </button>
+          {!this.state.detailMode && (
+            <button
+              className={cx("HereIam")}
+              onClick={() => this.handleDetailMode()}
+            >
+              이 위치로 주소 설정
+            </button>
+          )}
         </div>
       </div>
     );

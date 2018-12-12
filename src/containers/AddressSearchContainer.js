@@ -20,6 +20,11 @@ class AddressSearchContainer extends Component {
     // loading: false
   }
 
+  handleShippingAddress = address => {
+    // 배송지 정보 설정 함수
+    console.log(address);
+  };
+
   handleUserInput = e => {
     const userInput = e.target.value;
     this.setState({
@@ -108,7 +113,7 @@ class AddressSearchContainer extends Component {
             address={address}
           />
         ) : this.state.page === "kakao" ? (
-          <KakaoView />
+          <KakaoView onShippingAddress={this.handleShippingAddress} />
         ) : null}
       </>
     );
