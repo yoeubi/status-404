@@ -18,7 +18,8 @@ export default class RestaurantSearch extends Component {
       searchList,
       onDeleteBtn,
       searchResult,
-      onSearchResult
+      onSearchResult,
+      storeList
     } = this.props;
     return (
       <div className={cx("container")}>
@@ -62,7 +63,7 @@ export default class RestaurantSearch extends Component {
         </div>
         <div className={cx("ListContainer")}>
           {searchResult ? (
-            <RestaurantSearchList />
+            <RestaurantSearchList storeList={storeList} />
           ) : (
             <ul className={cx("HistoryList")}>
               {searchList &&

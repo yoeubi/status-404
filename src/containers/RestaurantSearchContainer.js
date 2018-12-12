@@ -1,28 +1,46 @@
 import React, { Component } from "react";
+import { withRouter } from "react-router-dom";
 import RestaurantSearch from "../components/RestaurantSearch/RestaurantSearch";
+import api from "../api/mainAPI";
 
-export default class RestaurantSearchContainer extends Component {
+class RestaurantSearchContainer extends Component {
   constructor(props) {
     super(props);
 
     this.state = {
       userInput: "",
       searchList: [],
-      searchResult: false
+      searchResult: false,
+      store: []
     };
   }
 
-  componentDidMount() {
+  async componentDidMount() {
+    // const { location } = this.props;
+    // console.log(location.search);
+    // const p = new URLSearchParams(location.search); // URLSearchParams: key value 스토어(저장소)
+    // const category = p.get("category");
+    const { category } = this.props;
+    const { data: store } = await api.get("/store/list", {
+      params: {
+        category
+      }
+    });
     const searchList = JSON.parse(localStorage.getItem("searchList"));
     if (searchList) {
       this.setState({
-        searchList
+        searchList,
+        store
       });
     } else {
       localStorage.setItem("searchList", JSON.stringify(this.state.searchList));
+      this.setState({
+        store
+      });
     }
-    console.log(searchList);
+    // console.log(searchList);
   }
+
   // 사용자의 맛집 검색 키워드를 상태로 저장하는 함수
   handleUserInput = e => {
     const userInput = e.target.value;
@@ -57,7 +75,19 @@ export default class RestaurantSearchContainer extends Component {
   };
 
   render() {
-    const { userInput, searchList, searchResult } = this.state;
+    const { userInput, searchList, searchResult, store } = this.state;
+    const { location } = this.props;
+    console.log(location.search);
+    const p = new URLSearchParams(location.search); // URLSearchParams: key value 스토어(저장소)
+    const category = p.get("category");
+    console.log(store);
+    const storeList = store.map(s => ({
+      name: s.name,
+      id: s.pk,
+      storeImgURL: s.storeimage_set[0]
+    }));
+    console.log(storeList);
+
     return (
       <div>
         <RestaurantSearch
@@ -69,8 +99,13 @@ export default class RestaurantSearchContainer extends Component {
           onDeleteBtn={index => this.handleDeleteBtn(index)}
           onList={this.handleList}
           onSearchResult={() => this.handleSearchResult()}
+          key={category}
+          category={p.get("category")}
+          storeList={storeList}
         />
       </div>
     );
   }
 }
+
+export default withRouter(RestaurantSearchContainer);
