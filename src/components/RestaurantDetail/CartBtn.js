@@ -10,11 +10,13 @@ class CartBtn extends Component {
   };
 
   render() {
-    const { fixed } = this.props;
+    const { fixed, numberOfCart } = this.props;
     return (
       <button className={cx("CartBtn", { FixedBottom: fixed })}>
         <span> 장바구니 </span>
-        <span className={cx("Quantity")}>1</span>
+        {numberOfCart ? (
+          <span className={cx("Quantity")}>{numberOfCart}</span>
+        ) : null}
       </button>
     );
   }
