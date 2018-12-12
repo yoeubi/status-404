@@ -6,14 +6,14 @@ import { ReactComponent as Star } from "../../svg/star.svg";
 
 const cx = classNames.bind(styles);
 
-const RestaurantItem = ({ logo, title, star, review, comment, menu }) => {
+const RestaurantItem = ({ logo, name, star, review, comment, menu }) => {
   return (
     <div className={cx("restaurant-item")}>
       <div className={cx("restaurant-img")}>
         <img src={logo} alt="" />
       </div>
       <div className={cx("restaurant-description")}>
-        <p className={cx("title")}>{title}</p>
+        <p className={cx("title")}>{name}</p>
         <p className={cx("detail")}>
           <span>
             <Star

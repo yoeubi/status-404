@@ -1,9 +1,9 @@
 import React from 'react';
-import NewList from '../components/NewList/NewList';
+import ListContainer from '../containers/ListContainer';
 
 const ListPage = (props) => {
     return (
-        <NewList {...props} />
+        <ListContainer {...props} />
     );
 };
 

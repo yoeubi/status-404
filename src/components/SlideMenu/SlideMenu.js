@@ -20,7 +20,6 @@ class SlideMenu extends Component {
 
   componentDidMount() {
     this.slide.current.scrollLeft = this.props.scroll;
-    console.log(this.slide.current.scrollLeft)
   }
   
   render() {

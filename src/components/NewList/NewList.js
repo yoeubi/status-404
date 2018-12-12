@@ -11,12 +11,13 @@ import RestaurantItem from "../RestaurantItem";
 import BlackCurtain from "../BlackCurtain";
 import SearchList from "../SearchList";
 import withModal from "../../HOC/withModal";
+import ListContainer from "../../containers/ListContainer";
 
 const cx = classNames.bind(styles);
 
 class NewList extends Component {
   state = {
-    category: "양식",
+    category: "",
     show: false,
     scroll: 0,
     show: false
@@ -32,30 +33,34 @@ class NewList extends Component {
     "중식",
     "분식"
   ];
-    componentDidMount() {
-        const category = this.parseQuery();
-        this.setState({
-            category
-        });
-        window.scrollTo(0, 0);
-    }
+  componentDidMount() {
+    const { category, index } = this.parseQuery();
+    this.setState({
+      category,
+      scroll: index * 50
+    });
+    window.scrollTo(0, 0);
+  }
 
-    componentDidUpdate(prevProps, prevState) {
-        if (this.props.location !== prevProps.location) {
-            const category = this.parseQuery();
-            this.setState({
-                category
-            });
-            window.scrollTo(0, 0);
-        }
+  componentDidUpdate(prevProps, prevState) {
+    if (this.props.location !== prevProps.location) {
+      const { category, index } = this.parseQuery();
+      this.setState({
+        category,
+        scroll: index * 50
+      });
+      window.scrollTo(0, 0);
     }
-    parseQuery = () => {
-        const query = decodeURI(this.props.location.search);
-        const parsed = new URLSearchParams(query);
-        const idx = parsed.get("category");
-        const category = this.categoryList.find((category, index) => index === parseInt(idx));
-        return category;
-    }
+  }
+  parseQuery = () => {
+    const query = decodeURI(this.props.location.search);
+    const parsed = new URLSearchParams(query);
+    const idx = parsed.get("category");
+    const category = this.categoryList.find(
+      (category, index) => index === parseInt(idx)
+    );
+    return { category, index: idx };
+  };
   handleScroll = scroll => {
     this.setState({
       scroll
@@ -78,6 +83,7 @@ class NewList extends Component {
   };
   render() {
     const { category, scroll, show } = this.state;
+    const { list } = this.props;
     return (
       <Page
         left={
@@ -97,7 +103,7 @@ class NewList extends Component {
           </div>
         }
       >
-        <SlideMenu
+        <SlideMenu //   key={scroll}
           category={category}
           onChange={this.handleCategory}
           scroll={scroll}
@@ -106,29 +112,22 @@ class NewList extends Component {
         <BlackCurtain show={show} onShowModal={this.handleModal} />
         <SearchList show={show} onShowModal={this.handleModal} />
         <div className={cx("content")}>
-          <RestaurantItem />
-          <RestaurantItem />
-          <RestaurantItem />
-          <RestaurantItem />
-          <RestaurantItem />
-          <RestaurantItem />
-          <RestaurantItem />
-          <RestaurantItem />
-          <RestaurantItem />
-          <RestaurantItem />
-          <RestaurantItem />
-          <RestaurantItem />
-          <RestaurantItem />
-          <RestaurantItem />
-          <RestaurantItem />
-          <RestaurantItem />
-          <RestaurantItem />
-          <RestaurantItem />
-          <RestaurantItem />
-          <RestaurantItem />
-          <RestaurantItem />
-          <RestaurantItem />
-          <RestaurantItem />
+          {list &&
+            list.map(li => (
+              <Link to={`/restaurant/${li.pk}/`} key={li.pk}>
+                <RestaurantItem
+                  name={li.name}
+                  logo={
+                    li.storeimage_set.length > 0
+                      ? li.storeimage_set[0].location
+                      : undefined
+                  }
+                />
+              </Link>
+            ))
+
+          //   logo, title, star, review, comment, menu
+          }
         </div>
       </Page>
     );
