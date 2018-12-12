@@ -62,9 +62,9 @@ export default class AddressSearchResult extends Component {
                   </div>
                   <button
                     className={cx("finishBtn")}
-                    onClick={index =>
+                    onClick={() =>
                       // onFinishBtn(s.address_name, s.road_address_name)
-                      onFinishBtn(index)
+                      onFinishBtn(s.id)
                     }
                   >
                     선택

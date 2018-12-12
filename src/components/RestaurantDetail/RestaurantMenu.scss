@@ -1,5 +1,11 @@
 @import "../../index.scss";
 
+.MenuBody {
+  display: none;
+  &.open {
+    display: block;
+  }
+}
 .Collapsible__trigger {
   width: 100%;
   display: flex;

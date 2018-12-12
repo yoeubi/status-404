@@ -1,0 +1,84 @@
+@import "../../index.scss";
+
+input,
+button {
+  outline: none;
+  border: none;
+}
+
+.container {
+  font-size: 1.4rem;
+  width: 100%;
+  height: 100%;
+
+  .backBtn {
+    display: block;
+    height: 49px;
+    width: 49px;
+    font-size: 15pt;
+    border: none;
+    background-color: white;
+    svg {
+      transform: scale(1.5);
+    }
+  }
+  .InputContainer {
+    border-bottom: 1px solid rgb(214, 214, 214);
+    display: flex;
+    flex-direction: row;
+    height: 50px;
+    width: 100%;
+
+    .InputForm {
+      .Input {
+        font-size: 12pt;
+        // width: calc(100% - 80px);
+        width: 320px;
+        height: 100%;
+        // background-color: blue;
+      }
+    }
+    .SubmitBtn {
+      position: absolute;
+      right: 0px;
+      top: 9px;
+      width: 40px;
+      height: 40px;
+      // background-color: pink;
+      svg {
+        transform: scale(1.2);
+        vertical-align: middle;
+      }
+    }
+  }
+  .HistoryContainer {
+    border-top: 10px solid rgb(238, 238, 238);
+    height: calc(100% - 40px);
+    width: 100%;
+    .HistoryList {
+      .listItem {
+        position: relative;
+        line-height: 2.5;
+        font-size: 1.6rem;
+        padding: 10px;
+        color: black;
+        height: 60px;
+        width: 100%;
+        border-bottom: 1px solid rgb(233, 233, 233);
+        .deleteButton {
+          border: none;
+          position: absolute;
+          top: 30%;
+          right: 10px;
+          width: 30px;
+          // height: 80px;
+          font-size: 15pt;
+          background-color: white;
+          svg {
+            fill: rgb(207, 207, 207);
+          }
+        }
+      }
+    }
+  }
+}
