@@ -14,17 +14,8 @@ class ProductModalView extends Component {
       menu: null,
       totalPrice: 0, // 기본 합계금액
       quantity: 1, // 기본 수량
-      selectedMenu: null,
-      show: false
+      selectedMenu: null
     };
-  }
-
-  async componentDidMount() {
-    const { selectedMenu } = this.props;
-    this.setState({
-      totalPrice: selectedMenu.price * this.state.quantity,
-      show: true
-    });
   }
 
   // handleChange = async optionId => {
@@ -44,6 +35,17 @@ class ProductModalView extends Component {
   //   this.sumTotalPrice();
   // };
 
+  componentDidUpdate(prevProps) {
+    // 컴포넌트 업데이트시 최초 합계 금액 설정하기
+    const { selectedMenu } = this.props;
+    console.log(selectedMenu);
+    if (prevProps.selectedMenu !== selectedMenu) {
+      this.setState({
+        totalPrice: selectedMenu.price,
+        quantity: 1
+      });
+    }
+  }
   sumTotalPrice = async () => {
     const { selectedMenu } = this.props;
     // let result = 0; // 옵션 가격의 합을 구하기 위한 변수
@@ -79,9 +81,11 @@ class ProductModalView extends Component {
       onProductModal,
       onHandleBodyOnModal,
       selectedMenu,
-      least_cost
+      least_cost,
+      show,
+      addItemToCart
     } = this.props;
-    const { totalPrice, quantity, show } = this.state;
+    const { totalPrice, quantity } = this.state;
     return (
       <div
         className={cx("ProductModalWrap", {
@@ -156,17 +160,23 @@ class ProductModalView extends Component {
               </div>
               <div className={cx("TotalPrice")}>
                 <span className={cx("Title")}>총 주문 금액</span>
+
                 <span className={cx("Price")}>
-                  {totalPrice.toLocaleString()} 원
+                  {totalPrice && totalPrice.toLocaleString()} 원
                 </span>
+
                 <span className={cx("Least")}>
                   최소 주문 금액 : {least_cost.toLocaleString()}
                 </span>
               </div>
               <button
                 onClick={() => {
-                  alert("상품이 장바구니에 담겼습니다.");
+                  if (!localStorage.getItem("token")) {
+                    alert("로그인이 필요한 서비스입니다.");
+                  }
+                  addItemToCart(selectedMenu.pk, this.state.quantity);
                   onProductModal();
+                  onHandleBodyOnModal("close");
                 }}
                 className={cx("CartButton")}
               >

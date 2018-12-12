@@ -1,7 +1,6 @@
 import React from 'react';
 import styles from './Order.module.scss';
 import classNames from 'classnames/bind';
-import Nothing from '../Nothing';
 
 const cx = classNames.bind(styles);
 

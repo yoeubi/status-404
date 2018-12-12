@@ -182,9 +182,7 @@ class MainView extends Component {
             </li>
           </ul>
 
-          <div className={cx("bottomBanner")}>
-            <BottomBanner />
-          </div>
+          <div className={cx("bottomBanner")}>{/* <BottomBanner /> */}</div>
         </div>
 
         <div className={cx("footer")}>

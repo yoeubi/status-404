@@ -5,19 +5,11 @@ import { Link } from "react-router-dom";
 // svg
 import { ReactComponent as MagnifyingGlass } from "../../img/search.svg";
 import { ReactComponent as BackBtn } from "../../svg/arrow-left.svg";
-import { ReactComponent as Ex } from "../../img/x.svg";
-
 const cx = classNames.bind(styles);
 
 export default class RestaurantSearch extends Component {
   render() {
-    const {
-      userInput,
-      onUserInput,
-      onSubmitBtn,
-      searchList,
-      onDeleteBtn
-    } = this.props;
+    const { userInput, onUserInput, onSubmitBtn, searchList } = this.props;
     return (
       <div className={cx("container")}>
         <div className={cx("InputContainer")}>
@@ -52,24 +44,12 @@ export default class RestaurantSearch extends Component {
         </div>
         <div className={cx("HistoryContainer")}>
           <ul className={cx("HistoryList")}>
-            <li className={cx("listItem")}>
-              김밥
-              <button onClick={onDeleteBtn} className={cx("deleteButton")}>
-                <Ex />
-              </button>
-            </li>
-            <li className={cx("listItem")}>
-              치킨
-              <button onClick={onDeleteBtn} className={cx("deleteButton")}>
-                <Ex />
-              </button>
-            </li>
-            {/* {searchList &&
+            {searchList &&
               searchList.map((s, index) => (
                 <li key={index} className={cx("listItem")}>
                   {s}
                 </li>
-              ))} */}
+              ))}
           </ul>
         </div>
       </div>
