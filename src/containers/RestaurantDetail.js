@@ -57,9 +57,9 @@ class RestaurantDetail extends Component {
 
   selectedMenuOnModal = menuId => {
     const { store } = this.state;
-    store.menu.find(item => {
+    store.menu.forEach(item => {
       const food_set = item.food_set;
-      food_set.find(item => {
+      food_set.forEach(item => {
         if (item.pk === menuId) {
           this.setState({
             selectedMenu: item

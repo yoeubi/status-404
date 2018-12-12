@@ -11,6 +11,7 @@ import { ReactComponent as ArrowDown } from "../../img/chevron-down.svg";
 
 class RestaurantMenu extends Component {
   static defaultProps = {};
+
   handleClick = pk => {
     // param  :::
     // pk : 선택한 메뉴 pk
@@ -19,18 +20,11 @@ class RestaurantMenu extends Component {
       onHandleBodyOnModal,
       selectedMenuOnModal
     } = this.props;
-
-    // 토큰확인 :: 로그인 여부 확인
-    if (localStorage.getItem("token")) {
-      // 로그인
-      onProductModal();
-      onHandleBodyOnModal("open");
-      selectedMenuOnModal(pk);
-    } else {
-      // 미로그인
-      alert("로그인이 필요한 서비스입니다.");
-    }
+    onProductModal();
+    onHandleBodyOnModal("open");
+    selectedMenuOnModal(pk);
   };
+
   render() {
     const { menu, activeTab } = this.props;
 
