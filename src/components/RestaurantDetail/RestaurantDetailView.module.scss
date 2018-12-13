@@ -2,6 +2,10 @@
 //RestaurantDetailWrap
 .RestaurantDetailWrap {
   margin-bottom: 60px;
+  transition: transform 500ms cubic-bezier(0.825, 0.105, 0.54, 1.14);
+  &.ActiveModal {
+    transform: translateX(-20%);
+  }
 }
 //Tab
 .Tab {
