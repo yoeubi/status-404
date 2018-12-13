@@ -23,7 +23,9 @@ class MainContainer extends Component {
       show: false,
       // 주소 검색 모달 활성화 여부
       addressSearchShow: false,
+      // loading indicator 토글용 flag
       loading: true,
+      // policy 모달 컴포넌트 토글용 flag
       policy: false
     };
   }
