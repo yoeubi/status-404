@@ -282,9 +282,11 @@ class UserProvider extends Component {
     try {
       const { data } = await mainAPI.get("/cart/items/");
       console.log(data);
-      this.setState({
-        cart: data.cart
+      await this.setState({
+        cart: data
       });
+      console.log(this.state.cart);
+      
     } catch (e) {
       console.log("장바구니 리스트 에러");
     }

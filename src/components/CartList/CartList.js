@@ -10,102 +10,15 @@ import SideNothing from "../SideNothing";
 const cx = classNames.bind(styles);
 
 class CartList extends Component {
-    cartList = [
-        {
-            cartTitle: "피자 세트1",
-            conditionList: ["기본: M(23800원)", "피자 선택: 슈퍼슈프림 피자"],
-            totalPrice: 23800,
-            amount: 1
-        },
-        {
-            cartTitle: "피자 세트2",
-            conditionList: ["기본: M(23800원)", "피자 선택: 슈퍼슈프림 피자"],
-            totalPrice: 23800,
-            amount: 1
-        },
-        {
-            cartTitle: "피자 세트3",
-            conditionList: ["기본: M(23800원)", "피자 선택: 슈퍼슈프림 피자"],
-            totalPrice: 23800,
-            amount: 1
-        },
-        {
-            cartTitle: "피자 세트4",
-            conditionList: ["기본: M(23800원)", "피자 선택: 슈퍼슈프림 피자"],
-            totalPrice: 23800,
-            amount: 1
-        },
-        {
-            cartTitle: "피자 세트5",
-            conditionList: ["기본: M(23800원)", "피자 선택: 슈퍼슈프림 피자"],
-            totalPrice: 23800,
-            amount: 1
-        },
-        {
-            cartTitle: "피자 세트6",
-            conditionList: ["기본: M(23800원)", "피자 선택: 슈퍼슈프림 피자"],
-            totalPrice: 23800,
-            amount: 1
-        },
-        {
-            cartTitle: "피자 세트7",
-            conditionList: ["기본: M(23800원)", "피자 선택: 슈퍼슈프림 피자"],
-            totalPrice: 23800,
-            amount: 1
-        }
-    ];
-  state = {
-    cartList: this.cartList,
-      total: this.cartList.reduce((acc, item) => acc + (item.totalPrice * item.amount) , 0)
-  };
-  async componentDidMount() {
-      const {pullCart} = this.props;
-      await pullCart();
-  }
-  
-  handleInc = (index) => {
-      const {cartList} = this.state;
-      const newCartList = [
-          ...cartList.slice(0, index),
-          {
-              ...cartList[index],
-              amount: cartList[index].amount + 1
-          },
-          ...cartList.slice(index + 1, cartList.length)
-      ];
-      const newTotal = newCartList.reduce((acc, item) => acc + (item.totalPrice * item.amount), 0)
-      this.setState({
-          cartList : newCartList,
-          total: newTotal
-      })
-  }
-  handleDec = (index) => {
-      const { cartList } = this.state;
-      const newCartList = [
-          ...cartList.slice(0, index),
-          {
-              ...cartList[index],
-              amount: cartList[index].amount - 1
-          },
-          ...cartList.slice(index + 1, cartList.length)
-      ];
-      const newTotal = newCartList.reduce((acc, item) => acc + (item.totalPrice * item.amount), 0)
-      this.setState({
-          cartList: newCartList,
-          total: newTotal
-      })
-  }
-  handleDelete = (index) => {
-      const {cartList} = this.state;
-      const newCartList = cartList.filter( ( cart , idx ) => idx !== index);
-      const newTotal = newCartList.reduce((acc, item) => acc + item.totalPrice * item.amount, 0);
-      this.setState({
-          cartList : newCartList,
-          total : newTotal
-      })
-  }
+    static defaultProps = {
+        cartList : [],
+        total : 0 ,
+        handleDec : () => console.warn('handleInc not defined'),
+        handleInc : () => console.warn('handleInc not defined'),
+        handleDelete : () => console.warn('handleInc not defined'),
+    }
   render() {
-    const { cartList, total } = this.state;
+      const { cartList, total} = this.props;
     return (
       <div className={cx("cart-list")}>
         <BackHeader
