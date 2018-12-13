@@ -20,13 +20,8 @@ class ProductModalView extends Component {
 
   componentDidMount() {
     console.log("ProductModalView componentDidMount");
-  }
-
-  componentDidUpdate(prevProps) {
-    // 컴포넌트 업데이트시 최초 합계 금액 설정하기
     const { selectedMenu } = this.props;
-
-    if (prevProps.selectedMenu !== selectedMenu) {
+    if (selectedMenu) {
       if (selectedMenu.sidedishes_set) {
         // 선택한 메뉴에 옵션이 있을 경우 : options 상태에 sidedishes_set 으로부터 checked 값을 추가한 배열을 새로 생성하여 넣어준다.
         const options = selectedMenu.sidedishes_set.map(item => {
