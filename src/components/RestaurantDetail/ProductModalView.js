@@ -18,10 +18,13 @@ class ProductModalView extends Component {
     };
   }
 
+  componentDidMount() {
+    console.log("ProductModalView componentDidMount");
+  }
+
   componentDidUpdate(prevProps) {
     // 컴포넌트 업데이트시 최초 합계 금액 설정하기
     const { selectedMenu } = this.props;
-    console.log("componentDidUpdate");
 
     if (prevProps.selectedMenu !== selectedMenu) {
       if (selectedMenu.sidedishes_set) {
@@ -35,12 +38,12 @@ class ProductModalView extends Component {
           quantity: 1,
           options
         });
-      } else {
-        this.setState({
-          totalPrice: selectedMenu.price,
-          quantity: 1
-        });
       }
+
+      this.setState({
+        totalPrice: selectedMenu.price,
+        quantity: 1
+      });
     }
   }
 

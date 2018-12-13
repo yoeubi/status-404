@@ -126,6 +126,7 @@ class RestaurantDetailView extends Component {
         <CartBtn fixed={true} numberOfCart={numberOfCart} />
 
         <ProductModalView
+          key={productModal}
           addItemToCart={addItemToCart}
           show={productModal}
           name={name}
