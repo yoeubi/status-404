@@ -1,5 +1,5 @@
 import React, { Component } from "react";
-import { kakaoAPI, mainAPI } from "../api";
+import { mainAPI } from "../api";
 
 const { Provider, Consumer } = React.createContext();
 
@@ -183,7 +183,8 @@ class UserProvider extends Component {
     logout: this.logout.bind(this),
     facebookLogin: this.facebookLogin.bind(this),
     googleLogin: this.googleLogin.bind(this),
-    failLogin: this.failLogin.bind(this)
+    failLogin: this.failLogin.bind(this),
+    join : this.join.bind(this)
   };
 
   async componentDidMount() {
@@ -197,7 +198,7 @@ class UserProvider extends Component {
           success: true
         });
       } catch (e) {
-        console.log('token 로그인 실패 or token 미존재')
+        console.log("token 로그인 실패 or token 미존재");
       }
     }
   }
@@ -231,11 +232,22 @@ class UserProvider extends Component {
     });
     localStorage.removeItem("token");
   }
-  facebookLogin(response) {
+  async facebookLogin(response) {
     // mainAPI 연결
-    console.log("facebook 로그인");
-    console.log(response);
-    // this.failLogin('facebook')
+    try {
+      const {data : {user, token}} = await mainAPI.post('/members/facebook/', {
+        facebook_id: response.userID,
+        name: response.name,
+        email: response.email
+      })
+      localStorage.setItem('user',JSON.stringify(user));
+      localStorage.setItem('token',token );
+      this.setState({
+        user
+      })
+    } catch(e){
+      this.failLogin('facebook');
+    }
   }
   googleLogin(response) {
     // mainAPI 연결
@@ -247,7 +259,7 @@ class UserProvider extends Component {
       warning: `${target} 로그인이 실패했습니다.`
     });
   }
-  async join({nickname, phone, password, username}){
+  async join({ nickname, phone, password, username }) {
     try {
       await mainAPI.post("/members/register/", {
         username,
@@ -255,8 +267,8 @@ class UserProvider extends Component {
         nickname,
         phone
       });
-    } catch(e) {
-      console.log('회원가입 실패했습니다.')
+    } catch (e) {
+      console.log("회원가입 실패했습니다.");
     }
   }
   render() {

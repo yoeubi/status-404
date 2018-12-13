@@ -6,6 +6,7 @@ import { ReactComponent as ChevronLeft } from "../../img/chevron-left.svg"; // �
 import { ReactComponent as Check } from "../../img/check.svg"; // checkbox 아이콘
 
 const cx = classNames.bind(styles);
+
 class ProductModalView extends Component {
   constructor(props) {
     super(props);
@@ -14,53 +15,75 @@ class ProductModalView extends Component {
       menu: null,
       totalPrice: 0, // 기본 합계금액
       quantity: 1, // 기본 수량
-      selectedMenu: null
+      options: null
     };
   }
 
-  // handleChange = async optionId => {
-  //   const newOptions = this.state.menu.options.map(option => {
-  //     if (option.optionId === optionId) {
-  //       option.checked = !option.checked;
-  //     }
-  //     return option;
-  //   });
-  //   await this.setState(prevState => ({
-  //     menu: {
-  //       ...prevState.menu,
-  //       options: newOptions
-  //     }
-  //   }));
-
-  //   this.sumTotalPrice();
-  // };
-
-  componentDidUpdate(prevProps) {
-    // 컴포넌트 업데이트시 최초 합계 금액 설정하기
+  componentDidMount() {
+    console.log("ProductModalView componentDidMount");
     const { selectedMenu } = this.props;
-    console.log(selectedMenu);
-    if (prevProps.selectedMenu !== selectedMenu) {
+    if (selectedMenu) {
+      // 최초 렌더링 시에는 selectedMenu 을 prop으로 전달받지 못한 상황이기 때문에 분기처리
+
+      if (selectedMenu.sidedishes_set) {
+        // selectedMenu 를 전달받았을 때에도 옵션정보가 있는 경우와 없는 경우가 있기 때문에 분기처리
+        // 선택한 메뉴에 옵션이 있을 경우 :
+        // options state에 sidedishes_set 으로부터 checked 값을 추가한 배열을 새로 생성하여 넣어준다. :: 옵션 채크 부분을 관리하기 위해서
+        const options = selectedMenu.sidedishes_set.map(item => {
+          item.checked = false; // check 속성을 false 값으로 넣어준다.
+          return item;
+        });
+
+        this.setState({
+          totalPrice: selectedMenu.price, // 최초 가격은 선택 메뉴의 가격으로 설정한다.
+          quantity: 1, // 최초 수량은 1로 설정한다.
+          options // 새로 생성한 옵션 객체가 들어있는 배열을 설정한다.
+        });
+      }
+
+      // 선택한 메뉴에 옵션이 없는 경우
       this.setState({
-        totalPrice: selectedMenu.price,
-        quantity: 1
+        totalPrice: selectedMenu.price, // 최초 가격은 선택 메뉴의 가격으로 설정한다.
+        quantity: 1 // 최초 수량은 1로 설정한다.
       });
     }
   }
-  sumTotalPrice = async () => {
-    const { selectedMenu } = this.props;
-    // let result = 0; // 옵션 가격의 합을 구하기 위한 변수
-    // const { options } = this.state.menu;
-    // for (const option of options) {
-    //   if (option.checked === true) {
-    //     result += option.price;
-    //   }
-    // }
+
+  handleChange = async optionPk => {
+    // 옵션 체크를 위한 함수
+    const { options } = this.state; // 상태에 저장되어 있는 옵션 정보
+
+    // 현재 option state 에서 선택한 옵션의 check 속성의 boolean 값을 토글하여 새로운 배열을 만들어 낸다.
+    const newOptions = options.map(option => {
+      if (option.pk === optionPk) {
+        option.checked = !option.checked;
+      }
+      return option;
+    });
     await this.setState(prevState => ({
-      totalPrice: selectedMenu.price * this.state.quantity
+      options: newOptions // 새로 생성한 배열을 옵션에 넣어준다.
+    }));
+
+    this.sumTotalPrice();
+  };
+
+  sumTotalPrice = async () => {
+    // 선택한 메뉴의 총 주문 가격을 구하는 함수
+    const { selectedMenu } = this.props;
+    let result = 0; // 옵션 가격의 합을 구하기 위한 변수
+    const { options } = this.state;
+    for (const option of options) {
+      if (option.checked === true) {
+        result += option.price;
+      }
+    }
+    await this.setState(prevState => ({
+      totalPrice: selectedMenu.price * this.state.quantity + result
     }));
   };
 
   handleQuantity = async mode => {
+    // 선택한 메뉴의 갯수를 수정하는 함수
     const { quantity } = this.state;
 
     if (mode === "plus") {
@@ -75,6 +98,23 @@ class ProductModalView extends Component {
     this.sumTotalPrice();
   };
 
+  handleCartBtn = () => {
+    const pk = this.props.selectedMenu.pk;
+    const quantity = this.state.quantity;
+    const options = this.state.options.map(item => item.pk);
+    const { onHandleBodyOnModal, addItemToCart, onProductModal } = this.props;
+
+    if (!localStorage.getItem("token")) {
+      alert("로그인이 필요한 서비스입니다.");
+      onHandleBodyOnModal("close");
+      onProductModal();
+    } else {
+      addItemToCart(pk, quantity, options);
+      onProductModal();
+      onHandleBodyOnModal("close");
+    }
+  };
+
   render() {
     const {
       name,
@@ -82,10 +122,9 @@ class ProductModalView extends Component {
       onHandleBodyOnModal,
       selectedMenu,
       least_cost,
-      show,
-      addItemToCart
+      show
     } = this.props;
-    const { totalPrice, quantity } = this.state;
+    const { totalPrice, quantity, options } = this.state;
     return (
       <div
         className={cx("ProductModalWrap", {
@@ -126,19 +165,19 @@ class ProductModalView extends Component {
                   <span>{selectedMenu.sidedishes_set.length} 개 선택 가능</span>
                 </div>
                 <ul className={cx("ProductOptionList")}>
-                  {selectedMenu.sidedishes_set &&
-                    selectedMenu.sidedishes_set.map(o => (
-                      <li key={o.optionId}>
+                  {options &&
+                    options.map(o => (
+                      <li key={o.pk}>
                         <Check
                           className={cx("CheckBox", { Checked: o.checked })}
                         />
                         <input
-                          onChange={() => this.handleChange(o.optionId)}
+                          onChange={() => this.handleChange(o.pk)}
                           type="checkbox"
-                          id={o.optionId}
+                          id={o.pk}
                           checked={o.checked}
                         />
-                        <label htmlFor={o.optionId}>
+                        <label htmlFor={o.pk}>
                           <span>{o.name}</span>
                           <span className={cx("price")}>
                             + {o.price.toLocaleString()}
@@ -171,12 +210,7 @@ class ProductModalView extends Component {
               </div>
               <button
                 onClick={() => {
-                  if (!localStorage.getItem("token")) {
-                    alert("로그인이 필요한 서비스입니다.");
-                  }
-                  addItemToCart(selectedMenu.pk, this.state.quantity);
-                  onProductModal();
-                  onHandleBodyOnModal("close");
+                  this.handleCartBtn();
                 }}
                 className={cx("CartButton")}
               >

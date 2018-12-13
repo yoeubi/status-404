@@ -42,7 +42,11 @@ class RestaurantSummary extends Component {
       <div className={cx("SummaryWrap")}>
         <div className={cx("ImgProfile")}>
           {storeimage_set.length > 0 ? (
-            <img style={{ width: "100%" }} src={storeimage_set[0]} alt={name} />
+            <img
+              style={{ width: "100%" }}
+              src={storeimage_set[0].location}
+              alt={name}
+            />
           ) : (
             <div className={cx("ImgEmpty")} />
           )}
@@ -88,10 +92,10 @@ class RestaurantSummary extends Component {
 
         <div className={cx("SNS")}>
           <button>
-            <Heart /> <span>찜 {likes}</span>
+            <Heart className={cx("Heart")} /> <span>찜 {likes}</span>
           </button>
           <button>
-            <ArrowUp />
+            <ArrowUp className={cx("Share")} />
             공유
           </button>
         </div>

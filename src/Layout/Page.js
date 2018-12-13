@@ -2,11 +2,11 @@ import React from 'react';
 import CommonHeader from '../components/CommonHeader';
 
 const Page = (props) => {
-    const {children , ...rest} = props;
+    const {children , padding , ...rest} = props;
     return (
         <div>
             <CommonHeader {...rest} />
-            <div style={{ padding: '0 2.5rem', marginTop : '5rem' }}>
+            <div style={{ padding, marginTop : '5rem' }}>
                 {children}
             </div>
         </div>

@@ -10,14 +10,23 @@ import classNames from "classnames/bind";
 import { ReactComponent as ArrowDown } from "../../img/chevron-down.svg";
 
 class RestaurantMenu extends Component {
-  render() {
+  static defaultProps = {};
+
+  handleClick = pk => {
+    // param  :::
+    // pk : 선택한 메뉴 pk
     const {
-      menu,
       onProductModal,
       onHandleBodyOnModal,
-      selectedMenuOnModal,
-      activeTab
+      selectedMenuOnModal
     } = this.props;
+    onProductModal();
+    onHandleBodyOnModal("open");
+    selectedMenuOnModal(pk);
+  };
+
+  render() {
+    const { menu, activeTab, info } = this.props;
 
     return (
       <div className={classNames("MenuBody", { open: activeTab === "menu" })}>
@@ -46,9 +55,7 @@ class RestaurantMenu extends Component {
                 {m.food_set.map(fs => (
                   <li
                     onClick={() => {
-                      onProductModal();
-                      onHandleBodyOnModal("open");
-                      selectedMenuOnModal(fs.pk);
+                      this.handleClick(fs.pk);
                     }}
                     className={classNames("menuItem")}
                     key={fs.pk}
@@ -67,7 +74,7 @@ class RestaurantMenu extends Component {
               </ul>
             </Collapsible>
           ))}
-        <OriginInfo />
+        <OriginInfo info={info} />
       </div>
     );
   }

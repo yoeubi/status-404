@@ -2,6 +2,7 @@ import React, { Component } from "react";
 import styles from "./SearchList.module.scss";
 import classNames from "classnames/bind";
 import CheckBox from "../CheckBox";
+import { runInThisContext } from "vm";
 
 const cx = classNames.bind(styles);
 
@@ -36,6 +37,7 @@ class SearchList extends Component {
     this.setState({
       [target]: index
     });
+    this.props.onShowModal();
   };
   render() {
     const { payments, sorts, distances, show } = this.props;

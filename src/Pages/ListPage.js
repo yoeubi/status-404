@@ -1,9 +1,9 @@
 import React from 'react';
-import RestaurantList from '../components/RestaurantList/RestaurantList';
+import ListContainer from '../containers/ListContainer';
 
 const ListPage = (props) => {
     return (
-        <RestaurantList {...props} />
+        <ListContainer {...props} />
     );
 };
 
