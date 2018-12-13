@@ -11,7 +11,11 @@ class RestaurantSearchContainer extends Component {
       userInput: "",
       searchList: [],
       searchResult: false,
-      store: []
+      store: [],
+      //-------------------------
+      resultNum: "",
+      category: [],
+      storeList: []
     };
   }
 
@@ -20,7 +24,8 @@ class RestaurantSearchContainer extends Component {
     // console.log(location.search);
     // const p = new URLSearchParams(location.search); // URLSearchParams: key value 스토어(저장소)
     // const category = p.get("category");
-    const { category } = this.props;
+    // const { category } = this.state;
+    const { location } = this.props;
     const { data: store } = await api.get("/store/list", {
       params: {
         category
@@ -39,6 +44,21 @@ class RestaurantSearchContainer extends Component {
       });
     }
     // console.log(searchList);
+    //------------------------------------------------------------------------------
+    const p = new URLSearchParams(location.search); // URLSearchParams: key value 스토어(저장소)
+    const category = p.get("category");
+    // console.log(store);
+    const storeList = store.map(s => ({
+      name: s.name,
+      id: s.pk,
+      storeImgURL: s.storeimage_set[0]
+    }));
+    this.setState({
+      resultNum: storeList.length,
+      category,
+      storeList
+    });
+    console.log(storeList.length);
   }
 
   // 사용자의 맛집 검색 키워드를 상태로 저장하는 함수
@@ -75,18 +95,29 @@ class RestaurantSearchContainer extends Component {
   };
 
   render() {
-    const { userInput, searchList, searchResult, store } = this.state;
+    const {
+      userInput,
+      searchList,
+      searchResult,
+      store,
+      category,
+      storeList,
+      resultNum
+    } = this.state;
     const { location } = this.props;
-    console.log(location.search);
-    const p = new URLSearchParams(location.search); // URLSearchParams: key value 스토어(저장소)
-    const category = p.get("category");
-    console.log(store);
-    const storeList = store.map(s => ({
-      name: s.name,
-      id: s.pk,
-      storeImgURL: s.storeimage_set[0]
-    }));
-    console.log(storeList);
+    // console.log(location.search);
+    // const p = new URLSearchParams(location.search); // URLSearchParams: key value 스토어(저장소)
+    // const category = p.get("category");
+    // // console.log(store);
+    // const storeList = store.map(s => ({
+    //   name: s.name,
+    //   id: s.pk,
+    //   storeImgURL: s.storeimage_set[0]
+    // }));
+    // // this.setState({
+    // //   resultNum: storeList.length
+    // // });
+    // // console.log(storeList.length);
 
     return (
       <div>
@@ -100,8 +131,9 @@ class RestaurantSearchContainer extends Component {
           onList={this.handleList}
           onSearchResult={() => this.handleSearchResult()}
           key={category}
-          category={p.get("category")}
+          category={category}
           storeList={storeList}
+          resultNum={resultNum}
         />
       </div>
     );

@@ -7,6 +7,7 @@ import { ReactComponent as MagnifyingGlass } from "../../img/search.svg";
 import { ReactComponent as BackBtn } from "../../svg/arrow-left.svg";
 import { ReactComponent as Ex } from "../../img/x.svg";
 import RestaurantSearchList from "./RestaurantSearchList";
+import { spawn } from "child_process";
 const cx = classNames.bind(styles);
 
 export default class RestaurantSearch extends Component {
@@ -19,7 +20,8 @@ export default class RestaurantSearch extends Component {
       onDeleteBtn,
       searchResult,
       onSearchResult,
-      storeList
+      storeList,
+      resultNum
     } = this.props;
     return (
       <div className={cx("container")}>
@@ -44,7 +46,9 @@ export default class RestaurantSearch extends Component {
           >
             <label>
               <input
-                className={cx("Input")}
+                className={cx("Input", {
+                  searchResult: searchResult
+                })}
                 autoComplete="off"
                 placeholder="가게 이름으로 검색"
                 type="search"
@@ -52,6 +56,9 @@ export default class RestaurantSearch extends Component {
                 onChange={onUserInput}
               />
             </label>
+            <span className={cx("ResultNum", { searchResult: searchResult })}>
+              {resultNum}개
+            </span>
             <button
               className={cx("SubmitBtn")}
               onClick={e => onSubmitBtn(e)}
