@@ -21,8 +21,16 @@ export default class RestaurantSearchList extends Component {
         {storeList.map(s => (
           <li key={s.id} className={cx("listItem")}>
             <div>{s.id}</div>
-            {s.storeImgURL && <img src={s.storeImgURL.location} alt={s.name} />}
-            <Link to={`/restaurant/${s.id}`}>{s.name}</Link>
+            <div className={cx("Img")}>
+              {s.storeImgURL && (
+                <img src={s.storeImgURL.location} alt={s.name} />
+              )}
+            </div>
+            <div className={cx("Text")}>
+              <Link to={`/restaurant/${s.id}`} className={cx("StoreName")}>
+                {s.name}
+              </Link>
+            </div>
           </li>
         ))}
       </ul>
