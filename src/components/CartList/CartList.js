@@ -6,19 +6,20 @@ import BackHeader from "../BackHeader";
 import CartItem from "../CartItem";
 import Nothing from "../Nothing";
 import SideNothing from "../SideNothing";
+import withEmpty from "../../HOC/withEmpty";
 
 const cx = classNames.bind(styles);
 
 class CartList extends Component {
-    static defaultProps = {
-        cartList : [],
-        total : 0 ,
-        handleDec : () => console.warn('handleInc not defined'),
-        handleInc : () => console.warn('handleInc not defined'),
-        handleDelete : () => console.warn('handleInc not defined'),
-    }
+  static defaultProps = {
+    cartList: [],
+    total: 0,
+    handleDec: () => console.warn("handleInc not defined"),
+    handleInc: () => console.warn("handleInc not defined"),
+    handleDelete: () => console.warn("handleInc not defined")
+  };
   render() {
-      const { cartList, total} = this.props;
+    const { cartList, total } = this.props;
     return (
       <div className={cx("cart-list")}>
         <BackHeader
@@ -32,7 +33,14 @@ class CartList extends Component {
         </Nothing>
         <div className={cx("cart-item-gap")}>
           {cartList.map((cart, index) => (
-            <CartItem key={index} {...cart} index={index} onDec={this.handleDec} onInc={this.handleInc} onDel={this.handleDelete} />
+            <CartItem
+              key={index}
+              {...cart}
+              index={index}
+              onDec={this.handleDec}
+              onInc={this.handleInc}
+              onDel={this.handleDelete}
+            />
           ))}
         </div>
         <Nothing
@@ -65,11 +73,13 @@ class CartList extends Component {
             left: 0
           }}
         >
-          <Link to="/pay">{cartList.length}개 {total}원 주문하기</Link>
+          <Link to="/pay">
+            {cartList.length}개 {total}원 주문하기
+          </Link>
         </Nothing>
       </div>
     );
   }
 }
 
-export default CartList;
+export default withEmpty(CartList);

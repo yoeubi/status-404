@@ -1,0 +1,17 @@
+.empty {
+    min-height:  calc(100vh - 5rem);
+    z-index: 200;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    div {
+        img {
+            width: 100%;
+        }
+        p {
+            color: #999;
+                font-size: 1.5rem;
+            text-align: center;
+        }
+    }
+}
