@@ -80,11 +80,10 @@ class RestaurantDetailView extends Component {
     } = this.props;
     return (
       <React.Fragment>
+        <Header name={name} />
         <div
           className={cx("RestaurantDetailWrap", { ActiveModal: productModal })}
         >
-          <Header name={name} />
-
           <RestaurantSummary
             name={name}
             rating={rating}
