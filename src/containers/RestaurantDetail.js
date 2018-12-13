@@ -17,32 +17,38 @@ class RestaurantDetail extends Component {
     };
   }
   async componentDidMount() {
-    const { match, history } = this.props;
+    const { match } = this.props;
     const storeId = match.params.id;
     try {
-      // 상점 정보 요청
-      const res = await api.get(`/store/${storeId}`);
-      const { data, status } = res;
+      if (localStorage.getItem("token")) {
+        // 로그인
+        // 상점 정보 요청
+        const { data } = await api.get(`/store/${storeId}/`);
+        // 장바구니 정보 요청
+        const { data: cartData } = await api.get(`/cart/items/`);
 
-      // 장바구니 정보 요청
-      const { data: cartData } = await api.get(`/cart/items/`);
+        // 1. 불러온 정보를 state 에 저장한다.
+        // 2. 로딩 인디케이터 flag 를 false 로 설정한다.
+        this.setState({
+          store: data,
+          numberOfCart: cartData.item.length,
+          loading: false
+        });
+      } else {
+        // 미로그인
+        // 상점 정보 요청
+        const { data } = await api.get(`/store/${storeId}/`);
 
-      if (status === 404) {
-        alert("잘못된 요청입니다. 404");
-        // history.goBack();
+        // 1. 불러온 정보를 state 에 저장한다.
+        // 2. 로딩 인디케이터 flag 를 false 로 설정한다.
+        this.setState({
+          store: data,
+          loading: false
+        });
       }
-      // 1. 불러온 정보를 state 에 저장한다.
-      // 2. 로딩 인디케이터 flag 를 false 로 설정한다.
-      this.setState({
-        store: data,
-        numberOfCart: cartData.item.length,
-        loading: false
-      });
-    } catch (e) {
+    } catch (error) {
       // TODO :: 에러처리 및 404 처리를 어떻게 할지 논의해 봐야 함
-      console.log(e);
-      alert("잘못된 요청입니다. 500");
-      // history.goBack();
+      console.log(error);
     }
 
     console.log("상점 정보", this.state.store);
@@ -51,9 +57,9 @@ class RestaurantDetail extends Component {
 
   selectedMenuOnModal = menuId => {
     const { store } = this.state;
-    store.menu.find(item => {
+    store.menu.forEach(item => {
       const food_set = item.food_set;
-      food_set.find(item => {
+      food_set.forEach(item => {
         if (item.pk === menuId) {
           this.setState({
             selectedMenu: item
@@ -63,17 +69,30 @@ class RestaurantDetail extends Component {
     });
   };
 
-  addItemToCart = async (food, quantity, sidedishes_set) => {
+  addItemToCart = async (food_pk, quantity, side_dishes_pk) => {
+    this.setState({
+      loading: true
+    });
     try {
       const res = await api.post("/cart/items/", {
-        params: {
-          food,
-          quantity,
-          sidedishes_set
-        }
+        food_pk,
+        quantity,
+        side_dishes_pk
       });
-      console.log(res);
+      // 장바구니 정보 요청
+      const { data: cartData } = await api.get(`/cart/items/`);
+
+      alert("장바구니에 상품이 담겼습니다.");
+      this.setState({
+        numberOfCart: cartData.item.length,
+        loading: false
+      });
+      console.log(res.data);
     } catch (error) {
+      alert("이미 장바구니에 같은 상품이 담겨 있습니다.");
+      this.setState({
+        loading: false
+      });
       console.log(error);
     }
   };
