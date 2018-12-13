@@ -121,14 +121,30 @@ class UserModal extends Component {
 
           <div>
             <ul className={cx("nav")}>
-              {navList.map(n => (
-                <li key={n.id} className={cx("item")}>
-                  <Link to={n.url}>
-                    {n.img}
-                    {n.title}
-                  </Link>
-                </li>
-              ))}
+              {navList.map(n => {
+                if (n.id === 2) {
+                  // 장바구니 dom 추가
+                  return (
+                    <li key={n.id} className={cx("item")}>
+                      <Link to={n.url}>
+                        <span className={cx("cartAmount")}>
+                          {numberOfCartItem}
+                        </span>
+                        {n.img}
+                        {n.title}
+                      </Link>
+                    </li>
+                  );
+                }
+                return (
+                  <li key={n.id} className={cx("item")}>
+                    <Link to={n.url}>
+                      {n.img}
+                      {n.title}
+                    </Link>
+                  </li>
+                );
+              })}
             </ul>
           </div>
           <div className={cx("banner")}>
