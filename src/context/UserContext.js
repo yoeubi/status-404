@@ -179,12 +179,16 @@ class UserProvider extends Component {
     },
     warning: null,
     success: false,
+    cart: null,
     login: this.login.bind(this),
     logout: this.logout.bind(this),
     facebookLogin: this.facebookLogin.bind(this),
     googleLogin: this.googleLogin.bind(this),
     failLogin: this.failLogin.bind(this),
-    join : this.join.bind(this)
+    join: this.join.bind(this),
+    pullCart: this.pullCart.bind(this),
+    modCart: this.modCart.bind(this),
+    delCart: this.delCart.bind(this)
   };
 
   async componentDidMount() {
@@ -235,18 +239,20 @@ class UserProvider extends Component {
   async facebookLogin(response) {
     // mainAPI 연결
     try {
-      const {data : {user, token}} = await mainAPI.post('/members/facebook/', {
+      const {
+        data: { user, token }
+      } = await mainAPI.post("/members/facebook/", {
         facebook_id: response.userID,
         name: response.name,
         email: response.email
-      })
-      localStorage.setItem('user',JSON.stringify(user));
-      localStorage.setItem('token',token );
+      });
+      localStorage.setItem("user", JSON.stringify(user));
+      localStorage.setItem("token", token);
       this.setState({
         user
-      })
-    } catch(e){
-      this.failLogin('facebook');
+      });
+    } catch (e) {
+      this.failLogin("facebook");
     }
   }
   googleLogin(response) {
@@ -271,6 +277,55 @@ class UserProvider extends Component {
       console.log("회원가입 실패했습니다.");
     }
   }
+
+  async pullCart() {
+    try {
+      const { data } = await mainAPI.get("/cart/items/");
+      console.log(data);
+      await this.setState({
+        cart: data
+      });
+      console.log(this.state.cart);
+      
+    } catch (e) {
+      console.log("장바구니 리스트 에러");
+    }
+  }
+
+  async addCart({ food_pk, quantity, side_dishes_pk = [] }) {
+    try {
+      const { data } = await mainAPI.post("/cart/items/", {
+        food_pk,
+        quantity,
+        side_dishes_pk
+      });
+      console.log(data);
+    } catch (e) {
+      console.log("카트 담기 실패");
+    }
+  }
+  async modCart({ food_pk, quantity }) {
+    try {
+      const { data } = await mainAPI.patch("/cart/items/", {
+        food_pk,
+        quantity
+      });
+      console.log(data);
+    } catch (e) {
+      console.log("카트 수정 실패");
+    }
+  }
+  async delCart({ food_pk }) {
+    try {
+      const { data } = await mainAPI.delete("/cart/items/", {
+        food_pk
+      });
+      console.log(data);
+    } catch (e) {
+      console.log("카트 삭제 실패");
+    }
+  }
+
   render() {
     const { children } = this.props;
     return <Provider value={this.state}>{children}</Provider>;

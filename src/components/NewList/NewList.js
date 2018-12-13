@@ -11,7 +11,6 @@ import RestaurantItem from "../RestaurantItem";
 import BlackCurtain from "../BlackCurtain";
 import SearchList from "../SearchList";
 import withModal from "../../HOC/withModal";
-import ListContainer from "../../containers/ListContainer";
 
 const cx = classNames.bind(styles);
 
@@ -19,8 +18,7 @@ class NewList extends Component {
   state = {
     category: "",
     show: false,
-    scroll: 0,
-    show: false
+    scroll: 0
   };
   categoryList = [
     "한식",
