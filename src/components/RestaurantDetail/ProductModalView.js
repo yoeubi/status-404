@@ -6,6 +6,7 @@ import { ReactComponent as ChevronLeft } from "../../img/chevron-left.svg"; // �
 import { ReactComponent as Check } from "../../img/check.svg"; // checkbox 아이콘
 
 const cx = classNames.bind(styles);
+
 class ProductModalView extends Component {
   constructor(props) {
     super(props);
@@ -22,36 +23,45 @@ class ProductModalView extends Component {
     console.log("ProductModalView componentDidMount");
     const { selectedMenu } = this.props;
     if (selectedMenu) {
+      // 최초 렌더링 시에는 selectedMenu 을 prop으로 전달받지 못한 상황이기 때문에 분기처리
+
       if (selectedMenu.sidedishes_set) {
-        // 선택한 메뉴에 옵션이 있을 경우 : options 상태에 sidedishes_set 으로부터 checked 값을 추가한 배열을 새로 생성하여 넣어준다.
+        // selectedMenu 를 전달받았을 때에도 옵션정보가 있는 경우와 없는 경우가 있기 때문에 분기처리
+        // 선택한 메뉴에 옵션이 있을 경우 :
+        // options state에 sidedishes_set 으로부터 checked 값을 추가한 배열을 새로 생성하여 넣어준다. :: 옵션 채크 부분을 관리하기 위해서
         const options = selectedMenu.sidedishes_set.map(item => {
-          item.checked = false;
+          item.checked = false; // check 속성을 false 값으로 넣어준다.
           return item;
         });
+
         this.setState({
-          totalPrice: selectedMenu.price,
-          quantity: 1,
-          options
+          totalPrice: selectedMenu.price, // 최초 가격은 선택 메뉴의 가격으로 설정한다.
+          quantity: 1, // 최초 수량은 1로 설정한다.
+          options // 새로 생성한 옵션 객체가 들어있는 배열을 설정한다.
         });
       }
 
+      // 선택한 메뉴에 옵션이 없는 경우
       this.setState({
-        totalPrice: selectedMenu.price,
-        quantity: 1
+        totalPrice: selectedMenu.price, // 최초 가격은 선택 메뉴의 가격으로 설정한다.
+        quantity: 1 // 최초 수량은 1로 설정한다.
       });
     }
   }
 
-  handleChange = async optionId => {
+  handleChange = async optionPk => {
     // 옵션 체크를 위한 함수
-    const newOptions = this.state.options.map(option => {
-      if (option.pk === optionId) {
+    const { options } = this.state; // 상태에 저장되어 있는 옵션 정보
+
+    // 현재 option state 에서 선택한 옵션의 check 속성의 boolean 값을 토글하여 새로운 배열을 만들어 낸다.
+    const newOptions = options.map(option => {
+      if (option.pk === optionPk) {
         option.checked = !option.checked;
       }
       return option;
     });
     await this.setState(prevState => ({
-      options: newOptions
+      options: newOptions // 새로 생성한 배열을 옵션에 넣어준다.
     }));
 
     this.sumTotalPrice();
