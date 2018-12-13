@@ -30,12 +30,30 @@ button {
     width: 100%;
 
     .InputForm {
+      width: 100%;
+      display: flex;
+      flex-direction: row;
       .Input {
         font-size: 12pt;
         // width: calc(100% - 80px);
         width: 320px;
         height: 100%;
-        // background-color: blue;
+        &.searchResult {
+          width: 100%;
+        }
+      }
+      .ResultNum {
+        position: absolute;
+        right: 50px;
+        line-height: 3;
+        display: none;
+        height: 50px;
+        width: 60px;
+        font-size: 12pt;
+        color: silver;
+        &.searchResult {
+          display: block;
+        }
       }
     }
     .SubmitBtn {
@@ -45,13 +63,14 @@ button {
       width: 50px;
       height: 50px;
       background-color: transparent;
+      border: none;
       svg {
         transform: scale(1.2);
         vertical-align: middle;
       }
     }
   }
-  .HistoryContainer {
+  .ListContainer {
     border-top: 10px solid rgb(238, 238, 238);
     height: calc(100% - 40px);
     width: 100%;
