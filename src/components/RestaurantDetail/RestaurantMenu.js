@@ -26,7 +26,7 @@ class RestaurantMenu extends Component {
   };
 
   render() {
-    const { menu, activeTab } = this.props;
+    const { menu, activeTab, info } = this.props;
 
     return (
       <div className={classNames("MenuBody", { open: activeTab === "menu" })}>
@@ -74,7 +74,7 @@ class RestaurantMenu extends Component {
               </ul>
             </Collapsible>
           ))}
-        <OriginInfo />
+        <OriginInfo info={info} />
       </div>
     );
   }

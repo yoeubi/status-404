@@ -65,7 +65,8 @@ class RestaurantDetailView extends Component {
       fee,
       least_cost,
       rating,
-      menu
+      menu,
+      origin_info
     } = this.props.store; // 스토어 정보
     const {
       handleBodyOnModal,
@@ -109,6 +110,7 @@ class RestaurantDetailView extends Component {
 
         <div className={cx("Body")}>
           <RestaurantMenu
+            info={origin_info}
             menu={menu}
             onProductModal={this.handleProductModal}
             onHandleBodyOnModal={handleBodyOnModal}

@@ -6,11 +6,13 @@ const cx = classNames.bind(styles);
 
 class OriginInfo extends Component {
   render() {
+    const { info } = this.props;
     return (
       <div className={cx("OriginInfoWrap")}>
         <div className={cx("Head")}>
           <h3>원산지 표기</h3>
-          <p>돼지 - 국내산, 쌀 - 국내산, 새우 - 베트남산</p>
+          {/* <p>돼지 - 국내산, 쌀 - 국내산, 새우 - 베트남산</p> */}
+          <p>{info && info}</p>
         </div>
 
         <ul>
