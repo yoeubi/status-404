@@ -16,7 +16,6 @@ class AddressSearchView extends Component {
       onAddressSearch,
       getAddress,
       onSubmitBtn,
-      address,
       onKakaoView,
       userInput,
       onUserInput,

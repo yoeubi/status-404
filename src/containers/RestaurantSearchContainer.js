@@ -28,7 +28,7 @@ class RestaurantSearchContainer extends Component {
     const { location } = this.props;
     const { data: store } = await api.get("/store/list", {
       params: {
-        category
+        // category
       }
     });
     const searchList = JSON.parse(localStorage.getItem("searchList"));
@@ -99,12 +99,10 @@ class RestaurantSearchContainer extends Component {
       userInput,
       searchList,
       searchResult,
-      store,
       category,
       storeList,
       resultNum
     } = this.state;
-    const { location } = this.props;
     // console.log(location.search);
     // const p = new URLSearchParams(location.search); // URLSearchParams: key value 스토어(저장소)
     // const category = p.get("category");
