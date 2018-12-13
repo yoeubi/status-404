@@ -4,6 +4,7 @@ import AddressSearchView from "../components/AddressSearch/AddressSearchView";
 import AddressSearchResult from "../components/AddressSearch/AddressSearchResult";
 import api from "../api/kakaoAPI";
 import { withUser } from "../context/UserContext";
+import KakaoView from "../components/AddressSearch/KakaoView";
 
 class AddressSearchContainer extends Component {
   constructor(props) {
@@ -18,6 +19,11 @@ class AddressSearchContainer extends Component {
 
     // loading: false
   }
+
+  handleShippingAddress = address => {
+    // 배송지 정보 설정 함수
+    console.log(address);
+  };
 
   handleUserInput = e => {
     const userInput = e.target.value;
@@ -66,6 +72,11 @@ class AddressSearchContainer extends Component {
     });
   };
 
+  handleKakaoView = () => {
+    this.setState({
+      page: "kakao"
+    });
+  };
   handleDeleteBtn = index => {
     // const { recentAddress } = this.props;
     // console.log(recentAddress[index]);
@@ -86,6 +97,7 @@ class AddressSearchContainer extends Component {
             show={show}
             recentAddress={recentAddress}
             address={address}
+            onKakaoView={this.handleKakaoView}
             userInput={userInput}
             onDeleteBtn={() => this.handleDeleteBtn()}
           />
@@ -100,6 +112,8 @@ class AddressSearchContainer extends Component {
             getAddress={this.getAddress}
             address={address}
           />
+        ) : this.state.page === "kakao" ? (
+          <KakaoView onShippingAddress={this.handleShippingAddress} />
         ) : null}
       </>
     );
