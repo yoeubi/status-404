@@ -58,6 +58,11 @@ class CartList extends Component {
     cartList: this.cartList,
       total: this.cartList.reduce((acc, item) => acc + (item.totalPrice * item.amount) , 0)
   };
+  async componentDidMount() {
+      const {pullCart} = this.props;
+      await pullCart();
+  }
+  
   handleInc = (index) => {
       const {cartList} = this.state;
       const newCartList = [

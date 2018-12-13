@@ -1,9 +1,9 @@
 import React from 'react';
-import CartList from '../components/CartList/CartList';
+import CartContainer from '../containers/CartContainer';
 
 const CartPage = (props) => {
     return (
-        <CartList {...props} />
+        <CartContainer {...props} />
     );
 };
 
