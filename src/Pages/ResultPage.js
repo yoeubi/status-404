@@ -1,9 +1,9 @@
 import React from 'react';
-import PayResult from '../components/PayResult/PayResult';
+import PayResultContainer from '../containers/PayResultContainer';
 
 const ResultPage = (props) => {
     return (
-        <PayResult {...props} /> 
+        <PayResultContainer {...props} /> 
     );
 };
 

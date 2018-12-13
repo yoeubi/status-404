@@ -13,7 +13,6 @@ import {
   Pay,
   Result
 } from "./Pages";
-import NewList from "./components/NewList/NewList";
 
 class App extends Component {
   render() {
@@ -38,7 +37,6 @@ class App extends Component {
           <Route path="/pay" component={Pay} />
           <Route path="/myorder" component={Order} />
           <Route path="/payresult" component={Result} />
-          <Route path="/test" component={NewList} />
         </Switch>
       </Router>
     );
