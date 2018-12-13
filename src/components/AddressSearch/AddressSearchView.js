@@ -57,7 +57,7 @@ class AddressSearchView extends Component {
               </button>
             </div>
             <button
-              onClick={() => onKakaoView()}
+              onClick={() => onKakaoView("kakao")}
               className={cx("addressSettingButton")}
             >
               <Crosshair />

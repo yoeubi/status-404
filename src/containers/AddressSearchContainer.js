@@ -72,9 +72,9 @@ class AddressSearchContainer extends Component {
     });
   };
 
-  handleKakaoView = () => {
+  handleComponentView = view => {
     this.setState({
-      page: "kakao"
+      page: view
     });
   };
   handleDeleteBtn = index => {
@@ -97,7 +97,7 @@ class AddressSearchContainer extends Component {
             show={show}
             recentAddress={recentAddress}
             address={address}
-            onKakaoView={this.handleKakaoView}
+            onKakaoView={this.handleComponentView}
             userInput={userInput}
             onDeleteBtn={() => this.handleDeleteBtn()}
           />
@@ -113,7 +113,10 @@ class AddressSearchContainer extends Component {
             address={address}
           />
         ) : this.state.page === "kakao" ? (
-          <KakaoView onShippingAddress={this.handleShippingAddress} />
+          <KakaoView
+            onShippingAddress={this.handleShippingAddress}
+            changeComponentView={this.handleComponentView}
+          />
         ) : null}
       </>
     );

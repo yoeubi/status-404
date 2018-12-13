@@ -2,6 +2,7 @@ import React, { Component } from "react";
 import styles from "./KakaoView.module.scss";
 import classNames from "classnames/bind";
 import Loading from "../Loading";
+import { ReactComponent as Close } from "../../img/x.svg";
 
 const cx = classNames.bind(styles);
 
@@ -126,13 +127,16 @@ class KakaoView extends Component {
   };
 
   render() {
-    const { onShippingAddress } = this.props;
+    const { onShippingAddress, changeComponentView } = this.props;
     const { loading } = this.state;
     console.log(this.state);
     return (
       <div className={cx("Wrap")}>
         {loading && <Loading />}
-        {/* Kakao Map API 사용을 위해서는 일단 렌더링된 */}
+        <Close
+          onClick={() => changeComponentView("address-search")}
+          className={cx("Close")}
+        />
         <div ref={this.daumMap} className={cx("Map")} />
         <div className={cx("MarkedAddress")}>
           <div className={cx("AddressHere")}>
