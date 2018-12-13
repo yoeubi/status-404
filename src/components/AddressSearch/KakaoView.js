@@ -53,6 +53,7 @@ class KakaoView extends Component {
     });
     // 지도에 마커를 표시합니다
     marker.setMap(map);
+    console.log(marker);
 
     // 현재 지도 중심좌표로 주소를 검색해서 지도 좌측 상단에 표시합니다
     searchAddrFromCoords(map.getCenter(), displayCenterInfo);
@@ -79,6 +80,8 @@ class KakaoView extends Component {
     // 중심 좌표나 확대 수준이 변경됐을 때 지도 중심 좌표에 대한 주소 정보를 표시하도록 이벤트를 등록합니다
     window.daum.maps.event.addListener(map, "idle", function() {
       searchAddrFromCoords(map.getCenter(), displayCenterInfo);
+      marker.setPosition(map.getCenter());
+      marker.setMap(map);
     });
 
     function searchAddrFromCoords(coords, callback) {
