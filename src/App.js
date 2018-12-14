@@ -28,6 +28,7 @@ class App extends Component {
             path="/restaurant-search"
             component={RestaurantSearchContainer}
           />
+          {/* <Route path="/store/:id" component={Detail} /> */}
           {/* 레스토랑 리스트 */}
           {/* <Route exact path="/restauant" component={Restaurant} />  */}
           <Route path="/restaurant/:id" component={Detail} />

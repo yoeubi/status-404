@@ -16,7 +16,6 @@ class AddressSearchView extends Component {
       onAddressSearch,
       getAddress,
       onSubmitBtn,
-      address,
       onKakaoView,
       userInput,
       onUserInput,
@@ -70,13 +69,14 @@ class AddressSearchView extends Component {
               {recentAddress &&
                 recentAddress.map((r, index) => (
                   <li key={index} className={cx("listItem")}>
+                    <div className={cx("place")}>{r.place_name}</div>
                     <div className={cx("address")}>{r.address_name}</div>
                     <div className={cx("textContainer")}>
                       {r.road_address_name && (
                         <>
                           <div className={cx("box")}>도로명</div>
                           <div className={cx("road")}>
-                            {r.road_address_name && r.road_address_name}
+                            {r.road_address_name}
                           </div>
                         </>
                       )}
