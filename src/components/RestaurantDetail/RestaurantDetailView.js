@@ -13,6 +13,9 @@ import styles from "./RestaurantDetailView.module.scss";
 import classNames from "classnames/bind";
 import ProductModalView from "./ProductModalView";
 import StoreReviewTapContainer from "../../containers/StoreReviewTapContainer";
+import { CSSTransition, TransitionGroup } from "react-transition-group";
+
+import "../../transition.scss";
 
 const cx = classNames.bind(styles);
 
@@ -76,66 +79,72 @@ class RestaurantDetailView extends Component {
       numberOfCart
     } = this.props;
     return (
-      <div className={cx("RestaurantDetailWrap")}>
+      <React.Fragment>
         <Header name={name} />
-
-        <RestaurantSummary
-          name={name}
-          rating={rating}
-          storeimage_set={storeimage_set}
-          fee={fee}
-          least_cost={least_cost}
-        />
-
-        <ul className={cx("Tab")}>
-          <li
-            onClick={() => this.handleTabActive("menu")}
-            className={cx("Menu", { Active: activeTab === "menu" })}
-          >
-            메뉴
-          </li>
-          <li
-            onClick={() => this.handleTabActive("info")}
-            className={cx("Info", { Active: activeTab === "info" })}
-          >
-            정보
-          </li>
-          <li
-            onClick={() => this.handleTabActive("review")}
-            className={cx("Review", { Active: activeTab === "review" })}
-          >
-            리뷰
-          </li>
-        </ul>
-
-        <div className={cx("Body")}>
-          <RestaurantMenu
-            info={origin_info}
-            menu={menu}
-            onProductModal={this.handleProductModal}
-            onHandleBodyOnModal={handleBodyOnModal}
-            selectedMenuOnModal={selectedMenuOnModal}
-            activeTab={activeTab}
+        <div
+          className={cx("RestaurantDetailWrap", { ActiveModal: productModal })}
+        >
+          <RestaurantSummary
+            name={name}
+            rating={rating}
+            storeimage_set={storeimage_set}
+            fee={fee}
+            least_cost={least_cost}
           />
 
-          <StoreInfoTap activeTab={activeTab} />
+          <ul className={cx("Tab")}>
+            <li
+              onClick={() => this.handleTabActive("menu")}
+              className={cx("Menu", { Active: activeTab === "menu" })}
+            >
+              메뉴
+            </li>
+            <li
+              onClick={() => this.handleTabActive("info")}
+              className={cx("Info", { Active: activeTab === "info" })}
+            >
+              정보
+            </li>
+            <li
+              onClick={() => this.handleTabActive("review")}
+              className={cx("Review", { Active: activeTab === "review" })}
+            >
+              리뷰
+            </li>
+          </ul>
 
-          <StoreReviewTapContainer activeTab={activeTab} />
+          <div className={cx("Body")}>
+            <RestaurantMenu
+              info={origin_info}
+              menu={menu}
+              onProductModal={this.handleProductModal}
+              onHandleBodyOnModal={handleBodyOnModal}
+              selectedMenuOnModal={selectedMenuOnModal}
+              activeTab={activeTab}
+            />
+
+            <StoreInfoTap activeTab={activeTab} />
+
+            <StoreReviewTapContainer activeTab={activeTab} />
+          </div>
+
+          <CartBtn fixed={true} numberOfCart={numberOfCart} />
         </div>
-
-        <CartBtn fixed={true} numberOfCart={numberOfCart} />
-
-        <ProductModalView
-          key={productModal}
-          addItemToCart={addItemToCart}
-          show={productModal}
-          name={name}
-          selectedMenu={selectedMenu}
-          least_cost={least_cost}
-          onProductModal={this.handleProductModal}
-          onHandleBodyOnModal={handleBodyOnModal}
-        />
-      </div>
+        <TransitionGroup>
+          {productModal && (
+            <CSSTransition timeout={500} classNames="fadeRight">
+              <ProductModalView
+                addItemToCart={addItemToCart}
+                name={name}
+                selectedMenu={selectedMenu}
+                least_cost={least_cost}
+                onProductModal={this.handleProductModal}
+                onHandleBodyOnModal={handleBodyOnModal}
+              />
+            </CSSTransition>
+          )}
+        </TransitionGroup>
+      </React.Fragment>
     );
   }
 }

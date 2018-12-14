@@ -75,7 +75,7 @@ class MainView extends Component {
         id: 8,
         name: "분식",
         img: <Bunsik />
-      },
+      }
       // {
       //   id: 6,
       //   name: "족발·보쌈",
@@ -105,7 +105,7 @@ class MainView extends Component {
   };
 
   render() {
-    const { lists } = this.props;
+    const { lists, hanldePolicy } = this.props;
 
     return (
       <div className={cx("wrap")}>
@@ -187,10 +187,19 @@ class MainView extends Component {
 
         <div className={cx("footer")}>
           <ul className={cx("footerLink")}>
-            <li className={cx("footerLinkItem")}>사업자정보확인</li>
-            <li className={cx("footerLinkItem")}>이용약관</li>
-            <li className={cx("footerLinkItem")}>전자금융거래 이용약관</li>
-            <li className={cx("footerLinkItem")}>개인정보 처리방침</li>
+            <li className={cx("footerLinkItem")} onClick={() => hanldePolicy()}>
+              사업자정보확인
+            </li>
+            <li className={cx("footerLinkItem")} onClick={() => hanldePolicy()}>
+              이용약관
+            </li>
+            <li className={cx("footerLinkItem")} onClick={() => hanldePolicy()}>
+              전자금융거래 이용약관
+            </li>
+            <li className={cx("footerLinkItem")} onClick={() => hanldePolicy()}>
+              개인정보 처리방침
+            </li>
+            
           </ul>
           <div className={cx("company")}>
             <p className={cx("companyTitle")}>Status404</p>

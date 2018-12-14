@@ -121,104 +121,93 @@ class ProductModalView extends Component {
       onProductModal,
       onHandleBodyOnModal,
       selectedMenu,
-      least_cost,
-      show
+      least_cost
     } = this.props;
     const { totalPrice, quantity, options } = this.state;
     return (
-      <div
-        className={cx("ProductModalWrap", {
-          Show: show
-        })}
-      >
-        {!selectedMenu ? (
-          "...loading" // 로딩인디케이터 들어갈자리
-        ) : (
-          <React.Fragment>
-            <div className={cx("ProductModalHeader")}>
-              <ChevronLeft
-                className={cx("Close")}
-                onClick={() => {
-                  onProductModal();
-                  onHandleBodyOnModal("close");
-                }}
-              />
-              <h1>{name}</h1>
+      <div className={cx("ProductModalWrap")}>
+        <React.Fragment>
+          <div className={cx("ProductModalHeader")}>
+            <ChevronLeft
+              className={cx("Close")}
+              onClick={() => {
+                onProductModal();
+                onHandleBodyOnModal("close");
+              }}
+            />
+            <h1>{name}</h1>
+          </div>
+          <div className={cx("ProductModalBody")}>
+            {selectedMenu.foodimage_set.length > 0 && (
+              <div className={cx("ProductImg")}>
+                <img
+                  src={selectedMenu.foodimage_set[0]}
+                  alt={selectedMenu.name}
+                />
+              </div>
+            )}
+            <h2 className={cx("ProductName")}>{selectedMenu.name}</h2>
+            <div className={cx("ProductPrice")}>
+              <label>가격</label>
+              <span>{selectedMenu.price.toLocaleString()} 원</span>
             </div>
-            <div className={cx("ProductModalBody")}>
-              {selectedMenu.foodimage_set.length > 0 && (
-                <div className={cx("ProductImg")}>
-                  <img
-                    src={selectedMenu.foodimage_set[0]}
-                    alt={selectedMenu.name}
-                  />
-                </div>
-              )}
-              <h2 className={cx("ProductName")}>{selectedMenu.name}</h2>
-              <div className={cx("ProductPrice")}>
-                <label>가격</label>
-                <span>{selectedMenu.price.toLocaleString()} 원</span>
+            <div className={cx("ProductOptions")}>
+              <div className={cx("ProductOptionsHeader")}>
+                <label>추가선택</label>
+                <span>{selectedMenu.sidedishes_set.length} 개 선택 가능</span>
               </div>
-              <div className={cx("ProductOptions")}>
-                <div className={cx("ProductOptionsHeader")}>
-                  <label>추가선택</label>
-                  <span>{selectedMenu.sidedishes_set.length} 개 선택 가능</span>
-                </div>
-                <ul className={cx("ProductOptionList")}>
-                  {options &&
-                    options.map(o => (
-                      <li key={o.pk}>
-                        <Check
-                          className={cx("CheckBox", { Checked: o.checked })}
-                        />
-                        <input
-                          onChange={() => this.handleChange(o.pk)}
-                          type="checkbox"
-                          id={o.pk}
-                          checked={o.checked}
-                        />
-                        <label htmlFor={o.pk}>
-                          <span>{o.name}</span>
-                          <span className={cx("price")}>
-                            + {o.price.toLocaleString()}
-                          </span>
-                        </label>
-                      </li>
-                    ))}
-                </ul>
-              </div>
-              <div className={cx("ProductQuantity")}>
-                <label>수량</label>
-                <div className={cx("ProductQuantityController")}>
-                  <button onClick={() => this.handleQuantity("minus")}>
-                    -
-                  </button>
-                  <div className={cx("Quantity")}>{quantity}</div>
-                  <button onClick={() => this.handleQuantity("plus")}>+</button>
-                </div>
-              </div>
-              <div className={cx("TotalPrice")}>
-                <span className={cx("Title")}>총 주문 금액</span>
-
-                <span className={cx("Price")}>
-                  {totalPrice && totalPrice.toLocaleString()} 원
-                </span>
-
-                <span className={cx("Least")}>
-                  최소 주문 금액 : {least_cost.toLocaleString()}
-                </span>
-              </div>
-              <button
-                onClick={() => {
-                  this.handleCartBtn();
-                }}
-                className={cx("CartButton")}
-              >
-                장바구니 담기
-              </button>
+              <ul className={cx("ProductOptionList")}>
+                {options &&
+                  options.map(o => (
+                    <li key={o.pk}>
+                      <Check
+                        className={cx("CheckBox", { Checked: o.checked })}
+                      />
+                      <input
+                        onChange={() => this.handleChange(o.pk)}
+                        type="checkbox"
+                        id={o.pk}
+                        checked={o.checked}
+                      />
+                      <label htmlFor={o.pk}>
+                        <span>{o.name}</span>
+                        <span className={cx("price")}>
+                          + {o.price.toLocaleString()}
+                        </span>
+                      </label>
+                    </li>
+                  ))}
+              </ul>
             </div>
-          </React.Fragment>
-        )}
+            <div className={cx("ProductQuantity")}>
+              <label>수량</label>
+              <div className={cx("ProductQuantityController")}>
+                <button onClick={() => this.handleQuantity("minus")}>-</button>
+                <div className={cx("Quantity")}>{quantity}</div>
+                <button onClick={() => this.handleQuantity("plus")}>+</button>
+              </div>
+            </div>
+            <div className={cx("TotalPrice")}>
+              <span className={cx("Title")}>총 주문 금액</span>
+
+              <span className={cx("Price")}>
+                {totalPrice && totalPrice.toLocaleString()} 원
+              </span>
+
+              <span className={cx("Least")}>
+                최소 주문 금액 : {least_cost.toLocaleString()}
+              </span>
+            </div>
+            <button
+              onClick={() => {
+                this.handleCartBtn();
+              }}
+              className={cx("CartButton")}
+            >
+              장바구니 담기
+            </button>
+          </div>
+        </React.Fragment>
       </div>
     );
   }
