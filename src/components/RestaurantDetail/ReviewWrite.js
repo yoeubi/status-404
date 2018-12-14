@@ -13,7 +13,7 @@ const cx = classNames.bind(styles);
 
 export default class ReviewWrite extends Component {
   static defaultProps = {
-    file: null
+    file: ""
   };
   constructor(props) {
     super(props);
@@ -22,6 +22,7 @@ export default class ReviewWrite extends Component {
     };
     this.handleChange = this.handleChange.bind(this);
   }
+
   handleChange(event) {
     this.setState({
       file: URL.createObjectURL(event.target.files[0])
