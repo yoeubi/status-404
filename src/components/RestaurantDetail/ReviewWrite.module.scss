@@ -67,6 +67,7 @@ button {
     .InputForm {
       height: 200px;
       width: 100%;
+      outline: none;
       textarea {
         outline: none;
         font-size: 1.8rem;
@@ -135,11 +136,15 @@ button {
       bottom: 170px;
       height: 200px;
       width: 250px;
-      img {
-        outline: none;
-        border: none;
-        width: 100%;
-        height: 100%;
+      z-index: 2;
+      .Img {
+        display: none;
+        &.img {
+          border: none;
+          display: block;
+          width: 100%;
+          height: 100%;
+        }
       }
     }
     .FooterContainer {

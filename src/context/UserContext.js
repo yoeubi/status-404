@@ -1,173 +1,10 @@
 import React, { Component } from "react";
 import { mainAPI } from "../api";
+import axios from 'axios';
 
 const { Provider, Consumer } = React.createContext();
 
 class UserProvider extends Component {
-  // state = {
-  //   user: {
-  //     pk: null,
-  //     username: null,
-  //     nickname: null,
-  //     phone: null,
-  //     img_profile: null
-  //   },
-  //   address: null,
-  //   /*
-  //       address : [
-  //           {
-  //               address_name: "서울 강동구 천호동 225-15",
-  //               main_address_no: "225",
-  //               mountain_yn: "N",
-  //               region_1depth_name: "서울",
-  //               region_2depth_name: "강동구",
-  //               region_3depth_name: "천호동",
-  //               sub_address_no: "15",
-  //               zip_code: ""
-  //           }
-  //       ]
-  //       */
-  //   login: this.login.bind(this),
-  //   logout: this.logout.bind(this),
-  //   join: this.join.bind(this),
-  //   socialLogin: this.socialLogin.bind(this),
-  //   googleLogin: this.googleLogin.bind(this)
-  // };
-
-  // async componentDidMount() {
-  //   const token = localStorage.getItem("token");
-  //   if (token) {
-  //     const { data } = await mainAPI.get('/members/profile/');
-  //     this.setState({
-  //       user : data
-  //     })
-  //     this.getAddress(data.username);
-  //   } else {
-  //     this.getAddress("default");
-  //   }
-  // }
-
-  // getAddress(username) {
-  //   const address = JSON.parse(localStorage.getItem("address"));
-  //   if (address && address[username]) {
-  //     this.setState({
-  //       address: address[username]
-  //     });
-  //   } else {
-  //     this.getPosition(username);
-  //   }
-  // }
-
-  // getPosition(username) {
-  //   navigator.geolocation.getCurrentPosition(
-  //     async ({ coords: { longitude, latitude } }) => {
-  //       const {
-  //         data: { documents }
-  //       } = await kakaoAPI.get("", {
-  //         params: {
-  //           x: longitude,
-  //           y: latitude,
-  //           input_coord: "WGS84"
-  //         }
-  //       });
-  //       this.setState({
-  //         address: [documents[0]]
-  //       });
-  //       /*
-  //            address : {
-  //                test :  [
-  //                 {
-  //             address_name: "서울 강동구 천호동 225-15",
-  //             main_address_no: "225",
-  //             mountain_yn: "N",
-  //             region_1depth_name: "서울",
-  //             region_2depth_name: "강동구",
-  //             region_3depth_name: "천호동",
-  //             sub_address_no: "15",
-  //             zip_code: ""
-  //         }
-  //             ]
-  //            }
-  //         */
-  //       localStorage.setItem(
-  //         "address",
-  //         JSON.stringify({
-  //           [username]: [documents[0]]
-  //         })
-  //       );
-  //     }
-  //   );
-  // }
-
-  // async login({ username, password }) {
-  //   const {data : {user, token}} = await mainAPI.post("/members/login/", {
-  //     username,
-  //     password
-  //   });
-  //   console.log('token',user,token);
-  //   this.setState({
-  //     user
-  //   })
-  //   this.getAddress(user.username);
-  //   localStorage.setItem("token", token);
-  // }
-
-  // logout() {
-  //   localStorage.removeItem("token");
-  //   this.setState({
-  //     user: null
-  //   });
-  //   this.getAddress("default");
-  // }
-  // async join({ username, password, nickname, phone }) {
-  //   await mainAPI.post("/members/register/", {
-  //     username,
-  //     password,
-  //     nickname,
-  //     phone
-  //   });
-  // }
-  // socialLogin(result, history) {
-  //   console.log(result);
-
-  //   if (result && result.status !== "unknown") {
-  //     this.setState({
-  //       user: {
-  //         /*
-  //         pk: null,
-  //       username: null,
-  //       nickname: null,
-  //       phone: null,
-  //       img_profile: null
-  //       */
-  //         username: result.email,
-  //         nickname: result.name,
-  //         img_profile: result.picture.data.url
-  //       }
-  //     });
-  //     history.push("/");
-  //   } else {
-  //     console.log("facebook error");
-  //   }
-  // }
-  // googleLogin({ profileObj: { email, googleId, imageUrl, name } }) {
-  //   if (email) {
-  //     this.setState({
-  //       user: {
-  //         pk: googleId,
-  //         username: email,
-  //         nickname: name,
-  //         phone: null,
-  //         img_profile: imageUrl
-  //       }
-  //     });
-  //     console.log(email, googleId, imageUrl, name);
-
-  //   } else {
-  //     console.log("Google login fail");
-  //   }
-  // }
-
   state = {
     user: {
       pk: null,
@@ -195,12 +32,14 @@ class UserProvider extends Component {
     const token = localStorage.getItem("token");
     if (token) {
       try {
-        const { data } = await mainAPI.get("/members/profile/");
+        const [ {data : user} , {data : cart} ] = await axios.all([
+          mainAPI.get("/members/profile/"),
+          mainAPI.get("/cart/items/")
+        ]);
         this.setState({
-          user: data,
-          warning: "",
-          success: true
-        });
+          user : user,
+          cart : cart
+        })
       } catch (e) {
         console.log("token 로그인 실패 or token 미존재");
       }
@@ -292,35 +131,37 @@ class UserProvider extends Component {
     }
   }
 
-  async addCart({ food_pk, quantity, side_dishes_pk = [] }) {
+  async addCart({ food_pk, quantity, side_dishes_pk }) {
     try {
-      const { data } = await mainAPI.post("/cart/items/", {
+      await mainAPI.post("/cart/items/", {
         food_pk,
         quantity,
         side_dishes_pk
       });
-      console.log(data);
+      await this.pullCart();
     } catch (e) {
       console.log("카트 담기 실패");
     }
   }
   async modCart({ food_pk, quantity }) {
     try {
-      const { data } = await mainAPI.patch("/cart/items/", {
+      await mainAPI.patch("/cart/items/", {
         food_pk,
         quantity
       });
-      console.log(data);
+      await this.pullCart();
     } catch (e) {
       console.log("카트 수정 실패");
     }
   }
   async delCart({ food_pk }) {
     try {
-      const { data } = await mainAPI.delete("/cart/items/", {
-        food_pk
+      await mainAPI.delete("/cart/items/", {
+        data : {
+          food_pk
+        }
       });
-      console.log(data);
+      await this.pullCart();
     } catch (e) {
       console.log("카트 삭제 실패");
     }
