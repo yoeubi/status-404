@@ -188,7 +188,8 @@ class UserProvider extends Component {
     join: this.join.bind(this),
     pullCart: this.pullCart.bind(this),
     modCart: this.modCart.bind(this),
-    delCart: this.delCart.bind(this)
+    delCart: this.delCart.bind(this),
+    updateUserAddress: this.updateUserAddress.bind(this)
   };
 
   async componentDidMount() {
@@ -286,7 +287,6 @@ class UserProvider extends Component {
         cart: data
       });
       console.log(this.state.cart);
-      
     } catch (e) {
       console.log("장바구니 리스트 에러");
     }
@@ -324,6 +324,9 @@ class UserProvider extends Component {
     } catch (e) {
       console.log("카트 삭제 실패");
     }
+  }
+  async updateUserAddress(address) {
+    console.log(address);
   }
 
   render() {

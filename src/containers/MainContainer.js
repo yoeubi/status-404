@@ -7,6 +7,7 @@ import UserModal from "../components/Main/UserModal";
 import PolicyView from "../components/Main/PolicyView";
 // import AddressSearchView from "../components/AddressSearch/AddressSearchView";
 import AddressSearchContainer from "./AddressSearchContainer";
+import kakaoAPI from "../api/kakaoAPI";
 import "../transition.scss";
 
 import { CSSTransition, TransitionGroup } from "react-transition-group";
@@ -26,17 +27,61 @@ class MainContainer extends Component {
       // loading indicator 토글용 flag
       loading: true,
       // policy 모달 컴포넌트 토글용 flag
-      policy: false
+      policy: false,
+      // 미 로그인단 사용자 주소 정보 저장소
+      noneAuthUserAddress: null
     };
   }
 
-  componentDidMount() {
-    setTimeout(() => {
-      this.setState({
-        loading: false
-      });
-    }, 1000);
+  async componentDidMount() {
+    const { updateUserAddress } = this.props;
+    if (localStorage.getItem("token")) {
+      // 로그인 된 사용자 주소처리
+      navigator.geolocation.getCurrentPosition(
+        async ({ coords: { longitude, latitude } }) => {
+          const {
+            data: { documents }
+          } = await kakaoAPI.get("", {
+            params: {
+              x: longitude,
+              y: latitude,
+              input_coord: "WGS84"
+            }
+          });
+          console.log(documents[0]);
+          // api 요청
+          updateUserAddress("hi");
+          this.setState({
+            loading: false
+          });
+        }
+      );
+    } else {
+      // 로그인 안된 사용자 주소처리
+      navigator.geolocation.getCurrentPosition(
+        async ({ coords: { longitude, latitude } }) => {
+          const {
+            data: { documents }
+          } = await kakaoAPI.get("", {
+            params: {
+              x: longitude,
+              y: latitude,
+              input_coord: "WGS84"
+            }
+          });
+
+          const { address, road_address } = documents[0];
+          this.setState({
+            noneAuthUserAddress:
+              address.address_name && road_address.address_name,
+            loading: false
+          });
+        }
+      );
+    }
   }
+
+  geoToKakaoAPI = () => {};
 
   handleUserModal = () => {
     this.setState({ show: !this.state.show });
@@ -51,7 +96,13 @@ class MainContainer extends Component {
   };
 
   render() {
-    const { show, addressSearchShow, loading, policy } = this.state;
+    const {
+      show,
+      addressSearchShow,
+      loading,
+      policy,
+      noneAuthUserAddress
+    } = this.state;
     const { user, address } = this.props; // <=== UserContext 에 작성된 상태가 props로 전달됩니다.
     return (
       <React.Fragment>
@@ -63,7 +114,7 @@ class MainContainer extends Component {
           />
           <Header
             user={user}
-            address={address}
+            noneAuthUserAddress={noneAuthUserAddress}
             onUserModal={this.handleUserModal}
             onAddressSearch={this.handleAddressSearch}
           />

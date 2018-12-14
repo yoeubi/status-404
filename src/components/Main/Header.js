@@ -14,10 +14,11 @@ class Header extends Component {
   }
   render() {
     const {
+      user,
       handleBodyOnModal,
-      address,
       onUserModal,
-      onAddressSearch
+      onAddressSearch,
+      noneAuthUserAddress
     } = this.props;
     return (
       <div className={cx("header")}>
@@ -31,7 +32,7 @@ class Header extends Component {
 
         <div onClick={onAddressSearch} className={cx("addressInput")}>
           <span className={cx("address")}>
-            {address ? address[0].address.address_name : "조회중입니다."}
+            {user.address ? user.address[0].address : noneAuthUserAddress}
           </span>
           <ChevronDown className={cx("icon")} alt="down" />
         </div>
