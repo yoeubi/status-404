@@ -80,6 +80,7 @@ button {
         font-weight: 600;
         top: 10px;
         right: 10px;
+        background-color: transparent;
       }
     }
     .Camera {
@@ -110,6 +111,17 @@ button {
         width: 40px;
         fill: white;
       }
+    }
+    .Photo {
+      position: absolute;
+      left: 140px;
+      bottom: 170px;
+      display: flex;
+      justify-content: center;
+      align-items: center;
+      height: 200px;
+      width: 250px;
+      z-index: 2;
     }
     .FooterContainer {
       position: absolute;
