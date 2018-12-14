@@ -4,48 +4,31 @@ import classNames from "classnames/bind";
 
 const cx = classNames.bind(styles);
 
-const CartItem = ({
-  cartTitle,
-  conditionList,
-  totalPrice,
-  amount,
-  onInc,
-  onDec,
-  onDel,
-  index
-}) => {
+const CartItem = (props) => {
+  const { food: { name, pk, sidedishes_set }, quantity, total_price , onChange, onDelete } = props;
   return <div className={cx("cart-item")}>
-      <p className={cx("cart-title")}>{cartTitle}</p>
+      <p className={cx("cart-title")}>{name}</p>
       <ul className={cx("condition-list")}>
-        {conditionList.map((con, index) => (
+        {sidedishes_set.map(( side , index) => (
           <li key={index} className={cx("condition-item")}>
-            {con}
+            {side.name}
           </li>
         ))}
       </ul>
-      <p className={cx("total-price")}>{totalPrice}원</p>
+    <p className={cx("total-price")}>{total_price}원</p>
       <div className={cx("btn")}>
-        <button className={cx("dec")} onClick={() => {
-            if (amount <= 1) return;
-            onDec(index);
-          }}>
+      <button className={cx("dec")} onClick={() => quantity > 1 && onChange({ food_pk: pk , quantity : quantity - 1 }) }>
           -
         </button>
-        <input type="text" name="amount" className={cx("amount")} value={`${amount}개`} readOnly />
-        <button className={cx("inc")} onClick={() => onInc(index)}>
+        <input type="text" name="amount" className={cx("amount")} value={`${quantity}개`} readOnly />
+      <button className={cx("inc")} onClick={() => onChange({ food_pk: pk, quantity: quantity + 1 })}>
           +
         </button>
       </div>
-    <button className={cx("delete")} onClick={() => onDel(index)}>
+    <button className={cx("delete")} onClick={() => onDelete({ food_pk: pk }) }>
         삭제
       </button>
     </div>;
-};
-CartItem.defaultProps = {
-  cartTitle: "피자 세트",
-  conditionList: ["기본: M(23800원)", "피자 선택: 슈퍼슈프림 피자"],
-  totalPrice: 23800,
-  amount: 1
 };
 
 export default CartItem;
