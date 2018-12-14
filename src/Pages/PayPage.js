@@ -1,9 +1,9 @@
 import React from 'react';
-import Payment from '../components/Payment';
+import PayContainer from '../containers/PayContainer';
 
 const PayPage = (props) => {
     return (
-        <Payment {...props} />
+        <PayContainer {...props} />
     );
 };
 

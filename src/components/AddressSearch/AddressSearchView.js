@@ -16,6 +16,8 @@ class AddressSearchView extends Component {
       onAddressSearch,
       getAddress,
       onSubmitBtn,
+      address,
+      onKakaoView,
       userInput,
       onUserInput,
       // address,
@@ -54,7 +56,10 @@ class AddressSearchView extends Component {
                 <MagnifyingGlass />
               </button>
             </div>
-            <button className={cx("addressSettingButton")}>
+            <button
+              onClick={() => onKakaoView()}
+              className={cx("addressSettingButton")}
+            >
               <Crosshair />
               <p>현 위치로 주소 설정</p>
             </button>

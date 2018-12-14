@@ -92,10 +92,10 @@ class RestaurantSummary extends Component {
 
         <div className={cx("SNS")}>
           <button>
-            <Heart /> <span>찜 {likes}</span>
+            <Heart className={cx("Heart")} /> <span>찜 {likes}</span>
           </button>
           <button>
-            <ArrowUp />
+            <ArrowUp className={cx("Share")} />
             공유
           </button>
         </div>

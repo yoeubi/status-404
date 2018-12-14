@@ -1,6 +1,7 @@
 import React, { Component } from 'react';
 import NewLogin from '../components/NewLogin/NewLogin';
 import { withUser } from '../context/UserContext';
+import withNoAuth from '../HOC/withNoAuth';
 
 class LoginContainer extends Component {
     render() {
@@ -10,4 +11,4 @@ class LoginContainer extends Component {
     }
 }
 
-export default withUser(LoginContainer);
+export default withUser( withNoAuth(LoginContainer) );

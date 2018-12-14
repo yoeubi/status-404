@@ -6,101 +6,20 @@ import BackHeader from "../BackHeader";
 import CartItem from "../CartItem";
 import Nothing from "../Nothing";
 import SideNothing from "../SideNothing";
+import withEmpty from "../../HOC/withEmpty";
 
 const cx = classNames.bind(styles);
 
 class CartList extends Component {
-    cartList = [
-        {
-            cartTitle: "피자 세트1",
-            conditionList: ["기본: M(23800원)", "피자 선택: 슈퍼슈프림 피자"],
-            totalPrice: 23800,
-            amount: 1
-        },
-        {
-            cartTitle: "피자 세트2",
-            conditionList: ["기본: M(23800원)", "피자 선택: 슈퍼슈프림 피자"],
-            totalPrice: 23800,
-            amount: 1
-        },
-        {
-            cartTitle: "피자 세트3",
-            conditionList: ["기본: M(23800원)", "피자 선택: 슈퍼슈프림 피자"],
-            totalPrice: 23800,
-            amount: 1
-        },
-        {
-            cartTitle: "피자 세트4",
-            conditionList: ["기본: M(23800원)", "피자 선택: 슈퍼슈프림 피자"],
-            totalPrice: 23800,
-            amount: 1
-        },
-        {
-            cartTitle: "피자 세트5",
-            conditionList: ["기본: M(23800원)", "피자 선택: 슈퍼슈프림 피자"],
-            totalPrice: 23800,
-            amount: 1
-        },
-        {
-            cartTitle: "피자 세트6",
-            conditionList: ["기본: M(23800원)", "피자 선택: 슈퍼슈프림 피자"],
-            totalPrice: 23800,
-            amount: 1
-        },
-        {
-            cartTitle: "피자 세트7",
-            conditionList: ["기본: M(23800원)", "피자 선택: 슈퍼슈프림 피자"],
-            totalPrice: 23800,
-            amount: 1
-        }
-    ];
-  state = {
-    cartList: this.cartList,
-      total: this.cartList.reduce((acc, item) => acc + (item.totalPrice * item.amount) , 0)
+  static defaultProps = {
+    cartList: [],
+    total: 0,
+    handleDec: () => console.warn("handleInc not defined"),
+    handleInc: () => console.warn("handleInc not defined"),
+    handleDelete: () => console.warn("handleInc not defined")
   };
-  handleInc = (index) => {
-      const {cartList} = this.state;
-      const newCartList = [
-          ...cartList.slice(0, index),
-          {
-              ...cartList[index],
-              amount: cartList[index].amount + 1
-          },
-          ...cartList.slice(index + 1, cartList.length)
-      ];
-      const newTotal = newCartList.reduce((acc, item) => acc + (item.totalPrice * item.amount), 0)
-      this.setState({
-          cartList : newCartList,
-          total: newTotal
-      })
-  }
-  handleDec = (index) => {
-      const { cartList } = this.state;
-      const newCartList = [
-          ...cartList.slice(0, index),
-          {
-              ...cartList[index],
-              amount: cartList[index].amount - 1
-          },
-          ...cartList.slice(index + 1, cartList.length)
-      ];
-      const newTotal = newCartList.reduce((acc, item) => acc + (item.totalPrice * item.amount), 0)
-      this.setState({
-          cartList: newCartList,
-          total: newTotal
-      })
-  }
-  handleDelete = (index) => {
-      const {cartList} = this.state;
-      const newCartList = cartList.filter( ( cart , idx ) => idx !== index);
-      const newTotal = newCartList.reduce((acc, item) => acc + item.totalPrice * item.amount, 0);
-      this.setState({
-          cartList : newCartList,
-          total : newTotal
-      })
-  }
   render() {
-    const { cartList, total } = this.state;
+    const { cartList, total } = this.props;
     return (
       <div className={cx("cart-list")}>
         <BackHeader
@@ -114,7 +33,14 @@ class CartList extends Component {
         </Nothing>
         <div className={cx("cart-item-gap")}>
           {cartList.map((cart, index) => (
-            <CartItem key={index} {...cart} index={index} onDec={this.handleDec} onInc={this.handleInc} onDel={this.handleDelete} />
+            <CartItem
+              key={index}
+              {...cart}
+              index={index}
+              onDec={this.handleDec}
+              onInc={this.handleInc}
+              onDel={this.handleDelete}
+            />
           ))}
         </div>
         <Nothing
@@ -147,11 +73,13 @@ class CartList extends Component {
             left: 0
           }}
         >
-          <Link to="/pay">{cartList.length}개 {total}원 주문하기</Link>
+          <Link to="/pay">
+            {cartList.length}개 {total}원 주문하기
+          </Link>
         </Nothing>
       </div>
     );
   }
 }
 
-export default CartList;
+export default withEmpty(CartList);

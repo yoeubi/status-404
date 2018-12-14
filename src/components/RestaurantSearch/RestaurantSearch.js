@@ -6,6 +6,8 @@ import { Link } from "react-router-dom";
 import { ReactComponent as MagnifyingGlass } from "../../img/search.svg";
 import { ReactComponent as BackBtn } from "../../svg/arrow-left.svg";
 import { ReactComponent as Ex } from "../../img/x.svg";
+import RestaurantSearchList from "./RestaurantSearchList";
+import { spawn } from "child_process";
 const cx = classNames.bind(styles);
 
 export default class RestaurantSearch extends Component {
@@ -15,23 +17,38 @@ export default class RestaurantSearch extends Component {
       onUserInput,
       onSubmitBtn,
       searchList,
-      onDeleteBtn
+      onDeleteBtn,
+      searchResult,
+      onSearchResult,
+      storeList,
+      resultNum
     } = this.props;
     return (
       <div className={cx("container")}>
         <div className={cx("InputContainer")}>
-          <button className={cx("backBtn")}>
-            <Link to={"/"}>
+          {searchResult ? (
+            <button className={cx("backBtn")} onClick={onSearchResult}>
               <BackBtn />
-            </Link>
-          </button>
+            </button>
+          ) : (
+            <button className={cx("backBtn")}>
+              <Link to={"/"}>
+                <BackBtn />
+              </Link>
+            </button>
+          )}
           <form
             className={cx("InputForm")}
-            // onSubmit={onSubmitBtn}
+            onSubmit={e => {
+              e.preventDefault();
+              onSubmitBtn(e);
+            }}
           >
             <label>
               <input
-                className={cx("Input")}
+                className={cx("Input", {
+                  searchResult: searchResult
+                })}
                 autoComplete="off"
                 placeholder="가게 이름으로 검색"
                 type="search"
@@ -39,31 +56,37 @@ export default class RestaurantSearch extends Component {
                 onChange={onUserInput}
               />
             </label>
+            <span className={cx("ResultNum", { searchResult: searchResult })}>
+              {resultNum}개
+            </span>
             <button
               className={cx("SubmitBtn")}
-              onClick={onSubmitBtn}
-              // type="submit"
+              onClick={e => onSubmitBtn(e)}
               value="검색"
             >
               <MagnifyingGlass />
             </button>
           </form>
         </div>
-        <div className={cx("HistoryContainer")}>
-          <ul className={cx("HistoryList")}>
-            {searchList &&
-              searchList.map((s, index) => (
-                <li key={index} className={cx("listItem")}>
-                  {s}
-                  <button
-                    onClick={() => onDeleteBtn(index)}
-                    className={cx("deleteButton")}
-                  >
-                    <Ex />
-                  </button>
-                </li>
-              ))}
-          </ul>
+        <div className={cx("ListContainer")}>
+          {searchResult ? (
+            <RestaurantSearchList storeList={storeList} />
+          ) : (
+            <ul className={cx("HistoryList")}>
+              {searchList &&
+                searchList.map((s, index) => (
+                  <li key={index} className={cx("listItem")}>
+                    {s}
+                    <button
+                      onClick={() => onDeleteBtn(index)}
+                      className={cx("deleteButton")}
+                    >
+                      <Ex />
+                    </button>
+                  </li>
+                ))}
+            </ul>
+          )}
         </div>
       </div>
     );
