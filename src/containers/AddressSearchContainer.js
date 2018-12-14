@@ -2,7 +2,8 @@ import React, { Component } from "react";
 
 import AddressSearchView from "../components/AddressSearch/AddressSearchView";
 import AddressSearchResult from "../components/AddressSearch/AddressSearchResult";
-import api from "../api/kakaoAPI";
+import kakaoAPI from "../api/kakaoAPI";
+import mainAPI from "../api/mainAPI";
 import { withUser } from "../context/UserContext";
 import KakaoView from "../components/AddressSearch/KakaoView";
 
@@ -39,7 +40,7 @@ class AddressSearchContainer extends Component {
   };
 
   getAddress = async userInput => {
-    const { data } = await api.get(
+    const { data } = await kakaoAPI.get(
       // 1. 주소로 검색
       // "https://dapi.kakao.com/v2/local/search/address.json",
       // 2. 키워드(지번, 도로명, 건물명)로 검색, 설정값: 전국 단위(기준이되는 위치 설정은 아직 미구현)
@@ -64,12 +65,13 @@ class AddressSearchContainer extends Component {
   };
 
   handleFinishBtn = id => {
-    const { searchResult } = this.state;
+    const { searchResult, recentAddress } = this.state;
     const index = searchResult.findIndex(item => item.id === id);
     this.state.recentAddress.push(searchResult[index]);
     this.setState({
       page: "address-search"
     });
+    console.log(recentAddress);
   };
 
   handleKakaoView = () => {
