@@ -34,7 +34,9 @@ class MainContainer extends Component {
   }
 
   async componentDidMount() {
-    const { updateUserAddress } = this.props;
+    const { updateUserAddress } = this.props; // 로그인된 사용자 주소처리 함수 :: from UserContext
+
+    // 사용자 주소처리
     if (localStorage.getItem("token")) {
       // 로그인 된 사용자 주소처리
       navigator.geolocation.getCurrentPosition(
@@ -73,7 +75,7 @@ class MainContainer extends Component {
           const { address, road_address } = documents[0];
           this.setState({
             noneAuthUserAddress:
-              address.address_name && road_address.address_name,
+              address.address_name || road_address.address_name,
             loading: false
           });
         }
