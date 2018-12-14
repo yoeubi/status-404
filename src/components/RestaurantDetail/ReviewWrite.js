@@ -87,7 +87,9 @@ export default class ReviewWrite extends Component {
               className={cx("FileInput")}
               type="file"
               onChange={event => this.handleChange(event)}
+              id="fileInput"
             />
+            <label className={cx("FileInputLabel")} htmlFor="fileInput" />
             <Camera />
           </div>
           <div className={cx("Photo")}>
