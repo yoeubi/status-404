@@ -130,7 +130,11 @@ class RestaurantDetailView extends Component {
               activeTab={activeTab}
             />
 
-            <StoreReviewTapContainer name={name} activeTab={activeTab} />
+            <StoreReviewTapContainer
+              store_info={store_info}
+              name={name}
+              activeTab={activeTab}
+            />
           </div>
 
           <CartBtn fixed={true} numberOfCart={numberOfCart} />
