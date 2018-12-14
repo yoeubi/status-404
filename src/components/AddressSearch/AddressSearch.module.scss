@@ -76,7 +76,6 @@ input {
 }
 
 .addressSearchButton {
-  // position: relative;
   display: flex;
   justify-content: center;
   align-items: center;
@@ -89,9 +88,7 @@ input {
   font-size: 20px;
   cursor: pointer;
   svg {
-    // position: absolute;
     transform: scale(1.2);
-    vertical-align: middle;
   }
 }
 
