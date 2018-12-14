@@ -111,6 +111,17 @@ button {
         fill: white;
       }
     }
+    .Photo {
+      position: absolute;
+      left: 140px;
+      bottom: 170px;
+      display: flex;
+      justify-content: center;
+      align-items: center;
+      height: 200px;
+      width: 250px;
+      z-index: 2;
+    }
     .FooterContainer {
       position: absolute;
       bottom: 30px;
