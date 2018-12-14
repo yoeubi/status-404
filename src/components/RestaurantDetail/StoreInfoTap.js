@@ -52,7 +52,8 @@ export default class StoreInfoTap extends Component {
       name: "패스트 피자",
       address: "서울 성동구 성수2가3동 289-10 제강빌딩 8층",
       number: "123-45-67890"
-    }
+    },
+    fee: 1000
   };
 
   constructor(props) {
@@ -73,16 +74,15 @@ export default class StoreInfoTap extends Component {
       operation,
       location,
       business,
-      activeTab
+      activeTab,
+      fee
     } = this.props;
     return (
       <>
         <div className={cx("InfoTapContainer", { open: activeTab === "info" })}>
           <div className={cx("section")}>
             <span className={cx("title")}>가게 소개</span>
-            <span className={cx("storeInfoText")}>
-              {store_info.description}
-            </span>
+            <span className={cx("storeInfoText")}>{store_info}</span>
           </div>
           <div className={cx("section")}>
             <span className={cx("title")}>가게 통계</span>
@@ -106,7 +106,7 @@ export default class StoreInfoTap extends Component {
             <div className={cx("textArea")}>
               <span className={cx("subTitle")}>지역</span>
               <span className={cx("deliveryTip")}>
-                {delivery_tip.fee.toLocaleString()}원
+                {fee.toLocaleString()}원
                 <span className={cx("text")}>{delivery_tip.region}</span>
               </span>
             </div>
