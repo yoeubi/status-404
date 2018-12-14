@@ -32,34 +32,53 @@ class MainContainer extends Component {
       noneAuthUserAddress: null
     };
   }
+  componentDidUpdate(prevProps) {
+    // const { createAddressFlag } = this.props;
+    // if (!createAddressFlag) {
+    //   console.log("gd");
+    // }
+  }
 
   async componentDidMount() {
-    const { updateUserAddress } = this.props; // 로그인된 사용자 주소처리 함수 :: from UserContext
-
-    // 사용자 주소처리
+    const { createUserAddress, user } = this.props;
     if (localStorage.getItem("token")) {
       // 로그인 된 사용자 주소처리
-      navigator.geolocation.getCurrentPosition(
-        async ({ coords: { longitude, latitude } }) => {
-          const {
-            data: { documents }
-          } = await kakaoAPI.get("", {
-            params: {
-              x: longitude,
-              y: latitude,
-              input_coord: "WGS84"
-            }
-          });
-          console.log(documents[0]);
-          // api 요청
-          updateUserAddress("hi");
-          this.setState({
-            loading: false
-          });
-        }
-      );
+      if (!user.address) {
+        navigator.geolocation.getCurrentPosition(
+          async ({ coords: { longitude, latitude } }) => {
+            const {
+              data: { documents }
+            } = await kakaoAPI.get("", {
+              params: {
+                x: longitude,
+                y: latitude,
+                input_coord: "WGS84"
+              }
+            });
+            const { address, road_address } = documents[0];
+            // 요청에 필요한 객체 생성
+            const createdAddress = {
+              lng: longitude.toFixed(5),
+              lat: latitude.toFixed(5),
+              address: road_address
+                ? road_address.address_name
+                : address.address_name,
+              old_address: address
+                ? address.address_name
+                : road_address.address_name,
+              detail_address: "상세주소 임의값"
+            };
+            await createUserAddress(createdAddress);
+          }
+        );
+      }
+
+      this.setState({
+        loading: false
+      });
     } else {
       // 로그인 안된 사용자 주소처리
+
       navigator.geolocation.getCurrentPosition(
         async ({ coords: { longitude, latitude } }) => {
           const {
@@ -73,17 +92,17 @@ class MainContainer extends Component {
           });
 
           const { address, road_address } = documents[0];
+
           this.setState({
             noneAuthUserAddress:
               address.address_name || road_address.address_name,
             loading: false
           });
+          console.log(this.state.noneAuthUserAddress);
         }
       );
     }
   }
-
-  geoToKakaoAPI = () => {};
 
   handleUserModal = () => {
     this.setState({ show: !this.state.show });

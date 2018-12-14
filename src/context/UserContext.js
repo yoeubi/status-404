@@ -180,6 +180,7 @@ class UserProvider extends Component {
     warning: null,
     success: false,
     cart: null,
+    createAddressFlag: false,
     login: this.login.bind(this),
     logout: this.logout.bind(this),
     facebookLogin: this.facebookLogin.bind(this),
@@ -189,7 +190,7 @@ class UserProvider extends Component {
     pullCart: this.pullCart.bind(this),
     modCart: this.modCart.bind(this),
     delCart: this.delCart.bind(this),
-    updateUserAddress: this.updateUserAddress.bind(this)
+    createUserAddress: this.createUserAddress.bind(this)
   };
 
   async componentDidMount() {
@@ -325,8 +326,13 @@ class UserProvider extends Component {
       console.log("카트 삭제 실패");
     }
   }
-  async updateUserAddress(address) {
-    console.log(address);
+  async createUserAddress(address) {
+    try {
+      const res = await mainAPI.post("/address/", address);
+      console.log(res);
+    } catch (error) {
+      console.log(error);
+    }
   }
 
   render() {

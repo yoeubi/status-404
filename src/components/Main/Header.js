@@ -32,7 +32,13 @@ class Header extends Component {
 
         <div onClick={onAddressSearch} className={cx("addressInput")}>
           <span className={cx("address")}>
-            {user.address ? user.address[0].address : noneAuthUserAddress}
+            {localStorage.getItem("token")
+              ? // 로그인
+                user.address
+                ? user.address[0].address
+                : "유저 정보 조회중"
+              : // 미로그인
+                noneAuthUserAddress}
           </span>
           <ChevronDown className={cx("icon")} alt="down" />
         </div>
