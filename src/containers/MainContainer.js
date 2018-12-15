@@ -69,6 +69,16 @@ class MainContainer extends Component {
             this.setState({
               loading: false
             });
+          },
+          error => {
+            console.log(error);
+          }, // geoLocation error callback func
+          {
+            // geoLocation options object
+            // params
+            enableHighAccuracy: false, // 최대한 정확도를 높게 받을 것인지를 지시하는 불리언 값입니다.
+            timeout: 5000, // 위치 값을 장치로 부터 받을 때 까지 최대한 대기할 시간 :: 기본값  Infinity
+            maximumAge: Infinity // 캐시된 위치 값을 반환 받아도 되는 최대한의 시간
           }
         );
       } else {
@@ -96,6 +106,16 @@ class MainContainer extends Component {
               address.address_name || road_address.address_name,
             loading: false
           });
+        },
+        error => {
+          console.log(error);
+        }, // geoLocation error callback func
+        {
+          // geoLocation options object
+          // params
+          enableHighAccuracy: false, // 최대한 정확도를 높게 받을 것인지를 지시하는 불리언 값입니다.
+          timeout: 5000, // 위치 값을 장치로 부터 받을 때 까지 최대한 대기할 시간 :: 기본값  Infinity
+          maximumAge: Infinity // 캐시된 위치 값을 반환 받아도 되는 최대한의 시간
         }
       );
     }
