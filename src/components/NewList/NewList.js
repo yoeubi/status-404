@@ -96,7 +96,7 @@ class NewList extends Component {
         <SlideMenu category={category} categoryList={this.categoryList} onChange={this.handleCategory} scroll={scroll} onScroll={this.handleScroll} />
         <BlackCurtain show={show} onShowModal={this.handleModal} />
         <SearchList show={show} onShowModal={this.handleModal} />
-        <InfiniteScroll pageStart={0} loadMore={this.props.loadMore} hasMore={this.props.next !== null} loader={<Loader />} threshold={100}>
+        <InfiniteScroll pageStart={0} loadMore={this.props.loadMore} hasMore={this.props.next !== null} loader={<Loader key={0} />} threshold={100}>
           <div className={cx("content")}>{items}</div>
         </InfiniteScroll>
       </Page>;
