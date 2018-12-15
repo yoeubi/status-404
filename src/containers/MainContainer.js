@@ -32,18 +32,13 @@ class MainContainer extends Component {
       noneAuthUserAddress: null
     };
   }
-  componentDidUpdate(prevProps) {
-    // const { createAddressFlag } = this.props;
-    // if (!createAddressFlag) {
-    //   console.log("gd");
-    // }
-  }
 
   async componentDidMount() {
     const { createUserAddress, user } = this.props;
     if (localStorage.getItem("token")) {
       // 로그인 된 사용자 주소처리
       if (!user.address) {
+        // 유저 정보에 address 가 미존재
         navigator.geolocation.getCurrentPosition(
           async ({ coords: { longitude, latitude } }) => {
             console.log("로그인 된 사용자");
@@ -59,7 +54,7 @@ class MainContainer extends Component {
             const { address, road_address } = documents[0];
             // 요청에 필요한 객체 생성
             const createdAddress = {
-              lng: longitude.toFixed(5),
+              lng: longitude.toFixed(5), // FIXME :: 위도 경도 소수점 이하 최대 자리수 수정시(백엔드) 자리주 제한 해제하기
               lat: latitude.toFixed(5),
               address: road_address
                 ? road_address.address_name
@@ -67,7 +62,7 @@ class MainContainer extends Component {
               old_address: address
                 ? address.address_name
                 : road_address.address_name,
-              detail_address: "상세주소 임의값"
+              detail_address: "some addresas" // FIXME :: optional 로 바뀌었을 시 삭제 혹은 빈문자열 전달
             };
             await createUserAddress(createdAddress);
 
@@ -77,13 +72,13 @@ class MainContainer extends Component {
           }
         );
       } else {
+        // 유저 정보에 address 가 존재
         this.setState({
           loading: false
         });
       }
     } else {
       // 로그인 안된 사용자 주소처리
-
       navigator.geolocation.getCurrentPosition(
         async ({ coords: { longitude, latitude } }) => {
           const {
@@ -95,15 +90,12 @@ class MainContainer extends Component {
               input_coord: "WGS84"
             }
           });
-
           const { address, road_address } = documents[0];
-
           this.setState({
             noneAuthUserAddress:
               address.address_name || road_address.address_name,
             loading: false
           });
-          console.log(this.state.noneAuthUserAddress);
         }
       );
     }
@@ -129,7 +121,7 @@ class MainContainer extends Component {
       policy,
       noneAuthUserAddress
     } = this.state;
-    const { user, address, createAddressFlag } = this.props; // <=== UserContext 에 작성된 상태가 props로 전달됩니다.
+    const { user, address } = this.props; // <=== UserContext 에 작성된 상태가 props로 전달됩니다.
     return (
       <React.Fragment>
         <UiProvider>
