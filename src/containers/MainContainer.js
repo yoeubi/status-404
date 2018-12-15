@@ -54,15 +54,14 @@ class MainContainer extends Component {
             const { address, road_address } = documents[0];
             // 요청에 필요한 객체 생성
             const createdAddress = {
-              lng: longitude.toFixed(5), // FIXME :: 위도 경도 소수점 이하 최대 자리수 수정시(백엔드) 자리주 제한 해제하기
-              lat: latitude.toFixed(5),
+              lng: longitude.toFixed(6), // FIXME :: 소수점 이하 절사방법 찾기
+              lat: latitude.toFixed(6), // FIXME :: 소수점 이하 절사방법 찾기
               address: road_address
                 ? road_address.address_name
                 : address.address_name,
               old_address: address
                 ? address.address_name
-                : road_address.address_name,
-              detail_address: "some addresas" // FIXME :: optional 로 바뀌었을 시 삭제 혹은 빈문자열 전달
+                : road_address.address_name
             };
             await createUserAddress(createdAddress);
 
@@ -112,7 +111,7 @@ class MainContainer extends Component {
           });
         },
         error => {
-          // geoLocation error callback func
+          // geoLocation error callback fun
           console.log(error);
           this.setState({
             loading: false
