@@ -1,6 +1,6 @@
 import React, { Component } from "react";
 import { mainAPI } from "../api";
-import axios from 'axios';
+import axios from "axios";
 
 const { Provider, Consumer } = React.createContext();
 
@@ -17,7 +17,6 @@ class UserProvider extends Component {
     warning: null,
     success: false,
     cart: null,
-    createAddressFlag: false,
     login: this.login.bind(this),
     logout: this.logout.bind(this),
     facebookLogin: this.facebookLogin.bind(this),
@@ -34,14 +33,14 @@ class UserProvider extends Component {
     const token = localStorage.getItem("token");
     if (token) {
       try {
-        const [ {data : user} , {data : cart} ] = await axios.all([
+        const [{ data: user }, { data: cart }] = await axios.all([
           mainAPI.get("/members/profile/"),
           mainAPI.get("/cart/items/")
         ]);
         this.setState({
-          user : user,
-          cart : cart
-        })
+          user: user,
+          cart: cart
+        });
       } catch (e) {
         console.log("token 로그인 실패 or token 미존재");
       }
@@ -158,7 +157,7 @@ class UserProvider extends Component {
   async delCart({ food_pk }) {
     try {
       await mainAPI.delete("/cart/items/", {
-        data : {
+        data: {
           food_pk
         }
       });
@@ -169,10 +168,10 @@ class UserProvider extends Component {
   }
   async createUserAddress(address) {
     try {
-      const res = await mainAPI.post("/address/", address);
-      console.log(res);
+      await mainAPI.post("/address/", address);
+      const { data } = await mainAPI.get("/members/profile/");
       this.setState({
-        createAddressFlag: true
+        user: data
       });
     } catch (error) {
       console.log(error);

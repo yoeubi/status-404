@@ -139,7 +139,6 @@ class MainContainer extends Component {
             showModal={show}
           />
           <Header
-            key={createAddressFlag}
             user={user}
             noneAuthUserAddress={noneAuthUserAddress}
             onUserModal={this.handleUserModal}
