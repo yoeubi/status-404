@@ -64,6 +64,7 @@ class UserModal extends Component {
     const { handleBodyOnModal } = this.props;
     handleBodyOnModal("close");
   }
+
   render() {
     const {
       handleBodyOnModal,
@@ -127,9 +128,11 @@ class UserModal extends Component {
                   return (
                     <li key={n.id} className={cx("item")}>
                       <Link to={n.url}>
-                        <span className={cx("cartAmount")}>
-                          {cart && cart.item.length}
-                        </span>
+                        {cart && (
+                          <span className={cx("cartAmount")}>
+                            {cart.item.length}
+                          </span>
+                        )}
                         {n.img}
                         {n.title}
                       </Link>
