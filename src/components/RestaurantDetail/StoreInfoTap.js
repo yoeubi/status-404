@@ -30,7 +30,7 @@ export default class StoreInfoTap extends Component {
       id: 3,
       section: "안내 및 혜택",
       description:
-        "- 세트메뉴를 제외한 모든메뉴 음료 별도입니다.\r\n\r\n- 방문포장할인\r\n\r\n- 모든피자메뉴 화아ㅣ트소스 변경가능"
+        "- 세트메뉴를 제외한 모든메뉴 음료 별도입니다.\r\n\r\n- 방문포장할인\r\n\r\n- 모든피자메뉴 화이트소스 변경가능"
     },
     operation: {
       id: 4,

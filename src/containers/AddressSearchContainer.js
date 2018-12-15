@@ -3,7 +3,7 @@ import React, { Component } from "react";
 import AddressSearchView from "../components/AddressSearch/AddressSearchView";
 import AddressSearchResult from "../components/AddressSearch/AddressSearchResult";
 import kakaoAPI from "../api/kakaoAPI";
-import mainAPI from "../api/mainAPI";
+// import mainAPI from "../api/mainAPI";
 import { withUser } from "../context/UserContext";
 import KakaoView from "../components/AddressSearch/KakaoView";
 

@@ -18,14 +18,18 @@ export default class ReviewWrite extends Component {
   constructor(props) {
     super(props);
     this.state = {
-      file: null
+      file: null,
+      img: false
     };
     this.handleChange = this.handleChange.bind(this);
   }
   handleChange(event) {
+    const { img } = this.state;
     this.setState({
-      file: URL.createObjectURL(event.target.files[0])
+      file: URL.createObjectURL(event.target.files[0]),
+      img: true
     });
+    console.log(img);
   }
 
   render() {
@@ -36,7 +40,8 @@ export default class ReviewWrite extends Component {
       onSubmitBtn,
       name
     } = this.props;
-    const { file } = this.state;
+    const { file, img } = this.state;
+    console.log(img);
     return (
       <div className={cx("container")}>
         <div className={cx("HeaderContainer")}>
@@ -87,11 +92,17 @@ export default class ReviewWrite extends Component {
               className={cx("FileInput")}
               type="file"
               onChange={event => this.handleChange(event)}
+              id="fileInput"
             />
+            <label className={cx("FileInputLabel")} htmlFor="fileInput" />
             <Camera />
           </div>
           <div className={cx("Photo")}>
-            <img src={this.state.file} alt={file} />
+            <img
+              className={cx("Img", { img: img })}
+              src={this.state.file}
+              alt={file}
+            />
           </div>
           <div className={cx("FooterContainer")}>
             <span className={cx("Guide")}>
