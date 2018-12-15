@@ -4,7 +4,7 @@ import classNames from "classnames/bind";
 import { withUi } from "../../context/UiContext";
 import { Link } from "react-router-dom";
 
-import { ReactComponent as Avater } from "../../img/mark-github.svg";
+import { ReactComponent as Avater } from "../../img/basic_img.svg";
 import { ReactComponent as Coin } from "../../img/coins.svg";
 import { ReactComponent as Coupon } from "../../img/coupon.svg";
 import { ReactComponent as Cart } from "../../img/shopping-cart.svg";
@@ -58,7 +58,7 @@ class UserModal extends Component {
     ]
   };
   componentDidMount() {
-    console.log("UserModal componentDidMount");
+    // console.log("UserModal componentDidMount");
   }
   componentWillUnmount() {
     const { handleBodyOnModal } = this.props;
@@ -71,7 +71,7 @@ class UserModal extends Component {
       showModal,
       onUserModal,
       navList,
-      numberOfCartItem
+      cart
     } = this.props;
     // FIXME :: 모달 활성화시 Layout 에스크롤이 생기지 않게 하기 위해 css 트릭을 적용하였으나
     //          활성화시 어떤 위치에서도 최상단으로 이동하는 버그가 있어서 해결해야 함
@@ -128,7 +128,7 @@ class UserModal extends Component {
                     <li key={n.id} className={cx("item")}>
                       <Link to={n.url}>
                         <span className={cx("cartAmount")}>
-                          {numberOfCartItem}
+                          {cart && cart.item.length}
                         </span>
                         {n.img}
                         {n.title}

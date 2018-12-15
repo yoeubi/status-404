@@ -1,6 +1,8 @@
 import React, { Component } from "react";
 import { Link } from "react-router-dom";
 
+import withLoading from "../../HOC/withLoading";
+
 import styles from "./ProfileView.module.scss";
 import classNames from "classnames/bind";
 
@@ -10,22 +12,6 @@ const cx = classNames.bind(styles);
 
 class ProfileView extends Component {
   static defaultProps = {
-    // user: {
-    //     pk: null,
-    //     username: null,
-    //     nickname: null,
-    //     phone: null,
-    //     img_profile: null
-    //   },
-    // logout: this.logout.bind(this),
-    user: {
-      pk: null,
-      username: "이강산",
-      nickname: "닉네임 강산",
-      phone: "010-0000-0000",
-      img_profile:
-        "http://mblogthumb4.phinf.naver.net/20151117_151/smartbaedal_1447748320696qYGB3_JPEG/12109275_986494971373814_8759974093703893190_n.jpg?type=w2"
-    },
     logout: () => {
       console.log("logout");
     },
@@ -34,8 +20,16 @@ class ProfileView extends Component {
       alert("서비스 준비중입니다.");
     }
   };
+
   render() {
-    const { user, logout, noService } = this.props;
+    const {
+      user,
+      onLogout,
+      preparingService,
+      toggleSwitch,
+      switchedEmail,
+      switchedSNS
+    } = this.props;
     return (
       <div className={cx("Profile")}>
         <div className={cx("Header")}>
@@ -48,10 +42,17 @@ class ProfileView extends Component {
 
         <div className={cx("Summary")}>
           <div className={cx("Avatar")}>
-            <img src={user.img_profile} alt={user.username} />
+            {user.img_profile ? (
+              <img src={user.img_profile} alt={user.username} />
+            ) : (
+              <img
+                src="https://is5-ssl.mzstatic.com/image/thumb/Purple128/v4/a5/4b/75/a54b7599-93f4-e3de-956b-d2aadb28d02b/AppIcon2015-1x_U007emarketing-85-220-0-3.png/1200x630bb.jpg"
+                alt={user.username}
+              />
+            )}
             <span className={cx("NickName")}>{user.nickname}</span>
           </div>
-          <input type="text" defaultValue={user.username} />
+          <input type="text" value={user.username} readOnly />
         </div>
 
         <div className={cx("Form")}>
@@ -76,7 +77,7 @@ class ProfileView extends Component {
               />
             </div>
 
-            <button onClick={() => noService()}>변경</button>
+            <button onClick={() => preparingService()}>변경</button>
           </div>
           <div className={cx("Elem")}>
             <label>
@@ -91,23 +92,23 @@ class ProfileView extends Component {
                   className={cx("PhoneNumber")}
                   type="number"
                   readOnly
-                  value={"000"}
+                  value={user.phone.slice(0, 3)}
                 />
                 <input
                   className={cx("PhoneNumber")}
                   type="number"
                   readOnly
-                  value={"000"}
+                  value={user.phone.slice(3, 7)}
                 />
                 <input
                   className={cx("PhoneNumber")}
                   type="number"
                   readOnly
-                  value={"000"}
+                  value={user.phone.slice(7, 11)}
                 />
               </div>
             </div>
-            <button onClick={() => noService()}>재인증</button>
+            <button onClick={() => preparingService()}>재인증</button>
           </div>
         </div>
 
@@ -115,20 +116,32 @@ class ProfileView extends Component {
           <h2>마케팅 정보 수신 동의</h2>
           <p>이벤트 및 혜택에 대한 다양한 정보를 받으실 수 있습니다.</p>
           <div className={cx("Email")}>
-            <span>메일 수신동의</span> <button>on/off</button>
+            <span>메일 수신동의</span>
+            <div
+              onClick={() => toggleSwitch(1)}
+              className={cx("Switch", { on: switchedEmail })}
+            >
+              <div className={cx("SwitchToggle")} />
+            </div>
           </div>
           <div className={cx("SMS")}>
-            <span>SMS 수신동의</span> <button>on/off</button>
+            <span>SMS 수신동의</span>
+            <div
+              onClick={() => toggleSwitch(2)}
+              className={cx("Switch", { on: switchedSNS })}
+            >
+              <div className={cx("SwitchToggle")} />
+            </div>
           </div>
         </div>
 
         <div className={cx("Footer")}>
-          <span>회원탈퇴</span>
-          <span onClick={() => logout()}>logout</span>
+          <span onClick={() => preparingService()}>회원탈퇴</span>
+          <span onClick={() => onLogout()}>logout</span>
         </div>
       </div>
     );
   }
 }
 
-export default ProfileView;
+export default withLoading(ProfileView);

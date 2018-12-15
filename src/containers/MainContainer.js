@@ -121,7 +121,7 @@ class MainContainer extends Component {
       policy,
       noneAuthUserAddress
     } = this.state;
-    const { user, address } = this.props; // <=== UserContext 에 작성된 상태가 props로 전달됩니다.
+    const { user, address, cart } = this.props; // <=== UserContext 에 작성된 상태가 props로 전달됩니다.
     return (
       <React.Fragment>
         <UiProvider>
@@ -129,6 +129,7 @@ class MainContainer extends Component {
             user={user}
             onUserModal={this.handleUserModal}
             showModal={show}
+            cart={cart}
           />
           <Header
             user={user}
