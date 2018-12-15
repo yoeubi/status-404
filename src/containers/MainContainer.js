@@ -71,8 +71,12 @@ class MainContainer extends Component {
             });
           },
           error => {
+            // geoLocation error callback func
             console.log(error);
-          }, // geoLocation error callback func
+            this.setState({
+              loading: false
+            });
+          },
           {
             // geoLocation options object
             // params
@@ -108,8 +112,12 @@ class MainContainer extends Component {
           });
         },
         error => {
+          // geoLocation error callback func
           console.log(error);
-        }, // geoLocation error callback func
+          this.setState({
+            loading: false
+          });
+        },
         {
           // geoLocation options object
           // params
