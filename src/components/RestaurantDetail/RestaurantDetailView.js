@@ -69,7 +69,8 @@ class RestaurantDetailView extends Component {
       least_cost,
       rating,
       menu,
-      origin_info
+      origin_info,
+      store_info
     } = this.props.store; // 스토어 정보
     const {
       handleBodyOnModal,
@@ -123,9 +124,17 @@ class RestaurantDetailView extends Component {
               activeTab={activeTab}
             />
 
-            <StoreInfoTap activeTab={activeTab} />
+            <StoreInfoTap
+              fee={fee}
+              store_info={store_info}
+              activeTab={activeTab}
+            />
 
-            <StoreReviewTapContainer activeTab={activeTab} />
+            <StoreReviewTapContainer
+              store_info={store_info}
+              name={name}
+              activeTab={activeTab}
+            />
           </div>
 
           <CartBtn fixed={true} numberOfCart={numberOfCart} />

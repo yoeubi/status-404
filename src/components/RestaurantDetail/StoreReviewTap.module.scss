@@ -38,6 +38,12 @@ button {
 .MiddleContainer {
   padding: 10px;
   border-bottom: 1px solid #dbd9dc;
+  font-size: 1.4rem;
+  .title {
+  }
+  .content {
+    color: rgb(116, 116, 116);
+  }
 }
 
 .border {

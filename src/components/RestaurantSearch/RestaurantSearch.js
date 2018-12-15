@@ -7,7 +7,6 @@ import { ReactComponent as MagnifyingGlass } from "../../img/search.svg";
 import { ReactComponent as BackBtn } from "../../svg/arrow-left.svg";
 import { ReactComponent as Ex } from "../../img/x.svg";
 import RestaurantSearchList from "./RestaurantSearchList";
-import { spawn } from "child_process";
 const cx = classNames.bind(styles);
 
 export default class RestaurantSearch extends Component {

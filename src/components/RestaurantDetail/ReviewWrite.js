@@ -9,8 +9,29 @@ import { ReactComponent as Camera } from "../../img/camera.svg"; // 카메라 �
 import { ReactComponent as Down } from "../../svg/chevron-right.svg"; // 오른쪽 화살표
 
 const cx = classNames.bind(styles);
+// const React = require("react");
 
 export default class ReviewWrite extends Component {
+  static defaultProps = {
+    file: null
+  };
+  constructor(props) {
+    super(props);
+    this.state = {
+      file: null,
+      img: false
+    };
+    this.handleChange = this.handleChange.bind(this);
+  }
+  handleChange(event) {
+    const { img } = this.state;
+    this.setState({
+      file: URL.createObjectURL(event.target.files[0]),
+      img: true
+    });
+    console.log(img);
+  }
+
   render() {
     const {
       onReviewWritePage,
@@ -19,6 +40,8 @@ export default class ReviewWrite extends Component {
       onSubmitBtn,
       name
     } = this.props;
+    const { file, img } = this.state;
+    console.log(img);
     return (
       <div className={cx("container")}>
         <div className={cx("HeaderContainer")}>
@@ -65,8 +88,21 @@ export default class ReviewWrite extends Component {
             <input className={cx("SubmitBtn")} type="submit" value="완료" />
           </form>
           <div className={cx("Camera")}>
-            <input className={cx("FileInput")} type="file" />
+            <input
+              className={cx("FileInput")}
+              type="file"
+              onChange={event => this.handleChange(event)}
+              id="fileInput"
+            />
+            <label className={cx("FileInputLabel")} htmlFor="fileInput" />
             <Camera />
+          </div>
+          <div className={cx("Photo")}>
+            <img
+              className={cx("Img", { img: img })}
+              src={this.state.file}
+              alt={file}
+            />
           </div>
           <div className={cx("FooterContainer")}>
             <span className={cx("Guide")}>

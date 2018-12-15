@@ -7,7 +7,7 @@ import UserModal from "../components/Main/UserModal";
 import PolicyView from "../components/Main/PolicyView";
 // import AddressSearchView from "../components/AddressSearch/AddressSearchView";
 import AddressSearchContainer from "./AddressSearchContainer";
-import mainAPI from "../api/mainAPI";
+import kakaoAPI from "../api/kakaoAPI";
 import "../transition.scss";
 
 import { CSSTransition, TransitionGroup } from "react-transition-group";
@@ -28,17 +28,77 @@ class MainContainer extends Component {
       // loading indicator 토글용 flag
       loading: true,
       // policy 모달 컴포넌트 토글용 flag
-      policy: false
+      policy: false,
+      // 미 로그인단 사용자 주소 정보 저장소
+      noneAuthUserAddress: null
     };
   }
 
   async componentDidMount() {
-    // 메인 페이지에서 받아올 api 작성할 부분 ↓↓↓↓↓↓↓
-    setTimeout(() => {
-      this.setState({
-        loading: false
-      });
-    }, 1000);
+    const { createUserAddress, user } = this.props;
+    if (localStorage.getItem("token")) {
+      // 로그인 된 사용자 주소처리
+      if (!user.address) {
+        // 유저 정보에 address 가 미존재
+        navigator.geolocation.getCurrentPosition(
+          async ({ coords: { longitude, latitude } }) => {
+            const {
+              data: { documents }
+            } = await kakaoAPI.get("", {
+              params: {
+                x: longitude,
+                y: latitude,
+                input_coord: "WGS84"
+              }
+            });
+            const { address, road_address } = documents[0];
+            // 요청에 필요한 객체 생성
+            const createdAddress = {
+              lng: longitude.toFixed(5), // FIXME :: 위도 경도 소수점 이하 최대 자리수 수정시(백엔드) 자리주 제한 해제하기
+              lat: latitude.toFixed(5),
+              address: road_address
+                ? road_address.address_name
+                : address.address_name,
+              old_address: address
+                ? address.address_name
+                : road_address.address_name,
+              detail_address: "some addresas" // FIXME :: optional 로 바뀌었을 시 삭제 혹은 빈문자열 전달
+            };
+            await createUserAddress(createdAddress);
+
+            this.setState({
+              loading: false
+            });
+          }
+        );
+      } else {
+        // 유저 정보에 address 가 존재
+        this.setState({
+          loading: false
+        });
+      }
+    } else {
+      // 로그인 안된 사용자 주소처리
+      navigator.geolocation.getCurrentPosition(
+        async ({ coords: { longitude, latitude } }) => {
+          const {
+            data: { documents }
+          } = await kakaoAPI.get("", {
+            params: {
+              x: longitude,
+              y: latitude,
+              input_coord: "WGS84"
+            }
+          });
+          const { address, road_address } = documents[0];
+          this.setState({
+            noneAuthUserAddress:
+              address.address_name || road_address.address_name,
+            loading: false
+          });
+        }
+      );
+    }
   }
 
   handleUserModal = () => {
@@ -54,7 +114,13 @@ class MainContainer extends Component {
   };
 
   render() {
-    const { show, addressSearchShow, loading, policy } = this.state;
+    const {
+      show,
+      addressSearchShow,
+      loading,
+      policy,
+      noneAuthUserAddress
+    } = this.state;
     const { user, address } = this.props; // <=== UserContext 에 작성된 상태가 props로 전달됩니다.
     return (
       <React.Fragment>
@@ -66,7 +132,7 @@ class MainContainer extends Component {
           />
           <Header
             user={user}
-            address={address}
+            noneAuthUserAddress={noneAuthUserAddress}
             onUserModal={this.handleUserModal}
             onAddressSearch={this.handleAddressSearch}
           />
