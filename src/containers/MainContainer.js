@@ -41,7 +41,6 @@ class MainContainer extends Component {
         // 유저 정보에 address 가 미존재
         navigator.geolocation.getCurrentPosition(
           async ({ coords: { longitude, latitude } }) => {
-            console.log("로그인 된 사용자");
             const {
               data: { documents }
             } = await kakaoAPI.get("", {
