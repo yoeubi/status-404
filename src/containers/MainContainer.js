@@ -46,6 +46,7 @@ class MainContainer extends Component {
       if (!user.address) {
         navigator.geolocation.getCurrentPosition(
           async ({ coords: { longitude, latitude } }) => {
+            console.log("로그인 된 사용자");
             const {
               data: { documents }
             } = await kakaoAPI.get("", {
@@ -69,13 +70,17 @@ class MainContainer extends Component {
               detail_address: "상세주소 임의값"
             };
             await createUserAddress(createdAddress);
+
+            this.setState({
+              loading: false
+            });
           }
         );
+      } else {
+        this.setState({
+          loading: false
+        });
       }
-
-      this.setState({
-        loading: false
-      });
     } else {
       // 로그인 안된 사용자 주소처리
 
@@ -124,7 +129,7 @@ class MainContainer extends Component {
       policy,
       noneAuthUserAddress
     } = this.state;
-    const { user, address } = this.props; // <=== UserContext 에 작성된 상태가 props로 전달됩니다.
+    const { user, address, createAddressFlag } = this.props; // <=== UserContext 에 작성된 상태가 props로 전달됩니다.
     return (
       <React.Fragment>
         <UiProvider>
@@ -134,6 +139,7 @@ class MainContainer extends Component {
             showModal={show}
           />
           <Header
+            key={createAddressFlag}
             user={user}
             noneAuthUserAddress={noneAuthUserAddress}
             onUserModal={this.handleUserModal}

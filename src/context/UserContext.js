@@ -330,6 +330,9 @@ class UserProvider extends Component {
     try {
       const res = await mainAPI.post("/address/", address);
       console.log(res);
+      this.setState({
+        createAddressFlag: true
+      });
     } catch (error) {
       console.log(error);
     }
