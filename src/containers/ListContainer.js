@@ -36,7 +36,6 @@ class ListContainer extends Component {
       const query = new URLSearchParams(location.search);
       const page = query.get("page");
       const { data } = await mainAPI.get(`/category/${pk}/`);
-      console.log(data);
       this.setState({
         pk,
         page,
@@ -49,11 +48,8 @@ class ListContainer extends Component {
   }
     loadMore = async () => {
     const { next } = this.state;
-    console.log('로드 중');
-    
     if (this.state) {
       const { data } = await axios.get(next);
-      console.log(data);
       this.setState({
           ...data,
           results : this.state.results.concat(data.results)

@@ -8,7 +8,7 @@ class Loader extends PureComponent {
   render() {
     return (
       <div className={cx('loader-wrap')}>
-        <div class={cx("loader")} />
+        <div className={cx("loader")} />
       </div>
     );
   }
