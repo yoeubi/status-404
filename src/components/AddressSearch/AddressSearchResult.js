@@ -4,10 +4,11 @@ import classNames from "classnames/bind";
 // SVG
 import { ReactComponent as MagnifyingGlass } from "../../img/search.svg";
 import { ReactComponent as BackBtn } from "../../svg/arrow-left.svg";
+import { withUi } from "../../context/UiContext";
 
 const cx = classNames.bind(styles);
 
-export default class AddressSearchResult extends Component {
+class AddressSearchResult extends Component {
   render() {
     const {
       getAddress,
@@ -78,3 +79,5 @@ export default class AddressSearchResult extends Component {
     );
   }
 }
+
+export default withUi(AddressSearchResult);

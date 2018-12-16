@@ -1,6 +1,7 @@
 import React, { Component } from "react";
 import styles from "./AddressSearch.module.scss";
 import classNames from "classnames/bind";
+import { withUi } from "../../context/UiContext";
 
 // SVG
 import { ReactComponent as MagnifyingGlass } from "../../img/search.svg";
@@ -97,4 +98,4 @@ class AddressSearchView extends Component {
   }
 }
 
-export default AddressSearchView;
+export default withUi(AddressSearchView);
