@@ -93,7 +93,7 @@ class NewList extends Component {
               <List style={{ transform: "scale(1.5)" }} />
             </div>
           </div>}>
-        <SlideMenu category={category} categoryList={this.categoryList} onChange={this.handleCategory} scroll={scroll} onScroll={this.handleScroll} />
+      <SlideMenu category={category} categoryList={this.categoryList} onClick={this.handleCategory} scroll={scroll} onScroll={this.handleScroll} />
         <BlackCurtain show={show} onShowModal={this.handleModal} />
         <SearchList show={show} onShowModal={this.handleModal} />
         <InfiniteScroll pageStart={0} loadMore={this.props.loadMore} hasMore={this.props.next !== null} loader={<Loader key={0} />} threshold={100}>

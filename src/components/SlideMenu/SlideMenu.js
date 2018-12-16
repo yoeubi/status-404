@@ -12,7 +12,7 @@ class SlideMenu extends Component {
   }
 
   render() {
-    const { category, categoryList, onChange, onScroll } = this.props;
+    const { category, categoryList, onClick, onScroll } = this.props;
     return (
       <div className={cx("slide-menu")}>
         <ul
@@ -28,7 +28,7 @@ class SlideMenu extends Component {
                 }
               }}
               className={cx({ active: menu === category })}
-              onClick={() => onChange(index)}
+              onClick={() => onClick(index)}
             >
               {menu}
             </li>
