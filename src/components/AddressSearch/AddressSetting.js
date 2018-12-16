@@ -143,12 +143,10 @@ export default class AddressSetting extends Component {
       addressType: !prevState.addressType
     }));
   };
-  // FIXME: AddressSetting compnt.에서 refresh button의 역할이 안됨
-  // handleRefreshBtn = () => {
-  //   this.setState({
-  //     refresh: "done"
-  //   });
-  // };
+
+  handleRefreshBtn = () => {
+    this.componentDidMount();
+  };
 
   render() {
     const { onBackBtn, onAddressSetting } = this.props;
@@ -169,7 +167,7 @@ export default class AddressSetting extends Component {
           <div className={cx("centered")}>x</div>
           <div className={cx("bottomContainer")}>
             <button
-              onClick={() => onAddressSetting()}
+              onClick={() => this.handleRefreshBtn()}
               className={cx("currentLocationBtn")}
             >
               <Crosshair />
