@@ -17,12 +17,13 @@ class AddressSearchView extends Component {
       onAddressSearch,
       getAddress,
       onSubmitBtn,
-      onKakaoView,
+      // onKakaoView,
       userInput,
       onUserInput,
       // address,
       recentAddress,
-      onDeleteBtn
+      onDeleteBtn,
+      onAddressSetting
     } = this.props;
     return (
       <>
@@ -57,7 +58,8 @@ class AddressSearchView extends Component {
               </button>
             </div>
             <button
-              onClick={() => onKakaoView()}
+              // onClick={() => onKakaoView()}
+              onClick={() => onAddressSetting()}
               className={cx("addressSettingButton")}
             >
               <Crosshair />
