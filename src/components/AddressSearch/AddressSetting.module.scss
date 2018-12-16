@@ -86,15 +86,37 @@ button {
   display: block;
 }
 
+// marker - type 1 (arrow)
+// .marker {
+//   position: absolute;
+//   transform: scale(5);
+//   bottom: 405px;
+//   left: 50%;
+//   color: rgba(250, 58, 58, 0.664);
+//   z-index: 100;
+// }
+
+// marker - type 2 (crosshair)
 .marker {
   position: absolute;
-  transform: scale(5);
   bottom: 405px;
   left: 50%;
-  color: rgba(250, 58, 58, 0.664);
+  color: rgb(240, 0, 0);
   z-index: 100;
-  /* background-color: blue;
-  height: 100%; */
+  svg {
+    transform: scale(1.5);
+  }
+}
+.centered {
+  display: none;
+  transform: scale(5);
+  color: rgba(250, 58, 58, 0.664);
+  position: fixed;
+  top: 50%;
+  left: 50%;
+  // margin-top: -50px;
+  // margin-left: -100px;
+  z-index: 100;
 }
 
 /* .bottomContainer {
