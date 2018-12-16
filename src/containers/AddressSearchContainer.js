@@ -6,6 +6,7 @@ import kakaoAPI from "../api/kakaoAPI";
 import { withUser } from "../context/UserContext";
 import KakaoView from "../components/AddressSearch/KakaoView";
 import { UiProvider } from "../context/UiContext";
+import AddressSetting from "../components/AddressSearch/AddressSetting";
 
 class AddressSearchContainer extends Component {
   constructor(props) {
@@ -79,6 +80,11 @@ class AddressSearchContainer extends Component {
       page: "kakao"
     });
   };
+  handleAddressSetting = () => {
+    this.setState({
+      page: "address-setting"
+    });
+  };
   handleDeleteBtn = index => {
     // const { recentAddress } = this.props;
     // console.log(recentAddress[index]);
@@ -103,6 +109,7 @@ class AddressSearchContainer extends Component {
               onKakaoView={this.handleKakaoView}
               userInput={userInput}
               onDeleteBtn={() => this.handleDeleteBtn()}
+              onAddressSetting={this.handleAddressSetting}
             />
           ) : this.state.page === "address-search-result" ? (
             <AddressSearchResult
@@ -117,6 +124,8 @@ class AddressSearchContainer extends Component {
             />
           ) : this.state.page === "kakao" ? (
             <KakaoView onShippingAddress={this.handleShippingAddress} />
+          ) : this.state.page === "address-setting" ? (
+            <AddressSetting />
           ) : null}
         </UiProvider>
       </>
