@@ -78,6 +78,8 @@ input {
   font-size: 20px;
   cursor: pointer;
   svg {
+    display: block;
+    margin: auto;
     transform: scale(1.2);
   }
 }
