@@ -91,6 +91,13 @@ class AddressSearchContainer extends Component {
     this.state.recentAddress.splice(index, 1);
   };
 
+  // FIXME: AddressSetting compnt.에서 refresh button의 역할이 안됨
+  // handleRefreshBtn = () => {
+  //   this.setState({
+  //     page: "address-setting"
+  //   });
+  // };
+
   render() {
     const { searchResult, userInput, recentAddress } = this.state;
     const { onAddressSearch, show, address } = this.props;
@@ -125,7 +132,11 @@ class AddressSearchContainer extends Component {
           ) : this.state.page === "kakao" ? (
             <KakaoView onShippingAddress={this.handleShippingAddress} />
           ) : this.state.page === "address-setting" ? (
-            <AddressSetting />
+            <AddressSetting
+              onBackBtn={() => this.handleBackBtn()}
+              onRefreshBtn={this.handleRefreshBtn}
+              onAddressSetting={this.handleAddressSetting}
+            />
           ) : null}
         </UiProvider>
       </>

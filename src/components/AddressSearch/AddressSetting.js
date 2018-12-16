@@ -12,9 +12,14 @@ export default class AddressSetting extends Component {
     super(props);
     this.mapRef = React.createRef();
     this.centerAddrRef = React.createRef();
-    // this.map.displayCenterInfo = this.map.displayCenterInfo.bind(this);
 
-    this.state = {};
+    this.state = {
+      addressType: true,
+      // roadAddress: null,
+      // address: null,
+      refresh: null,
+      content: null
+    };
   }
 
   componentDidMount() {
@@ -31,6 +36,8 @@ export default class AddressSetting extends Component {
   }
 
   map = (latitude, longitude) => {
+    // const getRoadAddr = this.getRoadAddr;
+    // const getAddr = this.getAddr;
     var infoDiv = this.centerAddrRef.current;
     var mapContainer = this.mapRef.current, // 지도를 표시할 div
       mapOption = {
@@ -56,6 +63,8 @@ export default class AddressSetting extends Component {
     daum.maps.event.addListener(map, "click", function(mouseEvent) {
       searchDetailAddrFromCoords(mouseEvent.latLng, function(result, status) {
         if (status === daum.maps.services.Status.OK) {
+          // console.log(result);
+          // console.log(status);
           var detailAddr = !!result[0].road_address
             ? "<div>도로명주소 : " +
               result[0].road_address.address_name +
@@ -69,10 +78,14 @@ export default class AddressSetting extends Component {
             '<span className={cx("title")}></span>' +
             detailAddr +
             "</div>";
+          // getRoadAddr(result[0].road_address.address_name);
+          // getAddr(result[0].address.address_name);
 
           // 마커를 클릭한 위치에 표시합니다
           marker.setPosition(mouseEvent.latLng);
           marker.setMap(map);
+          // console.log(mouseEvent.latLng);
+          // console.log(mouseEvent);
 
           // 인포윈도우에 클릭한 위치에 대한 법정동 상세 주소정보를 표시합니다
           infowindow.setContent(content);
@@ -99,11 +112,14 @@ export default class AddressSetting extends Component {
     // 지도 좌측상단에 지도 중심좌표에 대한 주소정보를 표출하는 함수입니다
     function displayCenterInfo(result, status) {
       if (status === daum.maps.services.Status.OK) {
-        // var infoDiv = this.centerAddrRef.current;
+        // console.log(result);
         for (var i = 0; i < result.length; i++) {
           // 행정동의 region_type 값은 'H' 이므로
           if (result[i].region_type === "H") {
-            infoDiv.innerHTML = result[i].address_name;
+            // infoDiv.innerHTML = result[i].address_name; // library 초기 상태
+            infoDiv.innerHTML =
+              result[i].region_2depth_name + " " + result[i].region_3depth_name; // customed
+            // console.log(result[i]);
             break;
           }
         }
@@ -111,23 +127,63 @@ export default class AddressSetting extends Component {
     }
   };
 
+  getRoadAddr = roadAddress => {
+    this.setState({
+      roadAddress
+    });
+  };
+  // getAddr = address => {
+  //   this.setState({
+  //     address
+  //   });
+  // };
+
+  handleAddressType = () => {
+    this.setState(prevState => ({
+      addressType: !prevState.addressType
+    }));
+  };
+  // FIXME: AddressSetting compnt.에서 refresh button의 역할이 안됨
+  // handleRefreshBtn = () => {
+  //   this.setState({
+  //     refresh: "done"
+  //   });
+  // };
+
   render() {
+    const { onBackBtn, onAddressSetting } = this.props;
     return (
       <>
         <div className={cx("map_wrap")}>
           <div ref={this.mapRef} className={cx("map")} />
-          <button className={cx("backBtn")}>←</button>
+          <button onClick={onBackBtn} className={cx("backBtn")}>
+            ←
+          </button>
           <div className={cx("guideTxt")}>
             지도를 움직여 배달 받을 위치를 설정하세요
           </div>
-          <div className={cx("marker")}>⬇</div>
+          {/* <div className={cx("marker")}>⬇</div> */}
+          <div className={cx("marker")}>
+            <Crosshair />
+          </div>
+          <div className={cx("centered")}>x</div>
           <div className={cx("bottomContainer")}>
-            <button className={cx("currentLocationBtn")}>
+            <button
+              onClick={() => onAddressSetting()}
+              className={cx("currentLocationBtn")}
+            >
               <Crosshair />
             </button>
             <div className={cx("hAddr")}>
               <span ref={this.centerAddrRef} className={cx("centerAddr")} />
-              <button className={cx("addressTypeBtn")}>지번주소로 보기</button>
+              {/* <button className={cx("addressTypeBtn")}>{address}</button> */}
+              {/* <button className={cx("addressTypeBtn")}>{roadAddress}</button> */}
+              <button
+                onClick={() => this.handleAddressType()}
+                className={cx("addressTypeBtn")}
+              >
+                지번주소로 보기
+              </button>
             </div>
             <button className={cx("settingBtn")}>이 위치로 주소 설정</button>
           </div>
