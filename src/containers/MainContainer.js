@@ -157,6 +157,7 @@ class MainContainer extends Component {
             onUserModal={this.handleUserModal}
             showModal={show}
             cart={cart}
+            key={cart}
           />
           <Header
             user={user}

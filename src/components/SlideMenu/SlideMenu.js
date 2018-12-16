@@ -6,9 +6,9 @@ const cx = classNames.bind(styles);
 
 class SlideMenu extends Component {
   slide = React.createRef();
-
+  item = React.createRef();
   componentDidMount() {
-    this.slide.current.scrollLeft = this.props.scroll;
+    this.slide.current.scrollLeft = this.item.offsetLeft - 60;
   }
 
   render() {
@@ -22,6 +22,11 @@ class SlideMenu extends Component {
           {categoryList.map((menu, index) => (
             <li
               key={index}
+              ref={ ref => {
+                if (menu === category) {
+                  this.item = ref;
+                }
+              }}
               className={cx({ active: menu === category })}
               onClick={() => onChange(index)}
             >

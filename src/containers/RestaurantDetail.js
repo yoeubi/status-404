@@ -18,12 +18,12 @@ class RestaurantDetail extends Component {
   }
   async componentDidMount() {
     const { match } = this.props;
-    const storeId = match.params.id;
+    const { cpk, spk } = match.params;
     try {
       if (localStorage.getItem("token")) {
         // 로그인
         // 상점 정보 요청
-        const { data } = await api.get(`/store/${storeId}/`);
+        const { data } = await api.get(`/category/${cpk}/store/${spk}/`);
         // 장바구니 정보 요청
         const { data: cartData } = await api.get(`/cart/items/`);
 
@@ -37,7 +37,7 @@ class RestaurantDetail extends Component {
       } else {
         // 미로그인
         // 상점 정보 요청
-        const { data } = await api.get(`/store/${storeId}/`);
+        const { data } = await api.get(`/category/${cpk}/store/${spk}/`);
 
         // 1. 불러온 정보를 state 에 저장한다.
         // 2. 로딩 인디케이터 flag 를 false 로 설정한다.
