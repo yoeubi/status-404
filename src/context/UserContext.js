@@ -23,6 +23,7 @@ class UserProvider extends Component {
     googleLogin: this.googleLogin.bind(this),
     failLogin: this.failLogin.bind(this),
     join: this.join.bind(this),
+    addCart: this.addCart.bind(this),
     pullCart: this.pullCart.bind(this),
     modCart: this.modCart.bind(this),
     delCart: this.delCart.bind(this),
