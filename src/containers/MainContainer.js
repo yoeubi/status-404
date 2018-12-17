@@ -35,18 +35,19 @@ class MainContainer extends Component {
   }
 
   async componentDidMount() {
+    const { pullCart } = this.props;
+
     await this.handleAddress();
-    await this.handleCart();
+
+    if (localStorage.getItem("token")) {
+      // 로그인된 사용자만 카트 정보 호출
+      await pullCart();
+    }
 
     this.setState({
       loading: false
     });
   }
-
-  handleCart = async () => {
-    const { pullCart } = this.props;
-    await pullCart();
-  };
 
   handleAddress = async () => {
     const { createUserAddress, user } = this.props;
