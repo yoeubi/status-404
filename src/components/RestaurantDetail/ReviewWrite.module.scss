@@ -1,5 +1,3 @@
-@import "../../common.scss";
-
 button {
   outline: none;
 }
@@ -160,7 +158,7 @@ button {
       .GuideBtn {
         margin-top: 10px;
         font-size: 1.4rem;
-        color: $main-color;
+        color: white;
         .Down {
           fill: #2fc0be;
           transform: scale(1.5);

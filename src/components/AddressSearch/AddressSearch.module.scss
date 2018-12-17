@@ -1,8 +1,3 @@
-@import "../../common.scss";
-
-$main-color: white;
-$main-border: 1px solid black;
-
 button,
 input {
   outline: none;
@@ -14,7 +9,7 @@ input {
   right: 0;
   width: 100%;
   height: 100%;
-  background-color: $main-color;
+  background-color: white;
   color: black;
   transform: translateY(100%);
   transition: all 0.5s;
