@@ -1,13 +1,12 @@
-span {
-  display: block;
-}
-
 .InfoTapContainer {
   padding: 10px;
   height: 100%;
   background-color: white;
   display: none;
   &.open {
+    display: block;
+  }
+  span {
     display: block;
   }
 }

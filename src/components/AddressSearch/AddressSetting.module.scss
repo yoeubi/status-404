@@ -1,18 +1,8 @@
-body {
+.map_wrap {
   margin: 0px;
   padding: 0px;
   font-family: "Noto", sans-serif;
   text-align: center;
-}
-svg {
-  display: block;
-}
-
-button {
-  outline: none;
-}
-
-.map_wrap {
   position: fixed;
   top: 0;
   right: 0;
@@ -36,6 +26,7 @@ button {
 }
 
 .backBtn {
+  outline: none;
   position: absolute;
   top: 40px;
   left: 20px;
@@ -79,6 +70,7 @@ button {
 }
 
 .addressTypeBtn {
+  outline: none;
   border: none;
   font-size: 13pt;
   color: #2fc0be;
@@ -105,6 +97,7 @@ button {
   color: rgb(240, 0, 0);
   z-index: 100;
   svg {
+    display: block;
     transform: scale(1.5);
   }
 }
@@ -126,6 +119,7 @@ button {
 } */
 
 .currentLocationBtn {
+  outline: none;
   position: absolute;
   bottom: 180px;
   right: 20px;
@@ -140,6 +134,7 @@ button {
   // justify-content: center;
   // align-items: center;
   svg {
+    display: block;
     margin: auto;
   }
 }
@@ -155,6 +150,7 @@ button {
 }
 
 .settingBtn {
+  outline: none;
   border: none;
   border-radius: 3px;
   position: absolute;

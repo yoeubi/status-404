@@ -1,8 +1,3 @@
-button,
-input {
-  outline: none;
-}
-
 .container {
   position: fixed;
   top: 0;
@@ -25,6 +20,7 @@ input {
 }
 
 .closeButton {
+  outline: none;
   display: block;
   height: 30px;
   width: 30px;
@@ -48,6 +44,7 @@ input {
 }
 
 .addressSearchInput {
+  outline: none;
   border-radius: 0;
   width: calc(100% - 40px);
   height: 40px;
@@ -61,6 +58,7 @@ input {
 }
 
 .addressSearchButton {
+  outline: none;
   background-color: white;
   border: 1px solid silver;
   color: black;
@@ -76,6 +74,7 @@ input {
 }
 
 .addressSettingButton {
+  outline: none;
   display: flex;
   flex-direction: row;
   justify-content: center;
@@ -162,6 +161,7 @@ input {
 }
 
 .deleteButton {
+  outline: none;
   border: none;
   position: absolute;
   top: 40%;
