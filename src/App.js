@@ -1,6 +1,5 @@
 import React, { Component } from "react";
 import { BrowserRouter as Router, Route, Switch } from "react-router-dom";
-import RestaurantSearchContainer from "./containers/RestaurantSearchContainer";
 import {
   Main,
   Login,
@@ -11,7 +10,8 @@ import {
   List,
   Cart,
   Pay,
-  Result
+  Result,
+  RestaurantSearch
 } from "./Pages";
 
 class App extends Component {
@@ -24,15 +24,12 @@ class App extends Component {
           <Route path="/login" component={Login} />
           <Route path="/join" component={Join} />
           <Route path="/profile" component={Profile} />
-          <Route
-            path="/restaurant-search"
-            component={RestaurantSearchContainer}
-          />
+          <Route path="/restaurant-search" component={RestaurantSearch} />
           {/* <Route path="/store/:id" component={Detail} /> */}
           {/* 레스토랑 리스트 */}
           {/* <Route exact path="/restauant" component={Restaurant} />  */}
-          <Route path="/restaurant/:id" component={Detail} />
-          <Route path="/list" component={List} />
+          <Route path="/category/:cpk/store/:spk" component={Detail} />
+          <Route path="/category/:pk" component={List} />
           <Route path="/cart" component={Cart} />
           <Route path="/pay" component={Pay} />
           <Route path="/myorder" component={Order} />

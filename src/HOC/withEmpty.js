@@ -5,7 +5,7 @@ import {ReactComponent as Left} from '../svg/chevron-left.svg';
 
 const withEmpty = WrappedComponent => props => {
     const {cart} = props;
-    if(!cart){
+    if(!cart || !cart.item || cart.item.length <= 0){
         return <Page left={<span style={{ padding: "1.5rem"}} onClick={() => props.history.goBack()}>
                 <Left style={{ transform: "scale(1.5)" }} />
               </span>} middle="장바구니">

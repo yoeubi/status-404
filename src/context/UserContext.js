@@ -1,6 +1,6 @@
 import React, { Component } from "react";
 import { mainAPI } from "../api";
-import axios from 'axios';
+import axios from "axios";
 
 const { Provider, Consumer } = React.createContext();
 
@@ -23,23 +23,25 @@ class UserProvider extends Component {
     googleLogin: this.googleLogin.bind(this),
     failLogin: this.failLogin.bind(this),
     join: this.join.bind(this),
+    addCart: this.addCart.bind(this),
     pullCart: this.pullCart.bind(this),
     modCart: this.modCart.bind(this),
-    delCart: this.delCart.bind(this)
+    delCart: this.delCart.bind(this),
+    createUserAddress: this.createUserAddress.bind(this)
   };
 
   async componentDidMount() {
     const token = localStorage.getItem("token");
     if (token) {
       try {
-        const [ {data : user} , {data : cart} ] = await axios.all([
+        const [{ data: user }, { data: cart }] = await axios.all([
           mainAPI.get("/members/profile/"),
           mainAPI.get("/cart/items/")
         ]);
         this.setState({
-          user : user,
-          cart : cart
-        })
+          user: user,
+          cart: cart
+        });
       } catch (e) {
         console.log("token 로그인 실패 or token 미존재");
       }
@@ -125,7 +127,6 @@ class UserProvider extends Component {
         cart: data
       });
       console.log(this.state.cart);
-      
     } catch (e) {
       console.log("장바구니 리스트 에러");
     }
@@ -157,13 +158,24 @@ class UserProvider extends Component {
   async delCart({ food_pk }) {
     try {
       await mainAPI.delete("/cart/items/", {
-        data : {
+        data: {
           food_pk
         }
       });
       await this.pullCart();
     } catch (e) {
       console.log("카트 삭제 실패");
+    }
+  }
+  async createUserAddress(address) {
+    try {
+      await mainAPI.post("/address/", address);
+      const { data } = await mainAPI.get("/members/profile/");
+      this.setState({
+        user: data
+      });
+    } catch (error) {
+      console.log(error);
     }
   }
 

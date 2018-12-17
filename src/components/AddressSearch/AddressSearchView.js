@@ -1,6 +1,7 @@
 import React, { Component } from "react";
 import styles from "./AddressSearch.module.scss";
 import classNames from "classnames/bind";
+import { withUi } from "../../context/UiContext";
 
 // SVG
 import { ReactComponent as MagnifyingGlass } from "../../img/search.svg";
@@ -16,12 +17,13 @@ class AddressSearchView extends Component {
       onAddressSearch,
       getAddress,
       onSubmitBtn,
-      onKakaoView,
+      // onKakaoView,
       userInput,
       onUserInput,
       // address,
       recentAddress,
-      onDeleteBtn
+      onDeleteBtn,
+      onAddressSetting
     } = this.props;
     return (
       <>
@@ -56,7 +58,8 @@ class AddressSearchView extends Component {
               </button>
             </div>
             <button
-              onClick={() => onKakaoView()}
+              // onClick={() => onKakaoView()}
+              onClick={() => onAddressSetting()}
               className={cx("addressSettingButton")}
             >
               <Crosshair />
@@ -97,4 +100,4 @@ class AddressSearchView extends Component {
   }
 }
 
-export default AddressSearchView;
+export default withUi(AddressSearchView);

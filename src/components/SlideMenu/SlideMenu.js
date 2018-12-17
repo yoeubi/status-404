@@ -5,36 +5,37 @@ import classNames from "classnames/bind";
 const cx = classNames.bind(styles);
 
 class SlideMenu extends Component {
-  menuList = [
-    "한식",
-    "일식",
-    "양식",
-    "카페",
-    "햄버거",
-    "치킨",
-    "피자",
-    "중식",
-    "분식",
-  ];
   slide = React.createRef();
-
+  item = React.createRef();
   componentDidMount() {
-    this.slide.current.scrollLeft = this.props.scroll;
+    this.slide.current.scrollLeft = this.item.offsetLeft - 60;
   }
-  
+
   render() {
-    const {category, onChange, onScroll} = this.props;
+    const { category, categoryList, onClick} = this.props;
     return (
       <div className={cx("slide-menu")}>
-        <ul ref={this.slide} onScroll={() => onScroll(this.slide.current.scrollLeft)}>
-          {
-            this.menuList.map((menu, index) => (<li key={index} className={cx({ active: menu === category })} onClick={() => onChange(index)}>{menu}</li>))
-          }
+        <ul
+          ref={this.slide}
+        >
+          {categoryList.map((menu, index) => (
+            <li
+              key={index}
+              ref={ ref => {
+                if (menu === category) {
+                  this.item = ref;
+                }
+              }}
+              className={cx({ active: menu === category })}
+              onClick={() => onClick(index)}
+            >
+              {menu}
+            </li>
+          ))}
         </ul>
       </div>
     );
   }
 }
-
 
 export default SlideMenu;

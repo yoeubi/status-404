@@ -10,6 +10,7 @@ import RightNothing from "../RightNothing";
 import CustomCheckBox from "../CustomCheckBox";
 import Folding from "../Folding";
 import PaymentMethod from "../PaymentMethod";
+import withLoading from "../../HOC/withLoading";
 
 const cx = classNames.bind(styles);
 
@@ -28,47 +29,29 @@ class Payment extends Component {
     popup: false,
     method: this.payList[0],
     // API로 디데일 주소 + 전화번호 받아오기
-    detail: "",
-    tel: "",
+    address: "",
+    detail_address: "",
+    old_address: "",
+    payment: "",
+    phone: "",
     request: ""
   };
   componentDidMount() {
-    var IMP = window.IMP; // 생략가능
-    IMP.init("imp19043807");
-  }
-  handlePay = () => {
-    const {history} = this.props;
-    // TODO: 사용자 정보를 받아서 표시해야 함
-    window.IMP.request_pay(
-      {
-        pg: "html5_inicis",
-        pay_method: "card",
-        merchant_uid: "merchant_" + new Date().getTime(),
-        name: "주문명:결제테스트",
-        amount: 1000,
-        buyer_email: "iamport@siot.do",
-        buyer_name: "구매자이름",
-        buyer_tel: "010-1234-5678",
-        buyer_addr: "서울특별시 강남구 삼성동",
-        buyer_postcode: "123-456"
+    const {
+      user: {
+        phone,
+        address: [{ address, detail_address, old_address }]
       },
-      function(rsp) {
-        if (rsp.success) {
-          var msg = "결제가 완료되었습니다.";
-          msg += "고유ID : " + rsp.imp_uid;
-          msg += "상점 거래ID : " + rsp.merchant_uid;
-          msg += "결제 금액 : " + rsp.paid_amount;
-          msg += "카드 승인번호 : " + rsp.apply_num;
-        } else {
-          msg = "결제에 실패하였습니다.";
-          msg += "에러내용 : " + rsp.error_msg;
-        }
-        console.dir('결제',rsp);
-        alert(msg);
-        history.replace('/');
-      }
-    );
-  };
+      cart: { payment }
+    } = this.props;
+    this.setState({
+      address,
+      detail_address,
+      old_address,
+      payment,
+      phone
+    });
+  }
   handlePopup = () => {
     this.setState({
       popup: !this.state.popup
@@ -83,6 +66,15 @@ class Payment extends Component {
     });
   };
   render() {
+    const {
+      address,
+      old_address,
+      phone,
+      request,
+      detail_address,
+      payment
+    } = this.state;
+    const {onPay} = this.props;
     return (
       <div className={cx("payment")}>
         <BackHeader backURL="/cart" title="" />
@@ -90,25 +82,25 @@ class Payment extends Component {
           title="배달정보"
           style={{ marginTop: "5rem", paddingTop: "0.5rem" }}
         />
-        <Detail main="노원구 상계동 666" sub="(도로명) 노원로 564" />
+        <Detail main={old_address} sub={`(도로명) ${address}`} />
         <CustomInput
           type="text"
-          value={this.state.detail}
-          name="detail"
+          value={detail_address}
+          name="detail_address"
           onChange={this.handleChange}
           placeholder="상세주소를 입력해주세요"
         />
         <CustomInput
           type="tel"
-          value={this.state.tel}
-          name="tel"
+          value={phone}
+          name="phone"
           onChange={this.handleChange}
           placeholder="전화번호를 입력해주세요"
         />
         <CustomCheckBox text="안심번호 사용" />
         <CustomInput
           type="text"
-          value={this.state.request}
+          value={request}
           name="request"
           onChange={this.handleChange}
           placeholder="요청사항을 입력해주세요"
@@ -118,7 +110,10 @@ class Payment extends Component {
           right={`${this.state.request.length}/40`}
         />
         <HighLight title="결제금액" />
-        <Detail main="23400원" sub="주문금액 20400원 + 배달팁 3000원" />
+        <Detail
+          main={`${payment / 10}원`}
+          sub={`주문금액 ${payment}원 배달의 민족 할인 90%`}
+        />
         <RightNothing
           title={this.state.method}
           right="변경"
@@ -147,9 +142,9 @@ class Payment extends Component {
             bottom: "0",
             left: "0"
           }}
-          onClick={this.handlePay}
+          onClick={onPay}
         >
-          23400원 결제하기
+          {payment/10}원 결제하기
         </Nothing>
         <PaymentMethod
           payList={this.payList}
@@ -164,4 +159,4 @@ class Payment extends Component {
   }
 }
 
-export default Payment;
+export default withLoading(Payment);

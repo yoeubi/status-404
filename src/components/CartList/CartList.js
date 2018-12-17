@@ -15,7 +15,13 @@ class CartList extends Component {
     const { cart : { item, payment}, modCart, delCart } = this.props;
     return <div className={cx("cart-list")}>
         <BackHeader title="장바구니" style={{ borderBottom: "1px solid #eee" }} />
-        <Nothing style={{ fontSize: "2rem", background: "#fff", marginTop: "5rem" }}>
+        <Nothing
+          style={{
+            fontSize: "2rem",
+            background: "#fff",
+            marginTop: "5rem"
+          }}
+        >
           피자네플러스 상계1호점
         </Nothing>
         <div className={cx("cart-item-gap")}>
@@ -29,9 +35,8 @@ class CartList extends Component {
             />
           ))}
         </div>
-        <Nothing style={{ fontSize: "1.5rem", color: "#2ac1bc", background: "#fff", borderTop: "1px solid #eee" }}>
-          {/* TODO: 이전 레스토랑의 주소가 필요함 */}
-          <Link to="/">+ 메뉴 더 담으러 가기</Link>
+        <Nothing style={{ fontSize: "1.5rem", color: "#2ac1bc", background: "#fff", borderTop: "1px solid #eee" }} onClick={() => this.props.history.goBack()}>
+          <span>+ 메뉴 더 담으러 가기</span>
         </Nothing>
         <SideNothing left="주문금액" right={`${payment}원`} style={{ fontSize: "1.5rem", marginTop: "1rem" }} />
         <p className={cx("cart-notification")}>
@@ -41,7 +46,7 @@ class CartList extends Component {
         </p>
         <Nothing style={{ fontSize: "1.7rem", background: "#2ac1bc", color: "#fff", position: "fixed", bottom: 0, left: 0 }}>
           <Link to="/pay">
-          {item.length}개 {payment}원 주문하기
+            {item.length}개 {payment}원 주문하기
           </Link>
         </Nothing>
       </div>;
