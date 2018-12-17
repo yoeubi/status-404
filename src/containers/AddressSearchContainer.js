@@ -64,6 +64,11 @@ class AddressSearchContainer extends Component {
       page: "address-search"
     });
   };
+  handleKakaoView = () => {
+    this.setState({
+      page: "kakao"
+    });
+  };
 
   handleFinishBtn = id => {
     const { searchResult, recentAddress } = this.state;
@@ -130,7 +135,10 @@ class AddressSearchContainer extends Component {
               address={address}
             />
           ) : this.state.page === "kakao" ? (
-            <KakaoView onShippingAddress={this.handleShippingAddress} />
+            <KakaoView
+              changeComponentView={this.handleComponentView}
+              onShippingAddress={this.handleShippingAddress}
+            />
           ) : this.state.page === "address-setting" ? (
             <AddressSetting
               onBackBtn={() => this.handleBackBtn()}
