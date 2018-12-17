@@ -7,7 +7,7 @@ import UserModal from "../components/Main/UserModal";
 import PolicyView from "../components/Main/PolicyView";
 // import AddressSearchView from "../components/AddressSearch/AddressSearchView";
 import AddressSearchContainer from "./AddressSearchContainer";
-import kakaoAPI from "../api/kakaoAPI";
+import { mainAPI, kakaoAPI } from "../api";
 import "../transition.scss";
 
 import { CSSTransition, TransitionGroup } from "react-transition-group";
@@ -30,11 +30,35 @@ class MainContainer extends Component {
       // policy 모달 컴포넌트 토글용 flag
       policy: false,
       // 미 로그인단 사용자 주소 정보 저장소
-      noneAuthUserAddress: null
+      noneAuthUserAddress: null,
+      cartItems: 0
     };
   }
 
   async componentDidMount() {
+    await this.handleAddress();
+    await this.handleCart();
+
+    this.setState({
+      loading: false
+    });
+  }
+
+  handleCart = async () => {
+    try {
+      const {
+        data: { item }
+      } = await mainAPI.get("/cart/items/");
+
+      this.setState({
+        cartItems: item
+      });
+    } catch (error) {
+      console.log(error);
+    }
+  };
+
+  handleAddress = async () => {
     const { createUserAddress, user } = this.props;
     if (localStorage.getItem("token")) {
       // 로그인 된 사용자 주소처리
@@ -64,10 +88,6 @@ class MainContainer extends Component {
                 : road_address.address_name
             };
             await createUserAddress(createdAddress);
-
-            this.setState({
-              loading: false
-            });
           },
           error => {
             // geoLocation error callback func
@@ -84,11 +104,6 @@ class MainContainer extends Component {
             maximumAge: Infinity // 캐시된 위치 값을 반환 받아도 되는 최대한의 시간
           }
         );
-      } else {
-        // 유저 정보에 address 가 존재
-        this.setState({
-          loading: false
-        });
       }
     } else {
       // 로그인 안된 사용자 주소처리
@@ -106,8 +121,7 @@ class MainContainer extends Component {
           const { address, road_address } = documents[0];
           this.setState({
             noneAuthUserAddress:
-              address.address_name || road_address.address_name,
-            loading: false
+              address.address_name || road_address.address_name
           });
         },
         error => {
@@ -126,7 +140,7 @@ class MainContainer extends Component {
         }
       );
     }
-  }
+  };
 
   handleUserModal = () => {
     this.setState({ show: !this.state.show });
@@ -146,9 +160,10 @@ class MainContainer extends Component {
       addressSearchShow,
       loading,
       policy,
-      noneAuthUserAddress
+      noneAuthUserAddress,
+      cartItems
     } = this.state;
-    const { user, address, cart } = this.props; // <=== UserContext 에 작성된 상태가 props로 전달됩니다.
+    const { user, address } = this.props; // <=== UserContext 에 작성된 상태가 props로 전달됩니다.
     return (
       <React.Fragment>
         <UiProvider>
@@ -156,8 +171,7 @@ class MainContainer extends Component {
             user={user}
             onUserModal={this.handleUserModal}
             showModal={show}
-            cart={cart}
-            key={cart}
+            cartItems={cartItems}
           />
           <Header
             user={user}
