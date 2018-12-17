@@ -1,10 +1,12 @@
 import React, { Component } from "react";
-
 import AddressSearchView from "../components/AddressSearch/AddressSearchView";
 import AddressSearchResult from "../components/AddressSearch/AddressSearchResult";
-import api from "../api/kakaoAPI";
+import kakaoAPI from "../api/kakaoAPI";
+// import mainAPI from "../api/mainAPI";
 import { withUser } from "../context/UserContext";
 import KakaoView from "../components/AddressSearch/KakaoView";
+import { UiProvider } from "../context/UiContext";
+import AddressSetting from "../components/AddressSearch/AddressSetting";
 
 class AddressSearchContainer extends Component {
   constructor(props) {
@@ -39,7 +41,7 @@ class AddressSearchContainer extends Component {
   };
 
   getAddress = async userInput => {
-    const { data } = await api.get(
+    const { data } = await kakaoAPI.get(
       // 1. 주소로 검색
       // "https://dapi.kakao.com/v2/local/search/address.json",
       // 2. 키워드(지번, 도로명, 건물명)로 검색, 설정값: 전국 단위(기준이되는 위치 설정은 아직 미구현)
@@ -64,17 +66,23 @@ class AddressSearchContainer extends Component {
   };
 
   handleFinishBtn = id => {
-    const { searchResult } = this.state;
+    const { searchResult, recentAddress } = this.state;
     const index = searchResult.findIndex(item => item.id === id);
     this.state.recentAddress.push(searchResult[index]);
     this.setState({
       page: "address-search"
     });
+    console.log(recentAddress);
   };
 
   handleComponentView = view => {
     this.setState({
       page: view
+    });
+  };
+  handleAddressSetting = () => {
+    this.setState({
+      page: "address-setting"
     });
   };
   handleDeleteBtn = index => {
@@ -83,41 +91,54 @@ class AddressSearchContainer extends Component {
     this.state.recentAddress.splice(index, 1);
   };
 
+  // FIXME: AddressSetting compnt.에서 refresh button의 역할이 안됨
+  // handleRefreshBtn = () => {
+  //   this.setState({
+  //     page: "address-setting"
+  //   });
+  // };
+
   render() {
     const { searchResult, userInput, recentAddress } = this.state;
     const { onAddressSearch, show, address } = this.props;
     return (
       <>
-        {this.state.page === "address-search" ? (
-          <AddressSearchView
-            onUserInput={e => this.handleUserInput(e)}
-            onSubmitBtn={() => this.handleSubmitBtn()}
-            getAddress={this.getAddress}
-            onAddressSearch={onAddressSearch}
-            show={show}
-            recentAddress={recentAddress}
-            address={address}
-            onKakaoView={this.handleComponentView}
-            userInput={userInput}
-            onDeleteBtn={() => this.handleDeleteBtn()}
-          />
-        ) : this.state.page === "address-search-result" ? (
-          <AddressSearchResult
-            searchResult={searchResult}
-            userInput={userInput}
-            onUserInput={e => this.handleUserInput(e)}
-            onBackBtn={index => this.handleBackBtn(index)}
-            onFinishBtn={e => this.handleFinishBtn(e)}
-            recentAddress={recentAddress}
-            getAddress={this.getAddress}
-            address={address}
-          />
-        ) : this.state.page === "kakao" ? (
-          <KakaoView
-            onShippingAddress={this.handleShippingAddress}
-            changeComponentView={this.handleComponentView}
-          />
-        ) : null}
+        <UiProvider>
+          {this.state.page === "address-search" ? (
+            <AddressSearchView
+              onUserInput={e => this.handleUserInput(e)}
+              onSubmitBtn={() => this.handleSubmitBtn()}
+              getAddress={this.getAddress}
+              onAddressSearch={onAddressSearch}
+              show={show}
+              recentAddress={recentAddress}
+              address={address}
+              onKakaoView={this.handleKakaoView}
+              userInput={userInput}
+              onDeleteBtn={() => this.handleDeleteBtn()}
+              onAddressSetting={this.handleAddressSetting}
+            />
+          ) : this.state.page === "address-search-result" ? (
+            <AddressSearchResult
+              searchResult={searchResult}
+              userInput={userInput}
+              onUserInput={e => this.handleUserInput(e)}
+              onBackBtn={index => this.handleBackBtn(index)}
+              onFinishBtn={e => this.handleFinishBtn(e)}
+              recentAddress={recentAddress}
+              getAddress={this.getAddress}
+              address={address}
+            />
+          ) : this.state.page === "kakao" ? (
+            <KakaoView onShippingAddress={this.handleShippingAddress} />
+          ) : this.state.page === "address-setting" ? (
+            <AddressSetting
+              onBackBtn={() => this.handleBackBtn()}
+              onRefreshBtn={this.handleRefreshBtn}
+              onAddressSetting={this.handleAddressSetting}
+            />
+          ) : null}
+        </UiProvider>
       </>
     );
   }

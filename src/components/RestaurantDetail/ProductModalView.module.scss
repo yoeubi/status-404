@@ -1,4 +1,4 @@
-@import "../../index.scss";
+@import "../../common.scss";
 
 .ProductModalWrap {
   width: 100%;
@@ -8,14 +8,10 @@
   position: fixed;
   top: 0;
   bottom: 0;
-  right: -150%;
+  right: 0;
 
   background: #fff;
   z-index: 100;
-  transition: right 0.3s;
-  &.Show {
-    right: 0;
-  }
 
   .ProductModalHeader {
     width: 100%;

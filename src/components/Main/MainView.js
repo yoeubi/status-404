@@ -13,16 +13,10 @@ import { ReactComponent as Ilsik } from "../../img/03_ilsik.svg";
 import { ReactComponent as Chicken } from "../../img/04_chicken.svg";
 import { ReactComponent as Pizza } from "../../img/05_pizza.svg";
 import { ReactComponent as Chinese } from "../../img/06_chinese.svg";
-// import { ReactComponent as Zokbal } from "../../img/07_zokbal.svg";
-// import { ReactComponent as Yasik } from "../../img/08_yasik.svg";
-// import { ReactComponent as Zzim } from "../../img/09_zzim.svg";
-// import { ReactComponent as Dosirak } from "../../img/10_dosirak.svg";
 import { ReactComponent as Desert } from "../../img/11_desert.svg";
 import { ReactComponent as Fastfood } from "../../img/12_fastfood.svg";
 import { ReactComponent as Franchise } from "../../img/13_franchise.svg";
-// import { ReactComponent as Matzip } from "../../img/14_matzip.svg";
 import { ReactComponent as SearchIcon } from "../../img/search.svg";
-// import { ReactComponent as BottomBanner } from "../../img/main_bottom_banner.svg";
 
 const cx = classNames.bind(styles);
 
@@ -32,19 +26,14 @@ class MainView extends Component {
     // 카테고리 가데이터
     lists: [
       {
-        id: 0,
+        id: 1,
         name: "한식",
         img: <Hansik />
       },
       {
-        id: 1,
+        id: 2,
         name: "일식",
         img: <Ilsik />
-      },
-      {
-        id: 2,
-        name: "양식",
-        img: <Franchise />
       },
       {
         id: 3,
@@ -53,59 +42,39 @@ class MainView extends Component {
       },
       {
         id: 4,
+        name: "양식",
+        img: <Franchise />
+      },
+      {
+        id: 5,
+        name: "분식",
+        img: <Bunsik />
+      },
+      {
+        id: 6,
         name: "햄버거",
         img: <Fastfood />
       },
       {
-        id: 5,
+        id: 7,
         name: "치킨",
         img: <Chicken />
       },
       {
-        id: 6,
-        name: "피자",
-        img: <Pizza />
-      },
-      {
-        id: 7,
+        id: 8,
         name: "중국집",
         img: <Chinese />
       },
       {
-        id: 8,
-        name: "분식",
-        img: <Bunsik />
+        id: 9,
+        name: "피자",
+        img: <Pizza />
       },
-      // {
-      //   id: 6,
-      //   name: "족발·보쌈",
-      //   img: <Zokbal />
-      // },
-      // {
-      //   id: 7,
-      //   name: "야식",
-      //   img: <Yasik />
-      // },
-      // {
-      //   id: 8,
-      //   name: "찜·탕",
-      //   img: <Zzim />
-      // },
-      // {
-      //   id: 9,
-      //   name: "도시락",
-      //   img: <Dosirak />
-      // },
-      // {
-      //   id: 13,
-      //   name: "맛집랭킹",
-      //   img: <Matzip />
-      // }
     ]
   };
 
   render() {
-    const { lists } = this.props;
+    const { lists, hanldePolicy } = this.props;
 
     return (
       <div className={cx("wrap")}>
@@ -142,7 +111,7 @@ class MainView extends Component {
             {lists.map(c => {
               return (
                 <li className={cx("item")} key={c.name}>
-                  <Link to={`/list?category=${c.id}`}>
+                  <Link to={`/category/${c.id}`}>
                     {c.img}
                     {c.name}
                   </Link>
@@ -187,10 +156,19 @@ class MainView extends Component {
 
         <div className={cx("footer")}>
           <ul className={cx("footerLink")}>
-            <li className={cx("footerLinkItem")}>사업자정보확인</li>
-            <li className={cx("footerLinkItem")}>이용약관</li>
-            <li className={cx("footerLinkItem")}>전자금융거래 이용약관</li>
-            <li className={cx("footerLinkItem")}>개인정보 처리방침</li>
+            <li className={cx("footerLinkItem")} onClick={() => hanldePolicy()}>
+              사업자정보확인
+            </li>
+            <li className={cx("footerLinkItem")} onClick={() => hanldePolicy()}>
+              이용약관
+            </li>
+            <li className={cx("footerLinkItem")} onClick={() => hanldePolicy()}>
+              전자금융거래 이용약관
+            </li>
+            <li className={cx("footerLinkItem")} onClick={() => hanldePolicy()}>
+              개인정보 처리방침
+            </li>
+            
           </ul>
           <div className={cx("company")}>
             <p className={cx("companyTitle")}>Status404</p>
