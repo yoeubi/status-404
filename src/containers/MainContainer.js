@@ -30,8 +30,7 @@ class MainContainer extends Component {
       // policy 모달 컴포넌트 토글용 flag
       policy: false,
       // 미 로그인단 사용자 주소 정보 저장소
-      noneAuthUserAddress: null,
-      cartItems: 0
+      noneAuthUserAddress: null
     };
   }
 
@@ -45,17 +44,8 @@ class MainContainer extends Component {
   }
 
   handleCart = async () => {
-    try {
-      const {
-        data: { item }
-      } = await mainAPI.get("/cart/items/");
-
-      this.setState({
-        cartItems: item
-      });
-    } catch (error) {
-      console.log(error);
-    }
+    const { pullCart } = this.props;
+    await pullCart();
   };
 
   handleAddress = async () => {
@@ -160,10 +150,9 @@ class MainContainer extends Component {
       addressSearchShow,
       loading,
       policy,
-      noneAuthUserAddress,
-      cartItems
+      noneAuthUserAddress
     } = this.state;
-    const { user, address } = this.props; // <=== UserContext 에 작성된 상태가 props로 전달됩니다.
+    const { user, address, cart } = this.props; // <=== UserContext 에 작성된 상태가 props로 전달됩니다.
     return (
       <React.Fragment>
         <UiProvider>
@@ -171,7 +160,7 @@ class MainContainer extends Component {
             user={user}
             onUserModal={this.handleUserModal}
             showModal={show}
-            cartItems={cartItems}
+            cart={cart}
           />
           <Header
             user={user}
