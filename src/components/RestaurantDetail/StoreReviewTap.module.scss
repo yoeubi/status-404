@@ -1,17 +1,19 @@
 @import "../../common.scss";
 
-button {
-  display: block;
-  outline: none;
-  background-color: white;
-  border: 1px solid #e5e5e5;
-}
-
 .ReviewTapContainer {
   display: none;
   height: 100%;
   &.open {
     display: block;
+  }
+  span {
+    display: block;
+  }
+  button {
+    display: block;
+    outline: none;
+    background-color: white;
+    border: 1px solid #e5e5e5;
   }
 }
 

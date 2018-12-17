@@ -99,17 +99,27 @@ class ProductModalView extends Component {
   };
 
   handleCartBtn = () => {
-    const pk = this.props.selectedMenu.pk;
+    const food_pk = this.props.selectedMenu.pk;
     const quantity = this.state.quantity;
-    const options = this.state.options.map(item => item.pk);
-    const { onHandleBodyOnModal, addItemToCart, onProductModal } = this.props;
+    const side_dishes_pk = this.state.options.map(item => item.pk);
+    const {
+      cart,
+      onHandleBodyOnModal,
+      addItemToCart,
+      onProductModal
+    } = this.props;
 
     if (!localStorage.getItem("token")) {
       alert("로그인이 필요한 서비스입니다.");
       onHandleBodyOnModal("close");
       onProductModal();
     } else {
-      addItemToCart(pk, quantity, options);
+      const alreadyItem = cart.item.find(i => i.food.pk === food_pk);
+      if (alreadyItem) {
+        alert("선택한 상품이 이미 카트에 담겨있습니다.");
+      } else {
+        addItemToCart({ food_pk, quantity, side_dishes_pk });
+      }
       onProductModal();
       onHandleBodyOnModal("close");
     }
@@ -141,7 +151,7 @@ class ProductModalView extends Component {
             {selectedMenu.foodimage_set.length > 0 && (
               <div className={cx("ProductImg")}>
                 <img
-                  src={selectedMenu.foodimage_set[0]}
+                  src={selectedMenu.foodimage_set[0].location}
                   alt={selectedMenu.name}
                 />
               </div>

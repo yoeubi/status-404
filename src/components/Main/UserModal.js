@@ -72,7 +72,7 @@ class UserModal extends Component {
       showModal,
       onUserModal,
       navList,
-      cartItems
+      cart
     } = this.props;
     // FIXME :: 모달 활성화시 Layout 에스크롤이 생기지 않게 하기 위해 css 트릭을 적용하였으나
     //          활성화시 어떤 위치에서도 최상단으로 이동하는 버그가 있어서 해결해야 함
@@ -128,9 +128,9 @@ class UserModal extends Component {
                   return (
                     <li key={n.id} className={cx("item")}>
                       <Link to={n.url}>
-                        {cartItems.length > 0 && (
+                        {cart && (
                           <span className={cx("cartAmount")}>
-                            {cartItems.length}
+                            {cart.item.length}
                           </span>
                         )}
                         {n.img}

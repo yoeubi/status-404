@@ -77,7 +77,7 @@ class RestaurantDetailView extends Component {
       selectedMenuOnModal,
       selectedMenu,
       addItemToCart,
-      numberOfCart
+      cart
     } = this.props;
     return (
       <React.Fragment>
@@ -137,12 +137,13 @@ class RestaurantDetailView extends Component {
             />
           </div>
 
-          <CartBtn fixed={true} numberOfCart={numberOfCart} />
+          <CartBtn fixed={true} cart={cart} />
         </div>
         <TransitionGroup>
           {productModal && (
             <CSSTransition timeout={500} classNames="fadeRight">
               <ProductModalView
+                cart={cart}
                 addItemToCart={addItemToCart}
                 name={name}
                 selectedMenu={selectedMenu}

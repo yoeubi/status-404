@@ -11,13 +11,11 @@ class CartBtn extends Component {
   };
 
   render() {
-    const { fixed, numberOfCart } = this.props;
+    const { fixed, cart } = this.props;
     return (
       <Link to={"/cart"} className={cx("CartBtn", { FixedBottom: fixed })}>
         <span> 장바구니 </span>
-        {numberOfCart ? (
-          <span className={cx("Quantity")}>{numberOfCart}</span>
-        ) : null}
+        {cart && <span className={cx("Quantity")}>{cart.item.length}</span>}
       </Link>
     );
   }
