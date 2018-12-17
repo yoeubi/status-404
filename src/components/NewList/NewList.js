@@ -21,7 +21,6 @@ class NewList extends Component {
   state = {
     category: "",
     show: false,
-    scroll: 0
   };
   categoryList = [
     "한식",
@@ -67,7 +66,7 @@ class NewList extends Component {
   };
   render() {
     const category = this.categoryList[+this.props.pk - 1];
-    const { scroll, show } = this.state;
+    const { show } = this.state;
     const { results } = this.props;
     const items = results.map(li => (
       <Link
