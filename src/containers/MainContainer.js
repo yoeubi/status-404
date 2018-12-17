@@ -45,13 +45,17 @@ class MainContainer extends Component {
   }
 
   handleCart = async () => {
-    const {
-      data: { item }
-    } = await mainAPI.get("/cart/items/");
+    try {
+      const {
+        data: { item }
+      } = await mainAPI.get("/cart/items/");
 
-    this.setState({
-      cartItems: item
-    });
+      this.setState({
+        cartItems: item
+      });
+    } catch (error) {
+      console.log(error);
+    }
   };
 
   handleAddress = async () => {
