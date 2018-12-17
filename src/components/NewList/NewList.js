@@ -52,10 +52,12 @@ class NewList extends Component {
   };
   handleCategory = idx => {
     const { history } = this.props;
-    history.push(`/category/${idx + 1}`);
-    this.setState({
-      show: false
-    });
+    if(+this.props.pk !== (idx + 1) ){
+      history.push(`/category/${idx + 1}`);
+      this.setState({
+        show: false
+      });
+    }
   };
   handleModal = () => {
     this.setState(prev => {
@@ -82,7 +84,6 @@ class NewList extends Component {
         />
       </Link>
     ))
-
     return <Page left={<Link to="/" style={{ padding: "1.5rem" }}>
             <Left style={{ transform: "scale(1.5)" }} />
           </Link>} middle={category} right={<div className={cx("util")}>
@@ -93,7 +94,7 @@ class NewList extends Component {
               <List style={{ transform: "scale(1.5)" }} />
             </div>
           </div>}>
-      <SlideMenu category={category} categoryList={this.categoryList} onClick={this.handleCategory} scroll={scroll} onScroll={this.handleScroll} />
+      <SlideMenu category={category} categoryList={this.categoryList} onClick={this.handleCategory} />
         <BlackCurtain show={show} onShowModal={this.handleModal} />
         <SearchList show={show} onShowModal={this.handleModal} />
         <InfiniteScroll pageStart={0} loadMore={this.props.loadMore} hasMore={this.props.next !== null} loader={<Loader key={0} />} threshold={100}>

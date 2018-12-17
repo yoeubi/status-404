@@ -1,7 +1,7 @@
 import React from "react";
 import styles from "./BackHeader.module.scss";
 import classNames from "classnames/bind";
-import { Link , withRouter } from "react-router-dom";
+import { withRouter } from "react-router-dom";
 import { ReactComponent as Left } from "../../svg/chevron-left.svg";
 
 const cx = classNames.bind(styles);

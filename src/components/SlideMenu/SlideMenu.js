@@ -12,12 +12,11 @@ class SlideMenu extends Component {
   }
 
   render() {
-    const { category, categoryList, onClick, onScroll } = this.props;
+    const { category, categoryList, onClick} = this.props;
     return (
       <div className={cx("slide-menu")}>
         <ul
           ref={this.slide}
-          onScroll={() => onScroll(this.slide.current.scrollLeft)}
         >
           {categoryList.map((menu, index) => (
             <li
