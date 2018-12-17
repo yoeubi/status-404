@@ -128,7 +128,7 @@ class UserModal extends Component {
                   return (
                     <li key={n.id} className={cx("item")}>
                       <Link to={n.url}>
-                        {cart.item.length > 0 && (
+                        {cart && (
                           <span className={cx("cartAmount")}>
                             {cart.item.length}
                           </span>
