@@ -2,6 +2,9 @@ import React, { Component } from "react";
 import { withUi } from "../../context/UiContext";
 import classNames from "classnames/bind";
 import styles from "./Header.module.scss";
+
+import { BeatLoader } from "react-spinners";
+
 import { ReactComponent as ChevronDown } from "../../img/chevron-down.svg";
 import { ReactComponent as Hambergur } from "../../img/grabber.svg";
 
@@ -32,13 +35,24 @@ class Header extends Component {
 
         <div onClick={onAddressSearch} className={cx("addressInput")}>
           <span className={cx("address")}>
-            {localStorage.getItem("token")
-              ? // 로그인
-                user.address
-                ? user.address[0].address
-                : "유저 정보 조회중"
-              : // 미로그인
-                noneAuthUserAddress}
+            {localStorage.getItem("token") ? (
+              // 로그인
+              user.address ? (
+                user.address[0].address
+              ) : (
+                "유저 정보 조회중"
+              )
+            ) : // 미로그인
+            noneAuthUserAddress ? (
+              noneAuthUserAddress
+            ) : (
+              <BeatLoader
+                className={cx("BeatLoader")}
+                sizeUnit={"px"}
+                size={14}
+                color={"#2fc0be"}
+              />
+            )}
           </span>
           <ChevronDown className={cx("icon")} alt="down" />
         </div>
