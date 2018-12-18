@@ -103,7 +103,7 @@ class ProductModalView extends Component {
     const quantity = this.state.quantity;
     const side_dishes_pk = this.state.options.map(item => item.pk);
     const {
-      cart,
+      // cart,
       onHandleBodyOnModal,
       addItemToCart,
       onProductModal
@@ -114,12 +114,18 @@ class ProductModalView extends Component {
       onHandleBodyOnModal("close");
       onProductModal();
     } else {
-      const alreadyItem = cart.item.find(i => i.food.pk === food_pk);
-      if (alreadyItem) {
-        alert("선택한 상품이 이미 카트에 담겨있습니다.");
-      } else {
-        addItemToCart({ food_pk, quantity, side_dishes_pk });
-      }
+      // const alreadyItem = cart.item.find(i => i.pk === food_pk);
+      // console.log(food_pk);
+      // console.log(cart.item);
+      // if (alreadyItem) {
+      //   alert("선택한 상품이 이미 카트에 담겨있습니다.");
+      // } else {
+      //   addItemToCart({ food_pk, quantity, side_dishes_pk });
+      // }
+      // onProductModal();
+      // onHandleBodyOnModal("close");
+      console.log({ food_pk, quantity, side_dishes_pk });
+      addItemToCart({ food_pk, quantity, side_dishes_pk });
       onProductModal();
       onHandleBodyOnModal("close");
     }
