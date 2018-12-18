@@ -3,7 +3,6 @@ import Payment from "../components/Payment";
 import withAuth from "../HOC/withAuth";
 import { withUser } from "../context/UserContext";
 import withNoCart from "../HOC/withNoCart";
-import {mainAPI} from '../api';
 
 class PayContainer extends Component {
   componentDidMount() {

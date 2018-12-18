@@ -31,7 +31,7 @@ class UserProvider extends Component {
     delCart: this.delCart.bind(this),
     createUserAddress: this.createUserAddress.bind(this),
     pullOrder: this.pullOrder.bind(this),
-    addOrder : this.addOrder.bind(this)
+    addOrder: this.addOrder.bind(this)
   };
 
   async componentDidMount() {
@@ -195,21 +195,16 @@ class UserProvider extends Component {
   }
   async addOrder({ shipping, comment, phone, payment_option }) {
     try {
-      // const {data : { results }} = await mainAPI.post("/order/", {
-      //   shipping,
-      //   comment,
-      //   phone,
-      //   payment_option
-      // });
+      const {
+        data: { results }
+      } = await mainAPI.post("/order/", {
+        shipping,
+        comment,
+        phone,
+        payment_option
+      });
       this.setState({
-        temp: {
-          store : [{ store : '테스트'}],
-          payment_option : '네이버',
-          payment : '3000',
-          shipping : '어딘가',
-          phone : '123123',
-          comment : '테스트'
-        }
+        temp: results
       });
       await this.pullOrder();
     } catch (e) {
