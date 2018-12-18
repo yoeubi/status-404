@@ -103,7 +103,7 @@ class ProductModalView extends Component {
     const quantity = this.state.quantity;
     const side_dishes_pk = this.state.options.map(item => item.pk);
     const {
-      // cart,
+      cart,
       onHandleBodyOnModal,
       addItemToCart,
       onProductModal
@@ -124,7 +124,8 @@ class ProductModalView extends Component {
       // }
       // onProductModal();
       // onHandleBodyOnModal("close");
-      console.log({ food_pk, quantity, side_dishes_pk });
+      console.log(cart);
+      console.log(food_pk);
       addItemToCart({ food_pk, quantity, side_dishes_pk });
       onProductModal();
       onHandleBodyOnModal("close");
