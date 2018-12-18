@@ -42,6 +42,7 @@ class ListContainer extends Component {
         ...data,
         loading: false
       });
+      console.log(data);
     } catch (e) {
       console.log("스토어 리스트 에러");
     }

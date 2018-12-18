@@ -3,7 +3,6 @@ import { Redirect } from "react-router-dom";
 
 const withNoCart = WrappedComponent => props => {
     const { cart } = props;
-    console.log(cart); 
   if (cart) {
     return <WrappedComponent {...props} />;
   } else {

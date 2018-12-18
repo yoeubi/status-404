@@ -8,7 +8,6 @@ const cx = classNames.bind(styles);
 
 const BackHeader = props => {
   const { title, style, history } = props;
-  console.log(history);
   return (
     <div className={cx("back-header")} style={style}>
       <div className={cx("back")} onClick={() => history.goBack()}>
