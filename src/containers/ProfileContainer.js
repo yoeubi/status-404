@@ -2,6 +2,7 @@ import React, { Component } from "react";
 import { Redirect } from "react-router-dom";
 import mainAPI from "../api/mainAPI";
 import ProfileView from "../components/Profile/ProfileView";
+import { withUser } from "../context/UserContext";
 
 class ProfileContainer extends Component {
   constructor(props) {
@@ -51,8 +52,9 @@ class ProfileContainer extends Component {
     }
   };
 
-  logout = () => {
-    localStorage.removeItem("token");
+  hanldeLogout = () => {
+    const { logout } = this.props;
+    logout();
     this.setState({
       goToLoginPage: true
     });
@@ -79,7 +81,7 @@ class ProfileContainer extends Component {
         loading={loading}
         switchedEmail={switchedEmail}
         switchedSNS={switchedSNS}
-        onLogout={this.logout}
+        onLogout={this.hanldeLogout}
         preparingService={this.preparingService}
         toggleSwitch={this.toggleSwitch}
       />
@@ -88,4 +90,4 @@ class ProfileContainer extends Component {
 }
 
 // 실제 유저정보 받아올때까지 userContext 정보 가져오지 않게
-export default ProfileContainer;
+export default withUser(ProfileContainer);
