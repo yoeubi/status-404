@@ -10,7 +10,7 @@ class PayContainer extends Component {
     IMP.init("imp19043807");
   }
   handlePay = async ({ shipping, comment, phone, payment_option }) => {
-    const { history, pullCart, addOrder  } = this.props;
+    const { history, addOrder  } = this.props;
     // TODO: 사용자 정보를 받아서 표시해야 함
     window.IMP.request_pay(
       {
