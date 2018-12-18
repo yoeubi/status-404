@@ -1,16 +1,40 @@
 import React, { Component } from "react";
 import styles from "./ReviewWriteModal.module.scss";
 import classNames from "classnames/bind";
-
+import ReactDOM from "react-dom";
+import StarRatingComponent from "react-star-rating-component";
 // svg
 import { ReactComponent as Ex } from "../../img/x.svg"; // x 아이콘
 import { ReactComponent as Star } from "../../img/star.svg"; // 별 아이콘
-import Rating from "react-rating";
+// import Rating from "react-rating";
+// import StarRating from "./StarRating";
 
 const cx = classNames.bind(styles);
 
 export default class ReviewWriteModal extends Component {
+  constructor(props) {
+    super(props);
+    this.starRef = React.createRef();
+    // const starsDiv = this.starRef.current;
+
+    this.state = {
+      // star-rating 관련 state
+      rating: 0
+    };
+  }
+
+  onStarClick(nextValue, prevValue, name) {
+    console.log(
+      "name: %s, nextValue: %s, prevValue: %s",
+      name,
+      nextValue,
+      prevValue
+    );
+    this.setState({ rating: nextValue });
+  }
+
   render() {
+    const { rating } = this.state;
     const { show, name, onReviewWriteModal, onReviewWritePage } = this.props;
     return (
       <>
@@ -24,32 +48,29 @@ export default class ReviewWriteModal extends Component {
             </p>
             드신 음식은 어떠셨어요?
           </h1>
-          <div className={cx("Stars")} onClick={onReviewWritePage}>
-            <Rating
-              emptySymbol={
-                <Star
-                  className={
-                    cx("Star", "Empty") // 빈 별
-                  }
-                />
-              }
-              fullSymbol={
-                <Star
-                  className={
-                    cx("Star") // 꽉찬별
-                  }
-                />
-              }
-              fractions={
-                2 // 분할
-              }
-              initialRating={
-                4.5 // 레이팅 정보
-              }
-              readonly
+          <div
+            ref={this.starRef}
+            className={cx("Stars")}
+            style={{ fontSize: 70 }}
+          >
+            <StarRatingComponent
+              name="rate1"
+              starCount={5}
+              value={rating}
+              onStarClick={this.onStarClick.bind(this)}
             />
           </div>
           <span className={cx("Explanation")}>별점을 선택해주세요</span>
+          {this.state.rating > 0 ? (
+            <span
+              onClick={() => onReviewWritePage(rating)}
+              className={cx("NextBtn-active")}
+            >
+              다음
+            </span>
+          ) : (
+            <span className={cx("NextBtn")}>다음</span>
+          )}
         </div>
       </>
     );

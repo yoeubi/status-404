@@ -13,23 +13,29 @@ const cx = classNames.bind(styles);
 
 export default class ReviewWrite extends Component {
   static defaultProps = {
-    file: null
+    file: ""
   };
   constructor(props) {
     super(props);
     this.state = {
       file: null,
-      img: false
+      img: false,
+      // star-rating 관련 state
+      rating: 1,
+      rating_custom_icon: 6,
+      rating_half_star: 3.5,
+      rating_empty_initial: 0
     };
     this.handleChange = this.handleChange.bind(this);
   }
+
   handleChange(event) {
     const { img } = this.state;
     this.setState({
       file: URL.createObjectURL(event.target.files[0]),
       img: true
     });
-    console.log(img);
+    // console.log(img);
   }
 
   render() {
@@ -38,10 +44,11 @@ export default class ReviewWrite extends Component {
       review,
       onUserInput,
       onSubmitBtn,
-      name
+      name,
+      rating
     } = this.props;
     const { file, img } = this.state;
-    console.log(img);
+    // console.log(img);
     return (
       <div className={cx("container")}>
         <div className={cx("HeaderContainer")}>
@@ -69,7 +76,7 @@ export default class ReviewWrite extends Component {
                 2 // 분할
               }
               initialRating={
-                4.5 // 레이팅 정보
+                rating // 레이팅 정보
               }
               readonly
             />
