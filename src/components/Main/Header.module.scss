@@ -16,6 +16,12 @@
 
   .addressInput {
     font-weight: 600;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    .BeatLoader {
+      height: 17px;
+    }
     .address {
       display: inline-block;
     }
