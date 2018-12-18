@@ -3,17 +3,15 @@ import StoreReviewTap from "../components/RestaurantDetail/StoreReviewTap";
 import ReviewModalContainer from "./ReviewModalContainer";
 import { mainAPI } from "../api";
 import axios from "axios";
+import { withUser } from "../context/UserContext";
 
-export default class StoreReviewTapContainer extends Component {
+class StoreReviewTapContainer extends Component {
   constructor(props) {
     super(props);
     this.state = {
       // 리뷰 작성 모달의 활성화 여부
       show: false,
-      // 사용자의 리뷰 작성 내용
-      review: "",
-      storePk: null,
-      rating: null
+      storePk: null
     };
   }
   // 리뷰 작성 모달의 활성화를 제어하는 함수
@@ -22,32 +20,39 @@ export default class StoreReviewTapContainer extends Component {
       show: !prevState.show,
       storePk
     }));
-    console.log("handleReviewWriteModal", storePk);
+    // console.log("handleReviewWriteModal", storePk);
   };
 
-  handleUesrInput = e => {
-    const review = e.target.value;
-    this.setState({
-      review
-    });
-  };
+  // handleUesrInput = e => {
+  //   const review = e.target.value;
+  //   this.setState({
+  //     review
+  //   });
+  // };
 
   // Review Create 함수
-  async handleSubmitBtn(review, rating, storePk) {
-    const res = await mainAPI.post("/review", {
-      content: review,
-      rating,
-      store: storePk
-    });
-    this.setState({
-      show: false
-    });
-  }
+  // async handleSubmitBtn(review, rating, storePk) {
+  //   console.log(review, rating, storePk);
+  //   const token = localStorage.getItem("token");
+  //   if (token) {
+  //     try {
+  //       await mainAPI.post("/review/", {
+  //         content: review,
+  //         rating,
+  //         store: storePk
+  //       });
+  //       this.setState({
+  //         show: false
+  //       });
+  //     } catch (e) {
+  //       console.log("token 로그인 실패 or token 미존재");
+  //     }
+  //   }
+  // }
 
   render() {
     const { name, activeTab, store_info, store } = this.props;
-    const { show, review } = this.state;
-    // console.log("StoreReviewTapContainer", storePk);
+    const { show, storePk } = this.state;
     return (
       <>
         <StoreReviewTap
@@ -58,14 +63,16 @@ export default class StoreReviewTapContainer extends Component {
           onReviewWriteModal={() => this.handleReviewWriteModal(store.pk)}
         />
         <ReviewModalContainer
-          review={review}
+          // review={review}
           name={name}
           show={show}
+          storePk={storePk}
           onReviewWriteModal={() => this.handleReviewWriteModal()}
           onUserInput={e => this.handleUesrInput(e)}
-          onSubmitBtn={() => this.handleSubmitBtn()}
         />
       </>
     );
   }
 }
+
+export default withUser(StoreReviewTapContainer);

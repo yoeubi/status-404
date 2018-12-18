@@ -19,15 +19,17 @@ export default class ReviewWrite extends Component {
     super(props);
     this.state = {
       file: null,
-      img: false,
-      // star-rating 관련 state
-      rating: 1,
-      rating_custom_icon: 6,
-      rating_half_star: 3.5,
-      rating_empty_initial: 0
+      img: false
     };
     this.handleChange = this.handleChange.bind(this);
   }
+
+  // handleUesrInput = e => {
+  //   const review = e.target.value;
+  //   this.setState({
+  //     review
+  //   });
+  // };
 
   handleChange(event) {
     const { img } = this.state;
@@ -41,14 +43,15 @@ export default class ReviewWrite extends Component {
   render() {
     const {
       onReviewWritePage,
-      review,
+      // review,
       onUserInput,
       onSubmitBtn,
       name,
-      rating
+      rating,
+      storePk
     } = this.props;
-    const { file, img } = this.state;
-    // console.log(img);
+    const { file, img, review } = this.state;
+    console.log("ReviewWrite", review, rating, storePk);
     return (
       <div className={cx("container")}>
         <div className={cx("HeaderContainer")}>
@@ -83,7 +86,13 @@ export default class ReviewWrite extends Component {
           </div>
         </div>
         <div className={cx("BodyContainer")}>
-          <form className={cx("InputForm")} onSubmit={onSubmitBtn}>
+          <form
+            className={cx("InputForm")}
+            onSubmit={e => {
+              e.preventDefault();
+              onSubmitBtn(review, rating, storePk);
+            }}
+          >
             <label>
               <textarea
                 autoComplete="off"
@@ -106,7 +115,9 @@ export default class ReviewWrite extends Component {
           </div>
           <div className={cx("Photo")}>
             <img
-              className={cx("Img", { img: img })}
+              className={cx("Img", {
+                img: img
+              })}
               src={this.state.file}
               alt={file}
             />
