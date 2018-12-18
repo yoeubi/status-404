@@ -38,7 +38,9 @@ class Header extends Component {
                 ? user.address[0].address
                 : "유저 정보 조회중"
               : // 미로그인
-                noneAuthUserAddress}
+              noneAuthUserAddress
+              ? noneAuthUserAddress
+              : "배송지를 설정해주세요"}
           </span>
           <ChevronDown className={cx("icon")} alt="down" />
         </div>
