@@ -1,32 +1,34 @@
 import React, { Component } from "react";
 import MyOrderView from "../components/MyOrder";
+import { mainAPI } from "../api";
 
 class MyOrderContainer extends Component {
   constructor(props) {
     super(props);
 
     this.state = {
-      loading: true
+      loading: true,
+      myorder: null
     };
   }
 
-  componentDidMount() {
+  async componentDidMount() {
     // api 호출 로직 작성
-    // ...
+    const { data } = await mainAPI.get("/order/");
 
-    // TODO : 로딩 인디케이터 시범 적용 api 로직 작성 후 setTimeout 함수 삭제
-    setTimeout(() => {
-      this.setState({
-        loading: false
-      });
-    }, 2000);
+    console.log(data);
+
+    this.setState({
+      myorder: data,
+      loading: false
+    });
   }
 
   render() {
-    const { loading } = this.state;
+    const { myorder, loading } = this.state;
     return (
       <div>
-        <MyOrderView loading={loading} />
+        <MyOrderView loading={loading} myorder={myorder} />
       </div>
     );
   }

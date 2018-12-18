@@ -18,12 +18,13 @@ import { ReactComponent as Desert } from "../../img/11_desert.svg";
 import { ReactComponent as Fastfood } from "../../img/12_fastfood.svg";
 import { ReactComponent as Franchise } from "../../img/13_franchise.svg";
 import { ReactComponent as Matzip } from "../../img/14_matzip.svg";
+import { ReactComponent as EmptyOrder } from "../../img/empty_order.svg";
 
 const cx = classNames.bind(styles);
 
 class MyOrderList extends Component {
   static defaultProps = {
-    orders: [
+    myorder: [
       {
         id: 0,
         category_Id: 1,
@@ -92,12 +93,12 @@ class MyOrderList extends Component {
   };
 
   render() {
-    const { orders } = this.props;
+    const { myorder } = this.props;
     return (
       <React.Fragment>
-        <ul className={cx("List")}>
-          {orders &&
-            orders.map(o => (
+        {myorder.length > 0 ? (
+          <ul className={cx("List")}>
+            {myorder.map(o => (
               <li key={o.id} className={cx("Item")}>
                 <div className={cx("OrderDate")}>
                   <span className={cx("Icon")}>
@@ -125,7 +126,12 @@ class MyOrderList extends Component {
                 </div>
               </li>
             ))}
-        </ul>
+          </ul>
+        ) : (
+          <div className={cx("EmptyOrder")}>
+            <EmptyOrder />
+          </div>
+        )}
       </React.Fragment>
     );
   }
