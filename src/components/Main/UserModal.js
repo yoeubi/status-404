@@ -92,7 +92,7 @@ class UserModal extends Component {
           }}
           className={cx("modal")}
         >
-          {user.username ? (
+          {localStorage.getItem("token") ? (
             // 로그인시 : user 존재시
             <div className={cx("header")}>
               <Avater className={cx("avartar")} />
