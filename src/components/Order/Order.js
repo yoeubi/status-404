@@ -5,7 +5,9 @@ import classNames from "classnames/bind";
 const cx = classNames.bind(styles);
 
 const Order = props => {
-  const { progress, name, list, orderDate, orderNumber, style } = props;
+  const { progress, name, list, created_at, orderNumber, style } = props;
+  const date = new Date(created_at);
+  const orderDate = `${date.getMonth() + 1 }월 ${date.getDate()}일 ${date.getHours()}시 ${date.getMinutes()}분`
   return (
     <div className={cx("order")} style={style}>
       <p className={cx("order-progress")}>{progress}</p>
