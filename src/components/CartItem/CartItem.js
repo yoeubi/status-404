@@ -5,15 +5,15 @@ import classNames from "classnames/bind";
 const cx = classNames.bind(styles);
 
 const CartItem = (props) => {
-  const { food: { name, pk, sidedishes_set }, quantity, total_price , onChange, onDelete } = props;
+  const { food, pk, quantity, total_price , onChange, onDelete } = props;
   return <div className={cx("cart-item")}>
-      <p className={cx("cart-title")}>{name}</p>
+      <p className={cx("cart-title")}>{food}</p>
       <ul className={cx("condition-list")}>
-        {sidedishes_set.map(( side , index) => (
+        {/* {sidedishes_set.map(( side , index) => (
           <li key={index} className={cx("condition-item")}>
             {side.name}
           </li>
-        ))}
+        ))} */}
       </ul>
     <p className={cx("total-price")}>{total_price}원</p>
       <div className={cx("btn")}>
