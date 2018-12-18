@@ -5,36 +5,32 @@ import classNames from "classnames/bind";
 const cx = classNames.bind(styles);
 
 const Table = props => {
-  const { addr, loadAddr, tel, request , style } = props;
-  return (
-    <div className={cx("table")} style={style}>
+  const { shipping, phone, comment, style } = props;
+  return <div className={cx("table")} style={style}>
       <table>
         <tbody>
           <tr>
             <td>배달주소</td>
             <td>
-              <p>{addr}</p>
-              <p className={cx("road-addr")}>{loadAddr}</p>
+              <p>{shipping}</p>
             </td>
           </tr>
           <tr>
             <td>전화번호</td>
-            <td>{tel}</td>
+          <td>{phone}</td>
           </tr>
           <tr>
             <td>요청사항</td>
-            <td>{request}</td>
+          <td>{comment}</td>
           </tr>
         </tbody>
       </table>
-    </div>
-  );
+    </div>;
 };
 Table.defaultProps = {
-  addr: "지번주소",
-  loadAddr: "도로명주소",
-  tel: "전화번호",
-  request: "(없음)"
+  shipping: "지번주소",
+  phone: "전화번호",
+  comment: "(없음)"
 };
 
 export default Table;

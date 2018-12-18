@@ -17,6 +17,8 @@ class UserProvider extends Component {
     warning: null,
     success: false,
     cart: null,
+    results: null,
+    temp: null,
     login: this.login.bind(this),
     logout: this.logout.bind(this),
     facebookLogin: this.facebookLogin.bind(this),
@@ -27,20 +29,30 @@ class UserProvider extends Component {
     pullCart: this.pullCart.bind(this),
     modCart: this.modCart.bind(this),
     delCart: this.delCart.bind(this),
-    createUserAddress: this.createUserAddress.bind(this)
+    createUserAddress: this.createUserAddress.bind(this),
+    pullOrder: this.pullOrder.bind(this),
+    addOrder: this.addOrder.bind(this)
   };
 
   async componentDidMount() {
     const token = localStorage.getItem("token");
     if (token) {
       try {
-        const [{ data: user }, { data: cart }] = await axios.all([
+        const [
+          { data: user },
+          { data: cart },
+          {
+            data: { results }
+          }
+        ] = await axios.all([
           mainAPI.get("/members/profile/"),
-          mainAPI.get("/cart/items/")
+          mainAPI.get("/cart/items/"),
+          mainAPI.get("/order/")
         ]);
         this.setState({
-          user: user,
-          cart: cart
+          user,
+          cart,
+          results
         });
       } catch (e) {
         console.log("token 로그인 실패 or token 미존재");
@@ -122,11 +134,9 @@ class UserProvider extends Component {
   async pullCart() {
     try {
       const { data } = await mainAPI.get("/cart/items/");
-      console.log(data);
       await this.setState({
         cart: data
       });
-      console.log(this.state.cart);
     } catch (e) {
       console.log("장바구니 리스트 에러");
     }
@@ -146,8 +156,7 @@ class UserProvider extends Component {
   }
   async modCart({ food_pk, quantity }) {
     try {
-      await mainAPI.patch("/cart/items/", {
-        food_pk,
+      await mainAPI.patch(`/cart/items/${food_pk}`, {
         quantity
       });
       await this.pullCart();
@@ -157,11 +166,7 @@ class UserProvider extends Component {
   }
   async delCart({ food_pk }) {
     try {
-      await mainAPI.delete("/cart/items/", {
-        data: {
-          food_pk
-        }
-      });
+      await mainAPI.delete(`/cart/items/${food_pk}`);
       await this.pullCart();
     } catch (e) {
       console.log("카트 삭제 실패");
@@ -176,6 +181,34 @@ class UserProvider extends Component {
       });
     } catch (error) {
       console.log(error);
+    }
+  }
+  async pullOrder() {
+    try {
+      const {
+        data: { results }
+      } = await mainAPI.get("/order/");
+      this.setState({ results });
+    } catch (e) {
+      console.log("결제 리스트 에러");
+    }
+  }
+  async addOrder({ shipping, comment, phone, payment_option }) {
+    try {
+      const {
+        data: { results }
+      } = await mainAPI.post("/order/", {
+        shipping,
+        comment,
+        phone,
+        payment_option
+      });
+      this.setState({
+        temp: results
+      });
+      await this.pullOrder();
+    } catch (e) {
+      console.log("결제 추가 에러");
     }
   }
 

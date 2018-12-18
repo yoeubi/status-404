@@ -72,7 +72,8 @@ class Payment extends Component {
       phone,
       request,
       detail_address,
-      payment
+      payment,
+      method
     } = this.state;
     const {onPay} = this.props;
     return (
@@ -115,7 +116,7 @@ class Payment extends Component {
           sub={`주문금액 ${payment}원 배달의 민족 할인 90%`}
         />
         <RightNothing
-          title={this.state.method}
+          title={method}
           right="변경"
           handleClick={this.handlePopup}
           style={{ cursor: "pointer" }}
@@ -142,7 +143,7 @@ class Payment extends Component {
             bottom: "0",
             left: "0"
           }}
-          onClick={onPay}
+          onClick={() => onPay({shipping : address + ' ' + detail_address , comment : request ,phone  , payment_option : method})}
         >
           {payment/10}원 결제하기
         </Nothing>

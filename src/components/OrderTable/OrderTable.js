@@ -5,9 +5,8 @@ import classNames from "classnames/bind";
 const cx = classNames.bind(styles);
 
 const OrderTable = props => {
-  const {style} = props;
-  return (
-    <div className={cx("order-table")} style={style}>
+  const { payment, payment_option, style } = props;
+  return <div className={cx("order-table")} style={style}>
       <table>
         <tbody>
           <tr>
@@ -15,7 +14,7 @@ const OrderTable = props => {
             <td>18000원</td>
           </tr>
           <tr>
-            <td className={cx('detail')} colSpan='2'>
+            <td className={cx("detail")} colSpan="2">
               <ul>
                 <li>기본</li>
               </ul>
@@ -31,16 +30,15 @@ const OrderTable = props => {
           </tr>
           <tr>
             <td>총 결제 금액</td>
-            <td>20000원</td>
+            <td>{payment}원</td>
           </tr>
           <tr>
             <td>결제방법</td>
-            <td>만나서 카드결제</td>
+            <td>{payment_option}</td>
           </tr>
         </tbody>
       </table>
-    </div>
-  );
+    </div>;
 };
 
 export default OrderTable;
