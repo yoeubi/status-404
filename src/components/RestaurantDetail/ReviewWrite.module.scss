@@ -1,4 +1,11 @@
 .container {
+  input {
+    border: none;
+    outline: none;
+  }
+  span {
+    display: block;
+  }
   position: fixed;
   top: 0;
   right: 0;
@@ -166,7 +173,7 @@
       .GuideBtn {
         margin-top: 10px;
         font-size: 1.4rem;
-        color: white;
+        color: #2fc0be;
         .Down {
           fill: #2fc0be;
           transform: scale(1.5);
