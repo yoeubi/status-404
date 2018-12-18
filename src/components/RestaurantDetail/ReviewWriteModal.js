@@ -60,6 +60,7 @@ export default class ReviewWriteModal extends Component {
               onStarClick={this.onStarClick.bind(this)}
             />
           </div>
+          <span className={cx("Explanation")}>별점을 선택해주세요</span>
           {this.state.rating > 0 ? (
             <span
               onClick={() => onReviewWritePage(rating)}
@@ -70,7 +71,6 @@ export default class ReviewWriteModal extends Component {
           ) : (
             <span className={cx("NextBtn")}>다음</span>
           )}
-          <span className={cx("Explanation")}>별점을 선택해주세요</span>
         </div>
       </>
     );
