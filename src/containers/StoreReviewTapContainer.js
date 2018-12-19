@@ -16,10 +16,15 @@ class StoreReviewTapContainer extends Component {
   }
   // 리뷰 작성 모달의 활성화를 제어하는 함수
   handleReviewWriteModal = storePk => {
-    this.setState(prevState => ({
-      show: !prevState.show,
-      storePk
-    }));
+    const token = localStorage.getItem("token");
+    if (token) {
+      this.setState(prevState => ({
+        show: !prevState.show,
+        storePk
+      }));
+    } else {
+      alert("로그인 후 리뷰작성이 가능합니다.");
+    }
     // console.log("handleReviewWriteModal", storePk);
   };
 

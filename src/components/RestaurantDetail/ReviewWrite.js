@@ -9,49 +9,40 @@ import { ReactComponent as Camera } from "../../img/camera.svg"; // 카메라 �
 import { ReactComponent as Down } from "../../svg/chevron-right.svg"; // 오른쪽 화살표
 
 const cx = classNames.bind(styles);
-// const React = require("react");
 
 export default class ReviewWrite extends Component {
-  static defaultProps = {
-    file: ""
-  };
   constructor(props) {
     super(props);
+
+    this.inputRef = React.createRef();
     this.state = {
-      file: null,
+      files: [],
       img: false
     };
-    this.handleChange = this.handleChange.bind(this);
   }
 
-  // handleUesrInput = e => {
-  //   const review = e.target.value;
-  //   this.setState({
-  //     review
-  //   });
-  // };
-
-  handleChange(event) {
-    const { img } = this.state;
-    this.setState({
-      file: URL.createObjectURL(event.target.files[0]),
-      img: true
-    });
-    // console.log(img);
+  handleFileChange(e) {
+    e.persist();
+    if (e.target.files) {
+      this.setState(prevState => ({
+        files: [...prevState.files, ...e.target.files],
+        img: !prevState.img
+      }));
+    }
   }
 
   render() {
     const {
       onReviewWritePage,
-      // review,
+      review,
       onUserInput,
       onSubmitBtn,
       name,
       rating,
       storePk
     } = this.props;
-    const { file, img, review } = this.state;
-    console.log("ReviewWrite", review, rating, storePk);
+    const { files, img } = this.state;
+    console.log("ReviewWrite", rating, storePk, files);
     return (
       <div className={cx("container")}>
         <div className={cx("HeaderContainer")}>
@@ -90,7 +81,7 @@ export default class ReviewWrite extends Component {
             className={cx("InputForm")}
             onSubmit={e => {
               e.preventDefault();
-              onSubmitBtn(review, rating, storePk);
+              onSubmitBtn(review, rating, storePk, files);
             }}
           >
             <label>
@@ -106,21 +97,31 @@ export default class ReviewWrite extends Component {
           <div className={cx("Camera")}>
             <input
               className={cx("FileInput")}
+              hidden
+              ref={this.inputRef}
               type="file"
-              onChange={event => this.handleChange(event)}
-              id="fileInput"
+              accept="image/*"
+              multiple
+              onChange={e => this.handleFileChange(e)}
             />
-            <label className={cx("FileInputLabel")} htmlFor="fileInput" />
+            <button
+              className={cx("FileInputLabel")}
+              onClick={() => this.inputRef.current.click()}
+            >
+              이미지 선택
+            </button>
             <Camera />
           </div>
           <div className={cx("Photo")}>
-            <img
-              className={cx("Img", {
-                img: img
-              })}
-              src={this.state.file}
-              alt={file}
-            />
+            {files.map((f, index) => (
+              <ImagePreview
+                className={cx("Img", {
+                  img: img
+                })}
+                file={f}
+                key={index}
+              />
+            ))}
           </div>
           <div className={cx("FooterContainer")}>
             <span className={cx("Guide")}>
@@ -138,6 +139,45 @@ export default class ReviewWrite extends Component {
           </div>
         </div>
       </div>
+    );
+  }
+}
+
+class ImagePreview extends React.Component {
+  static defaultProps = {
+    // File 객체
+    file: null
+  };
+
+  constructor(props) {
+    super(props);
+
+    this.state = {
+      imageSrc: null
+    };
+  }
+
+  componentDidMount() {
+    const { file } = this.props;
+    const reader = new FileReader();
+    reader.addEventListener("load", () => {
+      this.setState({
+        imageSrc: reader.result
+      });
+    });
+    reader.readAsDataURL(file);
+  }
+
+  render() {
+    const { file } = this.state;
+    const { imageSrc } = this.state;
+    const alt = file ? file.name : "";
+    return (
+      <img
+        // style={{ width: "100px" }}
+        src={imageSrc}
+        alt={alt}
+      />
     );
   }
 }

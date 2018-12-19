@@ -2,6 +2,7 @@ import React, { Component } from "react";
 import ReviewWriteModal from "../components/RestaurantDetail/ReviewWriteModal";
 import ReviewWrite from "../components/RestaurantDetail/ReviewWrite";
 import { mainAPI } from "../api";
+import axios from "axios";
 
 export default class ReviewModalContainer extends Component {
   constructor(props) {
@@ -29,25 +30,45 @@ export default class ReviewModalContainer extends Component {
     });
   };
 
-  // Review Create 함수
-  async handleSubmitBtn(review, rating, storePk) {
-    console.log(review, rating, storePk);
+  // Review Text post 함수
+  handleSubmitBtn = async (review, rating, storePk, files) => {
     const token = localStorage.getItem("token");
     if (token) {
+      console.log("handleSubmitBtn", files);
       try {
-        await mainAPI.post("/review/", {
+        const res = await mainAPI.post("/review/", {
           content: review,
           rating,
           store: storePk
+          // files: []
         });
         this.setState({
           show: false
+        });
+        // console.log(res);
+        const reviewPk = res.data.pk;
+        console.log(reviewPk);
+        // Review Image post 함수
+        // const { files } = this.state;
+        // FormData는 key-value 저장소로서,
+        // POST 요청에 담아 보낼 수 있습니다.
+        // 가장 큰 특징은 **파일을 담을 수 있다**는 것입니다.
+        const formData = new FormData();
+        files.forEach((f, index) => {
+          formData.append(`file`, f);
+        });
+        // console.log(formData.get("file"));
+
+        // const res = await axios.post("https://fodfly.shop/review/image/", {
+        const res2 = await mainAPI.post("/review/image/", {
+          location: formData,
+          review: reviewPk
         });
       } catch (e) {
         console.log("token 로그인 실패 or token 미존재");
       }
     }
-  }
+  };
 
   render() {
     const { show, name, onReviewWriteModal, onSubmitBtn, storePk } = this.props;
@@ -69,7 +90,7 @@ export default class ReviewModalContainer extends Component {
             review={review}
             onReviewWritePage={() => this.handleReviewWritePage()}
             onUserInput={e => this.handleUesrInput(e)}
-            onSubmitBtn={e => this.handleSubmitBtn(review, rating, storePk)}
+            onSubmitBtn={this.handleSubmitBtn}
           />
         ) : null}
       </>
