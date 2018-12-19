@@ -2,6 +2,7 @@ import React, { Component } from "react";
 import styles from "./ReviewWrite.module.scss";
 import classNames from "classnames/bind";
 import Rating from "react-rating";
+
 //svg
 import { ReactComponent as BackBtn } from "../../svg/arrow-left.svg";
 import { ReactComponent as Star } from "../../img/star.svg"; // 별 아이콘
@@ -39,7 +40,9 @@ export default class ReviewWrite extends Component {
       onSubmitBtn,
       name,
       rating,
-      storePk
+      storePk,
+      onReviewWriteModal,
+      onReviewWriteModalClose
     } = this.props;
     const { files, img } = this.state;
     console.log("ReviewWrite", rating, storePk, files);
@@ -81,7 +84,13 @@ export default class ReviewWrite extends Component {
             className={cx("InputForm")}
             onSubmit={e => {
               e.preventDefault();
-              onSubmitBtn(review, rating, storePk, files);
+              onSubmitBtn(
+                review,
+                rating,
+                storePk,
+                files,
+                onReviewWriteModalClose
+              );
             }}
           >
             <label>
@@ -173,11 +182,7 @@ class ImagePreview extends React.Component {
     const { imageSrc } = this.state;
     const alt = file ? file.name : "";
     return (
-      <img
-        // style={{ width: "100px" }}
-        src={imageSrc}
-        alt={alt}
-      />
+      <img style={{ width: "100%", height: "100%" }} src={imageSrc} alt={alt} />
     );
   }
 }

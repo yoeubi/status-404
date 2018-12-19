@@ -26,6 +26,12 @@ class StoreReviewTapContainer extends Component {
       alert("로그인 후 리뷰작성이 가능합니다.");
     }
   };
+  // 리뷰 작성 모달의 활성화를 제어하는 함수2
+  handleReviewWriteModalClose = () => {
+    this.setState(prevState => ({
+      show: !prevState.show
+    }));
+  };
 
   render() {
     const { name, activeTab, store_info, store } = this.props;
@@ -47,6 +53,7 @@ class StoreReviewTapContainer extends Component {
           storePk={storePk}
           onReviewWriteModal={() => this.handleReviewWriteModal()}
           onUserInput={e => this.handleUesrInput(e)}
+          onReviewWriteModalClose={() => this.handleReviewWriteModalClose()}
         />
       </>
     );

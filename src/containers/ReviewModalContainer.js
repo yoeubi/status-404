@@ -3,6 +3,7 @@ import ReviewWriteModal from "../components/RestaurantDetail/ReviewWriteModal";
 import ReviewWrite from "../components/RestaurantDetail/ReviewWrite";
 import { mainAPI } from "../api";
 import axios from "axios";
+import { Redirect } from "react-router-dom";
 
 export default class ReviewModalContainer extends Component {
   constructor(props) {
@@ -12,7 +13,8 @@ export default class ReviewModalContainer extends Component {
       // 리뷰 작성 모달 내의 페이지 상태
       reviewWritePage: false,
       rating: null,
-      review: ""
+      review: "",
+      done: false
     };
   }
   // 리뷰 작성 모달에서의 페이지 상태를 제어하는 함수
@@ -25,45 +27,37 @@ export default class ReviewModalContainer extends Component {
   // 사용자 입력을 관리하는 함수
   handleUesrInput = e => {
     const review = e.target.value;
-    this.setState({
-      review
-    });
+    this.setState({ review });
   };
 
   // Review Text post 함수
   handleSubmitBtn = async (review, rating, storePk, files) => {
     const token = localStorage.getItem("token");
     if (token) {
-      console.log("handleSubmitBtn", files);
       try {
         const res = await mainAPI.post("/review/", {
           content: review,
           rating,
           store: storePk
-          // files: []
         });
-        this.setState({
-          show: false
-        });
-        // console.log(res);
         const reviewPk = res.data.pk;
-        console.log(reviewPk);
-        // Review Image post 함수
-        // const { files } = this.state;
-        // FormData는 key-value 저장소로서,
-        // POST 요청에 담아 보낼 수 있습니다.
-        // 가장 큰 특징은 **파일을 담을 수 있다**는 것입니다.
+        // const formData = new FormData();
+        // files.forEach((f, index) => {
+        //   formData.append(`file${index}`, f);
+        // });
         const formData = new FormData();
-        files.forEach((f, index) => {
-          formData.append(`file`, f);
+        formData.append("location", files[0]);
+        formData.append("review", reviewPk);
+        const res2 = await mainAPI.post("/review/image/", formData, {
+          headers: {
+            "Content-Type": "application/x-www-form-urlencoded"
+          }
         });
-        // console.log(formData.get("file"));
-
-        // const res = await axios.post("https://fodfly.shop/review/image/", {
-        const res2 = await mainAPI.post("/review/image/", {
-          location: formData,
-          review: reviewPk
-        });
+        console.log("formData", formData);
+        console.log("res2", res2);
+        this.setState(prevState => ({
+          done: !prevState.done
+        }));
       } catch (e) {
         console.log("token 로그인 실패 or token 미존재");
       }
@@ -71,8 +65,22 @@ export default class ReviewModalContainer extends Component {
   };
 
   render() {
-    const { show, name, onReviewWriteModal, onSubmitBtn, storePk } = this.props;
-    const { review, rating } = this.state;
+    const {
+      show,
+      name,
+      onReviewWriteModal,
+      onSubmitBtn,
+      storePk,
+      store,
+      onReviewWriteModalClose
+    } = this.props;
+    const { review, rating, done } = this.state;
+    console.log("ReviewModalContainer", store);
+    if (done) {
+      console.log("DONE!!!");
+      // <Redirect to={}/>;
+      // onReviewWriteModalClose();
+    }
     return (
       <>
         {this.state.reviewWritePage === false ? (
@@ -88,9 +96,11 @@ export default class ReviewModalContainer extends Component {
             rating={rating}
             name={name}
             review={review}
+            onReviewWriteModal={onReviewWriteModal}
             onReviewWritePage={() => this.handleReviewWritePage()}
             onUserInput={e => this.handleUesrInput(e)}
             onSubmitBtn={this.handleSubmitBtn}
+            onReviewWriteModalClose={onReviewWriteModalClose}
           />
         ) : null}
       </>
