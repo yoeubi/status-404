@@ -3,54 +3,55 @@ import StoreReviewTap from "../components/RestaurantDetail/StoreReviewTap";
 import ReviewModalContainer from "./ReviewModalContainer";
 import { mainAPI } from "../api";
 import axios from "axios";
+import { withUser } from "../context/UserContext";
 
-export default class StoreReviewTapContainer extends Component {
+class StoreReviewTapContainer extends Component {
   constructor(props) {
     super(props);
     this.state = {
       // 리뷰 작성 모달의 활성화 여부
       show: false,
-      // 사용자의 리뷰 작성 내용
-      review: "",
       storePk: null,
-      rating: null
+      reviewData: null
     };
   }
-  // 리뷰 작성 모달의 활성화를 제어하는 함수
-  handleReviewWriteModal = storePk => {
-    this.setState(prevState => ({
-      show: !prevState.show,
-      storePk
-    }));
-    console.log("handleReviewWriteModal", storePk);
-  };
 
-  handleUesrInput = e => {
-    const review = e.target.value;
+  // 리뷰 목록을 불러오는 함수
+  // async getReview() {
+  async componentDidMount() {
+    const res = await mainAPI.get("/review/");
+    // console.log(res.data);
     this.setState({
-      review
-    });
-  };
-
-  // Review Create 함수
-  async handleSubmitBtn(review, rating, storePk) {
-    const res = await mainAPI.post("/review", {
-      content: review,
-      rating,
-      store: storePk
-    });
-    this.setState({
-      show: false
+      reviewData: res.data
     });
   }
+
+  // 리뷰 작성 모달의 활성화를 제어하는 함수
+  handleReviewWriteModal = storePk => {
+    const token = localStorage.getItem("token");
+    if (token) {
+      this.setState(prevState => ({
+        show: !prevState.show,
+        storePk
+      }));
+    } else {
+      alert("로그인 후 리뷰작성이 가능합니다.");
+    }
+  };
+  // 리뷰 작성 모달의 활성화를 제어하는 함수2
+  handleReviewWriteModalClose = () => {
+    this.setState(prevState => ({
+      show: !prevState.show
+    }));
+  };
 
   render() {
     const { name, activeTab, store_info, store } = this.props;
-    const { show, review } = this.state;
-    // console.log("StoreReviewTapContainer", storePk);
+    const { show, storePk, reviewData } = this.state;
     return (
       <>
         <StoreReviewTap
+          reviewData={reviewData}
           store={store}
           store_info={store_info}
           activeTab={activeTab}
@@ -58,14 +59,18 @@ export default class StoreReviewTapContainer extends Component {
           onReviewWriteModal={() => this.handleReviewWriteModal(store.pk)}
         />
         <ReviewModalContainer
-          review={review}
+          // review={review}
+          store={store}
           name={name}
           show={show}
+          storePk={storePk}
           onReviewWriteModal={() => this.handleReviewWriteModal()}
           onUserInput={e => this.handleUesrInput(e)}
-          onSubmitBtn={() => this.handleSubmitBtn()}
+          onReviewWriteModalClose={() => this.handleReviewWriteModalClose()}
         />
       </>
     );
   }
 }
+
+export default withUser(StoreReviewTapContainer);
