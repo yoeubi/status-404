@@ -2,7 +2,6 @@ import React, { Component } from "react";
 import styles from "./SearchList.module.scss";
 import classNames from "classnames/bind";
 import CheckBox from "../CheckBox";
-import { runInThisContext } from "vm";
 
 const cx = classNames.bind(styles);
 

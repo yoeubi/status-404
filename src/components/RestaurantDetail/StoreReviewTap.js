@@ -103,7 +103,13 @@ export default class StoreReviewTap extends Component {
   };
 
   render() {
-    const { users, onReviewWriteModal, activeTab, store_info } = this.props;
+    const {
+      users,
+      onReviewWriteModal,
+      activeTab,
+      store_info,
+      store
+    } = this.props;
     const { activePhotoReviewBtn, orderBtn } = this.state;
     return (
       <>
@@ -113,7 +119,10 @@ export default class StoreReviewTap extends Component {
           })}
         >
           <div className={cx("TopContainer")}>
-            <button onClick={onReviewWriteModal} className={cx("reviewBtn")}>
+            <button
+              onClick={() => onReviewWriteModal(store.pk)}
+              className={cx("reviewBtn")}
+            >
               <span role="img" aria-label="Review">
                 ✏️ 리뷰를 남겨주세요
               </span>
