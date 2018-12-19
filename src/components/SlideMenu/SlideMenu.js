@@ -12,21 +12,21 @@ class SlideMenu extends Component {
   }
 
   render() {
-    const { category, categoryList, onClick} = this.props;
+    const { category, categoryList, onClick } = this.props;
     return (
       <div className={cx("slide-menu")}>
-        <ul
-          ref={this.slide}
-        >
+        <ul ref={this.slide}>
           {categoryList.map((menu, index) => (
             <li
               key={index}
-              ref={ ref => {
+              ref={ref => {
                 if (menu === category) {
                   this.item = ref;
                 }
               }}
-              className={cx({ active: menu === category })}
+              className={cx({
+                active: menu === category
+              })}
               onClick={() => onClick(index)}
             >
               {menu}
