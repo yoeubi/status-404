@@ -25,35 +25,7 @@ class StoreReviewTapContainer extends Component {
     } else {
       alert("로그인 후 리뷰작성이 가능합니다.");
     }
-    // console.log("handleReviewWriteModal", storePk);
   };
-
-  // handleUesrInput = e => {
-  //   const review = e.target.value;
-  //   this.setState({
-  //     review
-  //   });
-  // };
-
-  // Review Create 함수
-  // async handleSubmitBtn(review, rating, storePk) {
-  //   console.log(review, rating, storePk);
-  //   const token = localStorage.getItem("token");
-  //   if (token) {
-  //     try {
-  //       await mainAPI.post("/review/", {
-  //         content: review,
-  //         rating,
-  //         store: storePk
-  //       });
-  //       this.setState({
-  //         show: false
-  //       });
-  //     } catch (e) {
-  //       console.log("token 로그인 실패 or token 미존재");
-  //     }
-  //   }
-  // }
 
   render() {
     const { name, activeTab, store_info, store } = this.props;
@@ -69,6 +41,7 @@ class StoreReviewTapContainer extends Component {
         />
         <ReviewModalContainer
           // review={review}
+          store={store}
           name={name}
           show={show}
           storePk={storePk}
