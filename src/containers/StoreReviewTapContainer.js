@@ -11,9 +11,21 @@ class StoreReviewTapContainer extends Component {
     this.state = {
       // 리뷰 작성 모달의 활성화 여부
       show: false,
-      storePk: null
+      storePk: null,
+      reviewData: null
     };
   }
+
+  // 리뷰 목록을 불러오는 함수
+  // async getReview() {
+  async componentDidMount() {
+    const res = await mainAPI.get("/review/");
+    // console.log(res.data);
+    this.setState({
+      reviewData: res.data
+    });
+  }
+
   // 리뷰 작성 모달의 활성화를 제어하는 함수
   handleReviewWriteModal = storePk => {
     const token = localStorage.getItem("token");
@@ -35,10 +47,11 @@ class StoreReviewTapContainer extends Component {
 
   render() {
     const { name, activeTab, store_info, store } = this.props;
-    const { show, storePk } = this.state;
+    const { show, storePk, reviewData } = this.state;
     return (
       <>
         <StoreReviewTap
+          reviewData={reviewData}
           store={store}
           store_info={store_info}
           activeTab={activeTab}
