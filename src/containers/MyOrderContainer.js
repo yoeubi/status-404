@@ -1,5 +1,6 @@
 import React, { Component } from "react";
 import MyOrderView from "../components/MyOrder";
+import axios from "axios";
 import { mainAPI } from "../api";
 
 class MyOrderContainer extends Component {
@@ -8,20 +9,48 @@ class MyOrderContainer extends Component {
 
     this.state = {
       loading: true,
-      myorder: null
+      myorder: null,
+      goToMain: false
     };
   }
 
   async componentDidMount() {
-    // api 호출 로직 작성
-    const { data } = await mainAPI.get("/order/");
+    const token = localStorage.getItem("token");
+    if (token) {
+      // 로그인시
+      try {
+        const [
+          { data: user },
+          {
+            data: { results }
+          }
+        ] = await axios.all([
+          mainAPI.get("/members/profile/"),
+          mainAPI.get("/order/")
+        ]);
 
-    console.log(data);
+        const myorder = results.filter(r => {
+          if (r.user === user.pk) {
+            return r;
+          }
+        });
 
-    this.setState({
-      myorder: data,
-      loading: false
-    });
+        this.setState({
+          myorder: myorder,
+          loading: false
+        });
+      } catch (e) {
+        console.log(e);
+      }
+    } else {
+      // 미로그인시
+      alert("로그인이 필요한 서비스입니다.");
+      this.setState({
+        goToMain: true
+      });
+    }
+
+    console.log(this.state);
   }
 
   render() {
