@@ -70,3 +70,14 @@
     }
   }
 }
+.EmptyOrder {
+  width: 100%;
+  height: calc(100vh - 50px);
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  svg {
+    transform: translateY(-50px);
+    width: 300px;
+  }
+}

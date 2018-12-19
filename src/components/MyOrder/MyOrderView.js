@@ -9,10 +9,11 @@ const cx = classNames.bind(styles);
 
 class MyOrderView extends Component {
   render() {
+    const { myorder } = this.props;
     return (
       <div className={cx("Wrap")}>
         <MyOrderHeader />
-        <MyOrderList />
+        <MyOrderList myorder={myorder} />
       </div>
     );
   }

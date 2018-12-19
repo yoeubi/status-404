@@ -18,12 +18,13 @@ import { ReactComponent as Desert } from "../../img/11_desert.svg";
 import { ReactComponent as Fastfood } from "../../img/12_fastfood.svg";
 import { ReactComponent as Franchise } from "../../img/13_franchise.svg";
 import { ReactComponent as Matzip } from "../../img/14_matzip.svg";
+import { ReactComponent as EmptyOrder } from "../../img/empty_order.svg";
 
 const cx = classNames.bind(styles);
 
 class MyOrderList extends Component {
   static defaultProps = {
-    orders: [
+    myorder: [
       {
         id: 0,
         category_Id: 1,
@@ -91,30 +92,39 @@ class MyOrderList extends Component {
     }
   };
 
+  translateTime = data => {
+    const date = new Date(data);
+    return date.toLocaleDateString();
+  };
+
   render() {
-    const { orders } = this.props;
+    const { myorder } = this.props;
+
     return (
       <React.Fragment>
-        <ul className={cx("List")}>
-          {orders &&
-            orders.map(o => (
-              <li key={o.id} className={cx("Item")}>
+        {myorder.length > 0 ? (
+          <ul className={cx("List")}>
+            {myorder.map(o => (
+              <li key={o.pk} className={cx("Item")}>
                 <div className={cx("OrderDate")}>
                   <span className={cx("Icon")}>
-                    {this.translateIdToIcon(o.category_Id)}
+                    {/* {this.translateIdToIcon(o.category_Id)} */}
                   </span>
-                  <span className={cx("Date")}>{o.date}</span>
+                  <span className={cx("Date")}>
+                    {this.translateTime(o.created_at)}
+                  </span>
                 </div>
 
-                <div className={cx("StoreName")}>{o.store_name}</div>
+                <div className={cx("StoreName")}>{o.store[0].store}</div>
                 <div className={cx("OrderedMenuPrice")}>
                   <span>
-                    {o.ordered_menu[0]}외 {o.ordered_menu.length - 1} 개
+                    {/* {o.ordered_menu[0]}외 {o.ordered_menu.length - 1} 개 */}
                   </span>
-                  <span>{o.ordered_price.toLocaleString()} 원</span>
+                  <span>{o.paymentpayment_option}</span>
+                  <span>{o.payment.toLocaleString()} 원</span>
                 </div>
 
-                <div className={cx("OrderAgain")}>
+                {/* <div className={cx("OrderAgain")}>
                   <button className={cx("Again")}>다시 주문하기</button>
                   {o.writed_review && (
                     <button className={cx("Review")}>
@@ -122,10 +132,15 @@ class MyOrderList extends Component {
                       <span className={cx("Caption")}>(7일간 작성 가능)</span>
                     </button>
                   )}
-                </div>
+                </div> */}
               </li>
             ))}
-        </ul>
+          </ul>
+        ) : (
+          <div className={cx("EmptyOrder")}>
+            <EmptyOrder />
+          </div>
+        )}
       </React.Fragment>
     );
   }

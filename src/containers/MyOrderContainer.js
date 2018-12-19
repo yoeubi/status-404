@@ -1,32 +1,63 @@
 import React, { Component } from "react";
 import MyOrderView from "../components/MyOrder";
+import axios from "axios";
+import { mainAPI } from "../api";
 
 class MyOrderContainer extends Component {
   constructor(props) {
     super(props);
 
     this.state = {
-      loading: true
+      loading: true,
+      myorder: null,
+      goToMain: false
     };
   }
 
-  componentDidMount() {
-    // api 호출 로직 작성
-    // ...
+  async componentDidMount() {
+    const token = localStorage.getItem("token");
+    if (token) {
+      // 로그인시
+      try {
+        const [
+          { data: user },
+          {
+            data: { results }
+          }
+        ] = await axios.all([
+          mainAPI.get("/members/profile/"),
+          mainAPI.get("/order/")
+        ]);
 
-    // TODO : 로딩 인디케이터 시범 적용 api 로직 작성 후 setTimeout 함수 삭제
-    setTimeout(() => {
+        const myorder = results.filter(r => {
+          if (r.user === user.pk) {
+            return r;
+          }
+        });
+
+        this.setState({
+          myorder: myorder,
+          loading: false
+        });
+      } catch (e) {
+        console.log(e);
+      }
+    } else {
+      // 미로그인시
+      alert("로그인이 필요한 서비스입니다.");
       this.setState({
-        loading: false
+        goToMain: true
       });
-    }, 2000);
+    }
+
+    console.log(this.state);
   }
 
   render() {
-    const { loading } = this.state;
+    const { myorder, loading } = this.state;
     return (
       <div>
-        <MyOrderView loading={loading} />
+        <MyOrderView loading={loading} myorder={myorder} />
       </div>
     );
   }
