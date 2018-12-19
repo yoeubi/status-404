@@ -196,7 +196,7 @@ class UserProvider extends Component {
   async addOrder({ shipping, comment, phone, payment_option }) {
     try {
       const {
-        data: { results }
+        data
       } = await mainAPI.post("/order/", {
         shipping,
         comment,
@@ -204,9 +204,8 @@ class UserProvider extends Component {
         payment_option
       });
       this.setState({
-        temp: results
+        temp: data
       });
-      await this.pullOrder();
     } catch (e) {
       console.log("결제 추가 에러");
     }

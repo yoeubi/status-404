@@ -133,6 +133,7 @@ class RestaurantDetailView extends Component {
 
             <StoreReviewTapContainer
               store_info={store_info}
+              store={store}
               name={name}
               activeTab={activeTab}
             />
