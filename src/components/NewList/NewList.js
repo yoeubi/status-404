@@ -20,7 +20,7 @@ const cx = classNames.bind(styles);
 class NewList extends Component {
   state = {
     category: "",
-    show: false,
+    show: false
   };
   categoryList = [
     "한식",
@@ -38,7 +38,11 @@ class NewList extends Component {
   }
 
   shouldComponentUpdate(nextProps, nextState) {
-    if ( (this.props.pk !== nextProps.pk) || (this.state.show !== nextState.show) || this.props.results !== nextProps.result ) {
+    if (
+      this.props.pk !== nextProps.pk ||
+      this.state.show !== nextState.show ||
+      this.props.results !== nextProps.result
+    ) {
       return true;
     }
     return false;
@@ -51,7 +55,7 @@ class NewList extends Component {
   };
   handleCategory = idx => {
     const { history } = this.props;
-    if(+this.props.pk !== (idx + 1) ){
+    if (+this.props.pk !== idx + 1) {
       history.push(`/category/${idx + 1}`);
       this.setState({
         show: false
@@ -69,10 +73,7 @@ class NewList extends Component {
     const { show } = this.state;
     const { results } = this.props;
     const items = results.map(li => (
-      <Link
-        to={`/category/${this.props.pk}/store/${li.pk}`}
-        key={li.pk}
-      >
+      <Link to={`/category/${this.props.pk}/store/${li.pk}`} key={li.pk}>
         <RestaurantItem
           name={li.name}
           logo={
@@ -80,26 +81,47 @@ class NewList extends Component {
               ? li.storeimage_set[0].location
               : undefined
           }
+          rating_average={li.rating_average}
         />
       </Link>
-    ))
-    return <Page left={<Link to="/" style={{ padding: "1.5rem" }}>
+    ));
+    return (
+      <Page
+        left={
+          <Link to="/" style={{ padding: "1.5rem" }}>
             <Left style={{ transform: "scale(1.5)" }} />
-          </Link>} middle={category} right={<div className={cx("util")}>
+          </Link>
+        }
+        middle={category}
+        right={
+          <div className={cx("util")}>
             <div>
               <Location style={{ transform: "scale(1.5)" }} />
             </div>
             <div onClick={this.handleModal}>
               <List style={{ transform: "scale(1.5)" }} />
             </div>
-          </div>}>
-      <SlideMenu category={category} categoryList={this.categoryList} onClick={this.handleCategory} />
+          </div>
+        }
+      >
+        <SlideMenu
+          category={category}
+          categoryList={this.categoryList}
+          onClick={this.handleCategory}
+        />
         <BlackCurtain show={show} onShowModal={this.handleModal} />
         <SearchList show={show} onShowModal={this.handleModal} />
-        <InfiniteScroll pageStart={0} loadMore={this.props.loadMore} hasMore={this.props.next !== null} loader={<Loader key={0} />} threshold={100}>
+        <InfiniteScroll
+          pageStart={0}
+          loadMore={this.props.loadMore}
+          hasMore={this.props.next !== null}
+          loader={<Loader key={0} />}
+          threshold={100}
+        >
           <div className={cx("content")}>{items}</div>
         </InfiniteScroll>
-      </Page>;
+      </Page>
+    );
   }
 }
 
