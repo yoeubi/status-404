@@ -18,6 +18,10 @@ import { ReactComponent as Fastfood } from "../../img/12_fastfood.svg";
 import { ReactComponent as Franchise } from "../../img/13_franchise.svg";
 import { ReactComponent as SearchIcon } from "../../img/search.svg";
 
+import MainBanner01 from "../../img/main_banner_01.svg";
+import MainBanner02 from "../../img/main_banner_02.svg";
+import MainBanner03 from "../../img/main_banner_03.svg";
+
 const cx = classNames.bind(styles);
 
 class MainView extends Component {
@@ -69,7 +73,7 @@ class MainView extends Component {
         id: 9,
         name: "피자",
         img: <Pizza />
-      },
+      }
     ]
   };
 
@@ -85,24 +89,19 @@ class MainView extends Component {
               showThumbs={false}
               showIndicators={false}
               showStatus={false}
+              dynamicHeight={false}
+              emulateTouch={true}
+              // autoPlay={true}
+              // infiniteLoop={true}
             >
               <div>
-                <img
-                  src="http://img.woowahan.com/www/common/baemin.jpg"
-                  alt="img"
-                />
+                <img src={MainBanner02} alt="img" />
               </div>
               <div>
-                <img
-                  src="http://img.woowahan.com/www/common/baemin.jpg"
-                  alt="img"
-                />
+                <img src={MainBanner03} alt="img" />
               </div>
               <div>
-                <img
-                  src="http://img.woowahan.com/www/common/baemin.jpg"
-                  alt="img"
-                />
+                <img src={MainBanner01} alt="img" />
               </div>
             </Carousel>
           </div>
