@@ -11,6 +11,8 @@ import { mainAPI, kakaoAPI } from "../api";
 import "../transition.scss";
 
 import { CSSTransition, TransitionGroup } from "react-transition-group";
+import flash from "../img/flash.jpg";
+import { cx } from "emotion";
 
 class MainContainer extends Component {
   static defaultProps = {
@@ -35,6 +37,8 @@ class MainContainer extends Component {
   }
 
   async componentDidMount() {
+    const { hanldeFirstAccess } = this.props;
+    hanldeFirstAccess();
     const { pullCart } = this.props;
 
     await this.handleAddress();
@@ -153,7 +157,25 @@ class MainContainer extends Component {
       policy,
       noneAuthUserAddress
     } = this.state;
-    const { user, address, cart } = this.props; // <=== UserContext 에 작성된 상태가 props로 전달됩니다.
+    const { user, address, cart, firstAccess } = this.props; // <=== UserContext 에 작성된 상태가 props로 전달됩니다.
+    if (firstAccess) {
+      return (
+        <div
+          style={{
+            width: "100%",
+            height: "100vh",
+            position: "fixed",
+            top: "0",
+            left: "0",
+            zIndex: "100",
+            textAlign: "center"
+          }}
+          className={cx("firstAccess")}
+        >
+          <img style={{ width: "90%" }} src={flash} alt="flash" />
+        </div>
+      );
+    }
     return (
       <React.Fragment>
         <UiProvider>

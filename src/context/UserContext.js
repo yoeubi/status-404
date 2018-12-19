@@ -14,6 +14,7 @@ class UserProvider extends Component {
       address: null,
       img_profile: null
     },
+    firstAccess: true,
     warning: null,
     success: false,
     cart: null,
@@ -31,7 +32,8 @@ class UserProvider extends Component {
     delCart: this.delCart.bind(this),
     createUserAddress: this.createUserAddress.bind(this),
     pullOrder: this.pullOrder.bind(this),
-    addOrder: this.addOrder.bind(this)
+    addOrder: this.addOrder.bind(this),
+    hanldeFirstAccess: this.hanldeFirstAccess.bind(this)
   };
 
   async componentDidMount() {
@@ -195,9 +197,7 @@ class UserProvider extends Component {
   }
   async addOrder({ shipping, comment, phone, payment_option }) {
     try {
-      const {
-        data
-      } = await mainAPI.post("/order/", {
+      const { data } = await mainAPI.post("/order/", {
         shipping,
         comment,
         phone,
@@ -209,6 +209,15 @@ class UserProvider extends Component {
     } catch (e) {
       console.log("결제 추가 에러");
     }
+  }
+
+  hanldeFirstAccess() {
+    console.log("hanldeFirstAccess");
+    setTimeout(() => {
+      this.setState({
+        firstAccess: false
+      });
+    }, 3000);
   }
 
   render() {
