@@ -2,6 +2,7 @@ import React, { Component } from "react";
 import MyOrderView from "../components/MyOrder";
 import axios from "axios";
 import { mainAPI } from "../api";
+import { Redirect } from "react-router-dom";
 
 class MyOrderContainer extends Component {
   constructor(props) {
@@ -54,7 +55,10 @@ class MyOrderContainer extends Component {
   }
 
   render() {
-    const { myorder, loading } = this.state;
+    const { myorder, loading, goToMain } = this.state;
+    if (goToMain) {
+      return <Redirect to={"/"} />;
+    }
     return (
       <div>
         <MyOrderView loading={loading} myorder={myorder} />

@@ -107,21 +107,21 @@ class MyOrderList extends Component {
             {myorder.map(o => (
               <li key={o.pk} className={cx("Item")}>
                 <div className={cx("OrderDate")}>
-                  <span className={cx("Icon")}>
-                    {/* {this.translateIdToIcon(o.category_Id)} */}
-                  </span>
+                  {/* <span className={cx("Icon")}>
+                    {this.translateIdToIcon(o.category_Id)}
+                  </span> */}
                   <span className={cx("Date")}>
                     {this.translateTime(o.created_at)}
                   </span>
                 </div>
-
-                <div className={cx("StoreName")}>{o.store[0].store}</div>
+                <div className={cx("StoreName")}>
+                  {o.store[0].store}
+                  {o.store.length > 1 &&
+                    " 외 " + (o.store.length - 1) + " 개 상점"}
+                </div>
                 <div className={cx("OrderedMenuPrice")}>
-                  <span>
-                    {/* {o.ordered_menu[0]}외 {o.ordered_menu.length - 1} 개 */}
-                  </span>
-                  <span>{o.paymentpayment_option}</span>
-                  <span>{o.payment.toLocaleString()} 원</span>
+                  {/* <span>{o.paymentpayment_option}</span> */}
+                  <span>주문금액 : {o.payment.toLocaleString()} 원</span>
                 </div>
 
                 {/* <div className={cx("OrderAgain")}>
