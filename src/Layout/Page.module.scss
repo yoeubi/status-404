@@ -1,0 +1,17 @@
+.page {
+    .content {
+        margin-top: 5rem;
+    }
+}
+
+@media all and (min-width: 415px){
+    .page {
+        position: relative;
+        overflow: hidden;
+        width: 414px;
+        margin: 5rem auto;
+        border: 1px solid #ddd;
+        box-shadow: rgba(0, 0, 0, 0.5) 0px 1px 1px 0px, rgba(0, 0, 0, 0.5) 0px 0px;
+        min-height: 736px;
+    }
+}

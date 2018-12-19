@@ -5,29 +5,30 @@ import classNames from "classnames/bind";
 const cx = classNames.bind(styles);
 
 const OrderTable = props => {
-  const { payment, payment_option, style } = props;
+  const { payment, payment_option, style, list } = props;
   return <div className={cx("order-table")} style={style}>
       <table>
         <tbody>
-          <tr>
-            <td>교촌 허니 콤보 1개</td>
-            <td>18000원</td>
-          </tr>
-          <tr>
+          {list.map((li, index) => <tr key={index}>
+              <td>{li.food}</td>
+              <td>18000원</td>
+            </tr>)}
+
+          {/* <tr>
             <td className={cx("detail")} colSpan="2">
               <ul>
                 <li>기본</li>
               </ul>
             </td>
-          </tr>
-          <tr>
+          </tr> */}
+          {/* <tr>
             <td>주문 금액</td>
             <td>18000원</td>
-          </tr>
-          <tr>
+          </tr> */}
+          {/* <tr>
             <td>배달팁</td>
             <td>2000원</td>
-          </tr>
+          </tr> */}
           <tr>
             <td>총 결제 금액</td>
             <td>{payment}원</td>

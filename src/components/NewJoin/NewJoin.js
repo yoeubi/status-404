@@ -89,9 +89,9 @@ class NewJoin extends Component {
       <Page
         padding="0 2.5rem"
         left={
-          <Link to="/" style={{ padding: "1.5rem" }}>
+          <div style={{ padding: "1.5rem" }} onClick={() => this.props.history.goBack()}>
             <Left style={{ transform: "scale(1.5)" }} />
-          </Link>
+          </div>
         }
         middle="회원가입"
         right={
