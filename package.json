@@ -21,6 +21,7 @@
     "react-router-dom": "^4.3.1",
     "react-scripts": "2.1.1",
     "react-spinners": "^0.4.7",
+    "react-star-rating-component": "^1.4.1",
     "react-transition-group": "^2.5.1",
     "semantic-ui-css": "^2.4.1"
   },
