@@ -12,14 +12,15 @@ import {ReactComponent as Left} from '../../svg/chevron-left.svg';
 const cx = classNames.bind(styles);
 
 const PayResult = props => {
-  const { temp: { store, payment_option, payment, shipping, phone, comment, created_at } } = props;
+  const { temp: { store, payment_option, payment, shipping, phone, comment, created_at } , cart } = props;
+  console.log('payresult',cart)
   return <div className={cx("pay-result")}>
       <CommonHeader left={<Link to="/" style={{ padding: "1.5rem" }}>
             <Left style={{ transform: "scale(1.5)" }} />
           </Link>} middle="결제 내역" />
       <div className={cx("pay-content")}>
-      <Order name={store[0].store} created_at={created_at} />
-        <OrderTable style={{ marginTop: "1rem" }} payment_option={payment_option} payment={payment} />
+      <Order name={store[0].store} created_at={created_at} list={cart.item}/>
+        <OrderTable style={{ marginTop: "1rem" }} payment_option={payment_option} payment={payment} list={cart.item}/>
         <Table style={{ marginTop: "1rem" }} shipping={shipping} phone={phone} comment={comment} />
         <div className={cx("info")}>
           <p className={cx("text")}>배달의민족 고객센터 24시간, 연중무휴</p>

@@ -13,7 +13,7 @@ const cx = classNames.bind(styles);
 class CartList extends Component {
   render() {
     const {
-      cart: { item, payment, store },
+      cart: { item, payment },
       modCart,
       delCart
     } = this.props;
@@ -30,7 +30,7 @@ class CartList extends Component {
             marginTop: "5rem"
           }}
         >
-          {store}
+          {item[0].store}
         </Nothing>
         <div className={cx("cart-item-gap")}>
           {item.map(info => (
@@ -62,20 +62,12 @@ class CartList extends Component {
           배달의 민족은 통신판매중개자이며 통신판매의 당사자가 아닙니다. 따라서
           배달의 민족은 상품 거래 정보 및 거래에 책임을 지지 않습니다.
         </p>
-        <Nothing
-          style={{
-            fontSize: "1.7rem",
-            background: "#2ac1bc",
-            color: "#fff",
-            position: "fixed",
-            bottom: 0,
-            left: 0
-          }}
-        >
-          <Link to="/pay">
+
+        <Link to="/pay">
+          <div className={cx("pay")}>
             {item.length}개 {payment}원 주문하기
-          </Link>
-        </Nothing>
+          </div>
+        </Link>
       </div>
     );
   }

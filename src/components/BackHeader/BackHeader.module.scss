@@ -35,3 +35,8 @@
       transform: translate(-50%, -50%);
   }
 }
+@media all and (min-width : 415px){
+  .back-header {
+    position: absolute;
+  }
+}

@@ -8,3 +8,8 @@
 .content {
     margin-top: 8.5rem;
 }
+@media all and (min-width: 415px){
+    .content {
+        margin-top: 0;
+    }
+}

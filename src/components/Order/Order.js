@@ -8,16 +8,15 @@ const Order = props => {
   const { progress, name, list, created_at, orderNumber, style } = props;
   const date = new Date(created_at);
   const orderDate = `${date.getMonth() + 1 }월 ${date.getDate()}일 ${date.getHours()}시 ${date.getMinutes()}분`
-  return (
-    <div className={cx("order")} style={style}>
+  return <div className={cx("order")} style={style}>
       <p className={cx("order-progress")}>{progress}</p>
       <div className={cx("order-restaurant")}>
         <p className={cx("name")}>{name}</p>
         <p className={cx("call")}>전화</p>
       </div>
       <ul className={cx("order-list")}>
-        {list.map( (li,index) => (
-          <li key={index}>{li}</li>
+        {list.map((li, index) => (
+          <li key={index}>{`${li.food} ${li.quantity}개`}</li>
         ))}
       </ul>
       <div className={cx("order-date")}>
@@ -27,8 +26,7 @@ const Order = props => {
       <div className={cx("service-center")}>
         <p>고객센터 전화하기</p>
       </div>
-    </div>
-  );
+    </div>;
 };
 Order.defaultProps = {
   progress: "배달 완료",

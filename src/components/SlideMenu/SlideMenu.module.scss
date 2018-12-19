@@ -33,3 +33,13 @@
         }
     }
 }
+@media all and (min-width: 415px){
+    .slide-menu {
+        position: relative;
+        height: 7rem;
+        top: 0;
+        ul {
+            white-space: normal;
+        }
+    }
+}
