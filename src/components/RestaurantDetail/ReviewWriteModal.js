@@ -24,12 +24,12 @@ export default class ReviewWriteModal extends Component {
   }
 
   onStarClick(nextValue, prevValue, name) {
-    console.log(
-      "name: %s, nextValue: %s, prevValue: %s",
-      name,
-      nextValue,
-      prevValue
-    );
+    // console.log(
+    //   "name: %s, nextValue: %s, prevValue: %s",
+    //   name,
+    //   nextValue,
+    //   prevValue
+    // );
     this.setState({ rating: nextValue });
   }
 

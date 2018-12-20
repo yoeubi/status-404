@@ -92,7 +92,6 @@ export default class StoreReviewTap extends Component {
     this.setState(prevState => ({
       activePhotoReviewBtn: !prevState.activePhotoReviewBtn
     }));
-    console.log("PhotoReviewBtn Active");
   };
 
   // 리뷰탭에 리뷰 정렬 순서 버튼 상태 관리 함수
@@ -112,7 +111,6 @@ export default class StoreReviewTap extends Component {
       reviewData
     } = this.props;
     const { activePhotoReviewBtn, orderBtn } = this.state;
-    console.log(reviewData);
     return (
       <>
         <div

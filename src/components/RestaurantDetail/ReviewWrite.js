@@ -45,7 +45,6 @@ export default class ReviewWrite extends Component {
       onReviewWriteModalClose
     } = this.props;
     const { files, img } = this.state;
-    console.log("ReviewWrite", rating, storePk, files);
     return (
       <div className={cx("container")}>
         <div className={cx("HeaderContainer")}>

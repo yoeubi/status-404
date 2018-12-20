@@ -30,7 +30,7 @@ class RestaurantDetail extends Component {
       console.log(error);
     }
 
-    console.log("상점 정보", this.state.store);
+    // console.log("상점 정보", this.state.store);
   }
 
   selectedMenuOnModal = menuId => {
