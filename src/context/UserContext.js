@@ -93,6 +93,9 @@ class UserProvider extends Component {
   }
   async facebookLogin(response) {
     // mainAPI 연결
+    console.log('페이스북 실행');
+    console.log(response.name, response.email);
+    
     try {
       const {
         data: { user, token }
@@ -103,9 +106,7 @@ class UserProvider extends Component {
       });
       localStorage.setItem("user", JSON.stringify(user));
       localStorage.setItem("token", token);
-      this.setState({
-        user
-      });
+      this.setState({ user, success: true });
     } catch (e) {
       this.failLogin("facebook");
     }
