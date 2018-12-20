@@ -15,8 +15,8 @@ export default class AddressSetting extends Component {
 
     this.state = {
       addressType: true,
-      // roadAddress: null,
-      // address: null,
+      roadAddress: null,
+      address: null,
       refresh: null,
       content: null
     };
@@ -37,7 +37,7 @@ export default class AddressSetting extends Component {
 
   map = (latitude, longitude) => {
     // const getRoadAddr = this.getRoadAddr;
-    // const getAddr = this.getAddr;
+    const getAddr = this.getAddr;
     var infoDiv = this.centerAddrRef.current;
     var mapContainer = this.mapRef.current, // 지도를 표시할 div
       mapOption = {
@@ -63,23 +63,24 @@ export default class AddressSetting extends Component {
     daum.maps.event.addListener(map, "click", function(mouseEvent) {
       searchDetailAddrFromCoords(mouseEvent.latLng, function(result, status) {
         if (status === daum.maps.services.Status.OK) {
-          // console.log(result);
-          // console.log(status);
-          var detailAddr = !!result[0].road_address
-            ? "<div>도로명주소 : " +
-              result[0].road_address.address_name +
-              "</div>"
-            : "";
-          detailAddr +=
-            "<div>지번 주소 : " + result[0].address.address_name + "</div>";
+          console.log(result[0]);
+          // var detailAddr = result[0].road_address
+          //   ? "<div>도로명주소 : " +
+          //     result[0].road_address.address_name +
+          //     "</div>"
+          //   : "";
+          // detailAddr +=
+          //   "<div>지번 주소 : " + result[0].address.address_name + "</div>";
 
-          var content =
-            '<div className={cx("bAddr")}>' +
-            '<span className={cx("title")}></span>' +
-            detailAddr +
-            "</div>";
-          // getRoadAddr(result[0].road_address.address_name);
-          // getAddr(result[0].address.address_name);
+          // var content =
+          //   '<div className={cx("bAddr")}>' +
+          //   '<span className={cx("title")}></span>' +
+          //   detailAddr +
+          //   "</div>";
+          // -----------------------------------------------------
+          if (result[0].address.address_name) {
+            getAddr(result[0].address.address_name);
+          }
 
           // 마커를 클릭한 위치에 표시합니다
           marker.setPosition(mouseEvent.latLng);
@@ -88,7 +89,7 @@ export default class AddressSetting extends Component {
           // console.log(mouseEvent);
 
           // 인포윈도우에 클릭한 위치에 대한 법정동 상세 주소정보를 표시합니다
-          infowindow.setContent(content);
+          // infowindow.setContent(content);
           infowindow.open(map, marker);
         }
       });
@@ -132,11 +133,9 @@ export default class AddressSetting extends Component {
       roadAddress
     });
   };
-  // getAddr = address => {
-  //   this.setState({
-  //     address
-  //   });
-  // };
+  getAddr = address => {
+    this.setState({ address });
+  };
 
   handleAddressType = () => {
     this.setState(prevState => ({
@@ -150,6 +149,9 @@ export default class AddressSetting extends Component {
 
   render() {
     const { onBackBtn, onAddressSetting } = this.props;
+    const { address, roadAddress } = this.state;
+    console.log("도로명 주소", roadAddress);
+    console.log("지번 주소", address);
     return (
       <>
         <div className={cx("map_wrap")}>
@@ -180,7 +182,8 @@ export default class AddressSetting extends Component {
                 onClick={() => this.handleAddressType()}
                 className={cx("addressTypeBtn")}
               >
-                지번주소로 보기
+                {address}
+                {/* 지번주소로 보기 */}
               </button>
             </div>
             <button className={cx("settingBtn")}>이 위치로 주소 설정</button>
