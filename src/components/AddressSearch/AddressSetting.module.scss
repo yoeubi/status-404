@@ -63,10 +63,20 @@
   bottom: 80px;
   background: #fff;
   z-index: 1;
-  padding: 5px;
+  padding: 5px 10px;
   font-size: 15pt;
   border-radius: 2px;
   border: 1px solid grey;
+  &.detailAddr {
+    height: 120px;
+  }
+  .detailAddress {
+    margin-top: 10px;
+    outline: none;
+    width: 100%;
+    height: 30px;
+    font-size: 13pt;
+  }
 }
 
 .addressTypeBtn {
@@ -101,17 +111,17 @@
     transform: scale(1.5);
   }
 }
-.centered {
-  display: none;
-  transform: scale(5);
-  color: rgba(250, 58, 58, 0.664);
-  position: fixed;
-  top: 50%;
-  left: 50%;
-  // margin-top: -50px;
-  // margin-left: -100px;
-  z-index: 100;
-}
+// .centered {
+//   display: none;
+//   transform: scale(5);
+//   color: rgba(250, 58, 58, 0.664);
+//   position: fixed;
+//   top: 50%;
+//   left: 50%;
+//   // margin-top: -50px;
+//   // margin-left: -100px;
+//   z-index: 100;
+// }
 
 /* .bottomContainer {
   display: flex;
@@ -136,6 +146,14 @@
   svg {
     display: block;
     margin: auto;
+  }
+  &.detailAddr {
+    bottom: 220px;
+    svg {
+      height: 30px;
+      width: 30px;
+      margin: 0 auto;
+    }
   }
 }
 

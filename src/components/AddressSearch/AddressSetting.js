@@ -3,6 +3,7 @@ import styles from "./AddressSetting.module.scss";
 import classNames from "classnames/bind";
 //svg
 import { ReactComponent as Crosshair } from "../../img/crosshair.svg";
+import { ReactComponent as Placeholder } from "../../img/placeholder-on-map.svg";
 
 const cx = classNames.bind(styles);
 const daum = window.daum;
@@ -18,7 +19,8 @@ export default class AddressSetting extends Component {
       roadAddress: null,
       address: null,
       refresh: null,
-      content: null
+      content: null,
+      detailAddr: false
     };
   }
 
@@ -51,10 +53,11 @@ export default class AddressSetting extends Component {
     // 주소-좌표 변환 객체를 생성합니다
     var geocoder = new daum.maps.services.Geocoder();
 
-    var marker = new daum.maps.Marker(), // 클릭한 위치를 표시할 마커입니다
-      infowindow = new daum.maps.InfoWindow({
-        zindex: 1
-      }); // 클릭한 위치에 대한 주소를 표시할 인포윈도우입니다
+    // var marker = new daum.maps.Marker(), // 클릭한 위치를 표시할 마커입니다
+    var marker = new daum.maps.Marker(); // 클릭한 위치를 표시할 마커입니다
+    // infowindow = new daum.maps.InfoWindow({
+    //   zindex: 1
+    // }); // 클릭한 위치에 대한 주소를 표시할 인포윈도우입니다
 
     // 현재 지도 중심좌표로 주소를 검색해서 지도 좌측 상단에 표시합니다
     searchAddrFromCoords(map.getCenter(), displayCenterInfo);
@@ -90,7 +93,7 @@ export default class AddressSetting extends Component {
 
           // 인포윈도우에 클릭한 위치에 대한 법정동 상세 주소정보를 표시합니다
           // infowindow.setContent(content);
-          infowindow.open(map, marker);
+          // infowindow.open(map, marker);
         }
       });
     });
@@ -146,10 +149,15 @@ export default class AddressSetting extends Component {
   handleRefreshBtn = () => {
     this.componentDidMount();
   };
+  handleSettingBtn = () => {
+    this.setState(prevState => ({
+      detailAddr: !prevState.detailAddr
+    }));
+  };
 
   render() {
     const { onBackBtn, onAddressSetting } = this.props;
-    const { address, roadAddress } = this.state;
+    const { address, roadAddress, detailAddr } = this.state;
     console.log("도로명 주소", roadAddress);
     console.log("지번 주소", address);
     return (
@@ -166,15 +174,23 @@ export default class AddressSetting extends Component {
           <div className={cx("marker")}>
             <Crosshair />
           </div>
-          <div className={cx("centered")}>x</div>
           <div className={cx("bottomContainer")}>
-            <button
-              onClick={() => this.handleRefreshBtn()}
-              className={cx("currentLocationBtn")}
-            >
-              <Crosshair />
-            </button>
-            <div className={cx("hAddr")}>
+            {detailAddr ? (
+              <button
+                onClick={() => this.handleSettingBtn()}
+                className={cx("currentLocationBtn", { detailAddr: detailAddr })}
+              >
+                <Placeholder />
+              </button>
+            ) : (
+              <button
+                onClick={() => this.handleRefreshBtn()}
+                className={cx("currentLocationBtn", { detailAddr: detailAddr })}
+              >
+                <Crosshair />
+              </button>
+            )}
+            <div className={cx("hAddr", { detailAddr: detailAddr })}>
               <span ref={this.centerAddrRef} className={cx("centerAddr")} />
               {/* <button className={cx("addressTypeBtn")}>{address}</button> */}
               {/* <button className={cx("addressTypeBtn")}>{roadAddress}</button> */}
@@ -185,8 +201,28 @@ export default class AddressSetting extends Component {
                 {address}
                 {/* 지번주소로 보기 */}
               </button>
+              {detailAddr && (
+                <input
+                  className={cx("detailAddress")}
+                  placeholder="상세주소를 입력하세요"
+                />
+              )}
             </div>
-            <button className={cx("settingBtn")}>이 위치로 주소 설정</button>
+            {detailAddr ? (
+              <button
+                onClick={() => this.handleSettingBtn()}
+                className={cx("settingBtn")}
+              >
+                완료
+              </button>
+            ) : (
+              <button
+                onClick={() => this.handleSettingBtn()}
+                className={cx("settingBtn")}
+              >
+                이 위치로 주소 설정
+              </button>
+            )}
           </div>
         </div>
       </>
