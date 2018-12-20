@@ -53,10 +53,9 @@ export default class ReviewModalContainer extends Component {
             "Content-Type": "application/x-www-form-urlencoded"
           }
         });
-        // this.setState(prevState => ({
-        //   done: !prevState.done
-        // }));
-        this.handleReset();
+        this.setState(prevState => ({
+          done: !prevState.done
+        }));
       } catch (e) {
         console.log("token 로그인 실패 or token 미존재");
       }
