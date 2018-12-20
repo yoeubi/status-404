@@ -16,7 +16,8 @@ class KakaoView extends Component {
       detailAddress: "",
       loading: true,
       longitude: null,
-      latitude: null
+      latitude: null,
+      failure: false
     };
   }
 
@@ -26,6 +27,18 @@ class KakaoView extends Component {
       navigator.geolocation.getCurrentPosition(
         ({ coords: { longitude, latitude } }) => {
           this.initKakaoMap(latitude, longitude);
+        },
+        error => {
+          console.log(error);
+          this.setState({
+            failure: true
+          });
+        },
+        {
+          // geoLocation options object
+          // params
+          enableHighAccuracy: true, // 최대한 정확도를 높게 받을 것인지를 지시하는 불리언 값입니다.
+          timeout: Infinity // 위치 값을 장치로 부터 받을 때 까지 최대한 대기할 시간 :: 기본값  Infinity
         }
       );
     } else {
