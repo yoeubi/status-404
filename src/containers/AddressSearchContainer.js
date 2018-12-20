@@ -22,15 +22,16 @@ class AddressSearchContainer extends Component {
     // loading: false
   }
 
-  handleShippingAddress = address => {
-    // 배송지 정보 설정 함수
-    console.log(address);
-  };
-
   handleUserInput = e => {
     const userInput = e.target.value;
     this.setState({
       userInput
+    });
+  };
+
+  setUserInput = input => {
+    this.setState({
+      userInput: input
     });
   };
 
@@ -100,7 +101,7 @@ class AddressSearchContainer extends Component {
 
   render() {
     const { searchResult, userInput, recentAddress } = this.state;
-    const { onAddressSearch, show, address } = this.props;
+    const { onAddressSearch, show, address, createUserAddress } = this.props;
     return (
       <>
         <UiProvider>
@@ -130,7 +131,11 @@ class AddressSearchContainer extends Component {
               address={address}
             />
           ) : this.state.page === "kakao" ? (
-            <KakaoView onShippingAddress={this.handleShippingAddress} />
+            <KakaoView
+              createUserAddress={createUserAddress}
+              onBackBtn={this.handleBackBtn}
+              setUserInput={this.setUserInput}
+            />
           ) : this.state.page === "address-setting" ? (
             <AddressSetting
               onBackBtn={() => this.handleBackBtn()}

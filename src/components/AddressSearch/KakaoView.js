@@ -2,7 +2,6 @@ import React, { Component } from "react";
 import styles from "./KakaoView.module.scss";
 import classNames from "classnames/bind";
 import Loading from "../Loading";
-
 const cx = classNames.bind(styles);
 
 class KakaoView extends Component {
@@ -16,12 +15,12 @@ class KakaoView extends Component {
       detailAddress: "",
       loading: true,
       longitude: null,
-      latitude: null,
-      failure: false
+      latitude: null
     };
   }
 
   componentDidMount() {
+    const { onBackBtn } = this.props;
     // HTML5의 geolocation으로 사용할 수 있는지 확인합니다
     if (navigator.geolocation) {
       navigator.geolocation.getCurrentPosition(
@@ -30,15 +29,14 @@ class KakaoView extends Component {
         },
         error => {
           console.log(error);
-          this.setState({
-            failure: true
-          });
+          onBackBtn();
         },
         {
           // geoLocation options object
           // params
-          enableHighAccuracy: true, // 최대한 정확도를 높게 받을 것인지를 지시하는 불리언 값입니다.
-          timeout: Infinity // 위치 값을 장치로 부터 받을 때 까지 최대한 대기할 시간 :: 기본값  Infinity
+          enableHighAccuracy: false, // 최대한 정확도를 높게 받을 것인지를 지시하는 불리언 값입니다.
+          timeout: 5000, // 위치 값을 장치로 부터 받을 때 까지 최대한 대기할 시간 :: 기본값  Infinity
+          maximumAge: Infinity // 캐시된 위치 값을 반환 받아도 되는 최대한의 시간
         }
       );
     } else {
@@ -138,8 +136,25 @@ class KakaoView extends Component {
     }));
   };
 
+  submitAddress = async () => {
+    const { markedAddress, longitude, latitude, detailAddress } = this.state;
+    const { createUserAddress, onBackBtn, setUserInput } = this.props;
+
+    const address = {
+      lng: longitude,
+      lat: latitude,
+      address: markedAddress,
+      old_address: markedAddress,
+      detail_address: detailAddress
+    };
+    await createUserAddress(address);
+    setUserInput(markedAddress);
+    alert("배송지가 설정되었습니다.");
+
+    onBackBtn();
+  };
+
   render() {
-    const { onShippingAddress } = this.props;
     const { loading } = this.state;
     console.log(this.state);
     return (
@@ -159,7 +174,7 @@ class KakaoView extends Component {
                   placeholder="상세주소 입력하기"
                   autoFocus
                 />
-                <button onClick={() => onShippingAddress("aa")}>
+                <button onClick={() => this.submitAddress()}>
                   상세 주소로 설정하기
                 </button>
               </div>
