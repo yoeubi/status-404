@@ -53,17 +53,18 @@ export default class ReviewModalContainer extends Component {
             "Content-Type": "application/x-www-form-urlencoded"
           }
         });
-        console.log("formData", formData);
-        console.log("res2", res2);
-        this.setState(prevState => ({
-          done: !prevState.done
-        }));
+        // this.setState(prevState => ({
+        //   done: !prevState.done
+        // }));
+        this.handleReset();
       } catch (e) {
         console.log("token 로그인 실패 or token 미존재");
       }
     }
   };
-
+  // handleReset = () => {
+  //   this.componentDidMount();
+  // };
   render() {
     const {
       show,
@@ -75,11 +76,9 @@ export default class ReviewModalContainer extends Component {
       onReviewWriteModalClose
     } = this.props;
     const { review, rating, done } = this.state;
-    console.log("ReviewModalContainer", store);
+    // console.log("ReviewModalContainer", store);
     if (done) {
-      console.log("DONE!!!");
-      // <Redirect to={}/>;
-      // onReviewWriteModalClose();
+      return <Redirect to={"/"} />;
     }
     return (
       <>
