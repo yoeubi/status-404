@@ -121,6 +121,10 @@ class MyOrderList extends Component {
                 </div>
                 <div className={cx("OrderedMenuPrice")}>
                   {/* <span>{o.paymentpayment_option}</span> */}
+                  <span>배송지 : {o.shipping}</span>
+                </div>
+                <div className={cx("OrderedMenuPrice")}>
+                  {/* <span>{o.paymentpayment_option}</span> */}
                   <span>주문금액 : {o.payment.toLocaleString()} 원</span>
                 </div>
 
