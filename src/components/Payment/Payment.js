@@ -112,8 +112,8 @@ class Payment extends Component {
         />
         <HighLight title="결제금액" />
         <Detail
-          main={`${payment / 10}원`}
-          sub={`주문금액 ${payment}원 배달의 민족 할인 90%`}
+          main={`${payment}원`}
+          sub={`주문금액 ${payment}원`}
         />
         <RightNothing
           title={method}

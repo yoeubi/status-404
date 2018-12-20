@@ -30,7 +30,7 @@ class PayContainer extends Component {
     } else {
       window.IMP.request_pay(
         {
-          pg: "html5_inicis",
+          pg: "kakaopay",
           pay_method: "card",
           merchant_uid: "merchant_" + new Date().getTime(),
           name: "주문명:결제테스트",
