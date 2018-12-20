@@ -108,9 +108,11 @@ export default class StoreReviewTap extends Component {
       onReviewWriteModal,
       activeTab,
       store_info,
-      store
+      store,
+      reviewData
     } = this.props;
     const { activePhotoReviewBtn, orderBtn } = this.state;
+    console.log(reviewData);
     return (
       <>
         <div
@@ -138,7 +140,7 @@ export default class StoreReviewTap extends Component {
           <div className={cx("ReviewListContainer")}>
             <div className={cx("TitleContainer")}>
               <span className={cx("title")}>
-                총 <p>{3}</p>개의 리뷰가 있어요
+                총 <p>{reviewData && reviewData.length}</p>개의 리뷰가 있어요
               </span>
               <div className={cx("listOrderContainer")}>
                 <button
@@ -171,56 +173,69 @@ export default class StoreReviewTap extends Component {
               </div>
             </div>
             <ul>
-              {users.map(u => (
-                <li className={cx("listItem")} key={u.id}>
-                  <div className={cx("HeadContainer")}>
-                    <div className={cx("Avatar")}>
-                      <img src={u.img_profile} alt={u.username} />
-                    </div>
-                    <div className={cx("IdContainer")}>
-                      <span className={cx("NickName")}>{u.nickname}</span>
-                      <Right
-                        className={cx("Right")}
-                        style={{ transform: "scale(1.5)", fill: "#666" }}
-                      />
-                      {/* <div className={cx("Rating")}>
+              {reviewData &&
+                reviewData.map((r, index) => (
+                  <li className={cx("listItem")} key={r.pk}>
+                    <div className={cx("HeadContainer")}>
+                      <div className={cx("Avatar")}>
+                        <img
+                          src={users[0].img_profile}
+                          alt={users[0].username}
+                        />
+                      </div>
+                      <div className={cx("IdContainer")}>
+                        <span className={cx("NickName")}>
+                          {users[1].nickname}
+                        </span>
+                        <Right
+                          className={cx("Right")}
+                          style={{ transform: "scale(1.5)", fill: "#666" }}
+                        />
+                        {/* <div className={cx("Rating")}>
                         {u.review[0].rating} ️ ️ ️ ️ ️ ️
                       </div> */}
-                      <div className={cx("Stars")}>
-                        <Rating
-                          emptySymbol={
-                            <Star
-                              className={
-                                cx("Star", "Empty") // 빈 별
-                              }
-                            />
-                          }
-                          fullSymbol={
-                            <Star
-                              className={
-                                cx("Star") // 꽉찬별
-                              }
-                            />
-                          }
-                          fractions={
-                            2 // 분할
-                          }
-                          initialRating={
-                            u.review[0].rating // 레이팅 정보
-                          }
-                          readonly
-                        />
-                        <span className={cx("Rating")}>
-                          {u.review[0].rating}
-                        </span>
+                        <div className={cx("Stars")}>
+                          <Rating
+                            emptySymbol={
+                              <Star
+                                className={
+                                  cx("Star", "Empty") // 빈 별
+                                }
+                              />
+                            }
+                            fullSymbol={
+                              <Star
+                                className={
+                                  cx("Star") // 꽉찬별
+                                }
+                              />
+                            }
+                            fractions={
+                              2 // 분할
+                            }
+                            initialRating={
+                              r.rating // 레이팅 정보
+                            }
+                            readonly
+                          />
+                          <span className={cx("Rating")}>{r.rating}</span>
+                        </div>
                       </div>
                     </div>
-                  </div>
-                  <div className={cx("ContentContainer")}>
-                    <div className={cx("Content")}>{u.review[0].content}</div>
-                  </div>
-                </li>
-              ))}
+                    <div className={cx("ContentContainer")}>
+                      {r.reviewimage_set[0] && (
+                        <div className={cx("ImgContainer")}>
+                          <img
+                            src={r.reviewimage_set[0].location}
+                            alt={users[0].username}
+                          />
+                        </div>
+                      )}
+
+                      <div className={cx("Content")}>{r.content}</div>
+                    </div>
+                  </li>
+                ))}
             </ul>
           </div>
         </div>

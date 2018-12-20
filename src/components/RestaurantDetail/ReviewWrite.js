@@ -2,6 +2,7 @@ import React, { Component } from "react";
 import styles from "./ReviewWrite.module.scss";
 import classNames from "classnames/bind";
 import Rating from "react-rating";
+
 //svg
 import { ReactComponent as BackBtn } from "../../svg/arrow-left.svg";
 import { ReactComponent as Star } from "../../img/star.svg"; // 별 아이콘
@@ -9,33 +10,26 @@ import { ReactComponent as Camera } from "../../img/camera.svg"; // 카메라 �
 import { ReactComponent as Down } from "../../svg/chevron-right.svg"; // 오른쪽 화살표
 
 const cx = classNames.bind(styles);
-// const React = require("react");
 
 export default class ReviewWrite extends Component {
-  static defaultProps = {
-    file: ""
-  };
   constructor(props) {
     super(props);
+
+    this.inputRef = React.createRef();
     this.state = {
-      file: null,
-      img: false,
-      // star-rating 관련 state
-      rating: 1,
-      rating_custom_icon: 6,
-      rating_half_star: 3.5,
-      rating_empty_initial: 0
+      files: [],
+      img: false
     };
-    this.handleChange = this.handleChange.bind(this);
   }
 
-  handleChange(event) {
-    const { img } = this.state;
-    this.setState({
-      file: URL.createObjectURL(event.target.files[0]),
-      img: true
-    });
-    // console.log(img);
+  handleFileChange(e) {
+    e.persist();
+    if (e.target.files) {
+      this.setState(prevState => ({
+        files: [...prevState.files, ...e.target.files],
+        img: !prevState.img
+      }));
+    }
   }
 
   render() {
@@ -45,10 +39,13 @@ export default class ReviewWrite extends Component {
       onUserInput,
       onSubmitBtn,
       name,
-      rating
+      rating,
+      storePk,
+      onReviewWriteModal,
+      onReviewWriteModalClose
     } = this.props;
-    const { file, img } = this.state;
-    // console.log(img);
+    const { files, img } = this.state;
+    console.log("ReviewWrite", rating, storePk, files);
     return (
       <div className={cx("container")}>
         <div className={cx("HeaderContainer")}>
@@ -83,7 +80,19 @@ export default class ReviewWrite extends Component {
           </div>
         </div>
         <div className={cx("BodyContainer")}>
-          <form className={cx("InputForm")} onSubmit={onSubmitBtn}>
+          <form
+            className={cx("InputForm")}
+            onSubmit={e => {
+              e.preventDefault();
+              onSubmitBtn(
+                review,
+                rating,
+                storePk,
+                files,
+                onReviewWriteModalClose
+              );
+            }}
+          >
             <label>
               <textarea
                 autoComplete="off"
@@ -97,19 +106,31 @@ export default class ReviewWrite extends Component {
           <div className={cx("Camera")}>
             <input
               className={cx("FileInput")}
+              hidden
+              ref={this.inputRef}
               type="file"
-              onChange={event => this.handleChange(event)}
-              id="fileInput"
+              accept="image/*"
+              multiple
+              onChange={e => this.handleFileChange(e)}
             />
-            <label className={cx("FileInputLabel")} htmlFor="fileInput" />
+            <button
+              className={cx("FileInputLabel")}
+              onClick={() => this.inputRef.current.click()}
+            >
+              이미지 선택
+            </button>
             <Camera />
           </div>
           <div className={cx("Photo")}>
-            <img
-              className={cx("Img", { img: img })}
-              src={this.state.file}
-              alt={file}
-            />
+            {files.map((f, index) => (
+              <ImagePreview
+                className={cx("Img", {
+                  img: img
+                })}
+                file={f}
+                key={index}
+              />
+            ))}
           </div>
           <div className={cx("FooterContainer")}>
             <span className={cx("Guide")}>
@@ -127,6 +148,41 @@ export default class ReviewWrite extends Component {
           </div>
         </div>
       </div>
+    );
+  }
+}
+
+class ImagePreview extends React.Component {
+  static defaultProps = {
+    // File 객체
+    file: null
+  };
+
+  constructor(props) {
+    super(props);
+
+    this.state = {
+      imageSrc: null
+    };
+  }
+
+  componentDidMount() {
+    const { file } = this.props;
+    const reader = new FileReader();
+    reader.addEventListener("load", () => {
+      this.setState({
+        imageSrc: reader.result
+      });
+    });
+    reader.readAsDataURL(file);
+  }
+
+  render() {
+    const { file } = this.state;
+    const { imageSrc } = this.state;
+    const alt = file ? file.name : "";
+    return (
+      <img style={{ width: "100%", height: "100%" }} src={imageSrc} alt={alt} />
     );
   }
 }
