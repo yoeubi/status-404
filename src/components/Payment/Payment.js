@@ -135,7 +135,7 @@ class Payment extends Component {
           위 내용을 확인하였으며 결제에 동의합니다.
         </Nothing>
         <div className={cx('pay')} onClick={() => onPay({ shipping: address + ' ' + detail_address, comment: request, phone, payment_option: method })}>
-          {payment / 10}원 결제하기
+          {payment}원 결제하기
         </div>
         <PaymentMethod
           payList={this.payList}
