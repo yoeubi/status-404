@@ -24,8 +24,41 @@
 1. node-sass
 1. classnames
 1. axios
-1. immutable
+1. react
+1. react-collapse
+1. react-collapsible
+1. react-facebook-login
+1. react-google-login
+1. react-infinite-scroller
+1. react-rating
+1. react-responsive-carousel
+1. react-spinners
+1. react-star-rating-component
+1. react-transition-group
 
+## API
+
+1. 카카오 주소 검색, 지도 API
+1. 키워드 검색을 할 때 카카오 주소 API를 사용한다.
+1. 다음 MAP API를 사용해서 현재 위치를 설정한다.
+
+## 기능
+
+배달의 민족 앱을 웹으로 옮기는 프로젝트를 진행했습니다.  
+
+1. 회원가입 페이지 - 정규표현식 사용해서 유효성검사를 했습니다.
+1. 로그인 - 구글 로그인, 페이스북 로그인 구현했으며 시간 관계상 페이스북 로그인만 시현하겠습니다.
+1. 메인 페이지 - CSS 트랜지션 그룹을 사용해서 배민과 비슷한 UI를 구현하려고 했습니다.
+1. 주소 페이지 - 키워드 검색을 할때 카카오 주소 API를 사용해서 데이터를 가지고 옵니다.
+1. 지도 페이지 - 다음 MAP API를 사용해서 현재 위치를 설정할 수 있습니다.
+1. 리스트 페이지 - 인피니티 스크롤 구현했습니다. 스크롤 내릴때마다 리스트가 나오도록 했습니다.
+1. 상점 디테일 페이지 - 콜랩스 구현했습니다. 트랜지션을 사용해서 모바일 앱과 비슷한 UI를 만들었습니다.
+1. 장바구니 페이지
+1. 결제 페이지 - 결제 수단을 고릴수 있으며 결제 API를 사용해서 실제로 결제가 실행이 됩니다. 
+1. 결제 결과 페이지
+1. 결제 리스트 페이지 
+1. 리뷰 페이지 - 별 점 구현 
+1. 로그아웃 
 
 ## Sass Module 사용법
 
@@ -47,44 +80,7 @@ const SampleComponent = () => (
     </div>
 )
 ```
-
-## immutable.js 사용법
-
-```js
-// immutable에서는 객체는 Map, 배열은 List입니다.
-import {Map, List} from 'immutable';
-
-// Map , List 생성 방법
-const map = Map({
-    id : 0,
-    text : 'test'
-});
-const list = List([
-    1,2,3,4,5
-])
-const mapInList = List([
-    Map({
-        id : 0,
-        text : 'test'
-    }),
-    Map({
-        id : 0,
-        text : 'test'
-    })
-])
-// 값을 넣는 방법
-// { a : 1} 과 같은 형태를 띈다면 set을 사용합니다. 첫번째 인자는 프로퍼티명, 두 번째 인자는 바꿀 프로퍼티 값입니다. 
-map.set('id',1);
-// { a : { b : 2 }} 와 같이 깊어진다면 setIn을 사용합니다. 첫 번째 인자는 프로퍼티명인데 배열로 프로퍼티명을 생성하면 됩니다.
-map.setIn(['a','b'],3);
-// 프로퍼티 값을 가져오는것도 동일한 구조입니다.
-map.get('id');
-map.getIn(['a','b'])
-// 자바스크립트 배열 메소드 들은 기본적으로 immutable에도 동일하게 구현되어 있습니다.
-// 하지만 배열 업데이트 하는 방법은 하나 더 있습니다. update 메서드의 첫번째 인자는 바꿀 인덱스 번호, 두번째 인자는 어떻게 변경할지에 대한 함수가 들어갑니다. 깊이가 깊은 형태는 updateIn을 사용합니다.
-list.update(1, (item) => item)
-```
-
+햐
 ## Git Commit log
 
 ### Example
